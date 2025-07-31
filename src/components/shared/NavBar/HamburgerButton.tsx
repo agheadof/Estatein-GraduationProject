@@ -1,5 +1,3 @@
-// components/navbar/HamburgerButton.tsx
-
 interface HamburgerButtonProps {
   isOpen: boolean;
   onClick: () => void;
