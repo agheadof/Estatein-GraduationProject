@@ -11,7 +11,7 @@ type FooterProps = {
 
 export default function Footer({ links, footerNote, logo }: FooterProps) {
     return (
-        <footer className="bg-gray10 text-white px-4 md:px-8 lg-custom:!px-20 2xl:px-[162px] huge:px-0">
+        <footer className="bg-gray10 text-white px-4 md:px-8 lg-custom:!px-[120px] 2xl:!px-[162px] huge:px-0">
             <div className="huge:container huge:mx-auto pt-[50px] pb-5 md:pt-20 md:pb-3 2xl:pb-[16px] 2xl:pt-[100px]">
                 <div className="flex flex-col lg-custom:flex-row justify-between gap-[50px] lg-custom:gap-5">
                     <div className="flex flex-col gap-5 lg-custom:gap-6 2xl:gap-[30px]">
