@@ -5,31 +5,7 @@ type IconProps = {
   color?: string
 }
 
-const defaultStrokeWidth = 2
-
-export function FlagIcon({ className = "", hoverClassName = "", color = "currentColor" }: IconProps) {
-  return (
-    <svg
-      className={`${className} ${hoverClassName}`}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth={defaultStrokeWidth}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
-      <line x1="4" x2="4" y1="22" y2="15" />
-    </svg>
-  )
-}
-
-export function MessageIcon({
-  className = "",
-  hoverClassName = "",
-  color = "#999999",
-}: IconProps) {
+export function MessageIcon({ className = "", hoverClassName = "", color = "#999999"}: IconProps) {
   return (
     <svg
       width="24"
@@ -46,6 +22,7 @@ export function MessageIcon({
     </svg>
   );
 }
+
 export function SendIcon({ className = "", hoverClassName = "", color = "currentColor" }: IconProps) {
   return (
     <svg

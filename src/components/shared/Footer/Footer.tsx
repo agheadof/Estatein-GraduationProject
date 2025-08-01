@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { type LinkGroup } from "../../../data/footerData"
-import { FacebookIcon, FlagIcon, LinkedinIcon, TwitterIcon, YoutubeIcon } from "../../icons/FooterIcons"
+import { FacebookIcon, LinkedinIcon, TwitterIcon, YoutubeIcon } from "../../icons/FooterIcons"
 import { FooterNewsletter } from "./Newsletter"
 
 type FooterProps = {
@@ -11,15 +11,15 @@ type FooterProps = {
 
 export default function Footer({ links, footerNote, logo }: FooterProps) {
     return (
-        <footer className="bg-neutral-950 text-white">
-            <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <footer className="bg-gray10 text-white px-[162px]">
+            <div className="max-w-[1920px] mx-auto py-16">
                 <div className="flex flex-col lg:flex-row justify-between">
                     <div className="flex flex-col space-y-[15px] mb-10 lg:mb-0">
                         <img src={logo} alt="logo" className="w-40 h-12" />
                         <FooterNewsletter/>
                     </div>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-5 gap-8">
+                    <div className="grid grid-cols-2 lg:grid-cols-5 gap-[10px]">
                         {links?.map(({ title, to, items }, i) => (
                             <div key={i} className="flex flex-col space-y-2">
                                 <Link
