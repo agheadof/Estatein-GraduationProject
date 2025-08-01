@@ -1,10 +1,10 @@
 import React from 'react'
-import Title from '../components/shared/TItle/Title'
+import OurClientsSection from '../sections/home/OurClientsSection'
 
 function HomePage() {
   return (
-    <div>
-      <Title />
+    <div className='min-[1920px]:container min-[1920px]:mx-auto'>
+      <OurClientsSection />
     </div>
   )
 }
