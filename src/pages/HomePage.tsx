@@ -1,7 +1,6 @@
 
 import Hero from '../sections/home/Hero'
 import OurClientsSection from '../sections/home/OurClientsSection'
-
 function HomePage() {
   return (
     <>

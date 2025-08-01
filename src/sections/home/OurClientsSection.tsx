@@ -1,11 +1,10 @@
-import { useRef, useState } from 'react'
-
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import { SectionWrapper } from '../../layouts/SectionWrapper'
 import TitleBtn from '../../components/ui/TitleBtn'
 import Title from '../../components/shared/Title'
 import { testimonials } from '../../data/testimonialsData'
+import { useRef, useState } from 'react'
 
 function OurClientsSection() {
     const prevRef = useRef<HTMLButtonElement | null>(null)
