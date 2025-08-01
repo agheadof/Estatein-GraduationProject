@@ -1,0 +1,73 @@
+export const testimonials = [
+    {
+        name: 'Wade Warren',
+        title: 'Exceptional Service!',
+        location: 'USA, California',
+        image: '/assets/images/Clients/wade.webp',
+        message: "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
+    },
+    {
+        name: 'Emelie Thomson',
+        title: 'Exceptional Service!',
+        location: 'USA, Florida',
+        image: '/assets/images/Clients/emelie.webp',
+        message: "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
+    },
+    {
+        name: 'John Mans',
+        title: 'Exceptional Service!',
+        location: 'USA, Nevada',
+        image: '/assets/images/Clients/john.webp',
+        message: "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
+    },
+    {
+        name: 'Wade Warren',
+        title: 'Exceptional Service!',
+        location: 'USA, California',
+        image: '/assets/images/Clients/wade.webp',
+        message: "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
+    },
+        {
+        name: 'Emelie Thomson',
+        title: 'Exceptional Service!',
+        location: 'USA, Florida',
+        image: '/assets/images/Clients/emelie.webp',
+        message: "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
+    },
+    {
+        name: 'Emelie Thomson',
+        title: 'Exceptional Service!',
+        location: 'USA, Florida',
+        image: '/assets/images/Clients/emelie.webp',
+        message: "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
+    },
+    {
+        name: 'Wade Warren',
+        title: 'Exceptional Service!',
+        location: 'USA, California',
+        image: '/assets/images/Clients/wade.webp',
+        message: "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
+    },
+    {
+        name: 'Emelie Thomson',
+        title: 'Exceptional Service!',
+        location: 'USA, Florida',
+        image: '/assets/images/Clients/emelie.webp',
+        message: "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
+    },
+        {
+        name: 'Emelie Thomson',
+        title: 'Exceptional Service!',
+        location: 'USA, Florida',
+        image: '/assets/images/Clients/emelie.webp',
+        message: "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
+    },
+        {
+        name: 'Emelie Thomson',
+        title: 'Exceptional Service!',
+        location: 'USA, Florida',
+        image: '/assets/images/Clients/emelie.webp',
+        message: "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
+    },
+    
+]
