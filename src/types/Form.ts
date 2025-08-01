@@ -1,0 +1,43 @@
+export type InputProps = {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  type?: string;
+};
+export type SelectProps = {
+  label: string;
+  name: string;
+  value: string;
+  placeholder?: string;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  options: string[];
+};
+export type TextareaProps = {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+};
+export type CheckboxProps = {
+  label: string;
+  checked: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+export type FormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  inquiryType?: string;
+  selectedProperty?: string;
+  location?: string;
+  propertyType?: string;
+  bathrooms?: string;
+  bedrooms?: string;
+  budget?: string;
+  message: string;
+  preferredContact?: string[];
+};
+export type FormType = "inquiry" | "property" | "detailed";
