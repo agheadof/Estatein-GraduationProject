@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gray10 text-white py-5 px-4 md:px-10 fixed w-full z-50">
-      <div className="flex justify-between items-center min-[1920px]:container min-[1920px]:mx-auto">
+      <div className="flex justify-between items-center huge:container huge:mx-auto">
         {/* Logo */}
         <img src="/assets/icons/Navbar/logo.svg" alt="Logo" className="w-24 md:w-28 2xl:w-40" />
 

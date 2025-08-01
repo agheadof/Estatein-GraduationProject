@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+@import 'swiper/css';
+@import 'swiper/css/navigation';
 
 @theme {
 
@@ -29,6 +31,7 @@
     --color-gray70: #141414;
     --color-gray75: #D4D4D8;
 
-    --font-urbanist: "Urbanist", sans-serif;
+    --font-urbanist       : "Urbanist", sans-serif;
     --breakpoint-lg-custom: 992px;
 }
+
