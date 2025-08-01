@@ -1,14 +1,13 @@
-import React from 'react'
-import TitleBtn from '../../ui/TitleBtn'
+import TitleBtn from "../ui/TitleBtn";
 
-type Props = {
+type TitleProps = {
     heading: string;
     paragraph: string;
     buttonLabel: string;
     classEdit?: boolean;
 }
 
-const Title = ({ heading, paragraph, buttonLabel,classEdit }: Props) => {
+const Title = ({ heading, paragraph, buttonLabel, classEdit }: TitleProps) => {
     return (
         <div className=' mb-[40px] lg-custom:mb-[60px] 2xl:mb-[80px] mt-[61px] lg-custom:mt-[90px] 2xl:mt-[110px] w-full'>
             <div className=' lg-custom:mb-1.5 2xl:mb-2.5'>
