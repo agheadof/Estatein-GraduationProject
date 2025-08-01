@@ -33,3 +33,9 @@
     --font-urbanist: "Urbanist", sans-serif;
     --breakpoint-lg-custom: 992px;
 }
+
+@layer utilities {
+  .bg-gradient-custom {
+    background: linear-gradient(95.93deg, #262626 -26.82%, rgba(38, 38, 38, 0) 40.46%);
+  }
+}
