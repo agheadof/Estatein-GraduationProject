@@ -69,7 +69,6 @@ function OurClientsSection() {
                         }}
                         slidesPerGroup={1}
                         spaceBetween={30}
-                        // slidesPerView={3}
                         loop={true}
                         breakpoints={{
                             0: {
