@@ -31,4 +31,5 @@
     --color-gray75: #D4D4D8;
 
     --font-urbanist: "Urbanist", sans-serif;
+    --breakpoint-lg-custom: 992px;
 }
