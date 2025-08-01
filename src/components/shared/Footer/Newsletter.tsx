@@ -2,7 +2,7 @@ import { MessageIcon, SendIcon } from "../../icons/FooterIcons";
 
 export function FooterNewsletter() {
   return (
-    <form className="space-y-3 lg:w-[300px] border border-gray15 rounded-xl">
+    <form className="space-y-2 w-full lg-custom:w-[305px] 2xl:w-[423px] border border-gray15 rounded-xl">
       <div className="relative">
         <MessageIcon
           className="absolute left-5 top-1/2 size-4 -translate-y-1/2 stroke-gray-light"

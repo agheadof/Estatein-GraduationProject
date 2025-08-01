@@ -1,7 +1,7 @@
 
 function AboutPage() {
   return (
-    <div>
+    <div className="huge:container huge:mx-auto">
       
     </div>
   )

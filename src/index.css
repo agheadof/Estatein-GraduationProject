@@ -3,6 +3,7 @@
 
 
 @theme {
+
     --color-white90: #E4E4E7;
     --color-white95: #F1F1F3;
     --color-white97: #F7F7F8;
@@ -30,4 +31,6 @@
     --color-gray75: #D4D4D8;
 
     --font-urbanist: "Urbanist", sans-serif;
+    --breakpoint-lg-custom: 992px;
+    --breakpoint-huge: 1921px;
 }

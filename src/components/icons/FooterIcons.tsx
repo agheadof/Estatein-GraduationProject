@@ -23,13 +23,13 @@ export function MessageIcon({ className = "", hoverClassName = "", color = "#999
   );
 }
 
-export function SendIcon({ className = "", hoverClassName = "", color = "currentColor" }: IconProps) {
+export function SendIcon({ className = "", hoverClassName = "", color  }: IconProps) {
   return (
     <svg
       width="30"
       height="30"
       viewBox="0 0 30 30"
-      fill="none"
+      fill="#ffff"
       xmlns="http://www.w3.org/2000/svg"
       className={`${className} ${hoverClassName}`}
     >
@@ -46,31 +46,31 @@ export function SendIcon({ className = "", hoverClassName = "", color = "current
   )
 }
 
-export function FacebookIcon({ className = "", hoverClassName = "", color = "currentColor" }: IconProps)  {
+export function FacebookIcon({ className = "", hoverClassName = "", color  }: IconProps)  {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={color} className={`${className} ${hoverClassName}`} xmlns="http://www.w3.org/2000/svg">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill={hoverClassName} stroke={color} className={`${className} ${hoverClassName}`} xmlns="http://www.w3.org/2000/svg">
       <path d="M15.7442 3.98403H18.0002V0.168036C16.9079 0.0544523 15.8104 -0.00162514 14.7122 3.58369e-05C11.4482 3.58369e-05 9.21622 1.99203 9.21622 5.64003V8.78402H5.53223V13.056H9.21622V24H13.6322V13.056H17.3042L17.8562 8.78402H13.6322V6.06003C13.6322 4.80003 13.9682 3.98403 15.7442 3.98403Z" fill="white"/>
     </svg>
   )
 }
 
-export function LinkedinIcon({ className = "", hoverClassName = "", color = "currentColor" }: IconProps)  {
+export function LinkedinIcon({ className = "", hoverClassName = "", color }: IconProps)  {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={color} className={`${className} ${hoverClassName}`} xmlns="http://www.w3.org/2000/svg">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill={hoverClassName} stroke={color} className={`${className} ${hoverClassName}`} xmlns="http://www.w3.org/2000/svg">
       <path d="M20.4701 1.9999H3.53006C3.34 1.997 2.98 2.17 2.5 2.9V21.1C2.9 21.8 3.26 22 3.53 22H20.47C20.66 22 21 21.8 21.5 21.1V2.9C21.2 2.2 20.9 2 20.47 2V1.9999ZM8.09006 18.7399H5.09006V9.7399H8.09006V18.7399ZM6.59006 8.4799C5.86 8.47 5.03 7.88 5.03 6.91C5.03 5.93 5.85 5.36 6.59 5.36C7.34 5.36 8.15 5.92 8.15 6.91C8.15 7.89 7.34 8.48 6.59 8.48L6.59006 8.4799ZM18.9101 18.7399H15.9101V13.9099C15.9101 12.6999 15.4801 11.9099 14.3901 11.9099C13.0201 11.9099 12.7501 12.9999 12.7501 13.7299V18.7299H9.75006V9.7299H12.7501V10.9999C13.7201 9.7699 18.9101 9.4999 18.9101 13.5599V18.7399Z" fill="white"/>
     </svg>
   )
 }
 
-export function TwitterIcon({ className = "", hoverClassName = "", color = "currentColor" }: IconProps)  {
+export function TwitterIcon({ className = "", hoverClassName = "", color  }: IconProps)  {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={color} className={`${className} ${hoverClassName}`} xmlns="http://www.w3.org/2000/svg">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill={hoverClassName} stroke={color} className={`${className} ${hoverClassName}`} xmlns="http://www.w3.org/2000/svg">
       <path d="M22 5.79997C21.2483 6.12606 20.4534 6.34163 19.64 6.43997C20.4982 5.92729 21.1413 5.12075 21.45 4.16997C20.6436 4.65003 19.7608 4.98826 18.84 5.16997C18.2245 4.50254 17.405 4.05826 16.5098 3.90682C15.6147 3.75537 14.6945 3.90532 13.8938 4.33315C13.093 4.76099 12.4569 5.4425 12.0852 6.2708C11.7135 7.09911 11.6273 8.02736 11.84 8.90997C10.2 8.83 8.61 8.4 7.16 7.66C5.7 6.92 4.42 5.88 3.39 4.62C3.02 5.25 2.83 5.96 2.84 6.69C2.84 7.36 3 8.03 3.32 8.62C3.64 9.22 4.1 9.73 4.66 10.1C4 10.08 3.36 9.91 2.8 9.59V9.64C2.8 10.59 3.14 11.5 3.74 12.23C4.34 12.96 5.17 13.46 6.1 13.64C5.74 13.75 5.37 13.81 5 13.81C4.74 13.81 4.48 13.78 4.23 13.74C4.49 14.55 5 15.26 5.69 15.77C6.38 16.28 7.2 16.56 8.06 16.58C6.61 17.71 4.83 18.33 3 18.34C2.66 18.34 2.33 18.32 2 18.28C3.87 19.49 6.06 20.13 8.29 20.13C11.97 20.13 15.1 18.87 17.71 16.75C19.94 14.88 21.52 12.19 22 8.45C22 8.28 22 8.1 22 7.92C22.78 7.33 23.46 6.61 24 5.8H22Z" fill="white"/>
     </svg>
   )
 }
 
-export function YoutubeIcon({ className = "", hoverClassName = "", color = "currentColor" }: IconProps)  {
+export function YoutubeIcon({ className = "", hoverClassName = "", color }: IconProps)  {
   return (
     <svg width="22" height="16" viewBox="0 0 22 16" fill="none" stroke={color} className={`${className} ${hoverClassName}`} xmlns="http://www.w3.org/2000/svg">
       <path d="M22 5.70998C22.0495 4.27864 21.7365 2.858 21.09 1.57998C20.65 1.06 20.04 0.7 19.37 0.58C16.59 0.33 13.79 0.22 11 0.27C8.22 0.22 5.43 0.32 2.66 0.57C2.11 0.67 1.6 0.93 1.2 1.31C0.3 2.14 0.2 3.56 0.1 4.76C-0.05 6.92 -0.05 9.08 0.1 11.24C0.13 11.92 0.23 12.59 0.4 13.24C0.52 13.75 0.76 14.21 1.11 14.6C1.52 15 2.03 15.28 2.6 15.38C4.76 15.65 6.93 15.76 9.1 15.71C12.6 15.76 15.67 15.71 19.3 15.43C19.88 15.33 20.41 15.06 20.83 14.65C21.11 14.37 21.32 14.03 21.44 13.65C21.8 12.55 21.97 11.4 21.96 10.25C22 9.69 22 6.31 22 5.71ZM8.74 10.85V4.66L14.66 7.77C13 8.69 10.81 9.73 8.74 10.85Z" fill="white"/>

@@ -2,7 +2,7 @@ import React from 'react'
 
 function PropertyDetails() {
   return (
-    <div>
+    <div className='huge:container huge:mx-auto'>
       
     </div>
   )
