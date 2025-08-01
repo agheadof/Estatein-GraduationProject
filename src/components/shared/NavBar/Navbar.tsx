@@ -10,7 +10,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   return (
-    <nav className="bg-grey10 text-white py-5 px-4 md:px-10 fixed w-full z-50">
+    <nav className="bg-gray10 text-white py-5 px-4 md:px-10 fixed w-full z-50">
       <div className="flex justify-between items-center">
         {/* Logo */}
         <img src="/assets/icons/Navbar/logo.svg" alt="Logo" className="w-24 md:w-28 2xl:w-40" />
@@ -26,8 +26,8 @@ const Navbar = () => {
 
         {/* Desktop Button */}
         <NavLink to="/contact" onClick={() => { setIsMenuOpen(false);}} className={({ isActive }) =>
-          `hidden md:block text-white font-medium  md:py-3 md:px-5 2xl:py-3.5 2xl:px-6 md:rounded-lg 2xl:rounded-[10px] border border-grey15
-           ${isActive ? "bg-purple60" : "bg-grey08"}`
+          `hidden md:block text-white font-medium  md:py-3 md:px-5 2xl:py-3.5 2xl:px-6 md:rounded-lg 2xl:rounded-[10px] border border-gray15
+           ${isActive ? "bg-purple60" : "bg-gray08"}`
         }
         >
           Contact Us
@@ -41,7 +41,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.ul initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-            className="flex flex-col gap-4 mt-4 md:hidden bg-grey08 p-5 rounded-lg border border-grey15 ">
+            className="flex flex-col gap-4 mt-4 md:hidden bg-gray08 p-5 rounded-lg border border-gray15 ">
 
             {NavData.map((link, index) => (
               <li key={index}>
@@ -53,7 +53,7 @@ const Navbar = () => {
               <NavLink onClick={() => {setIsMenuOpen(false); scrollToTop();}} 
                 to="/contact"
                 className={({ isActive }) =>
-                  `block py-2 px-4 rounded-md text-center text-white ${isActive ? "bg-purple60" : "bg-grey15 "
+                  `block py-2 px-4 rounded-md text-center text-white ${isActive ? "bg-purple60" : "bg-gray15 "
                   }`
                 }
               >
