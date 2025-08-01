@@ -11,7 +11,7 @@ const Hero = () => {
                     <p className="text-sm md:text-base 2xl:text-lh font-medium text-gray60 leading-[150%]">Your journey to finding the perfect property begins here. Explore our listings to find the home that matches your dreams.</p>
                 </div>
                 <div className="flex flex-col md:flex-row gap-4">
-                    <Link to="/properties" className="text-center py-3.5 px-5 2xl:py-[18px] text-sm 2xl:text-lg 2xl:px-6 border border-gray15 rounded-lg">
+                    <Link to="/about" className="text-center py-3.5 px-5 2xl:py-[18px] text-sm 2xl:text-lg 2xl:px-6 border border-gray15 rounded-lg">
                         Learn More
                     </Link>
                     <Link to="/properties" className="text-center py-3.5 px-5 2xl:py-[18px] 2xl:px-6 text-sm 2xl:text-lg bg-purple60 rounded-lg">
@@ -20,7 +20,7 @@ const Hero = () => {
                 </div>
                 <CountUpComponent />
             </div>
-            <div className="relative mx-4 md:px-0 md:w-[48%]   md:h-screen flex items-end border border-gray15 md:border-none  rounded-xl   bg-gray10 bg-[linear-gradient(to_bottom_left,_#2A213F,_#19191900,_#19191900)] ">
+            <div className="relative mx-4 md:mx-0 md:px-0 md:w-[48%]   md:h-screen flex items-end border border-gray15 md:border-none  rounded-xl md:rounded-none  bg-gray10 bg-[linear-gradient(to_bottom_left,_#2A213F,_#19191900,_#19191900)] ">
                 <div className="absolute inset-0 z-0 ">
                     <img
                         src="/assets/images/AbstractDesign5.png"
@@ -32,7 +32,7 @@ const Hero = () => {
                 <img
                     src="/assets/images/MainHero/main.png"
                     alt="Hero"
-                    className="relative z-10  md:w-full 2xl:h-[90%] md:h-[70%]  "
+                    className="relative z-10  md:w-full 2xl:h-[90%] md:h-[70%]  md:pr-8 lg-custom:pr-20 2xl:pr-[162px] "
                 />
             <RotatingText />
 
