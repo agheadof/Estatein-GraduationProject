@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 export default function RotatingText() {
   const text = "Discover Your Dream Property ";
   const circleRef = useRef<HTMLDivElement>(null);
-  const [radius, setRadius] = useState(88); // default fallback
+  const [radius, setRadius] = useState(88); 
 
   useEffect(() => {
     const updateRadius = () => {
@@ -21,7 +21,7 @@ export default function RotatingText() {
   }, []);
 
   return (
-    <div className="absolute bottom-[-55px] md:bottom-0 md:top-[200px] md:left-[-90px] inline-block z-50">
+    <div className="absolute bottom-[-55px] lg-custom:bottom-0 2xl:top-[275px] 2xl:left-[-80px] lg-custom:top-[200px] lg-custom:left-[-70px]  inline-block z-40">
       <style>{`
         @keyframes rotateText {
           0% { transform: rotate(0deg); }
@@ -32,7 +32,7 @@ export default function RotatingText() {
       <div className="border border-gray15 rounded-full">
         <div
           ref={circleRef}
-          className="relative w-28 h-28 md:w-32 md:h-32 2xl:w-44 2xl:h-44 flex items-center justify-center rounded-full bg-grey08 overflow-hidden"
+          className="relative w-28 h-28 lg-custom:w-32 lg-custom:h-32 2xl:w-44 2xl:h-44 flex items-center justify-center rounded-full bg-grey08 overflow-hidden"
         >
           <div
             className="absolute w-full h-full rounded-full"
@@ -56,8 +56,8 @@ export default function RotatingText() {
             ))}
           </div>
 
-          <div className=" bg-gray15 p-7 rounded-full border border-gray15 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-            <img src="/assets/icons/arrowUpRight.svg" alt="Arrow" />
+          <div className=" bg-gray15 p-3 md:p-5 2xl:p-7 rounded-full border border-gray15 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+            <img src="/assets/icons/arrowUpRight.svg" alt="Arrow"  />
           </div>
         </div>
       </div>
