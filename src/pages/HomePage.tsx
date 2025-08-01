@@ -1,10 +1,13 @@
-import React from 'react'
+import Hero from '../sections/home/Hero'
 
 function HomePage() {
   return (
-    <div className='min-[1920px]:container min-[1920px]:mx-auto'>
-      
-    </div>
+    <>
+      <Hero />
+      <div className='min-[1920px]:container min-[1920px]:mx-auto'>
+      </div>
+    </>
+
   )
 }
 
