@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
 @theme {
     --color-white: #FFFFFF;
@@ -29,4 +30,6 @@
     --color-grey65: #F7F7F7;
     --color-grey70: #141414;
     --color-grey75: #D4D4D8;
+
+    --font-urbanist: "Urbanist", sans-serif;
 }
