@@ -24,8 +24,8 @@ function InquiryForm() {
   });
 
   return (
-    <form className="space-y-[50px] p-[100px] mt-40 rounded-xl border-1 border-gray15 w-full">
-      <div className="grid lg-custom:grid-cols-4 grid-col-1 gap-[50px]">
+    <form className="space-y-[50px] 2xl:p-[100px] lg-custom:p-[50px] p-5 2xl:mt-[80px] lg-custom:mt-[60px] mt-10 rounded-xl border-1 border-gray15 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] 2xl:gap-[50px]">
         <SharedFields formData={formData} handleChange={handleChange} />
         <FormSelect
           label="Preferred Location"
@@ -59,7 +59,7 @@ function InquiryForm() {
           onChange={handleChange}
           options={["1", "2", "3+"]}
         />
-        <div className="lg-custom:col-span-2">
+        <div className="xl:col-span-2 col-span-1">
           <FormSelect
             label="Budget"
             name="budget"
@@ -69,12 +69,12 @@ function InquiryForm() {
             options={["<1000", "1000-2000", ">2000"]}
           />
         </div>
-        <div className="lg-custom:col-span-2 flex flex-col justify-between">
+        <div className="xl:col-span-2 md:col-span-3 col-span-1 flex flex-col justify-between">
           <label className="mb-4 text-xl lg-custom:text-base/[1.5] text-white font-semibold">
             Preferred Contact Method
           </label>
-          <div className="w-full flex justify-between items-center space-x-4">
-            <div className="relative w-1/2">
+          <div className="w-full flex flex-col md:flex-row md:justify-between justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+            <div className="relative w-full lg-custom:w-1/2">
               <svg
                 width="25"
                 height="24"
@@ -105,11 +105,10 @@ function InquiryForm() {
                 value="phone"
                 checked={formData.preferredContact?.includes("phone") || false}
                 onChange={handleCheckboxChange}
-                className="absolute right-6 top-1/2 transform -translate-y-1/2 w-6 h-6 appearance-none bg-gray10 border-1 border-purple60 rounded-full checked:bg-purple60  cursor-pointer"
+                className="absolute right-6 top-1/2 transform -translate-y-1/2 md:w-6 w-[10px] md:h-6 h-[10px] appearance-none bg-gray10 border-1 border-purple60 rounded-full checked:bg-purple60 cursor-pointer"
               />
             </div>
-            <div className="relative w-1/2">
-              {/* Left Icon */}
+            <div className="relative w-full lg-custom:w-1/2">
               <svg
                 width="25"
                 height="24"
@@ -127,8 +126,6 @@ function InquiryForm() {
                   fill="white"
                 />
               </svg>
-
-              {/* Input with left padding for the icon */}
               <input
                 type="email"
                 name="email"
@@ -138,15 +135,13 @@ function InquiryForm() {
                 className="w-full rounded-lg bg-gray10 text-gray40 text-lg/[20px] lg-custom:text-sm font-medium border-1 border-gray15 px-5 py-6 pl-14"
                 disabled={!formData.preferredContact?.includes("email")}
               />
-
-              {/* Right Checkbox */}
               <input
                 type="checkbox"
                 name="preferredContact"
                 value="email"
                 checked={formData.preferredContact?.includes("email") || false}
                 onChange={handleCheckboxChange}
-                className="absolute right-6 top-1/2 transform -translate-y-1/2 w-6 h-6 appearance-none bg-gray10 border-1 border-purple60 rounded-full checked:bg-purple60 cursor-pointer"
+                className="absolute right-6 top-1/2 transform -translate-y-1/2 md:w-6 w-[10px] md:h-6 h-[10px] appearance-none bg-gray10 border-1 border-purple60 rounded-full checked:bg-purple60 cursor-pointer"
               />
             </div>
           </div>
