@@ -1,11 +1,13 @@
 import React from 'react'
-import OurClientsSection from '../sections/home/OurClientsSection'
+import Hero from '../sections/home/Hero'
 
 function HomePage() {
   return (
-    <div className='huge:container huge:mx-auto'>
-      
-    </div>
+    <>      <Hero />
+
+      <div className='huge:container huge:mx-auto'>
+      </div>
+    </>
   )
 
 

@@ -1,8 +1,27 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
+
 export default function RotatingText() {
   const text = "Discover Your Dream Property ";
+  const circleRef = useRef<HTMLDivElement>(null);
+  const [radius, setRadius] = useState(88); // default fallback
+
+  useEffect(() => {
+    const updateRadius = () => {
+      if (circleRef.current) {
+        const { width } = circleRef.current.getBoundingClientRect();
+        setRadius(width / 2);
+      }
+    };
+
+    updateRadius(); // on mount
+    window.addEventListener("resize", updateRadius);
+
+    return () => window.removeEventListener("resize", updateRadius);
+  }, []);
 
   return (
-    <div className="fixed top-[300px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 inline-block z-50">
+    <div className="absolute bottom-[-55px] md:bottom-0 md:top-[200px] md:left-[-90px] inline-block z-50">
       <style>{`
         @keyframes rotateText {
           0% { transform: rotate(0deg); }
@@ -11,7 +30,10 @@ export default function RotatingText() {
       `}</style>
 
       <div className="border border-gray15 rounded-full">
-        <div className="relative w-44 h-44 flex items-center justify-center rounded-full bg-grey08 overflow-hidden">
+        <div
+          ref={circleRef}
+          className="relative w-28 h-28 md:w-32 md:h-32 2xl:w-44 2xl:h-44 flex items-center justify-center rounded-full bg-grey08 overflow-hidden"
+        >
           <div
             className="absolute w-full h-full rounded-full"
             style={{
@@ -23,10 +45,10 @@ export default function RotatingText() {
             {text.split("").map((char, i) => (
               <span
                 key={i}
-                className="absolute left-1/2 text-[15px] font-semibold z-10 p-[8px]"
+                className="absolute left-1/2 text-[11px] 2xl:text-[15px] font-semibold z-10 p-[8px]"
                 style={{
                   transform: `rotate(${(360 / text.length) * i}deg)`,
-                  transformOrigin: "0 88px",
+                  transformOrigin: `0 ${radius}px`,
                 }}
               >
                 {char}
@@ -34,7 +56,7 @@ export default function RotatingText() {
             ))}
           </div>
 
-          <div className="text-[20px] bg-gray15 p-7 rounded-full border border-gray15 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+          <div className=" bg-gray15 p-7 rounded-full border border-gray15 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
             <img src="/assets/icons/arrowUpRight.svg" alt="Arrow" />
           </div>
         </div>
