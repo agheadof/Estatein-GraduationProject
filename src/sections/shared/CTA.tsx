@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import Title from "../../components/shared/Title";
+import TitleBtn from "../../components/ui/TitleBtn";
 
 type CTAProps = {
   title: string;
@@ -12,31 +14,18 @@ export function CTA({ title, description, buttonLabel, className}: CTAProps) {
     <section
       role="region"
       aria-labelledby="cta-heading"
-      className={`relative mx-break-out px-break-out py-12.5 overflow-hidden flex flex-col gap-12.5 lg:flex-row lg:items-center lg:justify-between  ${className ?? ""}`}
-    >
+      className={`relative mx-break-out border-t border-t-gray15 px-break-out py-12.5 overflow-hidden flex flex-col gap-12.5 lg-custom:flex-row lg-custom:items-center lg-custom:justify-between px-4 md:px-8 lg-custom:!px-20 2xl:px-[162px] huge:px-0  ${className ?? ""}`}>
 
       <div className="z-10 flex flex-col gap-1.5 md:gap-2.5 xl:gap-5 lg:grow">
-        <h2 id="cta-heading" className="text-white ">
-          {title}
-        </h2>
-        <p className="text-white">{description}</p>
+        <Title heading={title} paragraph={description} starImg = {false} paragraphStyle="w-full md:w-[85%] 2xl:w-[80%]"/>
       </div>
-
-      {/* Button */}
-      <Link
-        to="/properties"
-        className="z-10 btn-primary btn-sm 3xl:btn-lg whitespace-nowrap text-center"
-      >
-        {buttonLabel}
-      </Link>
-
       <img
-        src="/assets/Images/StartJourney/AbstractDesign.png"
+         src="/assets/images/StartJourney/AbstractDesign.png"
         alt="Abstarct"
-        className="absolute top-0 left-0 pointer-events-none"
+        className="absolute top-0 left-0 pointer-events-none scale-x-[-1]"
       />
       <img
-        src="/assets/Images/StartJourney/AbstractDesign2.png"
+        src="/assets/images/StartJourney/AbstractDesign.png"
         alt="Abstarct"
         className="absolute bottom-0 right-0 pointer-events-none"
       />
