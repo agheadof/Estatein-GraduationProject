@@ -1,4 +1,4 @@
-import type { CommonCardProps } from "../../../types/CommonCard";
+import type { CommonCardProps } from "../../types/CommonCard";
 
 const CommonCard = ({
   cardImg,

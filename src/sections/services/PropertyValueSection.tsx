@@ -1,11 +1,19 @@
-import CommonCard from "../../components/cards/CommonCard/CommonCard";
-import { propertyValueData } from "../../data/PropertyValueData";
+import CommonCard from "../../components/cards/CommonCard";
+import UnlockCardComponent from "../../components/cards/UnlockCardComponent";
+import Title from "../../components/shared/Title";
+import { propertyValueData } from "../../data/propertyValueData";
 import { SectionWrapper } from "../../layouts/SectionWrapper";
 
 const PropertyValueSection = () => {
   return (
     <SectionWrapper>
-      <section className="flex flex-wrap gap-[30px] pb-[150px]">
+      <section className="flex flex-wrap gap-[30px] mb-[110px]">
+        <Title
+          titleStyle="mb-[80px]"
+          heading="Unlock Property Value"
+          paragraph="Selling your property should be a rewarding experience, and at Estatein, we make sure it is. Our Property Selling Service is designed to maximize the value of your property, ensuring you get the best deal possible. Explore the categories below to see how we can help you at every step of your selling journey"
+          paragraphStyle="w-[1296px]"
+        />
         {propertyValueData.map((card, index) => (
           <CommonCard
             key={index}
@@ -15,6 +23,7 @@ const PropertyValueSection = () => {
             cardDesc={card.cardDesc}
           />
         ))}
+        <UnlockCardComponent />
       </section>
     </SectionWrapper>
   );

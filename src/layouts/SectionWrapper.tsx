@@ -11,7 +11,7 @@ export function SectionWrapper({
 }: SectionWrapperProps) {
   return (
     <section
-      className={`px-4 md:px-8 lg-custom:px-20 2xl:px-[162px] ${className}`}
+      className={`px-4 md:px-8 lg-custom:px-20 2xl:px-[162px] huge:px-0 ${className}`}
     >
       {children}
     </section>

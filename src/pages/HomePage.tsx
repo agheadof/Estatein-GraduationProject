@@ -1,11 +1,8 @@
-import React from 'react'
+import React from "react";
+// import OurClientsSection from '../sections/home/OurClientsSection'
 
 function HomePage() {
-  return (
-    <div className='min-[1920px]:container min-[1920px]:mx-auto'>
-      
-    </div>
-  )
+  return <div className="huge:container huge:mx-auto"></div>;
 }
 
-export default HomePage
+export default HomePage;
