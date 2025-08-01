@@ -6,7 +6,7 @@ import Navbar from '../components/shared/NavBar/Navbar'
 const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen font-urbanist">
-      <Navbar />
+      {/* <Navbar /> */}
       <main className="flex-grow bg-gray08">
         <Outlet />
       </main>
