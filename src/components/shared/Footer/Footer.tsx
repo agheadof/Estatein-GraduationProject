@@ -11,27 +11,26 @@ type FooterProps = {
 
 export default function Footer({ links, footerNote, logo }: FooterProps) {
     return (
-        <footer className="bg-gray10 text-white px-[162px]">
+        <footer className="bg-gray10 text-white min-[992px]:px-20 2xl:px-[162px]">
             <div className="max-w-[1920px] mx-auto py-16">
                 <div className="flex flex-col lg:flex-row justify-between">
                     <div className="flex flex-col space-y-[15px] mb-10 lg:mb-0">
                         <img src={logo} alt="logo" className="w-40 h-12" />
                         <FooterNewsletter/>
                     </div>
-
-                    <div className="grid grid-cols-2 lg:grid-cols-5 gap-[10px]">
+                    <div className="grid grid-cols-2 lg:grid-cols-5 min-[992px]:gap-[4%] 2xl:gap-[100px]">
                         {links?.map(({ title, to, items }, i) => (
                             <div key={i} className="flex flex-col space-y-2">
                                 <Link
                                     to={to}
-                                    className="font-semibold text-lg text-white hover:text-purple-400 transition-colors">
+                                    className="font-meduim text-lg text-gray60 hover:text-purple60 transition-colors mb-4">
                                     {title}
                                 </Link>
                                 {items.map(({ label, to }, j) => (
                                     <Link
                                         key={j}
                                         to={to}
-                                        className="text-gray-400 hover:text-white text-sm transition-colors">
+                                        className="font-meduim text-white hover:text-gray60 text-[16px] transition-colors leading-6">
                                         {label}
                                     </Link>
                                 ))}
