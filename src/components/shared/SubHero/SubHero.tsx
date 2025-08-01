@@ -1,4 +1,5 @@
 import { SectionWrapper } from "../../../layouts/SectionWrapper";
+import Title from "../Title";
 
 type SubHeroProps = {
   title: string
@@ -8,8 +9,7 @@ type SubHeroProps = {
 function SubHero({ title, desc }: SubHeroProps) {
   return (
     <SectionWrapper className="pt-[150px] pb-[100px] bg-gradient-custom">
-      <h2 className="text-white font-semibold text-[28px] xl:text-[38px] 2xl:text-5xl [line-height:150%]">{title}</h2>
-      <p className="text-gray60 font-medium text-sm xl:text-base 2xl:text-lg [line-height:150%]">{desc}</p>
+      <Title heading={title} paragraph={desc} buttonLabel="" classEdit={true} />
     </SectionWrapper>
   )
 }

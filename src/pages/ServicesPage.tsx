@@ -3,7 +3,7 @@ import { subHeroServices } from '../data/subHeroData'
 
 function ServicesPage() {
   return (
-    <div className='min-[1920px]:container min-[1920px]:mx-auto'>
+    <div className='huge:container huge:mx-auto'>
       <SubHero title={subHeroServices.title} desc={subHeroServices.desc} />
     </div>
   )
