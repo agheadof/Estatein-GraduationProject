@@ -9,6 +9,8 @@ export function useFormHandler(initialValues?: Partial<FormData>) {
     phone: "",
     message: "",
     preferredContact: [],
+    inquiryType: "", 
+    hearAboutUs: "", 
     ...initialValues,
   });
 
@@ -94,6 +96,8 @@ export function useFormHandler(initialValues?: Partial<FormData>) {
       phone: "",
       message: "",
       preferredContact: [],
+      inquiryType: "", 
+      hearAboutUs: "", 
       ...initialValues,
     });
     setAgreed(false);

@@ -18,6 +18,7 @@ function FormCheckbox({ label, checked, onChange }: CheckboxProps) {
           flex items-center justify-center
           ${checked ? "bg-purple60 border-purple60" : ""}
           focus-within:ring-2 focus-within:ring-purple60/30
+          hover:border-purple60
         `}
       >
         {checked && (

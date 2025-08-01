@@ -1,4 +1,5 @@
 import type { SelectProps } from "../../types/Form";
+import { DropdownIcon } from "../icons/FormIcons";
 
 function FormSelect({
   label,
@@ -9,7 +10,7 @@ function FormSelect({
   options,
 }: SelectProps) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col group">
       <label
         htmlFor={name}
         className="mb-4 text-xl lg-custom:text-base/[1.5] text-white font-semibold"
@@ -34,22 +35,9 @@ function FormSelect({
         </select>
 
         {/* Custom dropdown icon */}
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="pointer-events-none absolute right-5 top-1/2 transform -translate-y-1/2"
-        >
-          <path
-            d="M19.5 8.25L12 15.75L4.5 8.25"
-            stroke="white"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <DropdownIcon
+          className="absolute right-5 group-hover:text-purple60 top-1/2 transform -translate-y-1/2 text-white transition-colors duration-200"
+        />
       </div>
     </div>
   );
