@@ -17,13 +17,17 @@ const PropertyValueSection = () => {
         {propertyValueData.map((card, index) => (
           <CommonCard
             key={index}
-            cardStyle="gap-[30px] border-gray15 w-[512px]"
+            cardStyle="p-[50px] gap-[30px] border-gray15 w-[512px]"
             cardImg={card.cardImg}
             cardTitle={card.cardTitle}
             cardDesc={card.cardDesc}
           />
         ))}
-        <UnlockCardComponent />
+        <UnlockCardComponent
+          cardStyle='bg-[url("/assets/images/AbstractDesign2.png")]'
+          title="Unlock the Value of Your Property Today"
+          desc="Ready to unlock the true value of your property? Explore our Property Selling Service categories and let us help you achieve the best deal possible for your valuable asset."
+        />
       </section>
     </SectionWrapper>
   );

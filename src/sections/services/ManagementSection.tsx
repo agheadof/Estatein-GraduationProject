@@ -1,4 +1,5 @@
 import CommonCard from "../../components/cards/CommonCard";
+import UnlockCardComponent from "../../components/cards/UnlockCardComponent";
 import Title from "../../components/shared/Title";
 import { managementData } from "../../data/managementData";
 import { SectionWrapper } from "../../layouts/SectionWrapper";
@@ -16,12 +17,17 @@ const ManagementSection = () => {
         {managementData.map((card, index) => (
           <CommonCard
             key={index}
-            cardStyle="gap-[30px] border-gray15 w-[512px]"
+            cardStyle="p-[50px] gap-[30px] border-gray15 w-[512px]"
             cardImg={card.cardImg}
             cardTitle={card.cardTitle}
             cardDesc={card.cardDesc}
           />
         ))}
+        <UnlockCardComponent
+          cardStyle='bg-[url("/assets/images/AbstractDesign2.png")]'
+          title="Experience Effortless Property Management"
+          desc="Ready to experience hassle-free property management? Explore our Property Management Service categories and let us handle the complexities while you enjoy the benefits of property ownership."
+        />
       </section>
     </SectionWrapper>
   );
