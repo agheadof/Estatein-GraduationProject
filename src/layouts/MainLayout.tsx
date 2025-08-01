@@ -4,7 +4,6 @@ import Footer from '../components/shared/Footer/Footer'
 import { defaultLinks } from '../data/footerData'
 import { CTA } from '../sections/shared/CTA'
 
-
 const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen font-urbanist">

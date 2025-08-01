@@ -1,3 +1,5 @@
+import SubHero from "../components/shared/SubHero/SubHero"
+import { subHeroContact } from "../data/subHeroData"
 import { SectionWrapper } from '../layouts/SectionWrapper';
 import ContactForm from '../sections/properties/ContactForm';
 
@@ -13,6 +15,7 @@ function ContactPage() {
           contact={true}
         />
       </SectionWrapper>
+      <SubHero title={subHeroContact.title} desc={subHeroContact.desc} />
     </div>
   );
 }
