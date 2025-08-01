@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-import React, { useRef } from 'react'
-import Title from '../../components/shared/Title';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-=======
 import { useRef, useState } from 'react'
->>>>>>> bed5f3a88d972c3b05417641dee20c36b308b7fa
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
