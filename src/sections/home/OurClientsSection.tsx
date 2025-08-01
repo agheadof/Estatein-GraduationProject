@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import Title from '../../components/shared/TItle/Title'
+import Title from '../../components/shared/Title';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
