@@ -69,5 +69,20 @@ export const testimonials = [
         image: '/assets/images/Clients/emelie.webp',
         message: "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
     },
+    ,
+        {
+        name: 'Emelie Thomson',
+        title: 'Exceptional Service!',
+        location: 'USA, Florida',
+        image: '/assets/images/Clients/emelie.webp',
+        message: "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
+    },
+        {
+        name: 'Emelie Thomson',
+        title: 'Exceptional Service!',
+        location: 'USA, Florida',
+        image: '/assets/images/Clients/emelie.webp',
+        message: "Our experience with Estatein was outstanding. Their team's dedication and professionalism made finding our dream home a breeze. Highly recommended!",
+    },
     
 ]
