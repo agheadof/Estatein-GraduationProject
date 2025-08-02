@@ -1,5 +1,6 @@
-import type {TextareaProps} from '../../types/Form'
-function FormTextarea({ label, name, value, onChange }: TextareaProps) {
+import type { TextareaProps } from "../../types/Form";
+
+function FormTextarea({ label, name, value, onChange, error }: TextareaProps) {
   return (
     <div className="flex flex-col">
       <label
@@ -13,8 +14,10 @@ function FormTextarea({ label, name, value, onChange }: TextareaProps) {
         name={name}
         value={value}
         onChange={onChange}
-        className="rounded-lg bg-gray10 text-gray40 text-lg/[20px]  lg-custom:text-sm font-medium border-1 border-gray15 px-5 py-6"
+        className="rounded-lg bg-gray10 text-gray40 text-lg/[20px] lg-custom:text-sm font-medium border-1 border-gray15 px-5 py-6"
+        rows={4}
       />
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
 }
