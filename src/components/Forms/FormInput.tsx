@@ -10,7 +10,7 @@ function FormInput({
   error,
 }: InputProps) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col shrink-0">
       <label
         htmlFor={name}
         className="mb-4 text-xl lg-custom:text-base/[1.5] text-white font-semibold"

@@ -11,7 +11,7 @@ function FormSelect({
   error,
 }: SelectProps) {
   return (
-    <div className="flex flex-col group">
+    <div className="flex flex-col group shrink-0">
       <label
         htmlFor={name}
         className="mb-4 text-xl lg-custom:text-base/[1.5] text-white font-semibold"

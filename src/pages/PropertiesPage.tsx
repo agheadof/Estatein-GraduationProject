@@ -1,6 +1,4 @@
-import { SectionWrapper } from "../layouts/SectionWrapper";
 import ContactForm from "../sections/properties/ContactForm";
-import PropertyDetailsForm from "../sections/propertyDetails/PropertyDetailsForm";
 import SubHero from '../components/shared/SubHero/SubHero'
 import { subHeroProperties } from '../data/subHeroData'
 
