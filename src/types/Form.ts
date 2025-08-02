@@ -2,6 +2,7 @@ export type InputProps = {
   label: string;
   name: string;
   value: string;
+  error?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   type?: string;
@@ -11,6 +12,7 @@ export type SelectProps = {
   label: string;
   name: string;
   value: string;
+  error?: string;
   placeholder?: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   options: string[];
@@ -20,12 +22,14 @@ export type TextareaProps = {
   label: string;
   name: string;
   value: string;
+  error?: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 export type CheckboxProps = {
   label: string;
   checked: boolean;
+  error?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 

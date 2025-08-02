@@ -8,6 +8,7 @@ function FormSelect({
   placeholder,
   onChange,
   options,
+  error,
 }: SelectProps) {
   return (
     <div className="flex flex-col group">
@@ -17,14 +18,13 @@ function FormSelect({
       >
         {label}
       </label>
-
       <div className="relative">
         <select
           id={name}
           name={name}
           value={value}
           onChange={onChange}
-          className="appearance-none w-full rounded-lg bg-gray10 text-gray40 text-lg/[20px] lg-custom:text-sm font-medium border-1 border-gray15 px-5 py-6 pr-12" // ← pr-12 for icon space
+          className="appearance-none w-full rounded-lg bg-gray10 text-gray40 text-lg/[20px] lg-custom:text-sm font-medium border-1 border-gray15 px-5 py-6 pr-12"
         >
           <option value="">{placeholder || "Select"}</option>
           {options.map((opt) => (
@@ -33,12 +33,9 @@ function FormSelect({
             </option>
           ))}
         </select>
-
-        {/* Custom dropdown icon */}
-        <DropdownIcon
-          className="absolute right-5 group-hover:text-purple60 top-1/2 transform -translate-y-1/2 text-white transition-colors duration-200"
-        />
+        <DropdownIcon className="absolute right-5 group-hover:text-purple60 top-1/2 transform -translate-y-1/2 text-white transition-colors duration-200" />
       </div>
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
 }

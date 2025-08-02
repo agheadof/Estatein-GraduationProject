@@ -4,6 +4,7 @@ import { useFormHandler } from "../../hooks/useFormHandler";
 import SharedFields from "./SharedFields";
 import FormTextarea from "./FormTextarea";
 import { EmailIcon, PhoneIcon } from "../icons/FormIcons";
+import MainButton from "../../utlis/MainButton";
 
 function InquiryForm({ contact }: { contact: boolean }) {
   const {
@@ -13,6 +14,7 @@ function InquiryForm({ contact }: { contact: boolean }) {
     agreed,
     setAgreed,
     handleCheckboxChange,
+    errors,
   } = useFormHandler({
     location: "",
     propertyType: "",
@@ -27,7 +29,14 @@ function InquiryForm({ contact }: { contact: boolean }) {
   });
 
   return (
-    <form className="space-y-[50px] 2xl:p-[100px] xl:p-[50px] p-5 2xl:mt-[80px] xl:mt-[60px] mt-10 rounded-xl border-1 border-gray15 w-full">
+    <form
+      className="space-y-[50px] 2xl:p-[100px] xl:p-[50px] p-5 2xl:mt-[80px] xl:mt-[60px] mt-10 rounded-xl border-1 border-gray15 (
+w-full"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit((data) => console.log("Form submitted:", data));
+      }}
+    >
       <div
         className={
           contact
@@ -35,7 +44,11 @@ function InquiryForm({ contact }: { contact: boolean }) {
             : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] 2xl:gap-[50px]"
         }
       >
-        <SharedFields formData={formData} handleChange={handleChange} />
+        <SharedFields
+          formData={formData}
+          handleChange={handleChange}
+          errors={errors}
+        />
         {contact ? (
           <>
             <FormSelect
@@ -45,6 +58,7 @@ function InquiryForm({ contact }: { contact: boolean }) {
               value={formData.inquiryType || ""}
               onChange={handleChange}
               options={["General", "Support", "Sales"]}
+              error={errors.inquiryType}
             />
             <FormSelect
               label="How Did You Hear About Us?"
@@ -53,6 +67,7 @@ function InquiryForm({ contact }: { contact: boolean }) {
               value={formData.hearAboutUs || ""}
               onChange={handleChange}
               options={["Friend", "Social Media", "Search Engine"]}
+              error={errors.hearAboutUs}
             />
           </>
         ) : (
@@ -64,6 +79,7 @@ function InquiryForm({ contact }: { contact: boolean }) {
               value={formData.location || ""}
               onChange={handleChange}
               options={["London", "Paris", "New York"]}
+              error={errors.location}
             />
             <FormSelect
               label="Property Type"
@@ -72,6 +88,7 @@ function InquiryForm({ contact }: { contact: boolean }) {
               value={formData.propertyType || ""}
               onChange={handleChange}
               options={["Villa", "Apartment", "Studio"]}
+              error={errors.propertyType}
             />
             <FormSelect
               label="No. of Bathrooms"
@@ -80,6 +97,7 @@ function InquiryForm({ contact }: { contact: boolean }) {
               value={formData.bathrooms || ""}
               onChange={handleChange}
               options={["1", "2", "3+"]}
+              error={errors.bathrooms}
             />
             <FormSelect
               label="No. of Bedrooms"
@@ -88,6 +106,7 @@ function InquiryForm({ contact }: { contact: boolean }) {
               value={formData.bedrooms || ""}
               onChange={handleChange}
               options={["1", "2", "3+"]}
+              error={errors.bedrooms}
             />
             <div className="xl:col-span-2 col-span-1">
               <FormSelect
@@ -97,12 +116,18 @@ function InquiryForm({ contact }: { contact: boolean }) {
                 value={formData.budget || ""}
                 onChange={handleChange}
                 options={["<1000", "1000-2000", ">2000"]}
+                error={errors.budget}
               />
             </div>
             <div className="xl:col-span-2 md:col-span-3 col-span-1 flex flex-col justify-between">
               <label className="mb-4 lg-custom:text-xl text-base/[1.5] text-white font-semibold">
                 Preferred Contact Method
               </label>
+              {errors.preferredContact && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.preferredContact}
+                </p>
+              )}
               <div className="w-full flex flex-col md:flex-row md:justify-between justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
                 <div className="relative w-full lg-custom:w-1/2 group">
                   <PhoneIcon className="absolute text-white group-hover:text-purple60 left-6 top-1/2 transform -translate-y-1/2 w-6 h-6 pointer-events-none" />
@@ -146,9 +171,15 @@ function InquiryForm({ contact }: { contact: boolean }) {
                     }
                     onChange={handleCheckboxChange}
                     className="absolute right-6 top-1/2 transform -translate-y-1/2 md:w-6 w-[10px] md:h-6 h-[10px] appearance-none bg-gray10 border-1 border-purple60 rounded-full checked:bg-purple60 cursor-pointer"
-                  />
+                    />
                 </div>
               </div>
+                    {errors.phone && (
+                      <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                    )}
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
             </div>
           </>
         )}
@@ -158,22 +189,28 @@ function InquiryForm({ contact }: { contact: boolean }) {
         name="message"
         value={formData.message || ""}
         onChange={handleChange}
+        error={errors.message}
       />
       <div className="flex justify-between">
-        <FormCheckbox
-          label={`I agree with <a href="#" class="underline">Terms of Use</a> and <a href="#" class="underline">Privacy Policy</a>`}
-          checked={agreed}
-          onChange={(e) => setAgreed(e.target.checked)}
-        />
-        <button
-          type="button"
-          onClick={(e) =>
+        <div>
+          <FormCheckbox
+            label={`I agree with <a href="#" class="underline">Terms of Use</a> and <a href="#" class="underline">Privacy Policy</a>`}
+            checked={agreed}
+            onChange={(e) => setAgreed(e.target.checked)}
+          />
+          {errors.agreed && (
+            <p className="text-red-500 text-sm mt-1">{errors.agreed}</p>
+          )}
+        </div>
+        <MainButton
+          onClick={() =>
             handleSubmit((data) => console.log("Form submitted:", data))
           }
-          className="bg-purple60 text-white px-4 py-2 rounded-md"
+          className="normalPurple"
+          variant="normalPurple"
         >
           Send Your Message
-        </button>
+        </MainButton>
       </div>
     </form>
   );
