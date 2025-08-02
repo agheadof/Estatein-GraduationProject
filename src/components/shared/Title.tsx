@@ -24,7 +24,7 @@ const Title = ({
           <img
             src="/assets/icons/MainTitle/shape.svg"
             alt="icon"
-            className="w-[68px] h-[30px] -ml-5"
+            className="w-[68px] h-[30px] -ml-2 md:-ml-2.5 2xl:-ml-5"
           />
         </div>
       )}

@@ -1,4 +1,5 @@
 import type { SelectProps } from "../../types/Form";
+import { DropdownIcon } from "../icons/FormIcons";
 
 function FormSelect({
   label,
@@ -7,23 +8,23 @@ function FormSelect({
   placeholder,
   onChange,
   options,
+  error,
 }: SelectProps) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col group">
       <label
         htmlFor={name}
         className="mb-4 text-xl lg-custom:text-base/[1.5] text-white font-semibold"
       >
         {label}
       </label>
-
       <div className="relative">
         <select
           id={name}
           name={name}
           value={value}
           onChange={onChange}
-          className="appearance-none w-full rounded-lg bg-gray10 text-gray40 text-lg/[20px] lg-custom:text-sm font-medium border-1 border-gray15 px-5 py-6 pr-12" // ← pr-12 for icon space
+          className="appearance-none w-full rounded-lg bg-gray10 text-gray40 text-lg/[20px] lg-custom:text-sm font-medium border-1 border-gray15 px-5 py-6 pr-12"
         >
           <option value="">{placeholder || "Select"}</option>
           {options.map((opt) => (
@@ -32,25 +33,9 @@ function FormSelect({
             </option>
           ))}
         </select>
-
-        {/* Custom dropdown icon */}
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="pointer-events-none absolute right-5 top-1/2 transform -translate-y-1/2"
-        >
-          <path
-            d="M19.5 8.25L12 15.75L4.5 8.25"
-            stroke="white"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <DropdownIcon className="absolute right-5 group-hover:text-purple60 top-1/2 transform -translate-y-1/2 text-white transition-colors duration-200" />
       </div>
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
 }

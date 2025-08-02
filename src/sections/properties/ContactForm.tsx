@@ -1,17 +1,27 @@
 import InquiryForm from "../../components/Forms/InquiryForm";
-import Title from "../../components/shared/Title"
+import Title from "../../components/shared/Title";
 
-function ContactForm() {
+type ContactFormProps = {
+  titleStyle: string;
+  starImg: boolean;
+  heading: string;
+  paragraph: string;
+  contact: boolean;
+};
+
+function ContactForm({
+titleStyle,
+  starImg,
+  heading,
+  paragraph,
+  contact,
+}: ContactFormProps) {
   return (
     <div className="mt-50">
-      <Title
-        starImg={true}
-        heading="Let's Make it Happen"
-        paragraph="Ready to take the first step toward your dream property? Fill out the form below, and our real estate wizards will work their magic to find your perfect match. Don't wait; let's embark on this exciting journey together."
-      />
-      <InquiryForm/>
+      <Title titleStyle ={titleStyle} starImg={starImg} heading={heading} paragraph={paragraph} />
+      <InquiryForm contact={contact} />
     </div>
   );
 }
 
-export default ContactForm
+export default ContactForm;
