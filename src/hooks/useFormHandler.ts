@@ -1,5 +1,7 @@
 import { useState } from "react";
 import type { FormData } from "../types/Form";
+type FormErrors = Partial<Record<keyof FormData | "agreed", string>>;
+
 
 export function useFormHandler(initialValues?: Partial<FormData>) {
   const [formData, setFormData] = useState<FormData>({
@@ -9,13 +11,14 @@ export function useFormHandler(initialValues?: Partial<FormData>) {
     phone: "",
     message: "",
     preferredContact: [],
+    inquiryType: "",
+    hearAboutUs: "",
     ...initialValues,
   });
 
   const [agreed, setAgreed] = useState(false);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>(
-    {}
-  );
+  const [errors, setErrors] = useState<FormErrors>({});
+
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -24,7 +27,6 @@ export function useFormHandler(initialValues?: Partial<FormData>) {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error for this field when user starts typing
     setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
@@ -37,26 +39,25 @@ export function useFormHandler(initialValues?: Partial<FormData>) {
         : prevContact.filter((c) => c !== value);
       return { ...prev, preferredContact: updatedContact };
     });
-    // Clear error for preferredContact when changed
     setErrors((prev) => ({ ...prev, preferredContact: undefined }));
   };
 
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
 
-    // Required fields
     const requiredFields: (keyof FormData)[] = [
       "firstName",
       "lastName",
-      "message",
+      "budget",
     ];
     requiredFields.forEach((key) => {
       if (!formData[key]) {
-        newErrors[key] = `${key} is required`;
+        newErrors[key] = `${
+          key.charAt(0).toUpperCase() + key.slice(1)
+        } is required`;
       }
     });
 
-    // Conditional validation for preferredContact
     if (!formData.preferredContact?.length) {
       newErrors.preferredContact = "At least one contact method is required";
     } else {
@@ -94,6 +95,8 @@ export function useFormHandler(initialValues?: Partial<FormData>) {
       phone: "",
       message: "",
       preferredContact: [],
+      inquiryType: "",
+      hearAboutUs: "",
       ...initialValues,
     });
     setAgreed(false);

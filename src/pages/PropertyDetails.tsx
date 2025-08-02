@@ -1,9 +1,12 @@
-import PropertyGallery from "../sections/propertyDetails/PropertyGallery"
+import { SectionWrapper } from "../layouts/SectionWrapper"
+import PropertyDetailsForm from "../sections/propertyDetails/PropertyDetailsForm"
 
 function PropertyDetails() {
   return (
     <div className="huge:container huge:mx-auto">
-      <PropertyGallery />
+      <SectionWrapper>
+        <PropertyDetailsForm />
+      </SectionWrapper>
     </div>
   )
 }
