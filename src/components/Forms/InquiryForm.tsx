@@ -3,10 +3,14 @@ import FormCheckbox from "./FormCheckbox";
 import { useFormHandler } from "../../hooks/useFormHandler";
 import SharedFields from "./SharedFields";
 import FormTextarea from "./FormTextarea";
-import { EmailIcon, PhoneIcon } from "../icons/FormIcons";
+import { EmailIcon, PhoneIcon, LocationIcon } from "../icons/FormIcons";
 import MainButton from "../ui/MainButton";
 
-function InquiryForm({ contact }: { contact: boolean }) {
+type InquiryFormProps = {
+  type: "inquiry" | "contact" | "property";
+};
+
+function InquiryForm({ type }: InquiryFormProps) {
   const {
     formData,
     handleChange,
@@ -26,29 +30,38 @@ function InquiryForm({ contact }: { contact: boolean }) {
     phone: "",
     inquiryType: "",
     hearAboutUs: "",
+    message: "",
   });
+
+  const isContact = type === "contact";
+  const isProperty = type === "property";
+
+  const formPadding =
+    type === "property"
+      ? "space-y-[20px] 2xl:p-[50px] lg-custom:p-[40px] p-5"
+      : "space-y-[50px] 2xl:p-[100px] xl:p-[50px] p-5 2xl:mt-[80px] xl:mt-[60px] mt-10";
+
+  const gridClass =
+    isContact || isProperty
+      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] 2xl:gap-[50px]"
+      : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] 2xl:gap-[50px]";
 
   return (
     <form
-      className="space-y-[50px] 2xl:p-[100px] xl:p-[50px] p-5 2xl:mt-[80px] xl:mt-[60px] mt-10 rounded-xl border-1 border-gray15 (w-full"
+      className={`${formPadding} rounded-xl border-1 border-gray15 w-full`}
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit((data) => console.log("Form submitted:", data));
       }}
     >
-      <div
-        className={
-          contact
-            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] 2xl:gap-[50px]"
-            : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] 2xl:gap-[50px]"
-        }
-      >
+      <div className={gridClass}>
         <SharedFields
           formData={formData}
           handleChange={handleChange}
           errors={errors}
         />
-        {contact ? (
+
+        {isContact && (
           <>
             <FormSelect
               label="Inquiry Type"
@@ -69,7 +82,9 @@ function InquiryForm({ contact }: { contact: boolean }) {
               error={errors.hearAboutUs}
             />
           </>
-        ) : (
+        )}
+
+        {!isContact && !isProperty && (
           <>
             <FormSelect
               label="Preferred Location"
@@ -118,6 +133,7 @@ function InquiryForm({ contact }: { contact: boolean }) {
                 error={errors.budget}
               />
             </div>
+
             <div className="xl:col-span-2 md:col-span-3 col-span-1 flex flex-col justify-between">
               <label className="mb-4 lg-custom:text-xl text-base/[1.5] text-white font-semibold">
                 Preferred Contact Method
@@ -182,7 +198,22 @@ function InquiryForm({ contact }: { contact: boolean }) {
             </div>
           </>
         )}
+
+        {isProperty && (
+          <div className="xl:col-span-2 flex flex-col justify-between">
+            <label className="mb-4 text-xl lg-custom:text-base/[1.5] text-white font-semibold">
+              Property Name
+            </label>
+            <div className="flex justify-between text-white90 rounded-lg bg-gray10 text-lg/[20px] lg-custom:text-sm font-medium border-1 border-gray15 px-5 py-6">
+              Seaside Serenity Villa, Malibu, California
+              <LocationIcon className="text-white" />
+              {/* here we should add Property.name */}
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* Message */}
       <FormTextarea
         label="Message"
         name="message"
@@ -190,7 +221,9 @@ function InquiryForm({ contact }: { contact: boolean }) {
         onChange={handleChange}
         error={errors.message}
       />
-      <div className="flex justify-between">
+
+      {/* Agreement + Submit */}
+      <div className="flex flex-col md:flex-row justify-between space-y-5">
         <div>
           <FormCheckbox
             label={`I agree with <a href="#" class="underline">Terms of Use</a> and <a href="#" class="underline">Privacy Policy</a>`}
