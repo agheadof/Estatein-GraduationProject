@@ -30,8 +30,7 @@ function InquiryForm({ contact }: { contact: boolean }) {
 
   return (
     <form
-      className="space-y-[50px] 2xl:p-[100px] xl:p-[50px] p-5 2xl:mt-[80px] xl:mt-[60px] mt-10 rounded-xl border-1 border-gray15 (
-w-full"
+      className="space-y-[50px] 2xl:p-[100px] xl:p-[50px] p-5 2xl:mt-[80px] xl:mt-[60px] mt-10 rounded-xl border-1 border-gray15 (w-full"
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit((data) => console.log("Form submitted:", data));
