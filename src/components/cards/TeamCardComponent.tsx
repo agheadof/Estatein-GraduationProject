@@ -1,0 +1,29 @@
+// src/components/cards/TeamCardComponent.tsx
+interface TeamCardProps {
+    name: string
+    role: string
+    image: string
+}
+
+const TeamCardComponent: React.FC<TeamCardProps> = ({ name, role, image }) => {
+    return (
+        <div className="flex flex-col gap-10 lg-custom:gap-[50px] lg-custom:p-6 2xl:p-[30px] border border-gray15 rounded-xl ">
+
+            <div>
+                <img src={image} alt={name} className="rounded-[10px] 2xl:rounded-xl" />
+                <img src="/assets/icons/twitter.svg" alt="icon" className="absolute bottom-0 py-2.5 px-[20px] 2xl:py-3.5 2xl:px-[26px]  rounded-[43px]" />
+            </div>
+
+            <div className="flex flex-col gap-4 lg-custom:gap-5 2xl:gap-6">
+                <div className="text-center flex flex-col gap-0.5 lg-custom:gap-1 2xl:gap-1.5 ">
+                    <h3 className="text-lg lg-custom:text-[20px] 2xl:text-2xl font-semibold leading-7 text-white">{name}</h3>
+                    <p className="text-sm lg-custom:text-base 2xl:text-lg font-medium text-gray60">{role}</p>
+                </div>
+                <input type="text" placeholder="Say Hello 👋" className="bg-gray10 border border-gray15 py-2 pl-2 pr-6 lg-custom:py-2.5 lg-custom:pl-2.5 lg-custom:pr-5 2xl:py-3.5 2xl:pl-3.5 2xl:pr-6" />
+            </div>
+
+        </div>
+    )
+}
+
+export default TeamCardComponent

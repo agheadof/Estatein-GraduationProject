@@ -5,7 +5,7 @@ import RotatingText from "../../components/cards/RotatingText";
 const Hero = () => {
   return (
     // === Main Hero Section Container ===
-    <div className="mt-25 md:mt-0 flex flex-col-reverse lg-custom:flex-row md:items-center md:gap-[60px] 2xl:gap-[80px] text-white">
+    <div className="relative pt-[250px]   md:pt-[94px] h-screen flex flex-col-reverse lg-custom:flex-row md:items-center md:gap-[60px] 2xl:gap-[80px] text-white">
       
       {/* === Left Side: Text, Buttons, and CountUp === */}
       <div className="flex mt-10 lg-custom:w-[48%] flex-col gap-10 md:gap-[50px] 2xl:gap-[60px] px-4 md:pl-8 lg-custom:pl-20 2xl:pl-[162px]">
@@ -35,7 +35,7 @@ const Hero = () => {
       </div>
 
       {/* === Right Side: Hero Image, Background, and RotatingText === */}
-      <div className="relative  mx-4 md:mx-0 md:px-0 lg-custom:w-[48%] lg-custom:h-screen flex items-end border border-gray15 lg-custom:border-none rounded-xl lg-custom:rounded-none bg-gray10 bg-[linear-gradient(to_bottom_left,_#2A213F,_#19191900,_#19191900)]">
+      <div className="relative mx-4 md:mx-0 md:px-0 lg-custom:w-[48%] h-full flex items-end border border-gray15 lg-custom:border-none rounded-xl lg-custom:rounded-none bg-gray10 bg-[linear-gradient(to_bottom_left,_#2A213F,_#19191900,_#19191900)]">
         
         {/* === Background Abstract Design Image === */}
           <img
@@ -44,16 +44,23 @@ const Hero = () => {
             className="w-full h-full object-cover"
           />
 
-        {/* === Foreground Hero Image === */}
+              {/* === Foreground Hero Image === */}
           <img
             src="/assets/images/MainHero/main.png"
             alt="Hero"
-            className=" md:w-full 2xl:h-[90%] md:h-[70%] md:pr-8 lg-custom:pr-20 2xl:pr-[162px] absolute bottom-0"
+            className=" lg-custom:hidden  absolute bottom-0 h-fit   right-0"
           />
 
         {/* === Rotating Text Component === */}
         <RotatingText />
       </div>
+
+              {/* === Foreground Hero Image === */}
+          <img
+            src="/assets/images/MainHero/main.png"
+            alt="Hero"
+            className="hidden lg-custom:block  absolute bottom-0 h-fit w-1/2 right-0"
+          />
     </div>
   );
 };
