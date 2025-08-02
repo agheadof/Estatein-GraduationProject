@@ -1,3 +1,4 @@
+import { getIdTokenResult } from "firebase/auth/cordova";
 import CommonCard from "../../components/cards/CommonCard";
 import UnlockCardComponent from "../../components/cards/UnlockCardComponent";
 import Title from "../../components/shared/Title";
@@ -15,15 +16,19 @@ const InvestmentsSection = () => {
             paragraph="Building a real estate portfolio requires a strategic approach. Estatein's Investment Advisory Service empowers you to make smart investments and informed decisions."
           />
           <UnlockCardComponent
-            cardStyle='bg-[url("/assets/images/AbstractDesign3.png")] w-full'
+            investments={true}
+            cardStyle='p-[50px] bg-[url("/assets/images/AbstractDesign3.png")] w-full h-[340px]'
             title="Unlock Your Investment Potential"
+            titleStyle="text-2xl font-semibold"
             desc="Explore our Property Management Service categories and let us handle the complexities while you enjoy the benefits of property ownership."
+            descStyle="text-white90"
           />
         </div>
         <div className="w-[1017px] bg-gray10 rounded-xl flex flex-wrap gap-2.5 p-2.5">
           {investmentsData.map((card, index) => (
             <CommonCard
               key={index}
+              // cardStyle="p-[50px] gap-[30px] bg-gray08 border-gray15 w-[493px]"
               cardStyle="p-[50px] gap-[30px] bg-gray08 border-gray15 w-[493px]"
               cardImg={card.cardImg}
               cardTitle={card.cardTitle}

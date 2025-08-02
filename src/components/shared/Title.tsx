@@ -2,7 +2,7 @@ import TitleBtn from "../ui/TitleBtn";
 
 type TitleProps = {
   starImg?: boolean;
-  titleStyle: string;
+  titleStyle?: string;
   heading: string;
   paragraph: string;
   paragraphStyle?: string;

@@ -7,27 +7,31 @@ import { SectionWrapper } from "../../layouts/SectionWrapper";
 const ManagementSection = () => {
   return (
     <SectionWrapper>
-      <section className="flex flex-wrap gap-[30px] mb-[110px]">
+      <section>
         <Title
           titleStyle="mb-[80px]"
           heading="Effortless Property Management"
           paragraph="Owning a property should be a pleasure, not a hassle. Estatein's Property Management Service takes the stress out of property ownership, offering comprehensive solutions tailored to your needs. Explore the categories below to see how we can make property management effortless for you"
-          paragraphStyle="w-[1296px]"
+          paragraphStyle="w-[81.203%]"
         />
-        {managementData.map((card, index) => (
-          <CommonCard
-            key={index}
-            cardStyle="p-[50px] gap-[30px] border-gray15 w-[512px]"
-            cardImg={card.cardImg}
-            cardTitle={card.cardTitle}
-            cardDesc={card.cardDesc}
+        <div className="flex flex-wrap gap-[30px]">
+          {managementData.map((card, index) => (
+            <CommonCard
+              key={index}
+              cardStyle="p-[50px] gap-[30px] border-gray15 w-[512px]"
+              cardImg={card.cardImg}
+              cardTitle={card.cardTitle}
+              cardDesc={card.cardDesc}
+            />
+          ))}
+          <UnlockCardComponent
+            cardStyle='w-[65.914%] py-[59px] px-[50px] bg-[url("/assets/images/AbstractDesign2.png")]'
+            title="Experience Effortless Property Management"
+            titleStyle="text-[30px] font-bold"
+            desc="Ready to experience hassle-free property management? Explore our Property Management Service categories and let us handle the complexities while you enjoy the benefits of property ownership."
+            descStyle="text-gray60"
           />
-        ))}
-        <UnlockCardComponent
-          cardStyle='bg-[url("/assets/images/AbstractDesign2.png")]'
-          title="Experience Effortless Property Management"
-          desc="Ready to experience hassle-free property management? Explore our Property Management Service categories and let us handle the complexities while you enjoy the benefits of property ownership."
-        />
+        </div>
       </section>
     </SectionWrapper>
   );
