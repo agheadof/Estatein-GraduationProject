@@ -4,7 +4,7 @@ import { useFormHandler } from "../../hooks/useFormHandler";
 import SharedFields from "./SharedFields";
 import FormTextarea from "./FormTextarea";
 import { EmailIcon, PhoneIcon } from "../icons/FormIcons";
-import MainButton from "../../utlis/MainButton";
+import MainButton from "../ui/MainButton";
 
 function InquiryForm({ contact }: { contact: boolean }) {
   const {
@@ -30,8 +30,7 @@ function InquiryForm({ contact }: { contact: boolean }) {
 
   return (
     <form
-      className="space-y-[50px] 2xl:p-[100px] xl:p-[50px] p-5 2xl:mt-[80px] xl:mt-[60px] mt-10 rounded-xl border-1 border-gray15 (
-w-full"
+      className="space-y-[50px] 2xl:p-[100px] xl:p-[50px] p-5 2xl:mt-[80px] xl:mt-[60px] mt-10 rounded-xl border-1 border-gray15 (w-full"
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit((data) => console.log("Form submitted:", data));
