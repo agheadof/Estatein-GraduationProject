@@ -41,7 +41,6 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
     <div
       className={`bg-gray10 border border-gray15 rounded-xl p-5 md:p-10 2xl:p-12 flex flex-col items-center gap-5 2xl:gap-8 w-full mx-auto ${className}`}
     >
-      {/* Thumbnail Bar */}
       <div
         ref={thumbsRef}
         className="keen-slider bg-gray08 p-2.5 2xl:p-5 rounded-xl border border-gray15 order-2 md:order-1"
@@ -64,8 +63,6 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
         ))}
       </div>
 
-      {/* Main Slider */}
-
       <div ref={sliderRef} className="keen-slider order-1 md:order-2">
         {images.map((src, idx) => (
           <div
@@ -77,7 +74,6 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
         ))}
       </div>
 
-      {/* Navigation */}
       <div className="p-2.5 rounded-[100px] bg-gray08 flex gap-2.5 items-center order-3">
         <button
           onClick={goPrev}
@@ -91,7 +87,6 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
           <ArrowLeft />
         </button>
 
-        {/* Dots */}
         <div className="flex gap-[3px]">
           {images.slice(0, images.length - 1).map((_, idx) => (
             <div
