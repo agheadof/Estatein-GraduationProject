@@ -4,7 +4,7 @@ import { useFormHandler } from "../../hooks/useFormHandler";
 import SharedFields from "./SharedFields";
 import FormTextarea from "./FormTextarea";
 import { EmailIcon, PhoneIcon } from "../icons/FormIcons";
-import MainButton from "../../utlis/MainButton";
+import MainButton from "../ui/MainButton";
 
 function InquiryForm({ contact }: { contact: boolean }) {
   const {

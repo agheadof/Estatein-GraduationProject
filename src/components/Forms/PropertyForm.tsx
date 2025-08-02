@@ -3,7 +3,7 @@ import { useFormHandler } from "../../hooks/useFormHandler";
 import SharedFields from "./SharedFields";
 import FormTextarea from "./FormTextarea";
 import { LocationIcon } from "../icons/FormIcons";
-import MainButton from "../../utlis/MainButton";
+import MainButton from "../ui/MainButton";
 
 function PropertyForm() {
   const { formData, handleChange, handleSubmit, agreed, setAgreed, errors } =
