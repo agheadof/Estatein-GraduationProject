@@ -1,4 +1,3 @@
-// store/faqsSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ref, get } from "firebase/database";
 import { db } from "../../firebaseConfig";

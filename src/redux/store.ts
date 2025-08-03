@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import faqsReducer from './slices/faqsSlice';
+import achievementReducer from "./slices/achievementSlice";
+import themeReducer from './slices/themeSlice';
 
 const store = configureStore({
     reducer : {
+        theme: themeReducer,
         faqs: faqsReducer,
+        achievements: achievementReducer,
     }
 });
 
