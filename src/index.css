@@ -42,3 +42,33 @@
   }
 
 }
+
+@keyframes dotBounce {
+    0%, 80%, 100% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    40% {
+      transform: scale(0.8);
+      opacity: 1;
+    }
+    5% {
+      opacity: 0;
+    }
+  }
+
+  .animate-dotBounce {
+    animation: dotBounce 1.5s infinite ease-in-out;
+  }
+
+  .animation-delay-\[0\.4s\] {
+    animation-delay: 0.4s;
+  }
+
+  .animation-delay-\[0\.25s\] {
+    animation-delay: 0.25s;
+  }
+
+  .animation-delay-\[0\.1s\] {
+    animation-delay: 0.1s;
+  }
