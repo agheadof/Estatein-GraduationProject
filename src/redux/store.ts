@@ -2,12 +2,16 @@ import { configureStore } from "@reduxjs/toolkit";
 import faqsReducer from './slices/faqsSlice';
 import achievementReducer from "./slices/achievementSlice";
 import themeReducer from './slices/themeSlice';
+import testimonialsReducer from "./slices/testimonialsSlice";
+import propertiesReducer from './slices/propertiesSlice'
 
 const store = configureStore({
-    reducer : {
+    reducer: {
         theme: themeReducer,
         faqs: faqsReducer,
         achievements: achievementReducer,
+        testimonials: testimonialsReducer,
+        properties: propertiesReducer,
     }
 });
 

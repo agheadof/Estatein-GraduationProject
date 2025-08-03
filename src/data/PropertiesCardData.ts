@@ -1,5 +1,6 @@
 export const Properties = [
     {
+        id: "1",
         image: '/assets/images/Gallery/1.webp',
         title: 'Seaside Serenity Villa',
         desc: "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood...",
@@ -20,6 +21,7 @@ export const Properties = [
         Price: "$550,000",
     },
     {
+        id: "2",
         image: '/assets/images/Gallery/2.webp',
         title: 'Metropolitan Haven',
         desc: "A chic and fully-furnished 2-bedroom apartment with panoramic city views...",
@@ -40,6 +42,7 @@ export const Properties = [
         Price: "$550,000",
     },
     {
+        id: "3",
         image: '/assets/images/Gallery/3.webp',
         title: 'Rustic Retreat Cottage',
         desc: "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community...",
@@ -60,6 +63,7 @@ export const Properties = [
         Price: "$550,000",
     },
     {
+        id: "4",
         image: '/assets/images/Gallery/1.webp',
         title: 'Seaside Serenity Villa',
         desc: "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood...",
@@ -80,6 +84,7 @@ export const Properties = [
         Price: "$550,000",
     },
     {
+        id: "5",
         image: '/assets/images/Gallery/2.webp',
         title: 'Metropolitan Haven',
         desc: "A chic and fully-furnished 2-bedroom apartment with panoramic city views...",
@@ -100,6 +105,7 @@ export const Properties = [
         Price: "$550,000",
     },
     {
+        id: "6",
         image: '/assets/images/Gallery/3.webp',
         title: 'Rustic Retreat Cottage',
         desc: "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community...",
@@ -120,6 +126,7 @@ export const Properties = [
         Price: "$550,000",
     },
     {
+        id: "7",
         image: '/assets/images/Gallery/1.webp',
         title: 'Seaside Serenity Villa',
         desc: "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood...",
@@ -140,6 +147,7 @@ export const Properties = [
         Price: "$550,000",
     },
     {
+        id: "8",
         image: '/assets/images/Gallery/2.webp',
         title: 'Metropolitan Haven',
         desc: "A chic and fully-furnished 2-bedroom apartment with panoramic city views...",
@@ -160,6 +168,7 @@ export const Properties = [
         Price: "$550,000",
     },
     {
+        id: "9",
         image: '/assets/images/Gallery/3.webp',
         title: 'Rustic Retreat Cottage',
         desc: "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community...",
@@ -180,6 +189,7 @@ export const Properties = [
         Price: "$550,000",
     },
     {
+        id: "10",
         image: '/assets/images/Gallery/3.webp',
         title: 'Rustic Retreat Cottage',
         desc: "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community...",

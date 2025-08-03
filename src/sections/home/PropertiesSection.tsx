@@ -1,30 +1,46 @@
-import { SectionWrapper } from '../../layouts/SectionWrapper'
-import Title from '../../components/shared/Title/Title'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { useEffect } from 'react'
+import { fetchProperties } from '../../redux/slices/propertiesSlice'
+import { selectPropertiesCardsData } from '../../redux/types/Property'
 import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
 import PropertiesCard from '../../components/cards/PropertiesCard'
-import { Properties } from '../../data/PropertiesCardData'
+import Title from '../../components/shared/Title/Title'
+import { SectionWrapper } from '../../layouts/SectionWrapper'
 
 function PropertiesSection() {
+    const dispatch = useAppDispatch()
+    const properties = useAppSelector(selectPropertiesCardsData)
+    const { loading, error } = useAppSelector((state) => state.testimonials);
+
+
+    useEffect(() => {
+        dispatch(fetchProperties())
+    }, [dispatch])
+
     return (
-        <>
-            <SectionWrapper>
-                <div className=' mt-[61px] lg-custom:mt[90px] 2xl:mt-[110px]'>
-                    <Title
-                        heading="Featured Properties"
-                        paragraph= {`Explore our handpicked selection of featured properties. Each listing offers a glimpse into exceptional homes and investments available through Estatein. Click "View Details" for more information.`}
-                        buttonLabel="View All Properties"
-                    />
+        <SectionWrapper>
+            <div className="mt-[61px] lg-custom:mt-[90px] 2xl:mt-[110px]">
+                <Title
+                    heading="Featured Properties"
+                    paragraph="Explore our handpicked selection of featured properties."
+                    buttonLabel="View All Properties"
+                />
+                {loading ? (
+                    <p className="text-white">Loading...</p>
+                ) : error ? (
+                    <p className="text-red-500">{error}</p>
+                ) : (
                     <GenericSlider
-                        items={Properties}
-                        renderSlide={(property, index) => property ? <PropertiesCard key={index} property={property} /> : null}
+                        items={properties}
+                        renderSlide={(property) => (
+                            <PropertiesCard key={property.id} property={property} />
+                        )}
                         slidesPerView={3}
                         showCounter={true}
                         titleBtnLabel="View All Properties"
-                    />
-                </div>
-
-            </SectionWrapper>
-        </>
+                    />)}
+            </div>
+        </SectionWrapper>
     )
 }
 

@@ -24,7 +24,7 @@ const MainButton = ({ children, onClick, className, variant }: MainButtonProps) 
             className={`py-[14px] huge:py-[18px] text-center px-5 rounded-lg huge:rounded-[10px]
             text-sm huge:text-lg font-medium leading-[150%] cursor-pointer
             focus:outline-none focus:ring-2 focus:ring-opacity-75 duration-200
-             ${className} ${buttonVariants[variant]}`}
+            ${className} ${buttonVariants[variant]}`}
             onClick={onClick}
         >
             {children}

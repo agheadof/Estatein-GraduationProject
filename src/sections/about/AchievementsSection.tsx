@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Title from "../../components/shared/Title";
+import Title from "../../components/shared/Title/Title";
 import AchievementsCard from "../../components/cards/AchievementsCard";
 import { SectionWrapper } from "../../layouts/SectionWrapper";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";

@@ -91,7 +91,7 @@ const GenericSlider = <T,>({
                 className=" w-full  mb-[50px]"
             >
                 {items.map((item, index) => (
-                    <SwiperSlide key={index} className=' min-h-full flex items-stretch' >
+                    <SwiperSlide key={index} >
                         {renderSlide(item, index)}
                     </SwiperSlide>
                 ))}

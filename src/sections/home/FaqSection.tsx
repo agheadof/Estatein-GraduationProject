@@ -1,9 +1,17 @@
 import { SectionWrapper } from '../../layouts/SectionWrapper'
 import Title from '../../components/shared/Title/Title'
-import { faq } from '../../data/faqData'
 import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
 import FaqCard from '../../components/cards/FaqCard'
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchFaqs } from '../../redux/slices/faqsSlice'
 function FaqSection() {
+    const dispatch = useAppDispatch();
+    const { visibleItems, loading, error } = useAppSelector((state) => state.faqs);
+
+    useEffect(() => {
+        dispatch(fetchFaqs());
+    }, [dispatch]);
     return (
         <>
             <SectionWrapper>
@@ -13,13 +21,20 @@ function FaqSection() {
                         paragraph="Find answers to common questions about Estatein's services, property listings, and the real estate process. We're here to provide clarity and assist you every step of the way."
                         buttonLabel="View All FAQ’s"
                     />
+                    {loading ? (
+                    <p className="text-white">Loading...</p>
+                ) : error ? (
+                    <p className="text-red-500">{error}</p>
+                ) : (
                     <GenericSlider
-                        items={faq}
+                        items={visibleItems}
                         renderSlide={(question, index) => question ? <FaqCard key={index} question={question} /> : null}
                         showCounter={true}
                         titleBtnLabel="View All FAQ’s"
                     />
+                )}
                 </div>
+                
 
             </SectionWrapper>
         </>
