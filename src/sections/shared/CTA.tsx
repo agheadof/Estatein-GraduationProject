@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Title from "../../components/shared/Title";
+import Title from "../../components/shared/Title/Title";
 import TitleBtn from "../../components/ui/TitleBtn";
 
 type CTAProps = {

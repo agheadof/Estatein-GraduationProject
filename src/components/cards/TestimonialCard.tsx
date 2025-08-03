@@ -10,7 +10,7 @@ type Props = {
 
 function ClientCard({ client }: Props) {
     return (
-        <div className="p-[30px] lg-custom:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl bg-gray08 border border-gray15">
+        <div className=" min-h-[305px] lg-custom:min-h-[363px] 2xl:min-h-[442px] p-[30px] lg-custom:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl bg-gray08 border border-gray15">
             <div className="flex gap-2 2xl:gap-2.5 mb-6 lg-custom:mb-[30px] 2xl:mb-10">
                 {[...Array(5)].map((_, i) => (
                     <div
@@ -26,7 +26,7 @@ function ClientCard({ client }: Props) {
                 ))}
             </div>
 
-            <div className="lg-custom:mb-[30px] 2xl:mb-10">
+            <div className=" mb-6 lg-custom:mb-[30px] 2xl:mb-10">
                 <h3 className="text-white font-semibold lg-custom:text-xl 2xl:text-2xl lg-custom:mb-2.5 2xl:mb-3.5">
                     {client.title}
                 </h3>

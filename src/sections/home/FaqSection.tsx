@@ -1,5 +1,5 @@
 import { SectionWrapper } from '../../layouts/SectionWrapper'
-import Title from '../../components/shared/Title'
+import Title from '../../components/shared/Title/Title'
 import { faq } from '../../data/faqData'
 import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
 import FaqCard from '../../components/cards/FaqCard'
@@ -16,7 +16,6 @@ function FaqSection() {
                     <GenericSlider
                         items={faq}
                         renderSlide={(question, index) => question ? <FaqCard key={index} question={question} /> : null}
-                        slidesPerView={3}
                         showCounter={true}
                         titleBtnLabel="View All FAQ’s"
                     />

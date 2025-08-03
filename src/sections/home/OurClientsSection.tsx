@@ -1,5 +1,5 @@
 import { SectionWrapper } from '../../layouts/SectionWrapper'
-import Title from '../../components/shared/Title'
+import Title from '../../components/shared/Title/Title'
 import { testimonials } from '../../data/testimonialsData'
 import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
 import TestimonialCard from '../../components/cards/TestimonialCard'

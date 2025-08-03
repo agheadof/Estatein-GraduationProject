@@ -20,42 +20,35 @@ const GenericSlider = <T,>({
 }: Props<T>) => {
     const prevRef = useRef<HTMLButtonElement | null>(null)
     const nextRef = useRef<HTMLButtonElement | null>(null)
-    const [currentSlide, setCurrentSlide] = useState(1)
+    const [currentGroup, setCurrentGroup] = useState(1)
     const [isBeginning, setIsBeginning] = useState(true)
     const [isEnd, setIsEnd] = useState(false)
-    const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth)
-    const [visibleItems, setVisibleItems] = useState<T[]>(items)
-    const swiperRef = useRef<any>(null)
 
+    const [currentSlidesPerGroup, setCurrentSlidesPerGroup] = useState(3)
 
     useEffect(() => {
-        function handleResize() {
-            setWindowWidth(window.innerWidth)
+        const handleResize = () => {
+            const width = window.innerWidth
+            if (width >= 992) {
+                setCurrentSlidesPerGroup(slidesPerView)
+            } else if (width >= 768) {
+                setCurrentSlidesPerGroup(2)
+            } else {
+                setCurrentSlidesPerGroup(1)
+            }
         }
+
+        handleResize()
         window.addEventListener('resize', handleResize)
-        handleResize() 
         return () => window.removeEventListener('resize', handleResize)
-    }, [])
+    }, [slidesPerView])
 
-    useEffect(() => {
-        if (windowWidth < 768) {
-            setVisibleItems(items.slice(0, 10)) 
-        } else {
-            setVisibleItems(items) 
-        }
-    }, [windowWidth, items])
-    useEffect(() => {
-        const swiperInstance = swiperRef.current?.swiper
-        if (swiperInstance) {
-            setIsBeginning(swiperInstance.isBeginning)
-            setIsEnd(swiperInstance.isEnd)
-        }
-    }, [currentSlide])
+    const totalGroups = Math.ceil(items.length / currentSlidesPerGroup)
 
     return (
         <div className="w-full mt-[80px]">
             <Swiper
-                ref={swiperRef}
+
                 modules={[Navigation]}
                 navigation={{
                     prevEl: prevRef.current,
@@ -70,25 +63,35 @@ const GenericSlider = <T,>({
                         swiper.params.navigation.nextEl = nextRef.current
                     }
                 }}
-                slidesPerView={1} 
-                slidesPerGroup={1} 
                 spaceBetween={30}
                 loop={false}
                 watchOverflow={true}
                 onSlideChange={(swiper) => {
-                    setCurrentSlide(swiper.realIndex + 1)
+                    const lastVisibleIndex = swiper.activeIndex + currentSlidesPerGroup - 1
+                    const groupIndex = Math.floor(lastVisibleIndex / currentSlidesPerGroup) + 1
+                    setCurrentGroup(groupIndex)
+
                     setIsBeginning(swiper.isBeginning)
                     setIsEnd(swiper.isEnd)
                 }}
                 breakpoints={{
-                    0: { slidesPerView: 1 },
-                    768: { slidesPerView: 2 },
-                    992: { slidesPerView: slidesPerView },
+                    0: {
+                        slidesPerView: 1,
+                        slidesPerGroup: 1,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        slidesPerGroup: 2,
+                    },
+                    992: {
+                        slidesPerView: slidesPerView,
+                        slidesPerGroup: slidesPerView,
+                    },
                 }}
-                className="flex w-full justify-between mb-[50px]"
+                className=" w-full  mb-[50px]"
             >
-                {visibleItems.map((item, index) => (
-                    <SwiperSlide key={index}>
+                {items.map((item, index) => (
+                    <SwiperSlide key={index} className=' min-h-full flex items-stretch' >
                         {renderSlide(item, index)}
                     </SwiperSlide>
                 ))}
@@ -97,8 +100,11 @@ const GenericSlider = <T,>({
             <div className="flex justify-between items-center pt-4 2xl:pt-5 border-t border-t-gray15">
                 {showCounter && (
                     <p className="text-white text-base 2xl:text-xl font-medium hidden md:block">
-                        {String(currentSlide).padStart(2, '0')}{' '}
-                        <span className="text-gray60">of 10</span>
+                        {String(currentGroup).padStart(2, '0')}
+                        <span className="text-gray60">
+                            {' '}
+                            of {String(totalGroups).padStart(2, '0')}
+                        </span>
                     </p>
                 )}
 
@@ -116,10 +122,11 @@ const GenericSlider = <T,>({
                             p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px]
                             transition-all duration-300 border-gray15
                             ${isBeginning
-                                ? 'bg-inherit  opacity-50 cursor-not-allowed'
+                                ? 'bg-inherit opacity-50 cursor-not-allowed'
                                 : 'bg-gray10 border-gray15'}
                         `}
                     >
+                        {/* Prev Arrow */}
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -135,13 +142,15 @@ const GenericSlider = <T,>({
                                 fill="currentColor"
                             />
                         </svg>
-
                     </button>
 
                     {showCounter && (
                         <p className="text-white text-base 2xl:text-xl font-medium block md:hidden">
-                            {String(currentSlide).padStart(2, '0')}{' '}
-                            <span className="text-gray60">of 10</span>
+                            {String(currentGroup).padStart(2, '0')}
+                            <span className="text-gray60">
+                                {' '}
+                                of {String(totalGroups).padStart(2, '0')}
+                            </span>
                         </p>
                     )}
 
@@ -152,10 +161,11 @@ const GenericSlider = <T,>({
                             p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px]
                             transition-all duration-300 border-gray15
                             ${isEnd
-                                ? 'bg-inherit  opacity-50 cursor-not-allowed'
-                                : 'bg-gray10 '}
+                                ? 'bg-inherit opacity-50 cursor-not-allowed'
+                                : 'bg-gray10'}
                         `}
                     >
+                        {/* Next Arrow */}
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -163,7 +173,6 @@ const GenericSlider = <T,>({
                             viewBox="0 0 30 30"
                             fill="none"
                             className="text-white hover:text-gray60 transition-colors duration-300"
-
                         >
                             <path
                                 fillRule="evenodd"
@@ -172,7 +181,6 @@ const GenericSlider = <T,>({
                                 fill="currentColor"
                             />
                         </svg>
-
                     </button>
                 </div>
             </div>

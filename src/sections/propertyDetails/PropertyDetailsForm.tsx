@@ -1,5 +1,5 @@
 import PropertyForm from "../../components/Forms/PropertyForm";
-import Title from "../../components/shared/Title"
+import Title from "../../components/shared/Title/Title"
 
 function PropertyDetailsForm() {
   return (
