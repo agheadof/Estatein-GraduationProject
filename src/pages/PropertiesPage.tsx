@@ -1,12 +1,14 @@
 import { SectionWrapper } from "../layouts/SectionWrapper";
 import ContactForm from "../sections/properties/ContactForm";
-import PropertyDetailsForm from "../sections/propertyDetails/PropertyDetailsForm";
 import SubHero from '../components/shared/SubHero/SubHero'
 import { subHeroProperties } from '../data/subHeroData'
+import FilterProperty from "../sections/properties/FilterProperty";
 
 function PropertiesPage() {
   return (
     <div className="huge:container huge:mx-auto">
+      <SubHero title={subHeroProperties.title} desc={subHeroProperties.desc} classes="relative"/>
+      <FilterProperty />
       <SectionWrapper>
         <ContactForm
          titleStyle="leading-[1.5]"
@@ -16,7 +18,6 @@ function PropertiesPage() {
         contact={false}
         />
       </SectionWrapper>
-      <SubHero title={subHeroProperties.title} desc={subHeroProperties.desc} />
     </div>
   );
 }
