@@ -1,16 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchOffices } from "../thunks/officesThunks";
+import type {OfficeLocation} from "../types/OurOffices"
 
-export type OfficeLocation = {
-  id: string;
-  branch: string;
-  address: string;
-  description: string;
-  email: string;
-  phone: string;
-  city: string;
-  category: string;
-};
 
 interface OfficeLocationState {
   offices: OfficeLocation[];
@@ -27,7 +18,7 @@ const initialState: OfficeLocationState = {
 const officesSlice = createSlice({
   name: "offices",
   initialState,
-  reducers: {}, // no synchronous reducers for now
+  reducers: {}, 
   extraReducers: (builder) => {
     builder
       .addCase(fetchOffices.pending, (state) => {
