@@ -7,8 +7,8 @@ function PropertyDetails() {
     <div className="huge:container huge:mx-auto mt-28">
       <SectionWrapper>
         <PropertyGallery />
+        </SectionWrapper>
         <PropertyDetailsForm />
-      </SectionWrapper>
     </div>
   )
 }

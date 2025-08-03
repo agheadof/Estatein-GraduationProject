@@ -14,7 +14,7 @@ function FormSelect({
   children
 }: SelectProps) {
   return (
-    <div className="flex flex-col group">
+    <div className="flex flex-col group shrink-0">
       {
         label && <label
           htmlFor={name}
