@@ -1,4 +1,4 @@
-// redux/slices/officeSlice.ts
+
 import { createSlice} from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { fetchOffices } from "../thunks/officesThunks";

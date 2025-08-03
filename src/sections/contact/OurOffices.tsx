@@ -1,5 +1,6 @@
 import Title from "../../components/shared/Title";
 import OurOfficeTaps from "./OurOfficeTaps";
+import TeamGallery from "./TeamGallery";
 
 function OurOffices() {
   return (
@@ -11,7 +12,7 @@ function OurOffices() {
         paragraph="Estatein is here to serve you across multiple locations. Explore the categories below to find the Estatein office nearest to you"
       />
       <OurOfficeTaps />
-     
+     <TeamGallery/>
     </section>
   );
 }
