@@ -1,24 +1,44 @@
-import { createSlice } from "@reduxjs/toolkit";
+// redux/slices/officeSlice.ts
+import { createSlice} from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { fetchOffices } from "../thunks/officesThunks";
-import type {OfficeLocation} from "../types/OurOffices"
 
+export type OfficeLocation = {
+  id: string;
+  branch: string;
+  address: string;
+  details: string;
+  email: string;
+  phone: string;
+  city: string;
+  category: string;
+};
 
 interface OfficeLocationState {
   offices: OfficeLocation[];
   loading: boolean;
   error: string | null;
+  activeTab: "all" | "regional" | "international";
 }
 
 const initialState: OfficeLocationState = {
   offices: [],
   loading: true,
   error: null,
+  activeTab: "all",
 };
 
 const officesSlice = createSlice({
   name: "offices",
   initialState,
-  reducers: {}, 
+  reducers: {
+    setActiveTab: (
+      state,
+      action: PayloadAction<OfficeLocationState["activeTab"]>
+    ) => {
+      state.activeTab = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchOffices.pending, (state) => {
@@ -35,5 +55,7 @@ const officesSlice = createSlice({
       });
   },
 });
+
+export const { setActiveTab } = officesSlice.actions;
 
 export default officesSlice.reducer;

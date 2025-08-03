@@ -1,32 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import OfficeLocationCard from "../../components/cards/OfficeLocationCard";
 import { fetchOffices } from "../../redux/thunks/officesThunks";
+import { setActiveTab } from "../../redux/slices/ourOfficesSlice";
+import { selectFilteredOffices } from "../../redux/selectors/offices";
 import type { RootState, AppDispatch } from "../../redux/store";
 
 function OurOfficeTaps() {
   const dispatch = useDispatch<AppDispatch>();
-  const {
-    offices: officeLocations,
-    loading,
-    error,
-  } = useSelector((state: RootState) => state.offices);
 
-  const [activeTab, setActiveTab] = useState<
-    "all" | "regional" | "international"
-  >("all");
+  const filteredOffices = useSelector(selectFilteredOffices);
+  const { loading, error, activeTab } = useSelector(
+    (state: RootState) => state.offices
+  );
+
+  const tabs: ("all" | "regional" | "international")[] = [
+    "all",
+    "regional",
+    "international",
+  ];
 
   useEffect(() => {
     dispatch(fetchOffices());
   }, [dispatch]);
-
-  const filteredOffices = officeLocations.filter((office) =>
-    activeTab === "all"
-      ? true
-      : office.category.toLowerCase().includes(activeTab)
-  );
-
-  const tabs = ["all", "regional", "international"];
 
   if (loading) return <p className="text-white">Loading offices...</p>;
   if (error) return <p className="text-red-500">Error: {error}</p>;
@@ -37,7 +33,7 @@ function OurOfficeTaps() {
         {tabs.map((tab) => (
           <button
             key={tab}
-            onClick={() => setActiveTab(tab as any)}
+            onClick={() => dispatch(setActiveTab(tab))}
             className={`w-full py-3.5 px-5 2xl:py-4.5 2xl:px-6 border border-gray15 rounded-lg 2xl:rounded-[10px] capitalize text-sm/[1.5] 2xl:text-lg font-medium text-white ${
               activeTab === tab ? "bg-gray08" : "bg-gray15"
             }`}
