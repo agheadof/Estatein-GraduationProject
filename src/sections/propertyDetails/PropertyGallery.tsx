@@ -1,5 +1,5 @@
-import DescriptionComponent from "../../components/cards/DescriptionComponent"
-import KeyFeaturesComponent from "../../components/cards/KeyFeaturesComponent"
+// import DescriptionComponent from "../../components/cards/DescriptionComponent"
+// import KeyFeaturesComponent from "../../components/cards/KeyFeaturesComponent"
 import { LocationIcon } from "../../components/icons/FormIcons"
 import Gallery from "../../components/Sliders/Gallery"
 
@@ -50,8 +50,8 @@ const PropertyGallery = () => {
       />
 
       <div className="flex flex-col lg-custom:flex-row gap-5">
-        <DescriptionComponent />
-        <KeyFeaturesComponent />
+        {/* <DescriptionComponent />
+        <KeyFeaturesComponent /> */}
       </div>
 
 

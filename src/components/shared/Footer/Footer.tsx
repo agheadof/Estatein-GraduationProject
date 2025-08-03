@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { type LinkGroup } from "../../../data/footerData"
 import { FacebookIcon, LinkedinIcon, TwitterIcon, YoutubeIcon } from "../../icons/FooterIcons"
 import { FooterNewsletter } from "./Newsletter"
+import { scrollToTop } from "../../../utlis/scrollToTop"
 
 type FooterProps = {
     links?: LinkGroup[]
@@ -23,6 +24,7 @@ export default function Footer({ links, footerNote, logo }: FooterProps) {
                             <div key={i} className="flex flex-col space-y-2 pb-5 border-b odd:border-r border-r-gray15 border-gray15 lg-custom:pb-0 lg-custom:border-none">
                                 <Link
                                     to={to}
+                                    onClick={scrollToTop}
                                     className="font-meduim text-base 2xl:whitespace-nowrap md:text-[18px] 2xl:text-lg text-gray60 hover:text-purple70 transition-colors mb-4">
                                     {title}
                                 </Link>
@@ -30,6 +32,7 @@ export default function Footer({ links, footerNote, logo }: FooterProps) {
                                     <Link
                                         key={j}
                                         to={to}
+                                        onClick={scrollToTop}
                                         className="font-meduim text-white 2xl:whitespace-nowrap hover:text-gray60 text-sm md:text-base 2xl:text-lg transition-colors leading-6">
                                         {label}
                                     </Link>

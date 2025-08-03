@@ -5,6 +5,7 @@ import NavItem from "./NavItem";
 import { motion, AnimatePresence } from "framer-motion";
 import HamburgerButton from "./HamburgerButton";
 import { scrollToTop } from "../../../utlis/scrollToTop";
+import ToggleButton from "../../ui/ToggleButton";
 import { SectionWrapper } from "../../../layouts/SectionWrapper";
 
 const Navbar = () => {
@@ -24,6 +25,7 @@ const Navbar = () => {
               <NavItem to={link.path} label={link.name} />
             </li>
           ))}
+          <ToggleButton/>
         </ul>
 
         {/* Desktop Button */}

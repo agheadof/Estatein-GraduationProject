@@ -30,7 +30,7 @@ const Title = ({
       )}
       <div className="flex justify-between items-center 2xl:items-end">
         <div>
-          <h2 className="text-white font-semibold text-[28px] lg-custom:text-[38px] 2xl:text-5xl mb-1.5 lg-custom:mb-2.5 2xl:mb-3.5">
+          <h2 className="text-purple65 dark:text-white font-semibold text-[28px] lg-custom:text-[38px] 2xl:text-5xl mb-1.5 lg-custom:mb-2.5 2xl:mb-3.5">
             {heading}
           </h2>
           <p
