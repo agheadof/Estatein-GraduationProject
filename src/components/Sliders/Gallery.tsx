@@ -1,6 +1,6 @@
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ArrowLeft, ArrowRight } from "../icons/GalleryIcons"
 
 interface GalleryProps {
@@ -26,13 +26,31 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
     },
   })
 
-  const [thumbsRef] = useKeenSlider<HTMLDivElement>({
+  const [thumbsRef, thumbsInstanceRef] = useKeenSlider<HTMLDivElement>({
     loop: false,
     slides: {
       perView: thumbNumber,
       spacing: 15,
     },
   })
+  useEffect(() => {
+    const container = thumbsInstanceRef.current?.container
+    if (!container) return
+
+    const slides = container.querySelectorAll(".keen-slider__slide")
+    const activeSlide = slides[currentSlide] as HTMLElement
+
+    if (!activeSlide) return
+
+    const offsetLeft = activeSlide.offsetLeft
+
+    const scrollTo = offsetLeft
+
+    container.scrollTo({
+      left: scrollTo,
+      behavior: "smooth",
+    })
+  }, [currentSlide])
 
   const goPrev = () => instanceRef.current?.prev()
   const goNext = () => instanceRef.current?.next()
@@ -103,9 +121,9 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
 
         <button
           onClick={goNext}
-          disabled={currentSlide >= images.length - 2}
+          disabled={currentSlide >= images.length - 1}
           className={`p-2.5 md:p-3.5 border rounded-full size-11 md:size-14 flex items-center justify-center cursor-pointer ${
-            currentSlide >= images.length - 2
+            currentSlide >= images.length - 1
               ? "text-gray50 bg-transparent "
               : "bg-gray10 cursor-pointer"
           }`}

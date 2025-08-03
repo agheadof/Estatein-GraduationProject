@@ -33,7 +33,7 @@ const MainLayout = () => {
       <Loader />
       <TopBanner isVisible={isBannerVisible} onClose={handleBannerClose} />
       <Navbar isBannerVisible={isBannerVisible} />
-      <main className="flex-grow bg-gray08">
+      <main className="flex-grow bg-white99 dark:bg-gray08">
         <Outlet />
         <CTA
           title="Start Your Real Estate Journey Today"

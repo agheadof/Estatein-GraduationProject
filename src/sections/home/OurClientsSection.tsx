@@ -17,7 +17,7 @@ function OurClientsSection() {
             <Title
                 heading="What Our Clients Say"
                 paragraph="Read the success stories and heartfelt testimonials from our valued clients. Discover why they chose Estatein for their real estate needs."
-                buttonLabel="Testimonials"
+                buttonLabel="View All Testimonials"
             />
 
             <div className="w-full pt-[80px]">
