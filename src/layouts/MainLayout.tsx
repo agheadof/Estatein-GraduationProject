@@ -6,6 +6,7 @@ import { CTA } from '../sections/shared/CTA'
 import Scroll2Top from '../components/ui/Scroll2Top'
 import Loader from '../components/ui/Loader'
 
+
 const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen font-urbanist">
