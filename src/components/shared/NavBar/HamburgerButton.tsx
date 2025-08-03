@@ -6,7 +6,7 @@ interface HamburgerButtonProps {
 const HamburgerButton: React.FC<HamburgerButtonProps> = ({ isOpen, onClick}) => {
   return (
     <button
-      className="md:hidden flex flex-col justify-center items-center w-8 h-8 relative"
+      className="lg-custom:hidden flex flex-col justify-center items-center w-8 h-8 relative"
       onClick={onClick}
       aria-label="Toggle Menu"
     >

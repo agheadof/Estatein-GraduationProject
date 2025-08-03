@@ -1,4 +1,3 @@
-
 export const NavData = [
   {
     name: "Home",
