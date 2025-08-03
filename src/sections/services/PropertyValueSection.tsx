@@ -2,11 +2,9 @@ import CommonCard from "../../components/cards/CommonCard";
 import UnlockCardComponent from "../../components/cards/UnlockCardComponent";
 import Title from "../../components/shared/Title";
 import { propertyValueData } from "../../data/propertyValueData";
-import { SectionWrapper } from "../../layouts/SectionWrapper";
 
 const PropertyValueSection = () => {
   return (
-    <SectionWrapper>
       <section className="pb-[61px] md:pb-[90px] 2xl:pb-[110px]">
         <Title
           titleStyle="mb-[80px]"
@@ -35,7 +33,6 @@ const PropertyValueSection = () => {
           />
         </div>
       </section>
-    </SectionWrapper>
   );
 };
 
