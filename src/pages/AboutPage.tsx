@@ -1,4 +1,5 @@
 
+import AchievementsSection from "../sections/about/AchievementsSection"
 import Hero2 from "../sections/about/Hero2"
 import OurValues from "../sections/about/OurValues"
 import TeamSection from "../sections/about/TeamSection"
@@ -9,6 +10,7 @@ function AboutPage() {
     <div className="huge:container huge:mx-auto">
       <Hero2 />
       <OurValues />
+      <AchievementsSection/>
       <ExperienceSection/>
       <TeamSection/>
     </div>
