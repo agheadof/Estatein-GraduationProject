@@ -5,12 +5,14 @@ import NavItem from "./NavItem";
 import { motion, AnimatePresence } from "framer-motion";
 import HamburgerButton from "./HamburgerButton";
 import { scrollToTop } from "../../../utlis/scrollToTop";
+import { SectionWrapper } from "../../../layouts/SectionWrapper";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   return (
-    <nav className="bg-gray10 text-white py-5 px-4 md:px-10 fixed w-full z-50">
+    <nav className="bg-gray10 text-white py-5 px-4 md:px-10 fixed w-full z-50 border-b-2  border-b-gray15">
+      <SectionWrapper>
       <div className="flex justify-between items-center huge:container huge:mx-auto">
         {/* Logo */}
         <img src="/assets/icons/Navbar/logo.svg" alt="Logo" className="w-24 md:w-28 2xl:w-40" />
@@ -63,6 +65,7 @@ const Navbar = () => {
           </motion.ul>
         )}
       </AnimatePresence>
+      </SectionWrapper>
     </nav>
   );
 };

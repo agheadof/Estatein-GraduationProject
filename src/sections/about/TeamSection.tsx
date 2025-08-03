@@ -1,5 +1,6 @@
-// import TeamCardComponent from "../../components/cards/TeamCardComponent"
+import TeamCardComponent from "../../components/cards/TeamCardComponent"
 import Title from "../../components/shared/Title"
+import { TeamData } from "../../data/TeamMember"
 import { SectionWrapper } from "../../layouts/SectionWrapper"
 
 const TeamSection = () => {
@@ -15,16 +16,16 @@ const TeamSection = () => {
                     titleStyle='mb-2 md:mb-[10px] lg-custom:mb-[14px]'
                     paragraphStyle='w-full'
                 />
-                {/* <div className="flex flex-col lg-custom:flex-row 2xl:gap-[30px] gap-[20px]  ">
-                    {team.map((member: any, id: number) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-4  2xl:gap-[30px] gap-[20px]  ">
+                    {TeamData.map((member: any, id: number) => (
                         <TeamCardComponent
                             key={id}
                             name={member.name}
-                            role={member.role}
+                            role={member.position}
                             image={member.image}
                         />
                     ))}
-                </div> */}
+                </div>
             </section>
         </SectionWrapper>
 
