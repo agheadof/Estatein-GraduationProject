@@ -11,7 +11,7 @@ const MainLayout = () => {
     <div className="flex flex-col min-h-screen font-urbanist">
       <Loader/>
       <Navbar />
-      <main className="flex-grow bg-gray08">
+      <main className="flex-grow bg-white99 dark:bg-gray08">
         <Outlet />
         <CTA
           title="Start Your Real Estate Journey Today"

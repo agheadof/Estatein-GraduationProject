@@ -11,6 +11,7 @@ import PropertyDetails from './pages/PropertyDetails'
 import MainLayout from './layouts/MainLayout'
 import { Provider } from 'react-redux'
 import store from './redux/store'
+import ThemeController from './components/shared/ThemeController'
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <ThemeController>
+        <RouterProvider router={router} />
+      </ThemeController>
     </Provider>
   </StrictMode>
 )

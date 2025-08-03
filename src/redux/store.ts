@@ -1,11 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import faqsReducer from './slices/faqsSlice';
+import achievementReducer from "./slices/achievementSlice";
+import themeReducer from './slices/themeSlice';
 import officesReducer from "./slices/ourOfficesSlice"
 
 const store = configureStore({
-  reducer: {
-    faqs: faqsReducer,
-    offices: officesReducer,
+    reducer : {
+        theme: themeReducer,
+        faqs: faqsReducer,
+        achievements: achievementReducer,
+        offices: officesReducer,
   },
 });
 
