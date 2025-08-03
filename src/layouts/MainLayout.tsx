@@ -3,10 +3,14 @@ import Navbar from '../components/shared/NavBar/Navbar'
 import Footer from '../components/shared/Footer/Footer'
 import { defaultLinks } from '../data/footerData'
 import { CTA } from '../sections/shared/CTA'
+import Scroll2Top from '../components/ui/Scroll2Top'
+import Loader from '../components/ui/Loader'
+
 
 const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen font-urbanist">
+      <Loader/>
       <Navbar />
       <main className="flex-grow bg-gray08">
         <Outlet />
@@ -16,6 +20,7 @@ const MainLayout = () => {
           buttonLabel="Explore Properties"
         />
       </main>
+      <Scroll2Top/>
       <Footer links={defaultLinks} footerNote="©2023 Estatein. All Rights Reserved." logo='/assets/icons/Footer/logo.svg' />
     </div>
   )
