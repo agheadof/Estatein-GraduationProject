@@ -22,7 +22,7 @@ function FaqSection() {
                         buttonLabel="View All FAQ’s"
                     />
                     {loading ? (
-                    <p className="text-white">Loading...</p>
+                    <p className="text-black dark:text-white">Loading...</p>
                 ) : error ? (
                     <p className="text-red-500">{error}</p>
                 ) : (

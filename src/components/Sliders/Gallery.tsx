@@ -57,11 +57,11 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
 
   return (
     <div
-      className={`bg-gray10 border border-gray15 rounded-xl p-5 md:p-10 2xl:p-12 flex flex-col items-center gap-5 2xl:gap-8 w-full mx-auto ${className}`}
+      className={`bg-white97 dark:bg-gray10 border border-white90 dark:border-gray15 rounded-xl p-5 md:p-10 2xl:p-12 flex flex-col items-center gap-5 2xl:gap-8 w-full mx-auto ${className}`}
     >
       <div
         ref={thumbsRef}
-        className="keen-slider bg-gray08 p-2.5 2xl:p-5 rounded-xl border border-gray15 order-2 md:order-1"
+        className="keen-slider bg-white99 dark:bg-gray08 p-2.5 2xl:p-5 rounded-xl border border-white90 dark:border-gray15 order-2 md:order-1"
       >
         {images.map((src, idx) => (
           <div
@@ -92,14 +92,14 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
         ))}
       </div>
 
-      <div className="p-2.5 rounded-[100px] bg-gray08 flex gap-2.5 items-center order-3">
+      <div className="p-2.5 rounded-[100px] bg-white99 dark:bg-gray08 flex gap-2.5 items-center order-3">
         <button
           onClick={goPrev}
           disabled={currentSlide === 0}
           className={`p-2.5 md:p-3.5 border rounded-full size-11 md:size-14 flex items-center justify-center  ${
             currentSlide === 0
               ? "text-gray50 bg-transparent "
-              : "bg-gray10 cursor-pointer"
+              : "bg-white97 dark:bg-gray10 cursor-pointer"
           }`}
         >
           <ArrowLeft />
@@ -112,7 +112,7 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
               key={idx}
               className={`w-2.5 h-0.5 md:w-5 md:h-1.5 rounded-[60px] transition-all duration-300 ${
                 currentSlide === idx
-                  ? "bg-purple60"
+                  ?  " bg-purple90 dark:bg-purple60"
                   : "bg-gray30 cursor-pointer"
               }`}
             />
@@ -125,7 +125,7 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
           className={`p-2.5 md:p-3.5 border rounded-full size-11 md:size-14 flex items-center justify-center cursor-pointer ${
             currentSlide >= images.length - 1
               ? "text-gray50 bg-transparent "
-              : "bg-gray10 cursor-pointer"
+              : "bg-white97 dark:bg-gray10 cursor-pointer"
           }`}
         >
           <ArrowRight />

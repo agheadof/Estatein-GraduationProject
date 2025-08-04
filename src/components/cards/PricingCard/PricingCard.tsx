@@ -32,9 +32,9 @@ const PricingCard = ({ cardTitle, details, isTwoItem }: PricingCardProps) => {
   );
 
   return (
-    <div className="w-full rounded-xl border border-gray15 p-5 pb-0 md:p-10 md:pb-2.5 2xl:p-[50px] 2xl:pb-2.5">
+    <div className="w-full rounded-xl border border-white90 dark:border-gray15 p-5 pb-0 md:p-10 md:pb-2.5 2xl:p-[50px] 2xl:pb-2.5">
       <div className="flex items-center justify-between pb-5 md:pb-[30px] 2xl:pb-10">
-        <h3 className="text-lg md:text-xl 2xl:text-2xl font-semibold text-white">
+        <h3 className="text-lg md:text-xl 2xl:text-2xl font-semibold text-black dark:text-white">
           {cardTitle}
         </h3>
         <TitleBtn label="Learn More" />
