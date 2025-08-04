@@ -2,11 +2,9 @@ import CommonCard from "../../components/cards/CommonCard";
 import UnlockCardComponent from "../../components/cards/UnlockCardComponent";
 import Title from "../../components/shared/Title/Title";
 import { propertyValueData } from "../../data/propertyValueData";
-import { SectionWrapper } from "../../layouts/SectionWrapper";
 
 const PropertyValueSection = () => {
   return (
-    <SectionWrapper>
       <section className="pb-[61px] md:pb-[90px] 2xl:pb-[110px]">
         <Title
           titleStyle="mb-[80px]"
@@ -19,7 +17,7 @@ const PropertyValueSection = () => {
           {propertyValueData.map((card, index) => (
             <CommonCard
               key={index}
-              cardStyle="p-6 md:p-10 2xl:p-[50px] gap-4 md:gap-5 2xl:gap-[30px] border-gray15 "
+              cardStyle="p-6 md:p-10 2xl:p-[50px] gap-4 md:gap-5 2xl:gap-[30px] border-white90 dark:border-gray15 "
               cardImg={card.cardImg}
               cardTitle={card.cardTitle}
               cardDesc={card.cardDesc}
@@ -31,11 +29,10 @@ const PropertyValueSection = () => {
             title="Unlock the Value of Your Property Today"
             titleStyle="text-xl md:text-2xl 2xl:text-[30px] font-bold"
             desc="Ready to unlock the true value of your property? Explore our Property Selling Service categories and let us help you achieve the best deal possible for your valuable asset."
-            descStyle="text-gray60"
+            descStyle="text-gray40 dark:text-gray60"
           />
         </div>
       </section>
-    </SectionWrapper>
   );
 };
 

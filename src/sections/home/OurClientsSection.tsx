@@ -40,4 +40,4 @@ function OurClientsSection() {
     )
 }
 
-export default OurClientsSection
+export default OurClientsSection;
