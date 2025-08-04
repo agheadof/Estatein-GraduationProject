@@ -2,7 +2,7 @@ import type { CheckboxProps } from "../../types/Form";
 
 function FormCheckbox({ label, checked, onChange }: CheckboxProps) {
   return (
-    <label className="flex items-center text-lg font-medium dark:text-gray60 text-gray-800 space-x-[6px] 2xl:space-x-2.5 ">
+    <label className="flex items-center text-lg font-medium text-gray40 dark:text-gray60 space-x-[6px] 2xl:space-x-2.5">
       <input
         type="checkbox"
         checked={checked}
@@ -11,9 +11,9 @@ function FormCheckbox({ label, checked, onChange }: CheckboxProps) {
       />
       <div
         className="
-          w-6 h-6 2xl:w-7 2xl:h-7 rounded-sm
-          border dark:border-gray15 border-purple70
-          dark:bg-gray10
+           w-6 h-6 2xl:w-7 2xl:h-7 rounded-sm
+          border border-gray15
+          bg-white97 dark:bg-gray10
           transition-colors duration-200
           flex items-center justify-center
           peer-checked:bg-purple60 peer-checked:border-purple60
@@ -23,7 +23,7 @@ function FormCheckbox({ label, checked, onChange }: CheckboxProps) {
       >
         {checked && (
           <svg
-            className="w-4 h-4 text-white"
+            className="w-4 h-4 text-black dark:text-white"
             stroke="currentColor"
             strokeWidth="3"
             viewBox="0 0 24 24"

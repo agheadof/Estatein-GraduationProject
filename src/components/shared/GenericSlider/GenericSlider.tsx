@@ -97,11 +97,11 @@ const GenericSlider = <T,>({
                 ))}
             </Swiper>
 
-            <div className="flex justify-between items-center pt-4 2xl:pt-5 border-t border-t-gray15">
+            <div className="flex justify-between items-center pt-4 2xl:pt-5 border-t border-t-white90 dark:border-t-gray15">
                 {showCounter && (
-                    <p className="text-white text-base 2xl:text-xl font-medium hidden md:block">
+                    <p className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block">
                         {String(currentGroup).padStart(2, '0')}
-                        <span className="text-gray60">
+                        <span className= "text-gray40 dark:text-gray60">
                             {' '}
                             of {String(totalGroups).padStart(2, '0')}
                         </span>
@@ -120,10 +120,10 @@ const GenericSlider = <T,>({
                         disabled={isBeginning}
                         className={`
                             p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px]
-                            transition-all duration-300 border-gray15
+                            transition-all duration-300 border-white90 dark:border-gray15
                             ${isBeginning
                                 ? 'bg-inherit opacity-50 cursor-not-allowed'
-                                : 'bg-gray10 border-gray15'}
+                                : 'bg-white97 dark:bg-gray10 border-white90 dark:border-gray15'}
                         `}
                     >
                         {/* Prev Arrow */}
@@ -133,7 +133,7 @@ const GenericSlider = <T,>({
                             height="24"
                             viewBox="0 0 30 30"
                             fill="none"
-                            className="text-white hover:text-gray60 transition-colors duration-300"
+                            className="text-black dark:text-white hover:text-gray60 transition-colors duration-300"
                         >
                             <path
                                 fillRule="evenodd"
@@ -145,9 +145,9 @@ const GenericSlider = <T,>({
                     </button>
 
                     {showCounter && (
-                        <p className="text-white text-base 2xl:text-xl font-medium block md:hidden">
+                        <p className="text-black dark:text-white text-base 2xl:text-xl font-medium block md:hidden">
                             {String(currentGroup).padStart(2, '0')}
-                            <span className="text-gray60">
+                            <span className="text-gray40 dark:text-gray60">
                                 {' '}
                                 of {String(totalGroups).padStart(2, '0')}
                             </span>
@@ -159,10 +159,10 @@ const GenericSlider = <T,>({
                         disabled={isEnd}
                         className={`
                             p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px]
-                            transition-all duration-300 border-gray15
+                            transition-all duration-300 border-white90 dark:border-gray15
                             ${isEnd
                                 ? 'bg-inherit opacity-50 cursor-not-allowed'
-                                : 'bg-gray10'}
+                                : 'bg-white97 dark:bg-gray10'}
                         `}
                     >
                         {/* Next Arrow */}
@@ -172,7 +172,7 @@ const GenericSlider = <T,>({
                             height="24"
                             viewBox="0 0 30 30"
                             fill="none"
-                            className="text-white hover:text-gray60 transition-colors duration-300"
+                            className="text-black dark:text-white hover:text-gray60 transition-colors duration-300"
                         >
                             <path
                                 fillRule="evenodd"

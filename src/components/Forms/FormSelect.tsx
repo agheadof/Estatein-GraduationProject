@@ -10,7 +10,7 @@ function FormSelect({
   onChange,
   options,
   error,
-  classExtra = 'bg-gray10',
+  classExtra = ' bg-white97 dark:bg-gray10',
   classIcon,
   children
 }: SelectProps) {
@@ -31,7 +31,7 @@ function FormSelect({
     <div className="flex flex-col group w-full" ref={ref}>
       <label
         htmlFor={name}
-        className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 2xl:text-xl text-base/[1.5] dark:text-white text-black font-semibold"
+        className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 2xl:text-xl text-base/[1.5] text-black dark:text-white font-semibold"
       >
         {label}
       </label>

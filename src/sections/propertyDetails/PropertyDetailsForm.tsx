@@ -11,10 +11,8 @@ import Title from "../../components/shared/Title/Title";
 function PropertyDetailsForm() {
   const { id } = useParams<{ id: string }>();
 
-  // ✅ استخدم AppDispatch لتفادي خطأ dispatch لـ thunks
   const dispatch = useDispatch<AppDispatch>();
 
-  // ✅ استخدم optional chaining مع التحقق من وجود property
   const property = useSelector((state: RootState) =>
     state.properties.all.find((p) => p.id === id)
   );
@@ -25,7 +23,6 @@ function PropertyDetailsForm() {
     dispatch(fetchProperties());
   }, [dispatch]);
 
-  // ✅ تأكد من أن الخاصية موجودة قبل الوصول إلى خصائصها
   if (loading || !property) {
     return <div className="text-center text-red-200 py-20">Loading...</div>;
   }
@@ -42,7 +39,6 @@ function PropertyDetailsForm() {
         <InquiryForm
           type="property"
           propertyTitle={property.title}
-          // ✅ `property.location` قد تكون undefined، لذا وفر قيمة افتراضية
           propertyLocation={property.location ?? "Unknown Location"}
         />
       </div>

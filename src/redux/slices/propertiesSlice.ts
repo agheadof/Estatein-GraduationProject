@@ -1,3 +1,4 @@
+
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { get, ref } from 'firebase/database'
 import { db } from '../../firebaseConfig'
@@ -15,6 +16,7 @@ export type PropertyType = {
     gallery?: string[]
     location?: string
     [key: string]: any
+    tags?: string[];
 }
 
 const transformProperty = (property: any, id: string): PropertyType => ({
@@ -41,6 +43,11 @@ const transformProperty = (property: any, id: string): PropertyType => ({
     descriptionLong: property.description,
     gallery: property.images,
     location: property.location,
+    tags: [
+        "Coastal Escapes - Where Waves Beckon",
+        "Urban Oasis - Life in the Heart of the City",
+        "Countryside Charm - Escape to Nature's Embrace"
+    ],
 })
 
 export const fetchProperties = createAsyncThunk(
@@ -48,7 +55,8 @@ export const fetchProperties = createAsyncThunk(
     async () => {
         const snapshot = await get(ref(db, 'properties'))
         const data = snapshot.val()
-
+        console.log(data);
+        
         return Object.entries(data).map(([id, prop]) =>
             transformProperty(prop, id)
         )

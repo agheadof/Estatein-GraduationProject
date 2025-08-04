@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import TeamCardComponent from "../../components/cards/TeamCardComponent";
+import Title from "../../components/shared/Title/Title";
 import { SectionWrapper } from "../../layouts/SectionWrapper";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchTeams } from "../../redux/slices/teamSlice";
-import Title from "../../components/shared/Title/Title";
+
 
 const TeamSection = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ const TeamSection = () => {
         />
 
         {loading ? (
-          <p className="text-white">Loading...</p>
+          <p className="text-black dark:text-white">Loading...</p>
         ) : error ? (
           <p className="text-red-500">{error}</p>
         ) : (

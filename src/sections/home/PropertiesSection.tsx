@@ -6,8 +6,10 @@ import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
 import PropertiesCard from '../../components/cards/PropertiesCard'
 import Title from '../../components/shared/Title/Title'
 import { SectionWrapper } from '../../layouts/SectionWrapper'
-
-function PropertiesSection() {
+type Props = {
+    showDetails?: boolean;
+};
+function PropertiesSection({ showDetails = true }: Props) {
     const dispatch = useAppDispatch()
     const properties = useAppSelector(selectPropertiesCardsData)
     const { loading, error } = useAppSelector((state) => state.testimonials);
@@ -26,14 +28,14 @@ function PropertiesSection() {
                     buttonLabel="View All Properties"
                 />
                 {loading ? (
-                    <p className="text-white">Loading...</p>
+                    <p className="text-black dark:text-white">Loading...</p>
                 ) : error ? (
                     <p className="text-red-500">{error}</p>
                 ) : (
                     <GenericSlider
                         items={properties}
                         renderSlide={(property) => (
-                            <PropertiesCard key={property.id} property={property} />
+                            <PropertiesCard key={property.id} property={property} showDetails={showDetails} />
                         )}
                         slidesPerView={3}
                         showCounter={true}

@@ -21,34 +21,30 @@ function OfficeLocationCard({
   city,
 }: OfficeLocationCardProps) {
   return (
-    <div className="flex flex-col dark:bg-gray08 bg-purple99 border dark:border-gray15 border-purple70 rounded-lg 2xl:rounded-xl p-6 lg-custom:p-10 2xl:p-[50px] gap-6 lg-custom:gap-[30px] 2xl:gap-10 transition-all duration-300 transform hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(133,91,255,0.6)] hover:border-purple60/50">
-      <p className="text-sm/[1.5] 2xl:text-lg font-medium dark:text-white text-black">
+    <div className="flex flex-col border border-white90 dark:border-gray15 rounded-lg 2xl:rounded-xl p-6 lg-custom:p-10 2xl:p-[50px] gap-6 lg-custom:gap-[30px] 2xl:gap-10 transition-all duration-300 transform hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(133,91,255,0.6)] hover:border-purple60/50">
+      <p className="text-sm/[1.5] 2xl:text-lg font-medium text-black dark:text-white">
         {branch}
       </p>
-      <h3 className="text-xl/[1.5] lg-custom:text-2xl 2xl:text-3xl font-semibold dark:text-white text-black ">
+      <h3 className="text-xl/[1.5] lg-custom:text-2xl 2xl:text-3xl font-semibold text-black dark:text-white ">
         {address}
       </h3>
-      <p className="text-sm/[1.5] lg-custom:text-base 2xl:text-lg font-medium line-clamp-3 dark:text-gray60">
+      <p className="text-sm/[1.5] lg-custom:text-base 2xl:text-lg font-medium line-clamp-3 text-gray40 dark:text-gray60">
         {details}
       </p>
       <div className="flex items-center flex-wrap lg-custom:gap-2.5 gap-2">
         <LocationInfoBox
-          icon={
-            <EmailIcon className="dark:text-white text-black group-hover:text-purple60" />
-          }
+          icon={<EmailIcon className="text-black dark:text-white group-hover:text-purple60" />}
           text={email}
           className="group"
         />
         <LocationInfoBox
-          icon={
-            <PhoneIcon className="dark:text-white text-black group-hover:text-purple60" />
-          }
+          icon={<PhoneIcon className="text-black dark:text-white group-hover:text-purple60" />}
           text={phone}
           className="group"
         />
         <LocationInfoBox
           icon={
-            <LocationIcon className=" dark:text-white text-black group-hover:text-purple60" />
+            <LocationIcon className="text-black dark:text-white group-hover:text-purple60" />
           }
           text={city}
           className="group"

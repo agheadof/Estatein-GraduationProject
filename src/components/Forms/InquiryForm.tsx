@@ -60,7 +60,7 @@ function InquiryForm({
 
   return (
     <form
-      className={`${formPadding} flex flex-col w-full rounded-xl border-1 border-purple70 dark:border-gray15`}
+      className={`${formPadding} flex flex-col w-full rounded-xl border-1 border-white90  dark:border-gray15`}
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit((data) => console.log("Form submitted:", data));
@@ -200,7 +200,7 @@ function InquiryForm({
             <label className="mb-4 2xl:text-xl text-base/[1.5] text-black dark:text-white font-semibold">
               {propertyTitle}
             </label>
-            <div className="flex justify-between rounded-lg border-1 border-purple70 bg-purple95 2xl:px-5 2xl:py-6 px-5 py-4 2xl:text-xl/[20px] text-sm/[20px] font-medium text-purple70 dark:border-gray15 dark:bg-gray10 dark:text-white90">
+            <div className="flex justify-between rounded-lg border-1 border-white90 bg-white97 2xl:px-5 2xl:py-6 px-5 py-4 2xl:text-xl/[20px] text-sm/[20px] font-medium text-gray15 dark:border-gray15 dark:bg-gray10 dark:text-white90">
               {propertyTitle}, {propertyLocation}
               <LocationIcon className="text-black dark:text-white" />
             </div>

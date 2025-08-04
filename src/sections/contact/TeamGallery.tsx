@@ -1,9 +1,8 @@
 import Title from "../../components/shared/Title/Title";
 
-
 function TeamGallery() {
   return (
-    <div className="relative dark:bg-gray10 bg-purple95 border-1 dark:border-gray15 border-purple70 rounded-xl 2xl:p-20 lg-custom:p-[60px] p-6 overflow-hidden">
+    <div className="relative bg-white97 dark:bg-gray10 border-1 border-white90 dark:border-gray15 rounded-xl 2xl:p-20 lg-custom:p-[60px] p-6 overflow-hidden">
       <img
         src="/assets/images/AbstractDesign4.png"
         alt="Team Gallery Background"
