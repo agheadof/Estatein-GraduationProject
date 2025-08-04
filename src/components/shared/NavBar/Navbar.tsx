@@ -6,38 +6,62 @@ import { motion, AnimatePresence } from "framer-motion";
 import HamburgerButton from "./HamburgerButton";
 import { scrollToTop } from "../../../utlis/scrollToTop";
 import ToggleButton from "../../ui/ToggleButton";
+import { SectionWrapper } from "../../../layouts/SectionWrapper";
 
-const Navbar = () => {
+type NavbarProps = {
+  isBannerVisible: boolean;
+};
+
+const Navbar = ({ isBannerVisible }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   return (
-    <nav className="bg-gray10 text-white py-5 px-4 md:px-10 fixed w-full z-50">
-      <div className="flex justify-between items-center huge:container huge:mx-auto">
-        {/* Logo */}
-        <img src="/assets/icons/Navbar/logo.svg" alt="Logo" className="w-24 md:w-28 2xl:w-40" />
+    <nav
+      className={`bg-gray10 text-white py-5 px-4 lg-custom:px-10 fixed w-full z-50 border-b-2  border-b-gray15 transition-all duration-700 ease-in-out
+    ${isBannerVisible ? "top-[78px] md:top-[49px] 2xl:top-[63px]" : "top-0"}`}
+    >
+      <SectionWrapper>
+        <div className="flex justify-between items-center huge:container huge:mx-auto">
+          {/* Logo */}
+          <img
+          src="/assets/icons/Navbar/logo.svg"
+          alt="Logo"
+          className="w-24 md:w-28 2xl:w-40"
+        />
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex md:gap-6 2xl:gap-[30px] 2xl:font-medium">
-          {NavData.map((link, index) => (
-            <li key={index}>
-              <NavItem to={link.path} label={link.name} />
-            </li>
-          ))}
-          <ToggleButton/>
-        </ul>
+          {/* Desktop Menu */}
+          <ul className="hidden lg-custom:flex lg-custom:gap-6 2xl:gap-[30px] 2xl:font-medium">
+            {NavData.map((link, index) => (
+              <li key={index}>
+                <NavItem to={link.path} label={link.name} />
+              </li>
+            ))}
+          </ul>
 
-        {/* Desktop Button */}
-        <NavLink to="/contact" onClick={() => { setIsMenuOpen(false);}} className={({ isActive }) =>
-          `hidden md:block text-white font-medium  md:py-3 md:px-5 2xl:py-3.5 2xl:px-6 md:rounded-lg 2xl:rounded-[10px] border border-gray15
+          {/* Desktop Button */}
+          <div className="flex items-center gap-4 lg-custom:gap-6">
+            <NavLink
+          to="/contact"
+          onClick={() => {
+            setIsMenuOpen(false); 
+          }}
+          className={({ isActive }) =>
+                `hidden lg-custom:block text-white font-medium  lg-custom:py-3 lg-custom:px-5 2xl:py-3.5 2xl:px-6 lg-custom:rounded-lg 2xl:rounded-[10px] border border-gray15
            ${isActive ? "bg-purple60" : "bg-gray08"}`
-        }
-        >
-          Contact Us
-        </NavLink>
-
-        {/* Mobile Menu Toggle */}
-        <HamburgerButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen(prev => !prev)} />
-      </div>
+              }
+            >
+              Contact Us
+            </NavLink>
+            <div className="flex gap-3 items-center" >
+              <ToggleButton />
+              {/* Mobile Menu Toggle */}
+              <HamburgerButton
+          isOpen={isMenuOpen}
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+        />
+            </div>
+          </div>
+        </div>
 
       {/* Mobile Dropdown Menu */}
       <AnimatePresence>
@@ -51,20 +75,25 @@ const Navbar = () => {
               </li>
             ))}
 
-            <li className="mx-auto">
-              <NavLink onClick={() => {setIsMenuOpen(false); scrollToTop();}} 
-                to="/contact"
-                className={({ isActive }) =>
-                  `block py-2 px-4 rounded-md text-center text-white ${isActive ? "bg-purple60" : "bg-gray15 "
-                  }`
-                }
-              >
-                Contact Us
-              </NavLink>
-            </li>
-          </motion.ul>
-        )}
-      </AnimatePresence>
+              <li className="mx-auto flex gap-3">
+                <NavLink onClick={() => { setIsMenuOpen(false); scrollToTop(); }}
+                  to="/contact"
+                  className={({ isActive }) =>
+                    `block py-2 px-4 rounded-md text-center text-white ${isActive ? "bg-purple60" : "bg-gray15 "
+                    }`
+                  }
+                >
+                  Contact Us
+                </NavLink>
+                {/* <div className="block lg-custom:hidden">
+                  <ToggleButton />
+                </div> */}
+              </li>
+
+            </motion.ul>
+          )}
+        </AnimatePresence>
+      </SectionWrapper>
     </nav>
   );
 };

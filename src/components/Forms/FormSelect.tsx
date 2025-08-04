@@ -10,6 +10,9 @@ function FormSelect({
   onChange,
   options,
   error,
+  classExtra = 'bg-gray10',
+  classIcon,
+  children
 }: SelectProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);

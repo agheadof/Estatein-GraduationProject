@@ -1,3 +1,5 @@
+import type React from "react";
+
 export type InputProps = {
   label: string;
   name: string;
@@ -9,13 +11,16 @@ export type InputProps = {
 };
 
 export type SelectProps = {
-  label: string;
+  label?: string;
   name: string;
   value: string;
   error?: string;
   placeholder?: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   options: string[];
+  classExtra?: string;
+  classIcon?: string;
+  children?: React.ReactNode;
 };
 
 export type TextareaProps = {

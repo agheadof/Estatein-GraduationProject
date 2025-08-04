@@ -1,3 +1,6 @@
+
+import type { ReactNode } from "react";
+
 export type CommonCardProps = {
     cardStyle?: string;
     cardImg: string;
@@ -6,4 +9,5 @@ export type CommonCardProps = {
     titleSize?: string;
     cardDesc?: string;
     isArrow?: boolean,
+    children: ReactNode;  
 }

@@ -1,11 +1,11 @@
 import CountUpComponent from "../../components/cards/CountUpComponent"
-import Title from "../../components/shared/Title"
+import Title from "../../components/shared/Title/Title"
 import { SectionWrapper } from "../../layouts/SectionWrapper"
 
 const Hero2 = () => {
     return (
         <SectionWrapper>
-            <div className="flex flex-col-reverse lg-custom:flex-row  gap-5 md:gap-[50px] 2xl:gap-20  mt-[80px]   ">
+            <div className="flex flex-col-reverse lg-custom:flex-row  gap-5 md:gap-[50px] 2xl:gap-20  mt-[160px]   ">
                 <div className="flex flex-col gap-20 lg-custom:w-[48%]">
                     <Title heading="Our Journey" paragraph="Our story is one of continuous growth and evolution. We started as a small team with big dreams, determined to create a real estate platform that transcended the ordinary. Over the years, we've expanded our reach, forged valuable partnerships, and gained the trust of countless clients." />
                     <CountUpComponent />

@@ -1,4 +1,5 @@
-import Title from "../../components/shared/Title";
+import Title from "../../components/shared/Title/Title";
+
 
 function TeamGallery() {
   return (
