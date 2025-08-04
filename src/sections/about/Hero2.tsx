@@ -1,5 +1,5 @@
 import CountUpComponent from "../../components/cards/CountUpComponent"
-import Title from "../../components/shared/Title"
+import Title from "../../components/shared/Title/Title"
 import { SectionWrapper } from "../../layouts/SectionWrapper"
 
 const Hero2 = () => {

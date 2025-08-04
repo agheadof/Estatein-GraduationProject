@@ -1,6 +1,6 @@
 import NoteComponent from "../../components/cards/PricingCard/NoteComponent";
 import PricingCard from "../../components/cards/PricingCard/PricingCard";
-import Title from "../../components/shared/Title";
+import Title from "../../components/shared/Title/Title";
 import { pricingDetailsData } from "../../data/pricingDetailsData";
 
 const PricingDetailsSection = () => {

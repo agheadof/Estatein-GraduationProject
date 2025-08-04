@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import TeamCardComponent from "../../components/cards/TeamCardComponent";
-import Title from "../../components/shared/Title";
 import { SectionWrapper } from "../../layouts/SectionWrapper";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchTeams } from "../../redux/slices/teamSlice";
+import Title from "../../components/shared/Title/Title";
 
 const TeamSection = () => {
   const dispatch = useAppDispatch();

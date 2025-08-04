@@ -1,6 +1,7 @@
-
+import FaqSection from '../sections/home/FaqSection'
 import Hero from '../sections/home/Hero'
 import OurClientsSection from '../sections/home/OurClientsSection'
+import PropertiesSection from '../sections/home/PropertiesSection'
 import SiteFeaturesSection from '../sections/shared/SiteFeaturesSection'
 function HomePage() {
   return (
@@ -8,7 +9,9 @@ function HomePage() {
       <Hero />
       <SiteFeaturesSection />
       <div className="huge:container huge:mx-auto">
+        <PropertiesSection />
         <OurClientsSection />
+        <FaqSection />
       </div>
     </>
   )

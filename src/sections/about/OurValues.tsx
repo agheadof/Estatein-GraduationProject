@@ -1,4 +1,4 @@
-import Title from "../../components/shared/Title";
+import Title from "../../components/shared/Title/Title";
 import { ourValues } from "../../data/ourValues";
 import ValueCard from "../../components/cards/ValueCard";
 import { SectionWrapper } from "../../layouts/SectionWrapper";

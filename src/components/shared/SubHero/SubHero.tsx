@@ -1,5 +1,5 @@
 import { SectionWrapper } from "../../../layouts/SectionWrapper";
-import Title from "../Title";
+import Title from "../Title/Title";
 
 type SubHeroProps = {
   title: string

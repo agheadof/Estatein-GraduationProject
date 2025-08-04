@@ -1,5 +1,6 @@
+
 import InquiryForm from "../../components/Forms/InquiryForm";
-import Title from "../../components/shared/Title"
+import Title from "../../components/shared/Title/Title"
 
 function PropertyDetailsForm() {
   return (

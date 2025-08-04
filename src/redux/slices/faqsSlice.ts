@@ -1,55 +1,43 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ref, get } from "firebase/database";
+import { get, ref } from "firebase/database";
 import { db } from "../../firebaseConfig";
 import type { Faqs } from "../types/FAQ";
 
+
 interface FaqsState {
-  faqs: Faqs[];
-  currentFaqs: Faqs[];
-  currentPage: number;
-  itemsPerPage: 6;
-  totalPages: number;
+  items: Faqs[];
+  visibleItems: Faqs[];
   loading: boolean;
   error: string | null;
+  // itemsPerPage: number;
 }
 
 const initialState: FaqsState = {
-  faqs: [],
-  currentFaqs: [],
-  currentPage: 1,
-  itemsPerPage: 6,
-  totalPages: 0,
-  loading: true,
+  items: [],
+  visibleItems: [],
+  loading: false,
   error: null,
+  // itemsPerPage: 3,
 };
 
-export const fetchFaqs = createAsyncThunk("faqs/fetchFaqs", async () => {
-  try {
+
+export const fetchFaqs = createAsyncThunk(
+  "Faqs/fetch",
+  async () => {
     const snapshot = await get(ref(db, "faqs"));
-    if (snapshot.exists()) {
-      const data = snapshot.val();
-      return Object.keys(data).map((key) => ({ id: key, ...data[key] }));
-    }
-    return [];
-  } catch (error) {
-    throw new Error("Error");
+    const data = snapshot.val();
+    console.log(data)
+    return Object.keys(data).map((key) => ({
+      id: key,
+      ...data[key],
+    }));
   }
-});
+);
 
-const faqsSlice = createSlice({
-  name: "faqs",
+const FaqsSlice = createSlice({
+  name: "Faqs",
   initialState,
-  reducers: {
-    getFaqsByPag: (state, action) => {
-      const page = action.payload;
-      const start = (page - 1) * state.itemsPerPage;
-      const end = start + state.itemsPerPage;
-
-      state.currentPage = page;
-      state.currentFaqs = state.faqs.slice(start, end);
-      state.totalPages = Math.ceil(state.faqs.length / state.itemsPerPage);
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchFaqs.pending, (state) => {
@@ -57,18 +45,14 @@ const faqsSlice = createSlice({
       })
       .addCase(fetchFaqs.fulfilled, (state, action) => {
         state.loading = false;
-        state.faqs = action.payload;
-        state.totalPages = Math.ceil(action.payload.length / state.itemsPerPage);
-        state.currentPage = 1;
-        state.currentFaqs = action.payload.slice(0, state.itemsPerPage);
+        state.items = action.payload;
+        state.visibleItems = state.items;
       })
       .addCase(fetchFaqs.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "there is an error";
+        state.error = action.error.message || "an error happend";
       });
   },
 });
 
-export const { getFaqsByPag } = faqsSlice.actions;
-export default faqsSlice.reducer;
-
+export default FaqsSlice.reducer;
