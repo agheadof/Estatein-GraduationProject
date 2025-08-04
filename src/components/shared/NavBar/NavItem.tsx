@@ -15,8 +15,8 @@ const NavItem: React.FC<NavItemProps> = ({ to, label, onClick, mobile = false })
             className={({ isActive }) =>
                 isActive
                     ? mobile
-                        ? "block py-2 px-4 rounded-md bg-gray15"
-                        : "bg-gray08 md:py-3 md:px-5 2xl:py-3.5 2xl:px-6 md:rounded-lg 2xl:rounded-[10px] border border-gray15"
+                        ? "block py-2 px-4 rounded-md bg-white90 dark:bg-gray15"
+                        : "bg-white99 dark:bg-gray08 md:py-3 md:px-5 2xl:py-3.5 2xl:px-6 md:rounded-lg 2xl:rounded-[10px] border border-white90 dark:border-gray15"
                     : mobile
                         ? "block py-2 px-4"
                         : ""

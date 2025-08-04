@@ -4,15 +4,18 @@ import PropertyValueSection from "../sections/services/PropertyValueSection";
 import SubHero from "../components/shared/SubHero/SubHero";
 import { subHeroServices } from "../data/subHeroData";
 import SiteFeaturesSection from "../sections/shared/SiteFeaturesSection";
+import { SectionWrapper } from "../layouts/SectionWrapper";
 
 function ServicesPage() {
   return (
     <div className="huge:container huge:mx-auto">
       <SubHero title={subHeroServices.title} desc={subHeroServices.desc} />
       <SiteFeaturesSection />
-      <PropertyValueSection />
-      <ManagementSection />
-      <InvestmentsSection />
+      <SectionWrapper>
+        <PropertyValueSection />
+        <ManagementSection />
+        <InvestmentsSection />
+      </SectionWrapper>
     </div>
   );
 }

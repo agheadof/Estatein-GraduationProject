@@ -1,42 +1,98 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { fetchFaqs, getFaqsByPag } from "../../redux/slices/faqsSlice";
-import type { RootState } from "../../redux/store";
-import { useAppDispatch } from "../../redux/types/typed-hooks";
+import Title from "../../components/shared/Title/Title";
+import { ourValues } from "../../data/ourValues";
+import ValueCard from "../../components/cards/ValueCard";
+import { SectionWrapper } from "../../layouts/SectionWrapper";
 
 const FaqList = () => {
-  const dispatch = useAppDispatch();
-  const currentFaqs = useSelector((state :RootState) => state.faqs.currentFaqs);
-  const loading = useSelector((state :RootState) => state.faqs.loading);
-  const error = useSelector((state :RootState) => state.faqs.error);
-  const faqs = useSelector((state: any) => state.faqs.faqs);
-
-  useEffect(() => {
-    dispatch(fetchFaqs());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (!loading && !error) {
-      dispatch(getFaqsByPag({ page: 1, itemsPerPage: 6 }));
-    }
-  }, [loading, error, dispatch]);
-
-  if (loading) return <p className="text-center">Loading FAQs...</p>;
-  if (error) return <p className="text-red-500">Error: {error}</p>;
-  if (faqs.length === 0) return <p className="text-center">No FAQs available.</p>;
 
   return (
-    <div>
-      <ul className="space-y-6">
-        {currentFaqs.map((faqs1,index) => (
-          <li key={index} className="p-4 border rounded-lg bg-white">
-            <h3 className="font-semibold text-lg">{faqs1.question}</h3>
-            <p className="text-gray-700 mt-2">{faqs1.description}</p>
-          </li>
-        ))}
-      </ul>
+    <>
+      <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
+        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between xl:space-x-[80px] gap-10 lg:gap-0">
+          <Title
+            titleStyle="leading-[1.5] lg:w-1/3 w-full"
+            starImg={true}
+            heading="Our Values"
+            paragraph="Our story is one of continuous growth and evolution. We started as a small team with big dreams, determined to create a real estate platform that transcended the ordinary."
+          />
+          <div className="lg:w-2/3 w-full bg-white97 dark:bg-gray10 p-2.5  rounded-xl ">
+            <div className="bg-white99 dark:bg-gray08 p-6 lg:p-[55px] grid grid-cols-1 min-lg-custom:grid-cols-2  rounded-xl justify-center gap-[30px]">
+              {
+                ourValues.map((value, index) => (
+                  <ValueCard
+                    key={index}
+                    titleSize="2xl:text-2xl lg-custom:text-xl text-lg"
+                    cardStyle={`${index !== 0 && index !== 1 ? "lg:pt-[30px]" : ""} ${index % 2 == 0 ? "lg:pr-[30px]" : ""} relative not-last:border-b border-white90 dark:border-gray15 not-last:pb-5 lg:not-last:p-0 lg:not-last:border-0 `}
+                    cardImg={value.icon}
+                    cardTitle={value.title}
+                    cardDesc={value.description}
+                  >
+                    {index !== 0 && index !== 1 ?
+                      <div className="absolute top-0 left-0 right-8 lg:border-b border-white90 dark:border-gray15"></div>
+                      : <></>}
+                    {
+                      index == 0 ?
+                        <div className="absolute top-0 right-0 bottom-0 lg:border-l border-white90 dark:border-gray15"></div>
+                        :
+                        <></>
+                    }
+                    {
+                      index == 2 ?
+                        <div className="absolute top-8 right-0 bottom-0 lg:border-l border-white90 dark:border-gray15"></div>
+                        :
+                        <></>
+                    }
+                  </ValueCard>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </SectionWrapper>
+      <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
+        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between xl:space-x-[80px] gap-10 lg:gap-0">
+          <Title
+            titleStyle="leading-[1.5] lg:w-1/3 w-full"
+            starImg={true}
+            heading="Our Values"
+            paragraph="Our story is one of continuous growth and evolution. We started as a small team with big dreams, determined to create a real estate platform that transcended the ordinary."
+          />
+          <div className="lg:w-2/3 w-full bg-white97 dark:bg-gray10 p-2.5  rounded-xl ">
+            <div className="bg-white99 dark:bg-gray08 p-6 lg:p-[55px] grid grid-cols-1 min-lg-custom:grid-cols-2  rounded-xl justify-center gap-[30px]">
+              {
+                ourValues.map((value, index) => (
+                  <ValueCard
+                    key={index}
+                    titleSize="2xl:text-2xl lg-custom:text-xl text-lg"
+                    cardStyle={`${index !== 0 && index !== 1 ? "lg:pt-[30px]" : ""} ${index % 2 == 0 ? "lg:pr-[30px]" : ""} relative not-last:border-b border-white90 dark:border-gray15 not-last:pb-5 lg:not-last:p-0 lg:not-last:border-0 `}
+                    cardImg={value.icon}
+                    cardTitle={value.title}
+                    cardDesc={value.description}
+                  >
+                    {index !== 0 && index !== 1 ?
+                      <div className="absolute top-0 left-0 right-8 lg:border-b border-white90 dark:border-gray15"></div>
+                      : <></>}
+                    {
+                      index == 0 ?
+                        <div className="absolute top-0 right-0 bottom-0 lg:border-l border-white90 dark:border-gray15"></div>
+                        :
+                        <></>
+                    }
+                    {
+                      index == 2 ?
+                        <div className="absolute top-8 right-0 bottom-0 lg:border-l border-white90 dark:border-gray15"></div>
+                        :
+                        <></>
+                    }
+                  </ValueCard>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </SectionWrapper>
+    </>
 
-    </div>
   );
 };
 

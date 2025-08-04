@@ -1,0 +1,41 @@
+interface TeamCardProps {
+    name: string
+    role: string
+    image: string
+}
+
+const TeamCardComponent: React.FC<TeamCardProps> = ({ name, role, image }) => {
+    return (
+        <div className="flex flex-col gap-10 lg-custom:gap-[50px] p-5 lg-custom:p-6 2xl:p-[30px] border border-gray15 rounded-xl ">
+
+            <div className="relative">
+                <img src={image} alt={name} className="rounded-[10px] 2xl:rounded-xl w-full " />
+                <div className="bg-purple90 dark:bg-purple60 absolute bottom-0 py-3.5 px-[26px] rounded-[43px] transform translate-y-1/2 left-1/2 -translate-x-1/2 flex items-center justify-center gap-3 cursor-pointer">
+                    <img src="/assets/icons/Team/twitter.svg" alt="icon" className="w-5 h-5 2xl:w-6 2xl:h-6 " />
+                </div>
+            </div>
+
+            <div className="flex flex-col gap-4 lg-custom:gap-5 2xl:gap-6 ">
+                <div className="text-center flex flex-col gap-0.5 lg-custom:gap-1 2xl:gap-1.5 ">
+                    <h3 className="text-lg lg-custom:text-[20px] 2xl:text-2xl font-semibold leading-7 text-black dark:text-white">{name}</h3>
+                    <p className="text-sm lg-custom:text-base 2xl:text-lg font-medium text-gray40 dark:text-gray60">{role}</p>
+                </div>
+
+                <div className="relative w-full ">
+                    <input
+                        type="text"
+                        placeholder="Say Hello 👋"
+                        className="text-black dark:text-white bg-white97 dark:bg-gray10 border border-white90 dark:border-gray15 py-2 pr-2 pl-6 lg-custom:py-2.5 lg-custom:pr-2.5 lg-custom:pl-5 2xl:py-3.5 2xl:pr-3.5 2xl:pl-6
+                        rounded-[100px] w-full h-[64px]"
+                    />
+                    <button className="bg-purple90 dark:bg-purple60 absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center justify-center p-3.5 lg-custom:p-2 2xl:p-2.5 rounded-full cursor-pointer">
+                        <img src="/assets/icons/Team/send.svg" alt="icon" className="w-5 h-5 2xl:w-6 2xl:h-6 " />
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    )
+}
+
+export default TeamCardComponent

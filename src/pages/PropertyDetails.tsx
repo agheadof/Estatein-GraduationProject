@@ -1,4 +1,5 @@
 import { SectionWrapper } from "../layouts/SectionWrapper"
+import PricingDetailsSection from "../sections/propertyDetails/PricingDetailsSection"
 import PropertyDetailsForm from "../sections/propertyDetails/PropertyDetailsForm"
 import PropertyGallery from "../sections/propertyDetails/PropertyGallery"
 
@@ -8,6 +9,7 @@ function PropertyDetails() {
       <SectionWrapper>
         <PropertyGallery />
         <PropertyDetailsForm />
+        <PricingDetailsSection />
       </SectionWrapper>
     </div>
   )
