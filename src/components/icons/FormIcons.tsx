@@ -3,15 +3,13 @@ type IconProps = {
   hoverClassName?: string;
   color?: string;
 };
-export function PhoneIcon({ className = "" }: IconProps) {
+export function PhoneIcon({ className = "", }: IconProps) {
   return (
     <svg
-      width="20"
-      height="20"
       viewBox="0 0 25 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`${className} transition-colors duration-300`}
+      className={`${className} transition-colors duration-300 w-5 h-5 2xl:w-6 2xl:h-6`}
     >
       <path
         fill-rule="evenodd"
@@ -26,12 +24,10 @@ export function PhoneIcon({ className = "" }: IconProps) {
 export function EmailIcon({ className = "" }: IconProps) {
   return (
     <svg
-      width="25"
-      height="24"
       viewBox="0 0 25 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`${className} transition-colors duration-300`}
+      className={`${className} transition-colors duration-300 w-5 h-5 2xl:w-6 2xl:h-6`}
     >
       <path
         d="M1.75 8.6691V17.25C1.75 18.9069 3.09315 20.25 4.75 20.25H19.75C21.4069 20.25 22.75 18.9069 22.75 17.25V8.6691L13.8223 14.1631C12.8581 14.7564 11.6419 14.7564 10.6777 14.1631L1.75 8.6691Z"
@@ -47,12 +43,10 @@ export function EmailIcon({ className = "" }: IconProps) {
 export function DropdownIcon({ className = "" }: IconProps) {
   return (
     <svg
-      width="24"
-      height="24"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`${className} transition-colors duration-300`}
+      className={`${className} transition-colors duration-300 w-5 h-5 2xl:w-6 2xl:h-6`}
     >
       <path
         d="M19.5 8.25L12 15.75L4.5 8.25"
@@ -67,12 +61,10 @@ export function DropdownIcon({ className = "" }: IconProps) {
 export function LocationIcon({ className = "" }: IconProps) {
   return (
     <svg
-      width="24"
-      height="24"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`${className} transition-colors duration-300`}
+      className={`${className} transition-colors duration-300 w-5 h-5 2xl:w-6 2xl:h-6`}
     >
       <path
         fill-rule="evenodd"

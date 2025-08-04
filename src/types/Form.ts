@@ -23,6 +23,7 @@ export type TextareaProps = {
   name: string;
   value: string;
   error?: string;
+  className?: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 

@@ -10,10 +10,10 @@ function FormInput({
   error,
 }: InputProps) {
   return (
-    <div className="flex flex-col shrink-0">
+    <div className="flex flex-col w-full">
       <label
         htmlFor={name}
-        className="mb-4 text-xl lg-custom:text-base/[1.5] text-white font-semibold"
+        className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 text-base/[1.5] 2xl:text-xl  dark:text-white text-black font-semibold"
       >
         {label}
       </label>
@@ -24,7 +24,7 @@ function FormInput({
         onChange={onChange}
         placeholder={placeholder}
         type={type}
-        className="rounded-lg bg-gray10 text-gray40 text-lg/[20px] lg-custom:text-sm font-medium border-1 border-gray15 px-5 py-6"
+        className="rounded-lg dark:bg-gray10 bg-purple95 dark:text-gray40 text-purple65 2xl:text-lg text-sm/[20px] font-medium border-1 dark:border-gray15 border-purple70 2xl:px-5 2xl:py-6 px-5 py-4"
       />
       {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>

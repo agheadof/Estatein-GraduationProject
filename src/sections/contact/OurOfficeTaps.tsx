@@ -29,13 +29,13 @@ function OurOfficeTaps() {
 
   return (
     <div className="flex flex-col mt-10 lg-custom:mt-[60px] 2xl:mt-20 gap-7.5 lg-custom:gap-10 2xl:gap-[50px]">
-      <div className="grid grid-cols-3 bg-gray10 gap-2.5 w-fit p-2.5 rounded-lg 2xl:rounded-xl">
+      <div className="grid grid-cols-3 dark:bg-gray10 bg-purple95 gap-2.5 w-fit p-2.5 rounded-lg 2xl:rounded-xl">
         {tabs.map((tab) => (
           <button
             key={tab}
             onClick={() => dispatch(setActiveTab(tab))}
-            className={`w-full py-3.5 px-5 2xl:py-4.5 2xl:px-6 border border-gray15 rounded-lg 2xl:rounded-[10px] capitalize text-sm/[1.5] 2xl:text-lg font-medium text-white ${
-              activeTab === tab ? "bg-gray08" : "bg-gray15"
+            className={`w-full py-3.5 px-5 2xl:py-4.5 2xl:px-6 border dark:border-gray15 border-purple70 rounded-lg 2xl:rounded-[10px] capitalize text-sm/[1.5] 2xl:text-lg font-medium text-white ${
+              activeTab === tab ? "dark:bg-gray08 bg-purple60 " : "dark:bg-gray15 bg-purple70"
             }`}
           >
             {tab}
