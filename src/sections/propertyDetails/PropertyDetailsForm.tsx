@@ -1,18 +1,50 @@
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchProperties } from "../../redux/slices/propertiesSlice";
+import type { RootState, AppDispatch } from "../../redux/store";
 
 import InquiryForm from "../../components/Forms/InquiryForm";
-import Title from "../../components/shared/Title/Title"
+import Title from "../../components/shared/Title/Title";
 
 function PropertyDetailsForm() {
+  const { id } = useParams<{ id: string }>();
+
+  // ✅ استخدم AppDispatch لتفادي خطأ dispatch لـ thunks
+  const dispatch = useDispatch<AppDispatch>();
+
+  // ✅ استخدم optional chaining مع التحقق من وجود property
+  const property = useSelector((state: RootState) =>
+    state.properties.all.find((p) => p.id === id)
+  );
+
+  const loading = useSelector((state: RootState) => state.properties.loading);
+
+  useEffect(() => {
+    dispatch(fetchProperties());
+  }, [dispatch]);
+
+  // ✅ تأكد من أن الخاصية موجودة قبل الوصول إلى خصائصها
+  if (loading || !property) {
+    return <div className="text-center text-red-200 py-20">Loading...</div>;
+  }
+
   return (
-    <div className="flex flex-col lg:flex-row justify-center lg:justify-between xl:space-x-[100px] px-4 md:px-8 lg-custom:!px-20 2xl:!px-[162px] mt-20 lg-custom:mt-30 2xl:!mt-[150px]">
+    <div className="grid grid-cols-1 xl:grid-cols-[32.5%_65.5%] 2xl:grid-cols-[38.3%_70.7%] gap-y-10 md:gap-x-10 2xl:gap-x-[100px] xl:gap-x-[80px] lg-custom:my-30 2xl:!my-[150px]">
       <Title
-        titleStyle="lg:w-1/3 w-full"
+        titleStyle="w-full"
         starImg={true}
-        heading="Inquire About Seaside Serenity Villa"
+        heading={`Inquire About ${property.title}`}
         paragraph="Interested in this property? Fill out the form below, and our real estate experts will get back to you with more details, including scheduling a viewing and answering any questions you may have."
       />
-      <div className="lg:w-2/3 w-full">
-        <InquiryForm type="property" />
+      <div className="w-full">
+        <InquiryForm
+          type="property"
+          propertyTitle={property.title}
+          // ✅ `property.location` قد تكون undefined، لذا وفر قيمة افتراضية
+          propertyLocation={property.location ?? "Unknown Location"}
+        />
       </div>
     </div>
   );

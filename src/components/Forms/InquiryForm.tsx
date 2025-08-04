@@ -9,9 +9,16 @@ import PreferredContactMethod from "./PreferredContactMethod";
 
 type InquiryFormProps = {
   type: "inquiry" | "contact" | "property";
+  propertyTitle?: string;
+  propertyLocation?: string;
 };
 
-function InquiryForm({ type }: InquiryFormProps) {
+
+function InquiryForm({
+  type,
+  propertyTitle,
+  propertyLocation,
+}: InquiryFormProps) {
   const {
     formData,
     handleChange,
@@ -189,13 +196,12 @@ function InquiryForm({ type }: InquiryFormProps) {
         )}
 
         {isProperty && (
-          <div className="col-span-1 lg-custom:col-span-2 p-0 m-0 flex flex-col justify-between">
+          <div className="col-span-full p-0 m-0 flex flex-col justify-between">
             <label className="mb-4 2xl:text-xl text-base/[1.5] text-black dark:text-white font-semibold">
-              Property Name
+              {propertyTitle}
             </label>
-            <div className="flex justify-between rounded-lg border-1 border-purple70 bg-purple95 px-5 py-6 2xl:text-xl/[20px] text-sm/[20px] font-medium text-purple70 dark:border-gray15 dark:bg-gray10 dark:text-white90">
-              Seaside Serenity Villa, Malibu, California
-              {/* HERE i SHOULD REPLACE IT WITH PROPERTY NAME COMMING FROM THE ID */}
+            <div className="flex justify-between rounded-lg border-1 border-purple70 bg-purple95 2xl:px-5 2xl:py-6 px-5 py-4 2xl:text-xl/[20px] text-sm/[20px] font-medium text-purple70 dark:border-gray15 dark:bg-gray10 dark:text-white90">
+              {propertyTitle}, {propertyLocation}
               <LocationIcon className="text-black dark:text-white" />
             </div>
           </div>
