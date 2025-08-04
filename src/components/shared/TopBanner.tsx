@@ -13,7 +13,7 @@ const TopBanner = ({ isVisible, onClose }: TopBannerProps) => {
           ${isVisible ? "translate-y-0 opacity-100" : "-translate-y-full"}
    `}
     >
-      <div className="flex gap-1.5 2xl:gap-2.5 text-xs md:text-sm 2xl:text-lg font-medium leading-[150%] text-white">
+      <div className="flex gap-1.5 2xl:gap-2.5 text-[10px] min-[380px]:text-xs md:text-sm 2xl:text-lg font-medium leading-[150%] text-white">
         <p>✨ Discover Your Dream Property with Estatein</p>
         <Link to="/" className="underline">
           Learn More
@@ -21,7 +21,7 @@ const TopBanner = ({ isVisible, onClose }: TopBannerProps) => {
       </div>
       <img
         src="/assets/icons/close.svg"
-        className="absolute top-9 right-4 md:top-3.5 2xl:top-[18px] 2xl:right-8 bg-white/10 rounded-full w-[26px] h-[26px] p-1 cursor-pointer"
+        className="absolute top-2 min-[340px]:top-9 right-4 md:top-3.5 2xl:top-[18px] 2xl:right-8 bg-white/10 rounded-full w-[26px] h-[26px] p-1 cursor-pointer"
         alt=""
         onClick={onClose}
       />

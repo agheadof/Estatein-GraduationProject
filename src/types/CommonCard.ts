@@ -8,5 +8,5 @@ export type CommonCardProps = {
     titleSize?: string;
     cardDesc?: string;
     isArrow?: boolean,
-    children: ReactNode;  
+    children?: ReactNode;  
 }

@@ -12,7 +12,7 @@ export type PricingCardProps = {
 const PricingCard = ({ cardTitle, details, isTwoItem }: PricingCardProps) => {
   const renderRow = (cards: typeof details) => (
     <div
-      className={`grid gap-5 border-t border-gray15
+      className={`grid gap-5 
         ${
           isTwoItem ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2"
         } py-5 md:py-[30px] 2xl:py-10`}

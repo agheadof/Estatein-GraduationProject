@@ -1,22 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { get, ref } from "firebase/database";
 import { db } from "../../firebaseConfig";
-import type { additionalFees, MonthlyCosts, MonthlyExpenses, TotalCosts } from "../types/Property";
+import type { Property } from "../types/Property";
 
-
-
-type Property = {
-    id: string;
-} & additionalFees & MonthlyCosts & TotalCosts & MonthlyExpenses
 
 interface PropertiesState {
     properties: Property[];
+    visibleItems: Property[];
     loading: boolean;
     error: string | null;
 }
 
 const initialState: PropertiesState = {
     properties: [],
+    visibleItems: [],
     loading: false,
     error: null,
 };

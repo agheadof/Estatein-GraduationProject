@@ -7,10 +7,11 @@ import { fetchTeams } from "../../redux/slices/teamSlice";
 
 const TeamSection = () => {
   const dispatch = useAppDispatch();
-  const { visibleItems, loading, error } = useAppSelector((state) => state.team);
+  const { visibleItems, loading, error } = useAppSelector(
+    (state) => state.team
+  );
 
   useEffect(() => {
-
     dispatch(fetchTeams());
   }, [dispatch]);
 

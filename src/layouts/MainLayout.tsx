@@ -14,8 +14,6 @@ const MainLayout = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY <= 20) {
-        setIsBannerVisible(true);
-      } else {
         setIsBannerVisible(false);
       }
     };

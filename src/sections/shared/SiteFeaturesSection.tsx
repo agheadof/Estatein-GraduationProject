@@ -3,7 +3,7 @@ import { SiteFeaturesData } from "../../data/SiteFeaturesData";
 
 const SiteFeaturesSection = () => {
   return (
-    <section className="grid grid-cols-2 min-lg-custom:grid-cols-4 gap-2.5 2xl:gap-5 p-2.5 2xl:p-5 bg-gray08 border border-gray15 shadow-[0px_0px_0px_10px_#191919] mb-[90px]">
+    <section className="grid grid-cols-2 min-lg-custom:grid-cols-4 gap-2.5 2xl:gap-5 p-2.5 2xl:p-5 mb-[90px] bg-gray08 border border-gray15 shadow-[0_-10px_10px_-5px_#191919,_0_10px_10px_-5px_#191919]">
       {SiteFeaturesData.map((card, index) => (
         <CommonCard
           key={index}

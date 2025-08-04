@@ -7,7 +7,7 @@ const ManagementSection = () => {
   return (
       <section className="pb-[61px] md:pb-[90px] 2xl:pb-[110px]">
         <Title
-          titleStyle="mb-[80px]"
+          titleStyle="pb-10 lg-custom:pb-[60px] 2xl:pb-20"
           heading="Effortless Property Management"
           paragraph="Owning a property should be a pleasure, not a hassle. Estatein's Property Management Service takes the stress out of property ownership, offering comprehensive solutions tailored to your needs. Explore the categories below to see how we can make property management effortless for you"
           paragraphStyle="w-[81.203%]"
