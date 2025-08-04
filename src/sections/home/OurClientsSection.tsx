@@ -4,7 +4,7 @@ import { SectionWrapper } from '../../layouts/SectionWrapper'
 import TitleBtn from '../../components/ui/TitleBtn'
 import Title from '../../components/shared/Title'
 import { testimonials } from '../../data/testimonialsData'
-import { useRef, useState } from 'react'
+import { useRef, useState } from 'react' 
 
 function OurClientsSection() {
     const prevRef = useRef<HTMLButtonElement | null>(null)
@@ -18,7 +18,7 @@ function OurClientsSection() {
                 heading="What Our Clients Say"
                 paragraph="Read the success stories and heartfelt testimonials from our valued clients. Discover why they chose Estatein for their real estate needs."
                 buttonLabel="Testimonials"
-            />
+            />,
 
             <div className="w-full pt-[80px]">
                 <Swiper
