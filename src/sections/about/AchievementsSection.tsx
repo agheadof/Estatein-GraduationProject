@@ -25,7 +25,7 @@ function AchievementsSection() {
         />
 
         {loading ? (
-          <p className="text-white">Loading...</p>
+          <p className="text-black dark:text-white">Loading...</p>
         ) : error ? (
           <p className="text-red-500">{error}</p>
         ) : (

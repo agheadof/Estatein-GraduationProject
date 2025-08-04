@@ -1,4 +1,3 @@
-import React from 'react'
 import ExperienceSectionCard from '../../components/cards/ExperienceSectionCard';
 import { SectionWrapper } from '../../layouts/SectionWrapper';
 import Title from '../../components/shared/Title/Title';

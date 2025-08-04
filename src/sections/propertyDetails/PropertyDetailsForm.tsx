@@ -1,4 +1,3 @@
-
 import InquiryForm from "../../components/Forms/InquiryForm";
 import Title from "../../components/shared/Title/Title"
 
