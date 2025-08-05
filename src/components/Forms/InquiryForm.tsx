@@ -5,12 +5,21 @@ import SharedFields from "./SharedFields";
 import FormTextarea from "./FormTextarea";
 import { EmailIcon, PhoneIcon, LocationIcon } from "../icons/FormIcons";
 import MainButton from "../ui/MainButton";
+import PreferredContactMethod from "./PreferredContactMethod";
+
 
 type InquiryFormProps = {
   type: "inquiry" | "contact" | "property";
+  propertyTitle?: string;
+  propertyLocation?: string;
 };
 
-function InquiryForm({ type }: InquiryFormProps) {
+
+function InquiryForm({
+  type,
+  propertyTitle,
+  propertyLocation,
+}: InquiryFormProps) {
   const {
     formData,
     handleChange,
@@ -38,17 +47,21 @@ function InquiryForm({ type }: InquiryFormProps) {
 
   const formPadding =
     type === "property"
-      ? "space-y-[20px] 2xl:p-[50px] lg-custom:p-[40px] p-5"
-      : "space-y-[50px] 2xl:p-[100px] xl:p-[50px] p-5 2xl:mt-[80px] xl:mt-[60px] mt-10";
+      ? "p-5 lg-custom:p-[40px] 2xl:p-[50px] gap-[30px] lg-custom:gap-[40px] 2xl:!gap-[50px]"
+      : type === "contact"
+      ? "p-5 lg-custom:p-[40px] 2xl:p-[50px]  mt-10 xl:mt-[60px] 2xl:mt-[80px] gap-10 lg-custom:gap-[60px] 2xl:gap-[50px]"
+      : "p-5 xl:p-[50px] 2xl:p-[100px] mt-10 xl:mt-[60px] 2xl:mt-[80px] gap-[30px] 2xl:!gap-[50px]";
 
   const gridClass =
-    isContact || isProperty
-      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] 2xl:gap-[50px]"
-      : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-[30px] 2xl:gap-[50px]";
+    type === "property"
+      ? "grid p-0 m-0 grid-cols-1 lg:grid-cols-2 gap-x-[30px] gap-y-[20px]"
+      : type === "contact"
+      ? "grid p-0 m-0 grid-cols-1 md:grid-cols-3 gap-[20px] md:gap-[30px] 2xl:gap-[50px]"
+      : "grid p-0 m-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] 2xl:gap-[50px]";
 
   return (
     <form
-      className={`${formPadding} rounded-xl border-1 border-white90 dark:border-gray15 w-full`}
+      className={`${formPadding} flex flex-col w-full rounded-xl border-1 border-white90 dark:border-gray15`}
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit((data) => console.log("Form submitted:", data));
@@ -122,7 +135,7 @@ function InquiryForm({ type }: InquiryFormProps) {
               options={["1", "2", "3+"]}
               error={errors.bedrooms}
             />
-            <div className="xl:col-span-2 col-span-1">
+            <div className="col-span-1 md:col-span-2 lg:col-span-1 xl:col-span-2 p-0 m-0">
               <FormSelect
                 label="Budget"
                 name="budget"
@@ -134,111 +147,99 @@ function InquiryForm({ type }: InquiryFormProps) {
               />
             </div>
 
-            <div className="xl:col-span-2 md:col-span-3 col-span-1 flex flex-col justify-between">
-              <label className="mb-4 lg-custom:text-xl text-base/[1.5] text-black dark:text-white font-semibold">
+            <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-2 p-0 m-0 flex flex-col justify-between relative">
+              <label className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 2xl:text-xl text-base/[1.5] text-black dark:text-white font-semibold">
                 Preferred Contact Method
               </label>
+              <div className="flex w-full flex-col items-center justify-center space-y-4 md:flex-row md:justify-between md:space-x-4 md:space-y-0">
+                <PreferredContactMethod
+                  icon={
+                    <PhoneIcon className="absolute 2xl:left-6 left-5 top-1/2 2xl:h-6 2xl:w-6 h-5 w-5 -translate-y-1/2 text-black dark:text-white pointer-events-none group-hover:text-purple60" />
+                  }
+                  type="tel"
+                  name="phone"
+                  value={formData.phone || ""}
+                  placeholder="Enter Your Number"
+                  onChange={handleChange}
+                  onCheckboxChange={handleCheckboxChange}
+                  isChecked={
+                    formData.preferredContact?.includes("phone") || true
+                  }
+                />
+                <PreferredContactMethod
+                  icon={
+                    <EmailIcon className="absolute 2xl:left-6 left-5 top-1/2 2xl:h-6 2xl:w-6 h-5 w-5 -translate-y-1/2 text-black dark:text-white pointer-events-none group-hover:text-purple60" />
+                  }
+                  type="email"
+                  name="email"
+                  value={formData.email || ""}
+                  placeholder="Enter Your Email"
+                  onChange={handleChange}
+                  onCheckboxChange={handleCheckboxChange}
+                  isChecked={
+                    formData.preferredContact?.includes("email") || false
+                  }
+                />
+              </div>
               {errors.preferredContact && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="mt-1 text-sm text-red-500">
                   {errors.preferredContact}
                 </p>
               )}
-              <div className="w-full flex flex-col md:flex-row md:justify-between justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
-                <div className="relative w-full lg-custom:w-1/2 group">
-                  <PhoneIcon className="absolute text-black dark:text-white group-hover:text-purple60 left-6 top-1/2 transform -translate-y-1/2 w-6 h-6 pointer-events-none" />
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone || ""}
-                    onChange={handleChange}
-                    placeholder="Enter Your Number"
-                    className="w-full rounded-lg bg-white97 dark:bg-gray10 text-gray60 dark:text-gray40 xl:text-lg/[20px] text-sm font-medium border-1 border-white90 dark:border-gray15 px-5 py-6 pl-14"
-                    disabled={!formData.preferredContact?.includes("phone")}
-                  />
-                  <input
-                    type="checkbox"
-                    name="preferredContact"
-                    value="phone"
-                    checked={
-                      formData.preferredContact?.includes("phone") || false
-                    }
-                    onChange={handleCheckboxChange}
-                    className="absolute right-6 top-1/2 transform -translate-y-1/2 md:w-6 w-[10px] md:h-6 h-[10px] appearance-none bg-white97 dark:bg-gray10 border-1 border-purple90 dark:border-purple60 rounded-full checked:bg-purple60 cursor-pointer"
-                  />
-                </div>
-                <div className="relative w-full lg-custom:w-1/2 group">
-                  <EmailIcon className="absolute text-black dark:text-white group-hover:text-purple60 left-6 top-1/2 transform -translate-y-1/2 w-6 h-6 pointer-events-none" />
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email || ""}
-                    onChange={handleChange}
-                    placeholder="Enter Your Email"
-                    className="w-full rounded-lg bg-white97 dark:bg-gray10 text-gray60 dark:text-gray40 lg-custom:text-lg/[20px] text-sm font-medium border-1 border-white90 dark:border-gray15 px-5 py-6 pl-14"
-                    disabled={!formData.preferredContact?.includes("email")}
-                  />
-                  <input
-                    type="checkbox"
-                    name="preferredContact"
-                    value="email"
-                    checked={
-                      formData.preferredContact?.includes("email") || false
-                    }
-                    onChange={handleCheckboxChange}
-                    className="absolute right-6 top-1/2 transform -translate-y-1/2 md:w-6 w-[10px] md:h-6 h-[10px] appearance-none bg-white97 dark:bg-gray10 border-1 border-purple90 dark:border-purple60 rounded-full checked:bg-purple60 cursor-pointer"
-                  />
-                </div>
-              </div>
               {errors.phone && (
-                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                <p className="absolute left-0 top-full mt-1 text-sm text-red-500">
+                  {errors.phone}
+                </p>
               )}
               {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                <p className="absolute left-0 top-full mt-1 text-sm text-red-500">
+                  {errors.email}
+                </p>
               )}
             </div>
           </>
         )}
 
         {isProperty && (
-          <div className="xl:col-span-2 flex flex-col justify-between">
-            <label className="mb-4 text-xl lg-custom:text-base/[1.5] text-black dark:text-white font-semibold">
-              Property Name
+          <div className="col-span-full p-0 m-0 flex flex-col justify-between">
+            <label className="mb-4 2xl:text-xl text-base/[1.5] text-black dark:text-white font-semibold">
+              {propertyTitle}
             </label>
-            <div className="flex justify-between text-gray15 dark:text-white90 rounded-lg bg-white97 dark:bg-gray10 text-lg/[20px] lg-custom:text-sm font-medium border-1 border-white90 dark:border-gray15 px-5 py-6">
-              Seaside Serenity Villa, Malibu, California
+            <div className="flex justify-between rounded-lg border-1 border-white90 bg-white97 2xl:px-5 2xl:py-6 px-5 py-4 2xl:text-xl/[20px] text-sm/[20px] font-medium text-gray15 dark:border-gray15 dark:bg-gray10 dark:text-white90">
+              {propertyTitle}, {propertyLocation}
               <LocationIcon className="text-black dark:text-white" />
-              {/* here we should add Property.name */}
             </div>
           </div>
         )}
+
+        <FormTextarea
+          label="Message"
+          name="message"
+          className="col-span-full p-0 m-0"
+          value={formData.message || ""}
+          onChange={handleChange}
+          error={errors.message}
+        />
       </div>
 
-      {/* Message */}
-      <FormTextarea
-        label="Message"
-        name="message"
-        value={formData.message || ""}
-        onChange={handleChange}
-        error={errors.message}
-      />
-
-      {/* Agreement + Submit */}
-      <div className="flex flex-col md:flex-row justify-between space-y-5">
-        <div>
+      <div className="p-0 m-0 gap-5 flex flex-col md:flex-row md:items-center md:justify-between">
+        <div className="p-0 m-0 flex flex-col relative">
           <FormCheckbox
             label={`I agree with <a href="#" class="underline">Terms of Use</a> and <a href="#" class="underline">Privacy Policy</a>`}
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
           />
           {errors.agreed && (
-            <p className="text-red-500 text-sm mt-1">{errors.agreed}</p>
+            <p className="absolute left-0 top-full mt-1 text-sm text-red-500">
+              {errors.agreed}
+            </p>
           )}
         </div>
         <MainButton
           onClick={() =>
             handleSubmit((data) => console.log("Form submitted:", data))
           }
-          className="normalPurple"
+          className="normalPurple 2xl:py-4.5 2xl:px-11.5 lg-custom:py-3.5 lg-custom:px-[34px] 2xl:text-lg text-sm/[24px]"
           variant="normalPurple"
         >
           Send Your Message
