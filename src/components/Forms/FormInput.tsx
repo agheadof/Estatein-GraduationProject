@@ -10,7 +10,7 @@ function FormInput({
   error,
 }: InputProps) {
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full relative">
       <label
         htmlFor={name}
         className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 text-base/[1.5] 2xl:text-xl text-black dark:text-white font-semibold"
@@ -26,7 +26,11 @@ function FormInput({
         type={type}
         className="rounded-lg bg-white97 dark:bg-gray10 text-gray60 dark:text-gray40 2xl:text-lg text-sm/[20px] font-medium border-1 border-white90 dark:border-gray15 2xl:px-5 2xl:py-6 px-5 py-4"
       />
-      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+      {error && (
+        <p className="text-red-500 text-sm mt-1 absolute left-0 top-full">
+          {error}
+        </p>
+      )}
     </div>
   );
 }

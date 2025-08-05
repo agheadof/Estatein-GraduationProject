@@ -7,6 +7,7 @@ import { EmailIcon, PhoneIcon, LocationIcon } from "../icons/FormIcons";
 import MainButton from "../ui/MainButton";
 import PreferredContactMethod from "./PreferredContactMethod";
 
+
 type InquiryFormProps = {
   type: "inquiry" | "contact" | "property";
   propertyTitle?: string;
@@ -146,7 +147,7 @@ function InquiryForm({
               />
             </div>
 
-            <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-2 p-0 m-0 flex flex-col justify-between">
+            <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-2 p-0 m-0 flex flex-col justify-between relative">
               <label className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 2xl:text-xl text-base/[1.5] text-black dark:text-white font-semibold">
                 Preferred Contact Method
               </label>
@@ -186,10 +187,14 @@ function InquiryForm({
                 </p>
               )}
               {errors.phone && (
-                <p className="mt-1 text-sm text-red-500">{errors.phone}</p>
+                <p className="absolute left-0 top-full mt-1 text-sm text-red-500">
+                  {errors.phone}
+                </p>
               )}
               {errors.email && (
-                <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                <p className="absolute left-0 top-full mt-1 text-sm text-red-500">
+                  {errors.email}
+                </p>
               )}
             </div>
           </>
@@ -218,14 +223,16 @@ function InquiryForm({
       </div>
 
       <div className="p-0 m-0 gap-5 flex flex-col md:flex-row md:items-center md:justify-between">
-        <div className="p-0 m-0 flex flex-col">
+        <div className="p-0 m-0 flex flex-col relative">
           <FormCheckbox
             label={`I agree with <a href="#" class="underline">Terms of Use</a> and <a href="#" class="underline">Privacy Policy</a>`}
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
           />
           {errors.agreed && (
-            <p className="mt-1 text-sm text-red-500">{errors.agreed}</p>
+            <p className="absolute left-0 top-full mt-1 text-sm text-red-500">
+              {errors.agreed}
+            </p>
           )}
         </div>
         <MainButton

@@ -2,7 +2,7 @@ import type { CheckboxProps } from "../../types/Form";
 
 function FormCheckbox({ label, checked, onChange }: CheckboxProps) {
   return (
-    <label className="flex items-center text-lg font-medium text-gray40 dark:text-gray60 space-x-[6px] 2xl:space-x-2.5">
+    <label className="flex items-center text-lg font-medium text-gray40 dark:text-gray60 space-x-[6px] 2xl:space-x-2.5 relative">
       <input
         type="checkbox"
         checked={checked}

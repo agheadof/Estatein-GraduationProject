@@ -26,7 +26,7 @@ function FormSelect({
   }, []);
 
   return (
-    <div className="flex flex-col group w-full" ref={ref}>
+    <div className="flex flex-col group w-full relative" ref={ref}>
       <label
         htmlFor={name}
         className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 2xl:text-xl text-base/[1.5] text-black dark:text-white font-semibold"
@@ -74,7 +74,11 @@ function FormSelect({
         )}
       </div>
 
-      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+      {error && (
+        <p className="text-red-500 text-sm absolute left-0 top-full mt-1">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
