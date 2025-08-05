@@ -30,7 +30,7 @@ function PreferredContactMethod({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="w-full rounded-lg border-1 border-purple70 bg-purple95 px-5 py-4 2xl:py-5.5 2xl:pl-15 pl-11.5 font-medium text-purple65 2xl:text-lg text-sm/[20px] dark:border-gray15 dark:bg-gray10 dark:text-gray40"
+        className="w-full rounded-lg border-1 border-white90 bg-white97 px-5 py-4 2xl:pr-12 2xl:pl-15 pl-11.5 font-medium 2xl:text-lg text-sm/[20px] dark:border-gray15 dark:bg-gray10 dark:text-gray40"
         disabled={!isChecked}
       />
       <input

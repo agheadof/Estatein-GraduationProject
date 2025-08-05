@@ -48,19 +48,19 @@ function InquiryForm({
     type === "property"
       ? "p-5 lg-custom:p-[40px] 2xl:p-[50px] gap-[30px] lg-custom:gap-[40px] 2xl:!gap-[50px]"
       : type === "contact"
-      ? "p-5 lg-custom:p-[40px] 2xl:p-[50px] gap-10 lg-custom:gap-[60px] 2xl:gap-[50px]"
+      ? "p-5 lg-custom:p-[40px] 2xl:p-[50px]  mt-10 xl:mt-[60px] 2xl:mt-[80px] gap-10 lg-custom:gap-[60px] 2xl:gap-[50px]"
       : "p-5 xl:p-[50px] 2xl:p-[100px] mt-10 xl:mt-[60px] 2xl:mt-[80px] gap-[30px] 2xl:!gap-[50px]";
 
   const gridClass =
     type === "property"
       ? "grid p-0 m-0 grid-cols-1 lg:grid-cols-2 gap-x-[30px] gap-y-[20px]"
       : type === "contact"
-      ? "grid p-0 m-0 grid-cols-1 md:grid-cols-3 gap-[30px]"
+      ? "grid p-0 m-0 grid-cols-1 md:grid-cols-3 gap-[20px] md:gap-[30px] 2xl:gap-[50px]"
       : "grid p-0 m-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] 2xl:gap-[50px]";
 
   return (
     <form
-      className={`${formPadding} flex flex-col w-full rounded-xl border-1 border-white90  dark:border-gray15`}
+      className={`${formPadding} flex flex-col w-full rounded-xl border-1 border-white90 dark:border-gray15`}
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit((data) => console.log("Form submitted:", data));

@@ -10,9 +10,7 @@ function FormSelect({
   onChange,
   options,
   error,
-  classExtra = ' bg-white97 dark:bg-gray10',
-  classIcon,
-  children
+  
 }: SelectProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -40,7 +38,7 @@ function FormSelect({
         <div
           id={name}
           onClick={() => setOpen((prev) => !prev)}
-          className="cursor-pointer appearance-none w-full rounded-lg dark:bg-gray10 bg-purple95 dark:text-gray40 text-purple65 2xl:text-lg/[20px] text-sm/[20px] font-medium border-1 dark:border-gray15 border-purple70 px-5 py-4 2xl:py-5.5 flex items-center justify-between"
+          className="cursor-pointer appearance-none w-full rounded-lg dark:bg-gray10  bg-white97 dark:text-gray40 text-gray60 2xl:text-lg/[20px] text-sm/[20px] whitespace-nowrap font-medium border-1 dark:border-gray15 border-white90 px-5 py-4 2xl:py-5.5 flex items-center justify-between"
         >
           <span className={value ? "" : "text-gray-400"}>
             {value || placeholder || "Select"}
@@ -53,7 +51,7 @@ function FormSelect({
         </div>
 
         {open && (
-          <ul className="absolute z-10 mt-2 w-full rounded-lg border border-purple70 dark:border-gray15 bg-purple95 dark:bg-gray10 shadow-lg max-h-60 overflow-y-auto">
+          <ul className="absolute z-10 mt-2 w-full rounded-lg border border-white90 dark:border-gray15 bg-white97 dark:bg-gray10 shadow-lg max-h-60 overflow-y-auto">
             {options.map((opt) => (
               <li
                 key={opt}
@@ -65,7 +63,7 @@ function FormSelect({
                 }}
                 className={`px-5 py-3 text-sm cursor-pointer hover:bg-purple90 dark:hover:bg-gray20 ${
                   value === opt
-                    ? "bg-purple10 dark:bg-gray20 font-semibold text-purple70"
+                    ? "bg-purple10 dark:bg-gray20 font-semibold text-white90"
                     : "text-black dark:text-white"
                 }`}
               >
