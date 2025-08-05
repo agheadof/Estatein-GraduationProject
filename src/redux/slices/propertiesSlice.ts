@@ -56,7 +56,7 @@ export const fetchProperties = createAsyncThunk(
         const snapshot = await get(ref(db, 'properties'))
         const data = snapshot.val()
         console.log(data);
-        
+
         return Object.entries(data).map(([id, prop]) =>
             transformProperty(prop, id)
         )
@@ -71,6 +71,7 @@ type PropertiesState = {
 
 const initialState: PropertiesState = {
     all: [],
+    // properties: [],
     loading: false,
     error: null,
 }
