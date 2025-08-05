@@ -6,6 +6,7 @@ import ContactForm from '../sections/properties/ContactForm';
 function ContactPage() {
   return (
     <div className="huge:container huge:mx-auto">
+        <SubHero title={subHeroContact.title} desc={subHeroContact.desc} classes="lg-custom:pb-[100px]"/>
         <ContactForm
           titleStyle="leading-[1.5]"
           starImg={true}
@@ -14,7 +15,6 @@ function ContactPage() {
           type='contact'
         />
         <OurOffices/>
-      <SubHero title={subHeroContact.title} desc={subHeroContact.desc} />
     </div>
   );
 }

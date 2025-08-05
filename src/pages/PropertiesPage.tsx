@@ -7,7 +7,7 @@ import PropertiesSection from "../sections/home/PropertiesSection";
 function PropertiesPage() {
   return (
     <div className="huge:container huge:mx-auto">
-      <SubHero title={subHeroProperties.title} desc={subHeroProperties.desc} classes="relative"/>
+      <SubHero title={subHeroProperties.title} desc={subHeroProperties.desc} classes="lg-custom:pb-[130px] relative" />
       <FilterProperty />
       <PropertiesSection showDetails={false} />
         <ContactForm

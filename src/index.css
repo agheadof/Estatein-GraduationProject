@@ -43,6 +43,9 @@
     background: linear-gradient(95.93deg, #262626 -26.82%, rgba(38, 38, 38, 0) 40.46%);
   }
 
+  .bg-gradient-custom-light {
+    background: linear-gradient(95.93deg, #946CF9 -26.82%, rgba(38, 38, 38, 0) 40.46%);
+  }
 }
 
 @keyframes dotBounce {

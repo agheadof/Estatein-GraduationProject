@@ -9,7 +9,7 @@ import { SectionWrapper } from "../layouts/SectionWrapper";
 function ServicesPage() {
   return (
     <div className="huge:container huge:mx-auto">
-      <SubHero title={subHeroServices.title} desc={subHeroServices.desc} />
+      <SubHero title={subHeroServices.title} desc={subHeroServices.desc} classes="lg-custom:pb-[100px]" />
       <SiteFeaturesSection />
       <SectionWrapper>
         <PropertyValueSection />

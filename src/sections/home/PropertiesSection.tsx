@@ -21,7 +21,7 @@ function PropertiesSection({ showDetails = true }: Props) {
 
     return (
         <SectionWrapper>
-            <div className="mt-[61px] lg-custom:mt-[90px] 2xl:mt-[110px]">
+            <div className="mt-[61px] lg-custom:mt-[193px] 2xl:mt-[261px]">
                 <Title
                     heading="Featured Properties"
                     paragraph="Explore our handpicked selection of featured properties."
