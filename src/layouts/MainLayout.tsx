@@ -12,8 +12,9 @@ const MainLayout = () => {
   const [isBannerVisible, setIsBannerVisible] = useState<boolean>(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const handleScroll = () => {
-      if (window.scrollY <= 20) {
+      if (window.scrollY > 20) {
         setIsBannerVisible(false);
       }
     };

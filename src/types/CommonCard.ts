@@ -1,7 +1,9 @@
 
-import type { ReactNode } from "react";
+import type { ElementType, ReactNode } from "react";
 
 export type CommonCardProps = {
+    HeadingTag?: ElementType;
+    titleLink?: string;
     cardStyle?: string;
     cardImg: string;
     cardTitle: string;
@@ -9,5 +11,5 @@ export type CommonCardProps = {
     titleSize?: string;
     cardDesc?: string;
     isArrow?: boolean,
-    children?: ReactNode;  
+    children?: ReactNode;
 }

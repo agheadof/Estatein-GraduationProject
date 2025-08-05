@@ -5,9 +5,9 @@ import { pricingDetailsData } from "../../data/pricingDetailsData";
 
 const PricingDetailsSection = () => {
   return (
-    <section className="pb-[61px] md:pb-[90px] 2xl:pb-[110px]">
+    <section className="pb-[61px] lg-custom:pb-[90px] 2xl:pb-[110px]">
       <Title
-        titleStyle="pb-10 md:pb-[60px] 2xl:pb-20"
+        titleStyle="pb-10 lg-custom:pb-[60px] 2xl:pb-20"
         heading="Comprehensive Pricing Details"
         paragraph="At Estatein, transparency is key. We want you to have a clear understanding of all costs associated with your property investment. Below, we break down the pricing for Seaside Serenity Villa to help you make an informed decision"
         paragraphStyle="w-full md:w-[81.203%]"
