@@ -11,9 +11,9 @@ function Loader() {
 
   return (
     <div
-      className={`fixed inset-0 z-[90] flex items-center justify-center transition-opacity duration-700
-        ${isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
-      `}
+      className={`fixed inset-0 bg-purple95 dark:bg-gray15 flex items-center justify-center z-90 transition-opacity duration-700 ${
+        isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      }`}
     >
       <div className="absolute inset-0 bg-gradient-to-br from-[#FBFAFF] via-[#DBCEFD] to-[#703BF7] dark:hidden opacity-30 blur-2xl" />
       <div className="absolute inset-0 bg-gray15 hidden dark:block" />

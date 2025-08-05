@@ -2,6 +2,7 @@ type IconProps = {
   className?: string;
   hoverClassName?: string;
   color?: string;
+  onClick?: ()=> void;
 };
 export function PhoneIcon({ className = "" }: IconProps) {
   return (
@@ -44,9 +45,10 @@ export function EmailIcon({ className = "" }: IconProps) {
     </svg>
   );
 }
-export function DropdownIcon({ className = "" }: IconProps) {
+export function DropdownIcon({ className = "", onClick }: IconProps) {
   return (
     <svg
+      onClick={onClick}
       width="24"
       height="24"
       viewBox="0 0 24 24"

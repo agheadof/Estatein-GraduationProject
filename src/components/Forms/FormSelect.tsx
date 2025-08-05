@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import type { SelectProps } from "../../types/Form";
 import { DropdownIcon } from "../icons/FormIcons";
 
@@ -9,39 +10,82 @@ function FormSelect({
   onChange,
   options,
   error,
-  classExtra = ' bg-white97 dark:bg-gray10',
+  classExtra = "bg-white97 dark:bg-gray10",
   classIcon,
-  children
+  children,
 }: SelectProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState<string>(value || "");
+  const selectRef = useRef<HTMLDivElement>(null);
+
+  const handleSelect = (opt: string) => {
+    setSelected(opt);
+    onChange({ target: { name, value: opt } } as any);
+    setIsOpen(false);
+  };
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (selectRef.current && !selectRef.current.contains(e.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="flex flex-col group shrink-0">
-      {
-        label && <label
+    <div className="flex flex-col group shrink-0" ref={selectRef}>
+      {label && (
+        <label
           htmlFor={name}
           className="mb-4 text-xl lg-custom:text-base/[1.5] text-black dark:text-white font-semibold"
+          onClick={() => setIsOpen((prev) => !prev)}
         >
           {label}
         </label>
-      }
+      )}
 
-      <div className={`relative flex gap-3 border-1 rounded-lg px-5 py-6 pr-12 border-white90 dark:border-gray15 items-center justify-center ${classExtra}`}>
-        {children}
-        <select
-          id={name}
-          name={name}
-          value={value}
-          onChange={onChange}
-          className={`appearance-none w-full text-gray60 dark:text-gray40 text-lg/[20px] lg-custom:text-sm font-medium ${classExtra}`}
+      <div
+        className={`relative bg-purple90 flex flex-col border-1 rounded-lg border-white90 dark:border-gray15 hover:text-purple75 transition-colors duration-300 ${classExtra}`}
+      >
+        <div
+          className={`flex gap-2.5 px-5 py-6 pr-12 items-center cursor-pointer`}
+          onClick={() => setIsOpen((prev) => !prev)}
         >
-          <option value="">{placeholder || "Select"}</option>
-          {options.map((opt) => (
-            <option key={opt} value={opt}>
-              {opt}
-            </option>
-          ))}
-        </select>
-        <DropdownIcon className={`absolute right-5 group-hover:text-purple60 top-1/2 transform -translate-y-1/2 text-black dark:text-white transition-colors duration-200 ${classIcon}`} />
+          {children}
+          <span className={`text-black dark:text-gray40 text-lg/[20px] lg-custom:text-sm font-medium`}>
+            {selected || placeholder || "Select"}
+          </span>
+
+          <div onClick={() => setIsOpen((prev) => !prev)} >
+            <DropdownIcon
+              className={`absolute right-5 top-1/2 transform -translate-y-1/2 text-black dark:text-white transition-transform duration-200 cursor-pointer ${isOpen ? "rotate-180" : ""
+                } ${classIcon}`}
+                onClick={() => setIsOpen((prev) => !prev)}
+            />
+          </div>
+        </div>
+
+        {isOpen && (
+          <ul className="absolute top-full left-0 right-0 mt-1 max-h-60 overflow-auto bg-white dark:bg-gray10 border border-gray-200 dark:border-gray15 rounded-lg shadow-lg z-10">
+            {options.map((opt) => (
+              <li
+                key={opt}
+                className={`px-5 py-3 hover:bg-purple75 dark:hover:bg-purple90 cursor-pointer text-black dark:text-gray40 text-sm font-medium ${selected === opt ? "bg-purple90 dark:bg-purple90" : ""
+                  }`}
+                onClick={() => handleSelect(opt)}
+              >
+                {opt}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
+
       {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
