@@ -20,19 +20,19 @@ const images = [
 
 const PropertyGallery = () => {
   return (
-    <div className="flex flex-col gap-12 text-white">
+    <div className="flex flex-col gap-12 text-black dark:text-white">
       <div className="flex justify-between items-center">
         <div className="flex flex-col lg-custom:flex-row items-center gap-5">
           <h1 className="font-semibold text-xl  2xl:text-3xl  ">
             Seaside Serenity Villa
           </h1>
-          <div className="border border-gray15 rounded-lg p-2.5 flex gap-1.5">
+          <div className="border border-white90 dark:border-gray15 rounded-lg p-2.5 flex gap-1.5">
             <LocationIcon />
             <h2 className="font-medium ">Malibu, California</h2>
           </div>
         </div>
         <div className="flex flex-col gap-0.5">
-          <p className="text-gray60 font-medium">Price</p>
+          <p className="text-gray40 dark:text-gray60 font-medium">Price</p>
           <p className="font-semibold text-lg 2xl:text-2xl">$1,250,000</p>
         </div>
       </div>
