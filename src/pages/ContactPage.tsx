@@ -1,11 +1,12 @@
-import SubHero from "../components/shared/SubHero/SubHero"
+
+import SubHero from "../components/shared/SubHero";
 import { subHeroContact } from "../data/subHeroData"
 import OurOffices from "../sections/contact/OurOffices";
 import ContactForm from '../sections/properties/ContactForm';
 
 function ContactPage() {
   return (
-    <div className="huge:container huge:mx-auto">
+    <div className="huge:max-w-[1920px] huge:mx-auto">
         <ContactForm
           titleStyle="leading-[1.5]"
           starImg={true}

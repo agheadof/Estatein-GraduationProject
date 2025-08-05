@@ -5,7 +5,7 @@ import PropertyGallery from "../sections/propertyDetails/PropertyGallery"
 
 function PropertyDetails() {
   return (
-    <div className="huge:container huge:mx-auto mt-28">
+    <div className="huge:max-w-[1920px] huge:mx-auto mt-28">
       <SectionWrapper>
         <PropertyGallery />
         <PropertyDetailsForm />

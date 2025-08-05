@@ -4,8 +4,8 @@ import { fetchProperties } from '../../redux/slices/propertiesSlice'
 import { selectPropertiesCardsData } from '../../redux/types/Property'
 import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
 import PropertiesCard from '../../components/cards/PropertiesCard'
-import Title from '../../components/shared/Title/Title'
 import { SectionWrapper } from '../../layouts/SectionWrapper'
+import Title from '../../components/shared/Title'
 type Props = {
     showDetails?: boolean;
 };

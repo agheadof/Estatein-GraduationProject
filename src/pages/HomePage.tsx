@@ -9,7 +9,7 @@ function HomePage() {
     <>
       <Hero />
       <SiteFeaturesSection data={SiteFeaturesHomeData}/>
-      <div className="huge:container huge:mx-auto">
+      <div className="huge:max-w-[1920px] huge:mx-auto">
         <PropertiesSection />
         <OurClientsSection />
         <FaqSection />
