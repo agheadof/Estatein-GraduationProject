@@ -59,10 +59,10 @@ const Hero = () => {
 
         {/* === Rotating Text Component === */}
 
-        <div className="absolute bottom-[-15%] left-0 lg-custom:bottom-0 2xl:top-[20%] lg-custom:top-[15%] 2xl:left-[-20%] lg-custom:left-[-15%]  inline-block z-40">
-        <Maggnatic>
-          <RotatingText />
-        </Maggnatic>
+        <div className="absolute bottom-[-5%] left-0 lg-custom:bottom-0 2xl:top-[20%] lg-custom:top-[15%]  lg-custom:!left-[-10%]   inline-block z-40">
+          <Maggnatic>
+            <RotatingText />
+          </Maggnatic>
         </div>
       </div>
     </div>
