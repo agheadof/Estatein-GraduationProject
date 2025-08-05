@@ -48,7 +48,7 @@ function InquiryForm({ type }: InquiryFormProps) {
 
   return (
     <form
-      className={`${formPadding} rounded-xl border-1 border-gray15 w-full`}
+      className={`${formPadding} rounded-xl border-1 border-white90 dark:border-gray15 w-full`}
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit((data) => console.log("Form submitted:", data));
@@ -135,7 +135,7 @@ function InquiryForm({ type }: InquiryFormProps) {
             </div>
 
             <div className="xl:col-span-2 md:col-span-3 col-span-1 flex flex-col justify-between">
-              <label className="mb-4 lg-custom:text-xl text-base/[1.5] text-white font-semibold">
+              <label className="mb-4 lg-custom:text-xl text-base/[1.5] text-black dark:text-white font-semibold">
                 Preferred Contact Method
               </label>
               {errors.preferredContact && (
@@ -145,14 +145,14 @@ function InquiryForm({ type }: InquiryFormProps) {
               )}
               <div className="w-full flex flex-col md:flex-row md:justify-between justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
                 <div className="relative w-full lg-custom:w-1/2 group">
-                  <PhoneIcon className="absolute text-white group-hover:text-purple60 left-6 top-1/2 transform -translate-y-1/2 w-6 h-6 pointer-events-none" />
+                  <PhoneIcon className="absolute text-black dark:text-white group-hover:text-purple60 left-6 top-1/2 transform -translate-y-1/2 w-6 h-6 pointer-events-none" />
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone || ""}
                     onChange={handleChange}
                     placeholder="Enter Your Number"
-                    className="w-full rounded-lg bg-gray10 text-gray40 xl:text-lg/[20px] text-sm font-medium border-1 border-gray15 px-5 py-6 pl-14"
+                    className="w-full rounded-lg bg-white97 dark:bg-gray10 text-gray60 dark:text-gray40 xl:text-lg/[20px] text-sm font-medium border-1 border-white90 dark:border-gray15 px-5 py-6 pl-14"
                     disabled={!formData.preferredContact?.includes("phone")}
                   />
                   <input
@@ -163,18 +163,18 @@ function InquiryForm({ type }: InquiryFormProps) {
                       formData.preferredContact?.includes("phone") || false
                     }
                     onChange={handleCheckboxChange}
-                    className="absolute right-6 top-1/2 transform -translate-y-1/2 md:w-6 w-[10px] md:h-6 h-[10px] appearance-none bg-gray10 border-1 border-purple60 rounded-full checked:bg-purple60 cursor-pointer"
+                    className="absolute right-6 top-1/2 transform -translate-y-1/2 md:w-6 w-[10px] md:h-6 h-[10px] appearance-none bg-white97 dark:bg-gray10 border-1 border-purple90 dark:border-purple60 rounded-full checked:bg-purple60 cursor-pointer"
                   />
                 </div>
                 <div className="relative w-full lg-custom:w-1/2 group">
-                  <EmailIcon className="absolute text-white group-hover:text-purple60 left-6 top-1/2 transform -translate-y-1/2 w-6 h-6 pointer-events-none" />
+                  <EmailIcon className="absolute text-black dark:text-white group-hover:text-purple60 left-6 top-1/2 transform -translate-y-1/2 w-6 h-6 pointer-events-none" />
                   <input
                     type="email"
                     name="email"
                     value={formData.email || ""}
                     onChange={handleChange}
                     placeholder="Enter Your Email"
-                    className="w-full rounded-lg bg-gray10 text-gray40 lg-custom:text-lg/[20px] text-sm font-medium border-1 border-gray15 px-5 py-6 pl-14"
+                    className="w-full rounded-lg bg-white97 dark:bg-gray10 text-gray60 dark:text-gray40 lg-custom:text-lg/[20px] text-sm font-medium border-1 border-white90 dark:border-gray15 px-5 py-6 pl-14"
                     disabled={!formData.preferredContact?.includes("email")}
                   />
                   <input
@@ -185,7 +185,7 @@ function InquiryForm({ type }: InquiryFormProps) {
                       formData.preferredContact?.includes("email") || false
                     }
                     onChange={handleCheckboxChange}
-                    className="absolute right-6 top-1/2 transform -translate-y-1/2 md:w-6 w-[10px] md:h-6 h-[10px] appearance-none bg-gray10 border-1 border-purple60 rounded-full checked:bg-purple60 cursor-pointer"
+                    className="absolute right-6 top-1/2 transform -translate-y-1/2 md:w-6 w-[10px] md:h-6 h-[10px] appearance-none bg-white97 dark:bg-gray10 border-1 border-purple90 dark:border-purple60 rounded-full checked:bg-purple60 cursor-pointer"
                   />
                 </div>
               </div>
@@ -201,12 +201,12 @@ function InquiryForm({ type }: InquiryFormProps) {
 
         {isProperty && (
           <div className="xl:col-span-2 flex flex-col justify-between">
-            <label className="mb-4 text-xl lg-custom:text-base/[1.5] text-white font-semibold">
+            <label className="mb-4 text-xl lg-custom:text-base/[1.5] text-black dark:text-white font-semibold">
               Property Name
             </label>
-            <div className="flex justify-between text-white90 rounded-lg bg-gray10 text-lg/[20px] lg-custom:text-sm font-medium border-1 border-gray15 px-5 py-6">
+            <div className="flex justify-between text-gray15 dark:text-white90 rounded-lg bg-white97 dark:bg-gray10 text-lg/[20px] lg-custom:text-sm font-medium border-1 border-white90 dark:border-gray15 px-5 py-6">
               Seaside Serenity Villa, Malibu, California
-              <LocationIcon className="text-white" />
+              <LocationIcon className="text-black dark:text-white" />
               {/* here we should add Property.name */}
             </div>
           </div>

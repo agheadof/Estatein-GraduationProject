@@ -1,4 +1,4 @@
-import TitleBtn from "../ui/TitleBtn";
+import TitleBtn from "../../ui/TitleBtn";
 
 type TitleProps = {
   starImg?: boolean;
@@ -30,11 +30,11 @@ const Title = ({
       )}
       <div className="flex justify-between items-center 2xl:items-end">
         <div>
-          <h2 className="text-purple65 dark:text-white font-semibold text-[28px] lg-custom:text-[38px] 2xl:text-5xl mb-1.5 lg-custom:mb-2.5 2xl:mb-3.5">
+          <h2 className="text-black dark:text-white font-semibold text-[28px] lg-custom:text-[38px] 2xl:text-5xl mb-1.5 lg-custom:mb-2.5 2xl:mb-3.5">
             {heading}
           </h2>
           <p
-            className={`text-gray60 text-sm lg-custom:text-base 2xl:text-lg font-medium ${paragraphStyle}`}
+            className={ `text-gray40 dark:text-gray60 text-sm lg-custom:text-base 2xl:text-lg font-medium ${paragraphStyle}`}
           >
             {paragraph}
           </p>

@@ -1,6 +1,6 @@
 import CommonCard from "../../components/cards/CommonCard";
 import UnlockCardComponent from "../../components/cards/UnlockCardComponent";
-import Title from "../../components/shared/Title";
+import Title from "../../components/shared/Title/Title";
 import { investmentsData } from "../../data/investmentsData";
 
 const InvestmentsSection = () => {
@@ -12,28 +12,29 @@ const InvestmentsSection = () => {
           paragraph="Building a real estate portfolio requires a strategic approach. Estatein's Investment Advisory Service empowers you to make smart investments and informed decisions."
         />
 
-        <UnlockCardComponent
-          investments={true}
-          cardStyle='p-6 md:p-10 2xl:p-[50px] bg-[url("/assets/images/AbstractDesign3.png")] w-full'
-          title="Unlock Your Investment Potential"
-          titleStyle="text-xl md:text-[22px] 2xl:text-2xl font-semibold"
-          desc="Explore our Property Management Service categories and let us handle the complexities while you enjoy the benefits of property ownership."
-          descStyle="text-white90"
-        />
-      </div>
-
-      <div className="grid grid-cols-1 min-lg-custom:grid-cols-2 bg-gray10 rounded-xl justify-center gap-2.5 p-2.5">
-        {investmentsData.map((card, index) => (
-          <CommonCard
-            key={index}
-            cardStyle="p-6 md:p-10 2xl:p-[50px] gap-4 md:gap-5 2xl:gap-[30px] bg-gray08 border-gray15"
-            cardImg={card.cardImg}
-            cardTitle={card.cardTitle}
-            cardDesc={card.cardDesc}
+          <UnlockCardComponent
+            investments={true}
+            cardStyle='p-6 md:p-10 2xl:p-[50px] bg-[url("/assets/images/AbstractDesign3.png")] w-full'
+            title="Unlock Your Investment Potential"
+            titleStyle="text-xl md:text-[22px] 2xl:text-2xl font-semibold"
+            desc="Explore our Property Management Service categories and let us handle the complexities while you enjoy the benefits of property ownership."
+            descStyle=" text-gray15 dark:text-white90"
           />
-        ))}
-      </div>
-    </section>
+        </div>
+        
+        <div className="grid grid-cols-1 min-lg-custom:grid-cols-2 bg-white97 dark:bg-gray10 rounded-xl justify-center gap-2.5 p-2.5">
+          {investmentsData.map((card, index) => (
+            <CommonCard
+              key={index}
+              cardStyle="p-6 md:p-10 2xl:p-[50px] gap-4 md:gap-5 2xl:gap-[30px] bg-white99 dark:bg-gray08 border-white90 dark:border-gray15"
+              cardImg={card.cardImg}
+              cardTitle={card.cardTitle}
+              cardDesc={card.cardDesc}
+            />
+          ))}
+        </div>
+        
+      </section>
   );
 };
 

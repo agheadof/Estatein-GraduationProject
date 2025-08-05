@@ -1,15 +1,8 @@
-export type Property = {
-    id: string;
-    transferTax: number;
-    legalFees: number;
-    homeInspection: number;
-    propertyInsurance: number;
-    propertyTaxes: number;
-    hoaFees: number;
-    listingPrice: number;
-    additionalFees: number;
-    downPayment: number;
-    mortgageAmount: number;
-}
+import type { RootState } from '../store'
+import type { PropertyType } from '../slices/propertiesSlice'
 
+export const selectPropertiesCardsData = (state: RootState) =>
+    state.properties.all
 
+export const selectPropertyById = (id: string) => (state: RootState): PropertyType | undefined =>
+    state.properties.all.find((property) => property.id === id)

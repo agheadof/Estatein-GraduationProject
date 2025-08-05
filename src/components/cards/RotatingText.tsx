@@ -60,7 +60,7 @@ export default function RotatingText() {
               isFast ? "rotate-fast" : "rotate-slow"
             }`}
           >
-            <div className="absolute w-full h-full rounded-full bg-gray08 z-0" />
+            <div className="absolute w-full h-full rounded-full bg-white99 dark:bg-gray08 z-0" />
 
             {text.split("").map((char, i) => (
               <span
@@ -76,7 +76,7 @@ export default function RotatingText() {
             ))}
           </div>
 
-          <div className="bg-gray15 p-3 md:p-5 2xl:p-7 rounded-full border border-gray15 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer">
+          <div className="bg-white90 dark:bg-gray15 p-3 md:p-5 2xl:p-7 rounded-full border border-white90 dark:border-gray15 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer">
             <img src="/assets/icons/arrowUpRight.svg" alt="Arrow" />
           </div>
         </div>

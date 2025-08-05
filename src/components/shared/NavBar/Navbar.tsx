@@ -17,7 +17,7 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
 
   return (
     <nav
-      className={`bg-gray10 text-white py-5 px-4 lg-custom:px-10 fixed w-full z-50 border-b-2  border-b-gray15 transition-all duration-600 ease-in-out
+      className={`bg-white97 dark:bg-gray10 text-black dark:text-white py-5 px-4 lg-custom:px-10 fixed w-full z-50 border-b-2 border-b-white90 dark:border-b-gray15 transition-all duration-500 ease-in-out
     ${isBannerVisible ? "top-[78px] md:top-[49px] 2xl:top-[63px]" : "top-0"}`}
     >
       <SectionWrapper>
@@ -41,13 +41,13 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
           {/* Desktop Button */}
           <div className="flex items-center gap-4 lg-custom:gap-6">
             <NavLink
-              to="/contact"
-              onClick={() => {
-                setIsMenuOpen(false);
-              }}
-              className={({ isActive }) =>
-                `hidden lg-custom:block text-white font-medium  lg-custom:py-3 lg-custom:px-5 2xl:py-3.5 2xl:px-6 lg-custom:rounded-lg 2xl:rounded-[10px] border border-gray15
-           ${isActive ? "bg-purple60" : "bg-gray08"}`
+          to="/contact"
+          onClick={() => {
+            setIsMenuOpen(false); 
+          }}
+          className={({ isActive }) =>
+                `hidden lg-custom:block text-black dark:text-white font-medium  lg-custom:py-3 lg-custom:px-5 2xl:py-3.5 2xl:px-6 lg-custom:rounded-lg 2xl:rounded-[10px] border border-white90 dark:border-gray15
+           ${isActive ? "bg-purple90 dark:bg-purple60" : "bg-white99 dark:bg-gray08"}`
               }
             >
               Contact Us
@@ -63,28 +63,17 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.ul
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="flex flex-col gap-4 mt-4 md:hidden bg-gray08 p-5 rounded-lg border border-gray15 "
-            >
-              {NavData.map((link, index) => (
-                <li key={index}>
-                  <NavItem
-                    to={link.path}
-                    label={link.name}
-                    mobile
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      scrollToTop();
-                    }}
-                  />
-                </li>
-              ))}
+      {/* Mobile Dropdown Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.ul initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
+            className="flex flex-col gap-4 mt-4 md:hidden bg-gray08 p-5 rounded-lg border border-gray15 ">
+
+            {NavData.map((link, index) => (
+              <li key={index}>
+                <NavItem to={link.path} label={link.name} mobile onClick={() => { setIsMenuOpen(false); scrollToTop(); }} />
+              </li>
+            ))}
 
               <li className="mx-auto flex gap-3">
                 <NavLink
@@ -94,8 +83,7 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
                   }}
                   to="/contact"
                   className={({ isActive }) =>
-                    `block py-2 px-4 rounded-md text-center text-white ${
-                      isActive ? "bg-purple60" : "bg-gray15 "
+                    `block py-2 px-4 rounded-md text-center text-black dark:text-white ${isActive ? "bg-purple90 dark:bg-purple60" : "bg-white90 dark:bg-gray15 "
                     }`
                   }
                 >

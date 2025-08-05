@@ -21,11 +21,14 @@ const CommonCard = ({
         />
       )}
       <div className={`flex gap-2.5 md:gap-4 2xl:gap-5 ${titleStyle}`}>
-        <img src={cardImg} alt="card image" />
-        <h5 className={`text-white font-semibold ${titleSize}`}>{cardTitle}</h5>
+        <img
+          src={cardImg}
+          alt="card image"
+        />
+        <h5 className={`text-black dark:text-white font-semibold ${titleSize}`}>{cardTitle}</h5>
       </div>
       {cardDesc && (
-        <p className="text-sm md:text-base 2xl:text-lg font-medium leading-[150%] text-gray60">
+        <p className="text-sm md:text-base 2xl:text-lg font-medium leading-[150%] text-gray40 dark:text-gray60">
           {cardDesc}
         </p>
       )}

@@ -1,5 +1,5 @@
 import CountUpComponent from "../../components/cards/CountUpComponent"
-import Title from "../../components/shared/Title"
+import Title from "../../components/shared/Title/Title"
 import { SectionWrapper } from "../../layouts/SectionWrapper"
 
 const Hero2 = () => {
@@ -11,7 +11,7 @@ const Hero2 = () => {
                     <CountUpComponent />
                 </div>
 
-                <div className="relative border border-gray15 rounded-xl overflow-hidden md:[453px] 2xl:h-[546px] lg-custom:w-[48%] ">
+                <div className="relative border border-white90 dark:border-gray15 rounded-xl overflow-hidden md:[453px] 2xl:h-[546px] lg-custom:w-[48%] ">
                     <img
                         src="/assets/images/AbstractDesign5.png"
                         alt="Abstract Design"
