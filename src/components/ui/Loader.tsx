@@ -11,7 +11,7 @@ function Loader() {
 
   return (
     <div
-      className={`fixed inset-0 bg-gray15 flex items-center justify-center z-90 transition-opacity duration-700 ${
+      className={`fixed inset-0 bg-purple95 dark:bg-gray15 flex items-center justify-center z-90 transition-opacity duration-700 ${
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >
