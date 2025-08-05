@@ -13,7 +13,6 @@ export type PropertyType = {
     details: { label: string; icon: ReactNode }[]
     Price: string
 
-    // لبقية تفاصيل صفحة العقار
     descriptionLong?: string
     gallery?: string[]
     location?: string
@@ -62,9 +61,9 @@ export const fetchProperties = createAsyncThunk(
 )
 
 type PropertiesState = {
-    all: PropertyType[]
-    loading: boolean
-    error: string | null
+  all: PropertyType[]
+  loading: boolean
+  error: string | null
 }
 
 const initialState: PropertiesState = {
@@ -75,23 +74,23 @@ const initialState: PropertiesState = {
 }
 
 const propertiesSlice = createSlice({
-    name: 'properties',
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchProperties.pending, (state) => {
-                state.loading = true
-            })
-            .addCase(fetchProperties.fulfilled, (state, action) => {
-                state.loading = false
-                state.all = action.payload
-            })
-            .addCase(fetchProperties.rejected, (state, action) => {
-                state.loading = false
-                state.error = action.error.message || 'Failed to fetch'
-            })
-    },
+  name: "properties",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProperties.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(fetchProperties.fulfilled, (state, action) => {
+        state.loading = false
+        state.all = action.payload
+      })
+      .addCase(fetchProperties.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message || "Failed to fetch"
+      })
+  },
 })
 
 export default propertiesSlice.reducer
