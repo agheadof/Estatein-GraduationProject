@@ -137,14 +137,11 @@
 
 
 /* gradient border around icon */
-.border-gradient-custom_1::before {
-  content : '';
-  position: absolute;
-  inset   : 0;
-  padding : 1px;
-  background:
-    linear-gradient(130.5deg, #A685FA -3.27%, rgba(166, 133, 250, 0) 30.09%),
-    linear-gradient(305.31deg, #A685FA -20.93%, rgba(166, 133, 250, 0) 37.94%);
+.border-gradient-base::before {
+  content              : '';
+  position             : absolute;
+  inset                : 0;
+  padding              : 1px;
   background-blend-mode: screen;
   border-radius        : 50%;
   -webkit-mask         :
@@ -156,22 +153,14 @@
   pointer-events        : none;
 }
 
+.border-gradient-1::before {
+  background:
+    linear-gradient(130.5deg, #A685FA -3.27%, rgba(166, 133, 250, 0) 30.09%),
+    linear-gradient(305.31deg, #A685FA -20.93%, rgba(166, 133, 250, 0) 37.94%);
+}
 
-.border-gradient-custom_2::before {
-  content : '';
-  position: absolute;
-  inset   : 0;
-  padding : 1px;
+.border-gradient-2::before {
   background:
     linear-gradient(40.65deg, #A685FA 0.85%, rgba(166, 133, 250, 0) 34.8%),
     linear-gradient(219.04deg, #A685FA -6.93%, rgba(166, 133, 250, 0) 52.6%);
-  background-blend-mode: screen;
-  border-radius        : 50%;
-  -webkit-mask         :
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite        : exclude;
-  z-index               : 0;
-  pointer-events        : none;
 }
