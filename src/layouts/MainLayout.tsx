@@ -7,6 +7,7 @@ import Scroll2Top from "../components/ui/Scroll2Top";
 import Loader from "../components/ui/Loader";
 import TopBanner from "../components/shared/TopBanner";
 import { useEffect, useState } from "react";
+import ChatBot from "../components/shared/ChatBot/ChatBot";
 
 const MainLayout = () => {
   const [isBannerVisible, setIsBannerVisible] = useState<boolean>(true);
@@ -31,6 +32,7 @@ const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen font-urbanist">
       <Loader />
+      <ChatBot />
       <TopBanner isVisible={isBannerVisible} onClose={handleBannerClose} />
       <Navbar isBannerVisible={isBannerVisible} />
       <main className="flex-grow bg-white99 dark:bg-gray08">
