@@ -1,16 +1,14 @@
-import { type PropertyType } from "../../redux/slices/propertiesSlice"
+import { shallowEqual } from "react-redux"
+import { useAppSelector } from "../../redux/hooks"
 
-interface DescriptionProps {
-  property: PropertyType
-  loading?: boolean
-  error?: string | null
-}
+const DescriptionComponent = () => {
+  const property = useAppSelector((state) => {
+    let error = state.properties.error
+    let loading = state.properties.loading
+    let current = state.properties.current
+    return { error, loading, current }
+  }, shallowEqual)
 
-const DescriptionComponent = ({
-  property,
-  error,
-  loading,
-}: DescriptionProps) => {
   const castingToNumber = (input: string) => {
     const result = input.replace(/\D/g, "").padStart(2, "0")
     return result
@@ -23,18 +21,18 @@ const DescriptionComponent = ({
           Description
         </h3>
 
-        {loading ? (
+        {property.loading ? (
           <p className="text-white">Loading...</p>
-        ) : error ? (
-          <p className="text-red-500">{error}</p>
+        ) : property.error ? (
+          <p className="text-red-500">{property.error}</p>
         ) : (
           <p className="text-gray60 font-medium text-sm leading-[150%] lg-custom:text-base 2xl:text-lg">
-            {property?.descriptionLong || "No description available."}
+            {property.current?.descriptionLong || "No description available."}
           </p>
         )}
       </div>
 
-      {!loading && !error && property && (
+      {!property.loading && !property.error && property.current && (
         <div className="flex flex-wrap md:flex-nowrap gap-10 md:gap-5 lg-custom:gap-10 border-t border-t-gray15 pt-4 justify-between">
           <div className="flex flex-col">
             <div className="flex gap-1 lg-custom:gap-1.5">
@@ -48,7 +46,7 @@ const DescriptionComponent = ({
               </span>
             </div>
             <span className="text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-lg">
-              {castingToNumber(property.details[0].label)}
+              {castingToNumber(property.current.details[0].label)}
             </span>
           </div>
 
@@ -67,7 +65,7 @@ const DescriptionComponent = ({
                 </span>
               </div>
               <span className="text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-lg">
-                {castingToNumber(property.details[1].label)}
+                {castingToNumber(property.current.details[1].label)}
               </span>
             </div>
           </div>
@@ -86,7 +84,9 @@ const DescriptionComponent = ({
                 </span>
               </div>
               <span className="text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-lg">
-                {`${castingToNumber(property.details[2].label)} Square Feet`}
+                {`${castingToNumber(
+                  property.current.details[2].label
+                )} Square Feet`}
               </span>
             </div>
           </div>
