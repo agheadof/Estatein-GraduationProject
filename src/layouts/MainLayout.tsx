@@ -13,27 +13,30 @@ import { hideBanner, showBanner } from "../redux/slices/bannerSlice";
 
 const MainLayout = () => {
 
-    const dispatch = useAppDispatch();
-    const isBannerVisible = useAppSelector((state) => state.banner.isVisible);
+   const dispatch = useAppDispatch();
+   const isBannerVisible = useAppSelector((state) => state.banner.isVisible);
 
-    useEffect(() => {
-      window.scrollTo(0, 0);
+   const [hasClosedBanner, setHasClosedBanner] = useState(false); 
+
+   useEffect(() => {
+     window.scrollTo(0, 0);
 
      const handleScroll = () => {
        if (window.scrollY > 20) {
          dispatch(hideBanner());
-       } else if (window.scrollY === 0) {
+       } else if (window.scrollY === 0 && !hasClosedBanner) {
          dispatch(showBanner());
        }
      };
 
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }, [dispatch]);
+     window.addEventListener("scroll", handleScroll);
+     return () => window.removeEventListener("scroll", handleScroll);
+   }, [dispatch, hasClosedBanner]); 
 
-    const handleBannerClose = () => {
-      dispatch(hideBanner());
-    };
+   const handleBannerClose = () => {
+     setHasClosedBanner(true); 
+     dispatch(hideBanner());
+   };
 
 
   return (
