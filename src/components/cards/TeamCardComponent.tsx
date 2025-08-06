@@ -21,17 +21,15 @@ const TeamCardComponent = ({ name, role, image }: TeamCardProps) => {
           />
         </div>
       </div>
-
       <div className="flex flex-col gap-4 lg-custom:gap-5 2xl:gap-6 ">
         <div className="text-center flex flex-col gap-0.5 lg-custom:gap-1 2xl:gap-1.5 ">
           <h3 className="text-lg lg-custom:text-[20px] 2xl:text-2xl font-semibold leading-7 text-black dark:text-white">
             {name}
           </h3>
-          <p className="text-sm lg-custom:text-base 2xl:text-lg font-medium text-gray40 dark:text-gray60">
+          <p className="text-sm min-[1200px]:!text-[16px] 2xl:text-lg font-medium text-gray40 dark:text-gray60 whitespace-nowrap">
             {role}
           </p>
         </div>
-
         <div className="relative w-full ">
           <input
             type="text"

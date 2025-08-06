@@ -25,7 +25,7 @@ function PropertiesSection({ heading, paragraph, buttonLabel, showDetails = true
 
     return (
         <SectionWrapper>
-            <div className="mt-[61px] lg-custom:mt-[193px] 2xl:mt-[261px]">
+            <div className="mt-[80px] lg-custom:mt-[120px] 2xl:mt-[150px]">
                 <Title
                     heading={heading}
                     paragraph={paragraph}
