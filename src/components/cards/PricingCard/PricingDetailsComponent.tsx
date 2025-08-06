@@ -19,10 +19,11 @@ const PricingDetailsComponent = ({
     <div
       className={`flex flex-col gap-2.5 md:gap-3 2xl:gap-5  ${
         withBorder
-          ? "max-lg-custom:pt-5 max-lg-custom:border-t min-lg-custom:border-l min-lg-custom:pl-5 border-gray15"
+          ? "max-lg-custom:pt-5 max-lg-custom:border-t min-lg-custom:border-l min-lg-custom:pl-5 border-white90 dark:border-gray15"
           : ""
       }`}
     >
+      <h5 className="text-sm md:text-lg text-gray40 dark:text-gray60 font-medium">{title}</h5>
       <h5 className="text-sm md:text-lg text-gray40 dark:text-gray60 font-medium">{title}</h5>
       <div className="flex items-center gap-3 md:gap-4">
         <span className="text-lg md:text-xl 2xl:text-2xl text-black dark:text-white font-semibold">

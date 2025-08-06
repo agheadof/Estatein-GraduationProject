@@ -1,4 +1,4 @@
-import TitleBtn from "../../ui/TitleBtn";
+import TitleBtn from "../ui/TitleBtn";
 
 type TitleProps = {
   starImg?: boolean;

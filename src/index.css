@@ -43,6 +43,9 @@
     background: linear-gradient(95.93deg, #262626 -26.82%, rgba(38, 38, 38, 0) 40.46%);
   }
 
+  .bg-gradient-custom-light {
+    background: linear-gradient(95.93deg, #946CF9 -26.82%, rgba(38, 38, 38, 0) 40.46%);
+  }
 }
 
 @keyframes dotBounce {
@@ -114,7 +117,7 @@
     scrollbar-color: var(--color-purple65) var(--color-gray10);
   }
 
-  /* Dark mode scrollbar track & thumb override */
+  /* Dark mode scrollbar track & thumb override
   .dark ::-webkit-scrollbar-track {
     background: var(--color-gray08);
   }
@@ -130,9 +133,8 @@
     background: linear-gradient(180deg,
         var(--color-purple70),
         var(--color-purple90));
-  }
+  }*/
 }
-
 
 
 

@@ -1,7 +1,8 @@
 import ExperienceSectionCard from '../../components/cards/ExperienceSectionCard';
 import { SectionWrapper } from '../../layouts/SectionWrapper';
-import Title from '../../components/shared/Title/Title';
+
 import { fakeDataForTesting } from '../../data/ExperienceSectionData';
+import Title from '../../components/shared/Title';
 
 function ExperienceSection() {
 
