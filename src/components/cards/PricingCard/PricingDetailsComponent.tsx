@@ -30,7 +30,13 @@ const PricingDetailsComponent = ({
         </span>
         {desc && (
           <p
+<<<<<<< HEAD
             className={`text-sm 2xl:text-lg text-gray40 dark:text-gray60 bg-white97 dark:bg-gray10 border border-white90 dark:border-gray15 py-1.5 px-3 2xl:py-2 2xl:px-3 ${
+=======
+            className={`text-sm 2xl:text-lg text-gray40 dark:text-gray60 bg-white97 dark:bg-gray10 
+              border border-white90 dark:border-gray15 py-1.5 px-3 2xl:py-2 2xl:px-3 
+              ${
+>>>>>>> 953284cff2ac1d101a0f231b53a888ce6829f0f1
               borderRadius
                 ? "rounded-[28px]"
                 : "rounded-[6px] md:rounded-[28px]"

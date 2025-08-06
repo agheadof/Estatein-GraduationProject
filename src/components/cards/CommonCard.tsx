@@ -26,8 +26,8 @@ const CommonCard = ({
       <div
         className={`flex items-center gap-2.5 md:gap-4 2xl:gap-5 ${titleStyle}`}
       >
-        <div className="relative border-gradient-custom_2">
-          <div className="relative m-1.5 border-gradient-custom_1">
+        <div className="relative border-gradient-base border-gradient-2">
+          <div className="relative m-1.5 border-gradient-base border-gradient-1">
             <img src={cardImg} alt="card image" className="p-2" />
           </div>
         </div>

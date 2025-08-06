@@ -11,11 +11,14 @@ import ChatBot from "../components/shared/ChatBot/ChatBot";
 
 const MainLayout = () => {
   const [isBannerVisible, setIsBannerVisible] = useState<boolean>(true);
+  const [hasClosedBanner, setHasClosedBanner] = useState<boolean>(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      if (window.scrollY <= 20) {
+        setIsBannerVisible(true);
+      } else {
         setIsBannerVisible(false);
       }
     };
@@ -26,14 +29,17 @@ const MainLayout = () => {
 
   const handleBannerClose = () => {
     setIsBannerVisible(false);
+    setHasClosedBanner(true);
   };
 
   return (
     <div className="flex flex-col min-h-screen font-urbanist">
       <Loader />
       <ChatBot />
-      <TopBanner isVisible={isBannerVisible} onClose={handleBannerClose} />
-      <Navbar isBannerVisible={isBannerVisible} />
+      {isBannerVisible && !hasClosedBanner && (
+        <TopBanner isVisible={isBannerVisible} onClose={handleBannerClose} />
+      )}
+      <Navbar isBannerVisible={isBannerVisible && !hasClosedBanner} />
       <main className="flex-grow bg-white99 dark:bg-gray08">
         <Outlet />
         <CTA

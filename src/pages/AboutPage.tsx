@@ -7,7 +7,7 @@ import TeamSection from "../sections/about/TeamSection"
 
 function AboutPage() {
   return (
-    <div className="huge:container huge:mx-auto">
+    <div className="huge:max-w-[1920px] huge:mx-auto">
       <Hero2 />
       <OurValues />
       <AchievementsSection/>

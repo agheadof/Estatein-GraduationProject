@@ -1,13 +1,18 @@
 import ContactForm from "../sections/properties/ContactForm";
-import SubHero from "../components/shared/SubHero/SubHero";
 import { subHeroProperties } from "../data/subHeroData";
 import FilterProperty from "../sections/properties/FilterProperty";
 import PropertiesSection from "../sections/home/PropertiesSection";
+import SubHero from "../components/shared/SubHero";
 
 function PropertiesPage() {
   return (
+<<<<<<< HEAD
     <div className="huge:container huge:mx-auto">
       <SubHero title={subHeroProperties.title} desc={subHeroProperties.desc} classes="relative" />
+=======
+    <div className="huge:max-w-[1920px] huge:mx-auto">
+      <SubHero title={subHeroProperties.title} desc={subHeroProperties.desc} classes="relative"/>
+>>>>>>> 953284cff2ac1d101a0f231b53a888ce6829f0f1
       <FilterProperty />
       <PropertiesSection
         heading="Discover a World of Possibilities"

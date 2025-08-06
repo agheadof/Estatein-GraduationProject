@@ -4,8 +4,8 @@ import { fetchProperties } from '../../redux/slices/propertiesSlice'
 import { selectPropertiesCardsData } from '../../redux/types/Property'
 import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
 import PropertiesCard from '../../components/cards/PropertiesCard'
-import Title from '../../components/shared/Title/Title'
 import { SectionWrapper } from '../../layouts/SectionWrapper'
+import Title from '../../components/shared/Title'
 type Props = {
     showTags?: boolean;
     showDetails?: boolean;
@@ -25,7 +25,7 @@ function PropertiesSection({ heading, paragraph, buttonLabel, showDetails = true
 
     return (
         <SectionWrapper>
-            <div className="mt-[61px] lg-custom:mt-[90px] 2xl:mt-[110px]">
+            <div className="mt-[61px] lg-custom:mt-[193px] 2xl:mt-[261px]">
                 <Title
                     heading={heading}
                     paragraph={paragraph}
