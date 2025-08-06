@@ -1,7 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { get, ref } from "firebase/database";
-import { db } from "../../firebaseConfig";
+import { createSlice } from "@reduxjs/toolkit";
 import type { Achievement } from "../types/achievement";
+import { createFetchThunk } from "../thunks/createFetchThunk";
 
 
 interface AchievementState {
@@ -20,18 +19,7 @@ const initialState: AchievementState = {
   itemsPerPage: 3, 
 };
 
-
-export const fetchAchievements = createAsyncThunk(
-  "achievements/fetch",
-  async () => {
-    const snapshot = await get(ref(db, "achievements"));
-    const data = snapshot.val();
-    return Object.keys(data).map((key) => ({
-      id: key,
-      ...data[key],
-    }));
-  }
-);
+export const fetchAchievements = createFetchThunk<Achievement>("achievements", "achievements");
 
 const achievementSlice = createSlice({
   name: "achievements",

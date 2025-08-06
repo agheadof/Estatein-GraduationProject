@@ -1,7 +1,6 @@
 
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { get, ref } from 'firebase/database'
-import { db } from '../../firebaseConfig'
+import { createSlice } from '@reduxjs/toolkit'
+import { createFetchThunk } from '../thunks/createFetchThunk'
 import { Icon1 as BedIcon, Icon2 as BathIcon, Icon3 as VillaIcon } from '../../components/icons/PropertiesIcons'
 import type { ReactNode } from 'react'
 
@@ -47,18 +46,7 @@ const transformProperty = (property: any, id: string): PropertyType => ({
     tags: "Coastal Escapes - Where Waves Beckon",
 })
 
-export const fetchProperties = createAsyncThunk(
-    'properties/fetchAll',
-    async () => {
-        const snapshot = await get(ref(db, 'properties'))
-        const data = snapshot.val()
-        console.log(data);
-
-        return Object.entries(data).map(([id, prop]) =>
-            transformProperty(prop, id)
-        )
-    }
-)
+export const fetchProperties = createFetchThunk<PropertyType>("properties", "properties",  transformProperty);
 
 type PropertiesState = {
   all: PropertyType[]
