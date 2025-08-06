@@ -1,3 +1,5 @@
+import TeamCardComponentForm from "../ui/TeamCardComponentForm"
+
 interface TeamCardProps {
   name: string
   role: string
@@ -31,19 +33,7 @@ const TeamCardComponent = ({ name, role, image }: TeamCardProps) => {
           </p>
         </div>
         <div className="relative w-full ">
-          <input
-            type="text"
-            placeholder="Say Hello 👋"
-            className="text-black dark:text-white bg-white97 dark:bg-gray10 border border-white90 dark:border-gray15 py-2 pr-2 pl-6 lg-custom:py-2.5 lg-custom:pr-2.5 lg-custom:pl-5 2xl:py-3.5 2xl:pr-3.5 2xl:pl-6
-                        rounded-[100px] w-full h-[64px]"
-          />
-          <button className="bg-purple90 dark:bg-purple60 absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center justify-center p-3.5 lg-custom:p-2 2xl:p-2.5 rounded-full cursor-pointer">
-            <img
-              src="/assets/icons/Team/send.svg"
-              alt="icon"
-              className="w-5 h-5 2xl:w-6 2xl:h-6 "
-            />
-          </button>
+          <TeamCardComponentForm/>
         </div>
       </div>
     </div>
