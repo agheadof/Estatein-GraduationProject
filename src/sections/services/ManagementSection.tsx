@@ -1,6 +1,6 @@
 import CommonCard from "../../components/cards/CommonCard";
 import UnlockCardComponent from "../../components/cards/UnlockCardComponent";
-import Title from "../../components/shared/Title/Title";
+import Title from "../../components/shared/Title";
 import { managementData } from "../../data/managementData";
 
 const ManagementSection = () => {

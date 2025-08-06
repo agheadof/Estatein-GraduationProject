@@ -6,7 +6,8 @@ import { fetchProperties } from "../../redux/slices/propertiesSlice";
 import type { RootState, AppDispatch } from "../../redux/store";
 
 import InquiryForm from "../../components/Forms/InquiryForm";
-import Title from "../../components/shared/Title/Title";
+import Title from "../../components/shared/Title";
+
 
 function PropertyDetailsForm() {
   const { id } = useParams<{ id: string }>();

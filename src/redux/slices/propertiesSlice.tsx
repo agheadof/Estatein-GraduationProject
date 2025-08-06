@@ -2,21 +2,22 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { get, ref } from 'firebase/database'
 import { db } from '../../firebaseConfig'
+import { Icon1 as BedIcon, Icon2 as BathIcon, Icon3 as VillaIcon } from '../../components/icons/PropertiesIcons'
+import type { ReactNode } from 'react'
 
 export type PropertyType = {
     id: string
     image: string
     title: string
     desc: string
-    details: { label: string; icon: string }[]
+    details: { label: string; icon: ReactNode }[]
     Price: string
 
-    // لبقية تفاصيل صفحة العقار
     descriptionLong?: string
     gallery?: string[]
     location?: string
     [key: string]: any
-    tags?: string[];
+    tags?: string;
 }
 
 const transformProperty = (property: any, id: string): PropertyType => ({
@@ -27,27 +28,23 @@ const transformProperty = (property: any, id: string): PropertyType => ({
     Price: `$${property.price?.toLocaleString() || 'N/A'}`,
     details: [
         {
-            label: `${property.bedrooms || 0} Beds`,
-            icon: '/assets/icons/FeaturedProperties/bedroom.svg',
+            label: `${property.bedrooms || 0}-Bedroom`,
+            icon: <BedIcon />,
         },
         {
-            label: `${property.bathrooms || 0} Baths`,
-            icon: '/assets/icons/FeaturedProperties/bathroom.svg',
+            label: `${property.bathrooms || 0}-Bathroom`,
+            icon: <BathIcon />,
         },
         {
-            label: `${property.area || 0} sqft`,
-            icon: '/assets/icons/FeaturedProperties/villa.svg',
+            label: `-Villa`,
+            icon: <VillaIcon />,
         },
     ],
 
     descriptionLong: property.description,
     gallery: property.images,
     location: property.location,
-    tags: [
-        "Coastal Escapes - Where Waves Beckon",
-        "Urban Oasis - Life in the Heart of the City",
-        "Countryside Charm - Escape to Nature's Embrace"
-    ],
+    tags: "Coastal Escapes - Where Waves Beckon",
 })
 
 export const fetchProperties = createAsyncThunk(
@@ -64,9 +61,9 @@ export const fetchProperties = createAsyncThunk(
 )
 
 type PropertiesState = {
-    all: PropertyType[]
-    loading: boolean
-    error: string | null
+  all: PropertyType[]
+  loading: boolean
+  error: string | null
 }
 
 const initialState: PropertiesState = {
@@ -77,23 +74,23 @@ const initialState: PropertiesState = {
 }
 
 const propertiesSlice = createSlice({
-    name: 'properties',
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchProperties.pending, (state) => {
-                state.loading = true
-            })
-            .addCase(fetchProperties.fulfilled, (state, action) => {
-                state.loading = false
-                state.all = action.payload
-            })
-            .addCase(fetchProperties.rejected, (state, action) => {
-                state.loading = false
-                state.error = action.error.message || 'Failed to fetch'
-            })
-    },
+  name: "properties",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProperties.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(fetchProperties.fulfilled, (state, action) => {
+        state.loading = false
+        state.all = action.payload
+      })
+      .addCase(fetchProperties.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message || "Failed to fetch"
+      })
+  },
 })
 
 export default propertiesSlice.reducer

@@ -1,4 +1,4 @@
-import Title from "../../components/shared/Title/Title";
+import Title from "../../components/shared/Title";
 import OurOfficeTaps from "./OurOfficeTaps";
 
 function OurOffices() {

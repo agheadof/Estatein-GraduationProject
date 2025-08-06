@@ -16,7 +16,7 @@ export function FooterNewsletter() {
           type="submit"
           className="absolute right-1 top-1/2 size-10 -translate-y-1/2 cursor-pointer"
         >
-          <SendIcon />
+          <SendIcon/>
         </button>
       </div>
     </form>

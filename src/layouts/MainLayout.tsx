@@ -40,8 +40,10 @@ const MainLayout = () => {
     <div className="flex flex-col min-h-screen font-urbanist">
       <Loader />
       <ChatBot />
-      <TopBanner isVisible={isBannerVisible} onClose={handleBannerClose} />
-      <Navbar isBannerVisible={isBannerVisible} />
+      {isBannerVisible && !hasClosedBanner && (
+        <TopBanner isVisible={isBannerVisible} onClose={handleBannerClose} />
+      )}
+      <Navbar isBannerVisible={isBannerVisible && !hasClosedBanner} />
       <main className="flex-grow bg-white99 dark:bg-gray08">
         <Outlet />
         <CTA

@@ -1,6 +1,6 @@
 import NoteComponent from "../../components/cards/PricingCard/NoteComponent";
 import PricingCard from "../../components/cards/PricingCard/PricingCard";
-import Title from "../../components/shared/Title/Title";
+import Title from "../../components/shared/Title";
 import { pricingDetailsData } from "../../data/pricingDetailsData";
 
 const PricingDetailsSection = () => {
@@ -16,11 +16,11 @@ const PricingDetailsSection = () => {
 
       <div className="flex justify-between max-md:flex-col gap-5 md:gap-10 2xl:gap-[50px]">
         <div>
-          <h5 className="text-sm md:text-base 2xl:text-xl text-gray60 font-medium leading-[150%]">
+          <h5 className="text-sm md:text-base 2xl:text-xl text-gray40 dark:text-gray60 font-medium leading-[150%]">
             {" "}
             Listing Price{" "}
           </h5>
-          <span className="text-2xl md:text-[30px] 2xl:text-[40px] text-white font-semibold">
+          <span className="text-2xl md:text-[30px] 2xl:text-[40px] text-black dark:text-white font-semibold">
             {" "}
             $1,250,000{" "}
           </span>
