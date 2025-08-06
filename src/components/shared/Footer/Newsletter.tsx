@@ -32,7 +32,7 @@ export function FooterNewsletter() {
     <>
       {showAlert && (
         <AlertMessage
-          message="Your message has been sent successfully!"
+          message="We've got your email! 📬 We'll be in touch soon"
           onClose={() => setShowAlert(false)}
         />
       )}

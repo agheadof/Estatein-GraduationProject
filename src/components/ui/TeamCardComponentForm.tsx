@@ -24,7 +24,7 @@ function TeamCardComponentForm() {
     <>
       {showAlert && (
         <AlertMessage
-          message="Your message has been sent successfully!"
+          message="High five! 🖐 Your greeting just flew in."
           onClose={() => setShowAlert(false)}
         />
       )}
