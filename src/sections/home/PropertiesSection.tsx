@@ -4,12 +4,16 @@ import { fetchProperties } from '../../redux/slices/propertiesSlice'
 import { selectPropertiesCardsData } from '../../redux/types/Property'
 import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
 import PropertiesCard from '../../components/cards/PropertiesCard'
-import Title from '../../components/shared/Title/Title'
 import { SectionWrapper } from '../../layouts/SectionWrapper'
+import Title from '../../components/shared/Title'
 type Props = {
+    showTags?: boolean;
     showDetails?: boolean;
+    heading: string;
+    paragraph: string;
+    buttonLabel?: string;
 };
-function PropertiesSection({ showDetails = true }: Props) {
+function PropertiesSection({ heading, paragraph, buttonLabel, showDetails = true, showTags = false }: Props) {
     const dispatch = useAppDispatch()
     const properties = useAppSelector(selectPropertiesCardsData)
     const { loading, error } = useAppSelector((state) => state.testimonials);
@@ -23,9 +27,9 @@ function PropertiesSection({ showDetails = true }: Props) {
         <SectionWrapper>
             <div className="mt-[61px] lg-custom:mt-[193px] 2xl:mt-[261px]">
                 <Title
-                    heading="Featured Properties"
-                    paragraph="Explore our handpicked selection of featured properties."
-                    buttonLabel="View All Properties"
+                    heading={heading}
+                    paragraph={paragraph}
+                    buttonLabel={buttonLabel}
                 />
                 {loading ? (
                     <p className="text-black dark:text-white">Loading...</p>
@@ -35,7 +39,7 @@ function PropertiesSection({ showDetails = true }: Props) {
                     <GenericSlider
                         items={properties}
                         renderSlide={(property) => (
-                            <PropertiesCard key={property.id} property={property} showDetails={showDetails} />
+                            <PropertiesCard key={property.id} property={property} showDetails={showDetails} showTags={showTags} />
                         )}
                         slidesPerView={3}
                         showCounter={true}

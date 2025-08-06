@@ -1,23 +1,23 @@
-import { useState } from "react"
-import { NavLink } from "react-router-dom"
-import { NavData } from "../../../data/NavData"
-import NavItem from "./NavItem"
-import { motion, AnimatePresence } from "framer-motion"
-import HamburgerButton from "./HamburgerButton"
-import { scrollToTop } from "../../../utlis/scrollToTop"
-import ToggleButton from "../../ui/ToggleButton"
-import { SectionWrapper } from "../../../layouts/SectionWrapper"
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { NavData } from "../../../data/NavData";
+import NavItem from "./NavItem";
+import { motion, AnimatePresence } from "framer-motion";
+import HamburgerButton from "./HamburgerButton";
+import { scrollToTop } from "../../../utlis/scrollToTop";
+import ToggleButton from "../../ui/ToggleButton";
+import { SectionWrapper } from "../../../layouts/SectionWrapper";
 
 type NavbarProps = {
-  isBannerVisible: boolean
-}
+  isBannerVisible: boolean;
+};
 
 const Navbar = ({ isBannerVisible }: NavbarProps) => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   return (
     <nav
-      className={`bg-purple70/60 backdrop-blur-xl dark:backdrop-blur-none dark:bg-gray10 dark:text-white py-5 px-4 lg-custom:px-10 fixed w-full z-50 border-b-2  border-b-gray15 transition-all duration-700 ease-in-out
+      className={`bg-purple70/60 backdrop-blur-xl dark:backdrop-blur-none dark:bg-gray10 dark:text-white py-5 lg-custom:py-3.5 2xl:py-5 fixed w-full z-50 border-b-2 border-purple75  dark:border-b-2  dark:border-b-gray15 transition-all duration-700 ease-in-out
     ${isBannerVisible ? "top-[78px] md:top-[49px] 2xl:top-[63px]" : "top-0"}`}
     >
       <SectionWrapper>
@@ -26,8 +26,8 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
           <NavLink
             to="/"
             onClick={() => {
-              setIsMenuOpen(false)
-              scrollToTop()
+              setIsMenuOpen(false);
+              scrollToTop();
             }}
           >
             <img
@@ -43,7 +43,7 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
               <li
                 key={index}
                 onClick={() => {
-                  scrollToTop()
+                  scrollToTop();
                 }}
               >
                 <NavItem to={link.path} label={link.name} />
@@ -56,12 +56,17 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
             <NavLink
               to="/contact"
               onClick={() => {
-                setIsMenuOpen(false)
-                scrollToTop()
+                setIsMenuOpen(false);
+                scrollToTop();
               }}
               className={({ isActive }) =>
-                `hidden lg-custom:block text-white font-medium  lg-custom:py-3 lg-custom:px-5 2xl:py-3.5 2xl:px-6 lg-custom:rounded-lg 2xl:rounded-[10px] border border-gray15
-           ${isActive ? "bg-purple60" : " dark:bg-gray08 bg-gray08/60"}`
+                `hidden lg-custom:block text-white font-medium  lg-custom:py-3 lg-custom:px-5 2xl:py-3.5 2xl:px-6 lg-custom:rounded-lg 2xl:rounded-[10px] dark:border dark:border-gray15
+           ${
+             isActive
+               ? " dark:bg-gray08 bg-gray08/60"
+               : "dark:bg-purple60 bg-purple60/80"
+           }
+           transition-all duration-300 ease-in-out`
               }
             >
               Contact Us
@@ -95,8 +100,8 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
                       label={link.name}
                       mobile
                       onClick={() => {
-                        setIsMenuOpen(false)
-                        scrollToTop()
+                        setIsMenuOpen(false);
+                        scrollToTop();
                       }}
                     />
                   </li>
@@ -104,15 +109,15 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
                 <li className="mx-auto flex gap-3">
                   <NavLink
                     onClick={() => {
-                      setIsMenuOpen(false)
-                      scrollToTop()
+                      setIsMenuOpen(false);
+                      scrollToTop();
                     }}
                     to="/contact"
                     className={({ isActive }) =>
                       `block py-2 px-4 rounded-md text-center text-white ${
                         isActive
-                          ? "bg-purple60"
-                          : "dark:bg-gray15 bg-gray15/60 "
+                          ? " dark:bg-gray08 bg-gray08/60"
+                          : "dark:bg-purple60 bg-purple60/80"
                       }`
                     }
                   >
@@ -125,7 +130,7 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
         </AnimatePresence>
       </SectionWrapper>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
