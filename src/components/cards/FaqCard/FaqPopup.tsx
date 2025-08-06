@@ -10,7 +10,7 @@ type FaqPopupProps = {
 const FaqPopup = ({ question, answer, onClick }: FaqPopupProps) => {
   return createPortal(
     <div className="fixed h-screen z-50 inset-0 bg-black/10 dark:bg-white/40 backdrop-blur-md flex justify-center items-center">
-      <div className="relative w-[1000px] max-h-[70vh] overflow-y-auto bg-white dark:bg-gray08 border dark:border-gray15 border-white90 rounded-[10px] 2xl:rounded-xl p-[30px] lg-custom:p-[40px] 2xl:p-[50px] m-5">
+      <div className="relative w-5xl max-h-[70vh] overflow-y-auto bg-white dark:bg-gray08 border dark:border-gray15 border-white90 rounded-[10px] 2xl:rounded-xl p-[30px] lg-custom:p-[40px] 2xl:p-[50px] m-5">
         <h2
           className="dark:text-white text-black text-lg lg-custom:text-xl 2xl:text-2xl font-semibold 
         mb-[20px] lg-custom:mb-[24px] 2xl:mb-[30px] 
