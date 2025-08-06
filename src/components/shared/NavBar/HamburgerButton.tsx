@@ -9,7 +9,7 @@ const HamburgerButton: React.FC<HamburgerButtonProps> = ({
 }) => {
   return (
     <button
-      className="lg-custom:hidden flex flex-col justify-center items-center w-8 h-7 relative"
+      className="lg-custom:hidden flex flex-col justify-center items-center w-8 h-8 relative"
       onClick={onClick}
       aria-label="Toggle Menu"
     >
