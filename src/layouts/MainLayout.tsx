@@ -7,10 +7,11 @@ import Scroll2Top from "../components/ui/Scroll2Top";
 import Loader from "../components/ui/Loader";
 import TopBanner from "../components/shared/TopBanner";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const MainLayout = () => {
   const [isBannerVisible, setIsBannerVisible] = useState<boolean>(true);
-
+    const { pathname } = useLocation();
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY <= 20) {
@@ -27,7 +28,9 @@ const MainLayout = () => {
   const handleBannerClose = () => {
     setIsBannerVisible(false);
   };
-
+  useEffect(()=>{
+    window.scrollTo({top:0,left:0,behavior:"smooth"});
+  },[pathname])
   return (
     <div className="flex flex-col min-h-screen font-urbanist">
       <Loader />
