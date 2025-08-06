@@ -30,7 +30,7 @@ function SharedFields({ formData, handleChange, errors }: Props) {
         onChange={handleChange}
         error={errors.lastName} // Fixed typo from errors.LastName
       />
-      <FormInput
+      {/* <FormInput
         label="Email"
         name="email"
         placeholder="Enter your Email"
@@ -47,7 +47,7 @@ function SharedFields({ formData, handleChange, errors }: Props) {
         onChange={handleChange}
         error={errors.phone}
         type="tel"
-      />
+      /> */}
     </>
   );
 }

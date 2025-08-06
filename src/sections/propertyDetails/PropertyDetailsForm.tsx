@@ -28,7 +28,7 @@ function PropertyDetailsForm() {
   }
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-[32.5%_65.5%] 2xl:grid-cols-[38.3%_70.7%] gap-y-10 md:gap-x-10 2xl:gap-x-[100px] xl:gap-x-[80px] lg-custom:my-30 2xl:!my-[150px]">
+    <div className="grid grid-cols-1 xl:grid-cols-[32.5%_65.5%] 2xl:grid-cols-[30.3%_70.7%] gap-y-10 md:gap-x-10 2xl:gap-x-[100px] xl:gap-x-[80px] lg-custom:my-30 2xl:!my-[150px]">
       <Title
         titleStyle="w-full"
         starImg={true}
