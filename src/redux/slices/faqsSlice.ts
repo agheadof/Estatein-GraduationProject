@@ -1,38 +1,16 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { get, ref } from "firebase/database";
-import { db } from "../../firebaseConfig";
+import { createSlice } from "@reduxjs/toolkit";
 import type { Faqs } from "../types/FAQ";
+import { createFetchThunk } from "../thunks/createFetchThunk";
+import type { GenericState } from "../types/ReduxState";
 
-
-interface FaqsState {
-  items: Faqs[];
-  visibleItems: Faqs[];
-  loading: boolean;
-  error: string | null;
-  // itemsPerPage: number;
-}
-
-const initialState: FaqsState = {
+const initialState : GenericState<Faqs> = {
   items: [],
   visibleItems: [],
   loading: false,
   error: null,
-  // itemsPerPage: 3,
 };
 
-
-export const fetchFaqs = createAsyncThunk(
-  "Faqs/fetch",
-  async () => {
-    const snapshot = await get(ref(db, "faqs"));
-    const data = snapshot.val();
-    console.log(data)
-    return Object.keys(data).map((key) => ({
-      id: key,
-      ...data[key],
-    }));
-  }
-);
+export const fetchFaqs = createFetchThunk<Faqs>("faqs", "faqs");
 
 const FaqsSlice = createSlice({
   name: "Faqs",

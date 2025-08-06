@@ -1,111 +1,99 @@
-import FormSelect from "../../components/Forms/FormSelect";
-import { BuildIcon, LocationIcon, PricingIcon, PropertyIcon, PropertySizeIcon, SearchIcon } from "../../components/icons/FilterPropertyIcons";
-import MainButton from "../../components/ui/MainButton";
 import { SectionWrapper } from "../../layouts/SectionWrapper";
+import FormSelect from "../../components/Forms/FormSelect";
+import MainButton from "../../components/ui/MainButton";
+import {
+  SearchIcon,
+  LocationIcon,
+  PropertyIcon,
+  PricingIcon,
+  PropertySizeIcon,
+  BuildIcon,
+} from "../../components/icons/FilterPropertyIcons";
 
+const FilterProperty = () => {
+  // Define select fields configuration
+  const selectFields = [
+    {
+      name: "location",
+      placeholder: "Location",
+      options: ["General", "Support", "Sales"],
+      icon: <LocationIcon className="text-black dark:text-white" />,
+    },
+    {
+      name: "propertyType",
+      placeholder: "Property Type",
+      options: ["Villa", "Apartment", "Studio"],
+      icon: <PropertyIcon className="text-black dark:text-white" />,
+    },
+    {
+      name: "pricingRange",
+      placeholder: "Pricing Range",
+      options: ["London", "Paris", "New York"],
+      icon: (
+        <PricingIcon className="text-black dark:text-white hover:text-purple60 transition-colors duration-200" />
+      ),
+    },
+    {
+      name: "propertySize",
+      placeholder: "Property Size",
+      options: ["1", "2", "3+"],
+      icon: <PropertySizeIcon className="text-black dark:text-white" />,
+    },
+    {
+      name: "buildYear",
+      placeholder: "Build Year",
+      options: ["1", "2", "3+"],
+      icon: <BuildIcon className="text-black dark:text-white" />,
+    },
+  ];
 
-function FilterProperty() {
   return (
-    <SectionWrapper className="lg:absolute lg:top-[400px] py-5 lg:py-0 w-full huge:container huge:mx-auto">
-      <div className="mb-5 lg:mb-0 rounded-xl bg-white97 dark:bg-gray10  border-r border-l border-1 border-white90 dark:border-gray15 w-full lg:w-[81.4536%] lg:mx-auto pt-2.5 px-2.5">
-        <div className="px-4 py-2 flex justify-between items-center mb-4 rounded-lg  bg-white99 dark:bg-gray08 text-black dark:text-white focus:outline-none focus:border-purple-500">
+    <SectionWrapper className="lg:absolute lg-custom:top-[400px] 2xl:top-[450px] py-5 lg:py-0 w-full huge:container huge:mx-auto">
+      {/* Search Bar */}
+      <div className="mb-5 lg:mb-0 rounded-xl bg-purple90 dark:bg-gray10  border-r border-l border-1  border-gray08/60 dark:border-gray15 w-full lg:w-[81.4536%] lg:mx-auto pt-2.5 px-2.5">
+        <div className="px-4 py-2 flex justify-between items-center mb-2.5 rounded-lg  bg-white99 dark:bg-gray08 text-black dark:text-white focus:outline-none focus:border-purple-500">
           <input
             type="text"
             placeholder="Search For A Property"
-            className="w-full md:w-8/12  "
+            className="w-full md:w-8/12 outline-none bg-transparent placeholder:text-black dark:placeholder:text-gray40"
           />
-          <MainButton variant="normalPurple" key={"filter"}  
-          className="px-6 py-2 text-black dark:text-white font-semibold rounded-lg ">
-            <div className="flex">
-              <SearchIcon className={ `text-black dark:text-white`}/>
-              <span className="hidden lg:block">
-                Find Property
-              </span>
-              
-            </div>
-            
+          <MainButton
+            variant="normalPurple"
+            className="flex items-center gap-2 px-6 py-2 font-semibold rounded-lg"
+          >
+            <SearchIcon className="text-black dark:text-white" />
+            <span className="hidden lg:block">Find Property</span>
           </MainButton>
         </div>
-        </div>
-        <form
-          className="space-y-[50px] p-2.5 rounded-xl w-full bg-white97 dark:bg-gray10 border-1 border-white90 dark:border-gray15"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}>
-          <div className={"grid grid-cols-1 lg-custom:grid-cols-5 gap-5"}>
-            <FormSelect
-              classExtra="bg-white99 dark:bg-gray08"
-              classIcon=" bg-white97 dark:bg-gray10 rounded-full p-1"
-              name="Location"
-              placeholder="Location"
-              value={""}
-              onChange={() => { }}
-              options={["General", "Support", "Sales"]}
-              error={""}>
-                <div className="border-r border-white90 dark:border-gray15 pr-2.5">
-                  <LocationIcon className={ `text-black dark:text-white`} />
-                </div>
-            </FormSelect>
-            <FormSelect
-              classExtra="bg-white99 dark:bg-gray08"
-              classIcon=" bg-white97 dark:bg-gray10 rounded-full p-1"
-              name="PropertyType"
-              placeholder="Property Type"
-              value={""}
-              onChange={() => { }}
-              options={["London", "Paris", "New York"]}
-              error={""}>
-                <div className="border-r border-white90 dark:border-gray15 pr-2.5">
-                  <PropertyIcon className={ `text-black dark:text-white`} />
-                </div>
-            </FormSelect>
-            <FormSelect
-              classExtra="bg-white99 dark:bg-gray08"
-              classIcon=" bg-white97 dark:bg-gray10 rounded-full p-1"
-              name="PricingRange"
-              placeholder="Pricing Range"
-              value={""}
-              onChange={() => { }}
-              options={["Villa", "Apartment", "Studio"]}
-              error={""}
-            >
-              <div className="border-r border-white90 dark:border-gray15 pr-2.5">
-                <PricingIcon className={ `text-black dark:text-white`} />
-              </div>
-            </FormSelect>
-            <FormSelect
-              classExtra="bg-white99 dark:bg-gray08"
-              classIcon=" bg-white97 dark:bg-gray10 rounded-full p-1"
-              name="PropertySize"
-              placeholder="Property Size"
-              value={""}
-              onChange={() => { }}
-              options={["1", "2", "3+"]}
-              error={""}
-            >
-              <div className="border-r border-white90 dark:border-gray15 pr-2.5">
-                <PropertySizeIcon className={ `text-black dark:text-white`} /> 
-              </div>
-            </FormSelect>
-            <FormSelect
-              classExtra="bg-white99 dark:bg-gray08"
-              classIcon=" bg-white97 dark:bg-gray10 rounded-full p-1"
-              name="bedrooms"
-              placeholder="Build Year"
-              value={""}
-              onChange={() => { }}
-              options={["1", "2", "3+"]}
-              error={""}>
-              <div className="border-r border-white90 dark:border-gray15 pr-2.5">
-                <BuildIcon className={ `text-black dark:text-white`} /> 
-              </div>
-            </FormSelect>
-          </div>
-        </form>
-      
+      </div>
 
+      {/* Filter Form */}
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="p-2.5 space-y-[50px] rounded-xl w-full bg-purple90 dark:bg-gray10 border-1 border-gray08/60 dark:border-gray15"
+      >
+        <div className="grid grid-cols-1 lg-custom:grid-cols-5 gap-5">
+          {selectFields.map((field, index) => (
+            <FormSelect
+              key={index}
+              name={field.name}
+              placeholder={field.placeholder}
+              value=""
+              onChange={() => {}}
+              options={field.options}
+              error=""
+              classExtra="bg-white99 dark:bg-gray08"
+              classIcon="bg-purple90 dark:bg-gray10 rounded-full p-1"
+            >
+              <div className="flex items-center border-r border-white90 dark:border-gray15 pr-2.5">
+                {field.icon}
+              </div>
+            </FormSelect>
+          ))}
+        </div>
+      </form>
     </SectionWrapper>
   );
-}
+};
 
 export default FilterProperty;

@@ -1,7 +1,8 @@
 import ExperienceSectionCard from '../../components/cards/ExperienceSectionCard';
 import { SectionWrapper } from '../../layouts/SectionWrapper';
-import Title from '../../components/shared/Title/Title';
+
 import { fakeDataForTesting } from '../../data/ExperienceSectionData';
+import Title from '../../components/shared/Title';
 
 function ExperienceSection() {
 
@@ -10,7 +11,7 @@ function ExperienceSection() {
 
   return (
     <SectionWrapper >
-        <section className='ExperienceSection'>
+        <section className='mb-20 lg-custom:mb-[120px] 2xl:mb-[150px]'>
             <Title
              heading='Navigating the Estatein Experience' 
              paragraph="At Estatein, we've designed a straightforward process to help you find and purchase your dream property with ease. Here's a step-by-step guide to how it all works."
