@@ -7,8 +7,8 @@ type PreferredContactMethodProps = {
   value: string;
   placeholder: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onCheckboxChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  isChecked: boolean;
+  onRadioChange: (value: string) => void; 
+  checked: boolean; 
 };
 
 function PreferredContactMethod({
@@ -18,8 +18,8 @@ function PreferredContactMethod({
   value,
   placeholder,
   onChange,
-  onCheckboxChange,
-  isChecked,
+  onRadioChange,
+  checked,
 }: PreferredContactMethodProps) {
   return (
     <div className="relative w-full lg-custom:w-1/2 group">
@@ -31,14 +31,14 @@ function PreferredContactMethod({
         onChange={onChange}
         placeholder={placeholder}
         className="w-full rounded-lg border-1 border-white90 bg-white97 px-5 py-4 2xl:pr-12 2xl:pl-15 pl-11.5 font-medium 2xl:text-lg text-sm/[20px] dark:border-gray15 dark:bg-gray10 dark:text-gray40"
-        disabled={!isChecked}
+        disabled={!checked}
       />
       <input
-        type="checkbox"
-        name="preferredContact"
+        type="radio"
+        name="preferredContact" 
         value={name}
-        checked={isChecked}
-        onChange={onCheckboxChange}
+        checked={checked}
+        onChange={() => onRadioChange(name)}
         className="absolute 2xl:right-6 right-5 top-1/2 w-2.5 h-2.5 2xl:h-4 2xl:w-4 -translate-y-1/2 appearance-none rounded-full border-1 border-purple60 bg-purple95 dark:bg-gray10 checked:bg-purple60 cursor-pointer"
       />
     </div>

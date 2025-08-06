@@ -13,7 +13,7 @@ const Hero = () => {
     <div
       className={`relative h-screen ${
         isBannerVisible
-          ? "2xl:pt-[99px] lg-custom:pt-[77px] pt-[68px]"
+          ? "2xl:pt-[93px] lg-custom:pt-[77px] pt-[68px]"
           : "pt-0"
       } flex flex-col-reverse lg-custom:flex-row lg-custom:items-center gap-14 lg-custom:gap-[60px] 2xl:gap-[80px] text-black dark:text-white`}
     >

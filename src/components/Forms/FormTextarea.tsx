@@ -1,5 +1,4 @@
 import type { TextareaProps } from "../../types/Form";
-
 function FormTextarea({ label, name, value, onChange, error, className }: TextareaProps) {
   return (
     <div className={`${className} flex flex-col col-span-2`}>
