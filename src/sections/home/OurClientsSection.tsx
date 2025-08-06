@@ -8,17 +8,17 @@ import { SectionWrapper } from "../../layouts/SectionWrapper";
 
 function OurClientsSection() {
   const dispatch = useAppDispatch();
-  const { visibleItems, loading, error } = useAppSelector(
+  const { items, loading, error } = useAppSelector(
     (state) => state.testimonials
   );
 
     useEffect(() => {
-        if (visibleItems.length === 0) {
+        if (items.length === 0) {
             dispatch(fetchTestimonials());
         }
-    }, [dispatch, visibleItems.length]);
+    }, [dispatch, items.length]);
 
-    const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 3;
+    const skeletonCount = items.length > 0 ? items.length : 3;
 
     return (
         <SectionWrapper>
@@ -67,7 +67,7 @@ function OurClientsSection() {
                     <p className="text-red-500">{error}</p>
                 ) : (
                     <GenericSlider
-                        items={visibleItems}
+                        items={items}
                         renderSlide={(client, index) => client ? <TestimonialCard key={index} client={client} /> : null}
                         slidesPerView={3}
                         showCounter={true}

@@ -4,12 +4,11 @@ import { db } from "../../firebaseConfig";
 
 export const createFetchThunk = <T>(
   name: string,
-  path: string,
   transform?: (data: any, id: string) => T
 ) =>
   createAsyncThunk(`${name}/fetch`, async (_, { rejectWithValue }) => {
     try {
-      const snapshot = await get(ref(db, path));
+      const snapshot = await get(ref(db, name));
       if (!snapshot.exists()) return [];
 
       const data = snapshot.val();
