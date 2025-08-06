@@ -1,7 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { get, ref } from "firebase/database";
-import { db } from "../../firebaseConfig";
+import { createSlice } from "@reduxjs/toolkit";
 import type { testimonials } from "../types/Testimonial";
+import { createFetchThunk } from "../thunks/createFetchThunk";
 
 
 interface testimonialsState {
@@ -20,18 +19,7 @@ const initialState: testimonialsState = {
     // itemsPerPage: 3,
 };
 
-
-export const fetchTestimonials = createAsyncThunk(
-    "testimonials/fetch",
-    async () => {
-        const snapshot = await get(ref(db, "testimonials"));
-        const data = snapshot.val();
-        return Object.keys(data).map((key) => ({
-            id: key,
-            ...data[key],
-        }));
-    }
-);
+export const fetchTestimonials = createFetchThunk<testimonials>("testimonials", "testimonials");
 
 const testimonialsSlice = createSlice({
     name: "testimonials",

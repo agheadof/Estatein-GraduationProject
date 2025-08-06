@@ -18,7 +18,7 @@ const TeamSection = () => {
 
   return (
     <SectionWrapper>
-      <section className="flex flex-col gap-4 lg-custom:gap-[60px] 2xl:gap-20">
+      <section className="flex flex-col gap-4 lg-custom:gap-[60px] 2xl:gap-20 mb-20 lg-custom:mb-[120px] 2xl:mb-[150px]">
         <Title
           heading="Meet the Estatein Team"
           paragraph="At Estatein, our success is driven by the dedication and expertise of our team. Get to know the people behind our mission to make your real estate dreams a reality."

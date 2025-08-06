@@ -7,7 +7,7 @@ import type { RootState, AppDispatch } from "../../redux/store";
 
 import InquiryForm from "../../components/Forms/InquiryForm";
 import Title from "../../components/shared/Title";
-
+import { SectionWrapper } from "../../layouts/SectionWrapper";
 
 function PropertyDetailsForm() {
   const { id } = useParams<{ id: string }>();
@@ -29,21 +29,23 @@ function PropertyDetailsForm() {
   }
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-[32.5%_65.5%] 2xl:grid-cols-[38.3%_70.7%] gap-y-10 md:gap-x-10 2xl:gap-x-[100px] xl:gap-x-[80px] lg-custom:my-30 2xl:!my-[150px]">
-      <Title
-        titleStyle="w-full"
-        starImg={true}
-        heading={`Inquire About ${property.title}`}
-        paragraph="Interested in this property? Fill out the form below, and our real estate experts will get back to you with more details, including scheduling a viewing and answering any questions you may have."
-      />
-      <div className="w-full">
-        <InquiryForm
-          type="property"
-          propertyTitle={property.title}
-          propertyLocation={property.location ?? "Unknown Location"}
+    <SectionWrapper>
+      <div className="grid grid-cols-1 xl:grid-cols-[32.5%_65.5%] 2xl:grid-cols-[30.3%_70.7%] gap-y-10 md:gap-x-10 2xl:gap-x-[100px] xl:gap-x-[80px] lg-custom:my-30 2xl:!my-[150px]">
+        <Title
+          titleStyle="w-full"
+          starImg={true}
+          heading={`Inquire About ${property.title}`}
+          paragraph="Interested in this property? Fill out the form below, and our real estate experts will get back to you with more details, including scheduling a viewing and answering any questions you may have."
         />
+        <div className="w-full">
+          <InquiryForm
+            type="property"
+            propertyTitle={property.title}
+            propertyLocation={property.location ?? "Unknown Location"}
+          />
+        </div>
       </div>
-    </div>
+    </SectionWrapper>
   );
 }
 

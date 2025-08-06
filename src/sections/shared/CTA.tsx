@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import Title from "../../components/shared/Title";
 import MainButton from "../../components/ui/MainButton";
+import { scrollToTop } from "../../utlis/scrollToTop";
 
 
 type CTAProps = {
@@ -10,6 +12,7 @@ type CTAProps = {
 };
 
 export function CTA({ title, description, buttonLabel, className }: CTAProps) {
+  const navigate = useNavigate();
   return (
     <section
       role="region"
@@ -19,7 +22,10 @@ export function CTA({ title, description, buttonLabel, className }: CTAProps) {
       <div className="z-10 flex flex-col gap-1.5 md:gap-2.5 xl:gap-5 lg:grow lg-custom:w-[80%]">
         <Title heading={title} paragraph={description} starImg={false} paragraphStyle="w-full md:w-[85%] 2xl:w-[80%]" />
       </div>
-      <MainButton variant="normalPurple" className=" z-10" >
+      <MainButton variant="normalPurple" className=" z-10" onClick={() => {
+        navigate('/properties');
+        scrollToTop();
+      }} >
         {buttonLabel}
       </MainButton>
       <img

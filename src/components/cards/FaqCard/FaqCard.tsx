@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TitleBtn from "../ui/TitleBtn";
+import TitleBtn from "../../ui/TitleBtn";
 import FaqPopup from "./FaqPopup";
 type Props = {
   question: {

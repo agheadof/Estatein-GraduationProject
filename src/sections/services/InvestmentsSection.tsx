@@ -17,7 +17,7 @@ const InvestmentsSection = () => {
 
         <UnlockCardComponent
           investments={true}
-          cardStyle='p-6 md:p-10 2xl:p-[50px] bg-[url("/assets/images/AbstractDesign3.png")] w-full'
+          cardStyle='p-6 md:p-10 2xl:p-[50px] bg-[url("/assets/images/AbstractDesign3.png")] bg-no-repeat w-full'
           title="Unlock Your Investment Potential"
           titleStyle="text-xl md:text-[22px] 2xl:text-2xl font-semibold"
           desc="Explore our Property Management Service categories and let us handle the complexities while you enjoy the benefits of property ownership."

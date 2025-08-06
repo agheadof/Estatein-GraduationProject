@@ -6,14 +6,13 @@ import FormTextarea from "./FormTextarea";
 import { EmailIcon, PhoneIcon, LocationIcon } from "../icons/FormIcons";
 import MainButton from "../ui/MainButton";
 import PreferredContactMethod from "./PreferredContactMethod";
-
+import FormInput from "./FormInput";
 
 type InquiryFormProps = {
   type: "inquiry" | "contact" | "property";
   propertyTitle?: string;
   propertyLocation?: string;
 };
-
 
 function InquiryForm({
   type,
@@ -76,6 +75,24 @@ function InquiryForm({
 
         {isContact && (
           <>
+            <FormInput
+              label="Email"
+              name="email"
+              placeholder="Enter your Email"
+              value={formData.email || ""}
+              onChange={handleChange}
+              error={errors.email}
+              type="email"
+            />
+            <FormInput
+              label="Phone"
+              name="phone"
+              placeholder="Enter Phone Number"
+              value={formData.phone || ""}
+              onChange={handleChange}
+              error={errors.phone}
+              type="tel"
+            />
             <FormSelect
               label="Inquiry Type"
               name="inquiryType"
@@ -99,6 +116,24 @@ function InquiryForm({
 
         {!isContact && !isProperty && (
           <>
+            <FormInput
+              label="Email"
+              name="email"
+              placeholder="Enter your Email"
+              value={formData.email || ""}
+              onChange={handleChange}
+              error={errors.email}
+              type="email"
+            />
+            <FormInput
+              label="Phone"
+              name="phone"
+              placeholder="Enter Phone Number"
+              value={formData.phone || ""}
+              onChange={handleChange}
+              error={errors.phone}
+              type="tel"
+            />
             <FormSelect
               label="Preferred Location"
               name="location"
@@ -201,6 +236,25 @@ function InquiryForm({
         )}
 
         {isProperty && (
+          <>
+           <FormInput
+                  label="Email"
+                  name="email"
+                  placeholder="Enter your Email"
+                  value={formData.email || ""}
+                  onChange={handleChange}
+                  error={errors.email}
+                  type="email"
+                />
+                <FormInput
+                  label="Phone"
+                  name="phone"
+                  placeholder="Enter Phone Number"
+                  value={formData.phone || ""}
+                  onChange={handleChange}
+                  error={errors.phone}
+                  type="tel"
+                />
           <div className="col-span-full p-0 m-0 flex flex-col justify-between">
             <label className="mb-4 2xl:text-xl text-base/[1.5] text-black dark:text-white font-semibold">
               {propertyTitle}
@@ -210,6 +264,7 @@ function InquiryForm({
               <LocationIcon className="text-black dark:text-white" />
             </div>
           </div>
+          </>
         )}
 
         <FormTextarea

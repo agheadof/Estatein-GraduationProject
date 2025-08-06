@@ -3,7 +3,7 @@ import OurOfficeTaps from "./OurOfficeTaps";
 
 function OurOffices() {
   return (
-    <section className="px-4 md:px-8 lg-custom:!px-20 2xl:!px-[162px] mt-20 lg-custom:mt-30 2xl:!mt-[150px]">
+    <section className="px-4 md:px-8 lg-custom:!px-20 2xl:!px-[162px] my-20 lg-custom:my-30 2xl:!my-[150px]">
       <Title
         starImg={true}
         heading="Discover Our Office Locations"

@@ -10,7 +10,7 @@ import SubHero from "../components/shared/SubHero";
 function ServicesPage() {
   return (
     <div className="huge:max-w-[1920px] huge:mx-auto">
-      <SubHero title={subHeroServices.title} desc={subHeroServices.desc} />
+      <SubHero title={subHeroServices.title} desc={subHeroServices.desc} classes="lg-custom:pb-[100px]" />
       <SiteFeaturesSection data={SiteFeaturesServicesData} />
       <SectionWrapper>
         <PropertyValueSection />

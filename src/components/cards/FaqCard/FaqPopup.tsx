@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import CloseIcon from "../icons/CloseIcon";
+import CloseIcon from "../../icons/CloseIcon";
 
 type FaqPopupProps = {
   question: string;
@@ -10,14 +10,18 @@ type FaqPopupProps = {
 const FaqPopup = ({ question, answer, onClick }: FaqPopupProps) => {
   return createPortal(
     <div className="fixed h-screen z-50 inset-0 bg-black/10 dark:bg-white/40 backdrop-blur-md flex justify-center items-center">
-      <div className="relative w-[1000px] bg-white dark:bg-gray08 border dark:border-gray15 border-white90 rounded-[10px] 2xl:rounded-xl p-[30px] lg-custom:p-[40px] 2xl:p-[50px] m-5">
-        <h2 className="dark:text-white text-black text-lg lg-custom:text-xl 2xl:text-2xl font-semibold mb-[20px] lg-custom:mb-[24px] 2xl:mb-[30px] ">
+      <div className="relative w-[1000px] max-h-[70vh] overflow-y-auto bg-white dark:bg-gray08 border dark:border-gray15 border-white90 rounded-[10px] 2xl:rounded-xl p-[30px] lg-custom:p-[40px] 2xl:p-[50px] m-5">
+        <h2
+          className="dark:text-white text-black text-lg lg-custom:text-xl 2xl:text-2xl font-semibold 
+        mb-[20px] lg-custom:mb-[24px] 2xl:mb-[30px] 
+        border-b-2 border-purple65 pb-5"
+        >
           {question}
         </h2>
         <p className=" text-gray40 dark:text-gray60 text-sm lg-custom:text-base 2xl:text-lg font-medium leading-[150%]">
           {answer}
         </p>
-        <CloseIcon className="w-6 h-6 text-purple75" onClick={onClick} />
+        <CloseIcon className="w-6 h-6 text-purple65" onClick={onClick} />
       </div>
     </div>,
     document.body
