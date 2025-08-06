@@ -3,18 +3,28 @@ import CountUpComponent from "../../components/cards/CountUpComponent";
 import RotatingText from "../../components/cards/RotatingText";
 import { heroContent } from "../../data/heroContent";
 import Maggnatic from "../../utlis/Maggnatic";
+import { useAppSelector } from "../../redux/hooks";
+
 const Hero = () => {
+    const isBannerVisible = useAppSelector((state) => state.banner.isVisible);
+
   return (
     // === Main Hero Section Container ===
-    <div className="relative h-screen pt-[250px] md:pt-[94px] flex flex-col-reverse lg-custom:flex-row lg-custom:items-center lg-custom:gap-[60px] 2xl:gap-[80px] text-black  dark:text-white">
+    <div
+      className={`relative h-screen ${
+        isBannerVisible
+          ? "2xl:pt-[99px] lg-custom:pt-[77px] pt-[68px]"
+          : "pt-0"
+      } flex flex-col-reverse lg-custom:flex-row lg-custom:items-center gap-14 lg-custom:gap-[60px] 2xl:gap-[80px] text-black dark:text-white`}
+    >
       {/* === Left Side: Text, Buttons, and CountUp === */}
-      <div className="flex mt-10 lg-custom:w-[48%] flex-col gap-10 lg-custom:gap-[50px] 2xl:gap-[60px] px-4 lg-custom:pl-20 2xl:pl-[162px]">
+      <div className="flex lg-custom-mt-10 lg-custom:w-[48%] flex-col gap-10 lg-custom:gap-[50px] 2xl:gap-[60px] px-4 lg-custom:pl-20 2xl:pl-[162px]">
         {/* === Title and Description === */}
         <div className="flex flex-col gap-4 lg-custom:gap-5 2xl:gap-6 mt-10 lg-custom:mt-0">
-          <h1 className="text-[28px] lg-custom:text-[45px] 2xl:text-[60px] font-semibold leading-[120%]">
+          <h1 className="text-[28px] lg-custom:text-[46px] 2xl:text-[60px] font-semibold leading-[120%]">
             {heroContent.title}
           </h1>
-          <p className="text-sm lg-custom:text-base 2xl:text-lh font-medium text-gray40 dark:text-gray60 leading-[150%]">
+          <p className="text-sm lg-custom:text-base 2xl:text-lg font-medium text-gray40 dark:text-gray60 leading-[150%]">
             {heroContent.description}
           </p>
         </div>
@@ -59,7 +69,7 @@ const Hero = () => {
 
         {/* === Rotating Text Component === */}
 
-        <div className="absolute bottom-[-5%] left-0 lg-custom:bottom-0 2xl:top-[20%] lg-custom:top-[15%]  lg-custom:!left-[-10%]   inline-block z-40">
+        <div className="absolute bottom-[-10%] sm:bottom-[-8%] left-0 lg-custom:bottom-0 2xl:top-[20%] lg-custom:top-[15%] lg-custom:!left-[-10%] inline-block z-40">
           <Maggnatic>
             <RotatingText />
           </Maggnatic>

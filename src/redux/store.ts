@@ -6,17 +6,19 @@ import officesReducer from "./slices/ourOfficesSlice"
 import propertiesReducer from "./slices/propertiesSlice"
 import testimonialsReducer from "./slices/testimonialsSlice";
 import themeReducer from "./slices/themeSlice";
+import bannerReducer from './slices/bannerSlice'
 
 const store = configureStore({
-    reducer: {
-        theme: themeReducer,
-        faqs: faqsReducer,
-        achievements: achievementReducer,
-        properties: propertiesReducer,
-        team: teamReducer,
-        testimonials: testimonialsReducer,
-        offices: officesReducer,
-    }
+  reducer: {
+    theme: themeReducer,
+    faqs: faqsReducer,
+    achievements: achievementReducer,
+    properties: propertiesReducer,
+    team: teamReducer,
+    testimonials: testimonialsReducer,
+    offices: officesReducer,
+    banner: bannerReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

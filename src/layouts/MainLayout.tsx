@@ -8,25 +8,33 @@ import Loader from "../components/ui/Loader";
 import TopBanner from "../components/shared/TopBanner";
 import { useEffect, useState } from "react";
 import ChatBot from "../components/shared/ChatBot/ChatBot";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { hideBanner, showBanner } from "../redux/slices/bannerSlice";
 
 const MainLayout = () => {
-  const [isBannerVisible, setIsBannerVisible] = useState<boolean>(true);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsBannerVisible(false);
-      }
+    const dispatch = useAppDispatch();
+    const isBannerVisible = useAppSelector((state) => state.banner.isVisible);
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+
+     const handleScroll = () => {
+       if (window.scrollY > 20) {
+         dispatch(hideBanner());
+       } else if (window.scrollY === 0) {
+         dispatch(showBanner());
+       }
+     };
+
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, [dispatch]);
+
+    const handleBannerClose = () => {
+      dispatch(hideBanner());
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleBannerClose = () => {
-    setIsBannerVisible(false);
-  };
 
   return (
     <div className="flex flex-col min-h-screen font-urbanist">

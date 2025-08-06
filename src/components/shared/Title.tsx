@@ -22,7 +22,7 @@ const Title = ({
       {starImg && (
         <div className="lg-custom:mb-1.5 2xl:mb-2.5">
           <img
-            src="/assets/icons/MainTitle/shape.svg"
+            src="/assets/icons/MainTitle/stars.svg"
             alt="icon"
             className="w-[68px] h-[30px] -ml-2 md:-ml-2.5 2xl:-ml-5"
           />
