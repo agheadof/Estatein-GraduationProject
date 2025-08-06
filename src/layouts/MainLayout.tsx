@@ -8,6 +8,7 @@ import Loader from "../components/ui/Loader";
 import TopBanner from "../components/shared/TopBanner";
 import { useEffect, useState } from "react";
 import ChatBot from "../components/shared/ChatBot/ChatBot";
+import CustomCursor from "../components/shared/CustomCursor";
 
 const MainLayout = () => {
   const [isBannerVisible, setIsBannerVisible] = useState<boolean>(true);
@@ -32,6 +33,7 @@ const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen font-urbanist">
       <Loader />
+      <CustomCursor />
       <ChatBot />
       <TopBanner isVisible={isBannerVisible} onClose={handleBannerClose} />
       <Navbar isBannerVisible={isBannerVisible} />

@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { NavLink } from "react-router-dom"
-import { NavData } from "../../../data/NavData"
 import NavItem from "./NavItem"
 import { motion, AnimatePresence } from "framer-motion"
 import HamburgerButton from "./HamburgerButton"
 import { scrollToTop } from "../../../utlis/scrollToTop"
 import ToggleButton from "../../ui/ToggleButton"
 import { SectionWrapper } from "../../../layouts/SectionWrapper"
+import { navData } from "../../../data/NavData"
 
 type NavbarProps = {
   isBannerVisible: boolean
@@ -39,7 +39,7 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
 
           {/* Desktop Menu */}
           <ul className="hidden lg-custom:flex lg-custom:gap-6 2xl:gap-[30px] 2xl:font-medium">
-            {NavData.map((link, index) => (
+            {navData.map((link, index) => (
               <li
                 key={index}
                 onClick={() => {
@@ -88,7 +88,7 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
               className="overflow-hidden lg-custom:hidden mt-4"
             >
               <ul className="flex flex-col gap-4 bg-gray08/60 dark:bg-gray08 p-5 rounded-lg border border-gray15">
-                {NavData.map((link, index) => (
+                {navData.map((link, index) => (
                   <li key={index}>
                     <NavItem
                       to={link.path}
