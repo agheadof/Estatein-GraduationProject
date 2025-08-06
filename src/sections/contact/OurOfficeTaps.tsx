@@ -25,7 +25,7 @@ function OurOfficeTaps() {
     dispatch(fetchOffices());
   }, [dispatch]);
 
-  const skeletonCount = filteredOffices.length > 0 ? filteredOffices.length : 3;
+  const skeletonCount = filteredOffices.length > 0 ? filteredOffices.length : 4;
 
   if (error) return <p className="text-red-500">Error: {error}</p>;
 

@@ -1,14 +1,16 @@
-import { SectionWrapper } from '../../layouts/SectionWrapper'
-import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
-import FaqCard from '../../components/cards/FaqCard'
+import GenericSlider from "../../components/shared/GenericSlider/GenericSlider";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchFaqs } from '../../redux/slices/faqsSlice'
 import Title from '../../components/shared/Title';
+import { SectionWrapper } from "../../layouts/SectionWrapper";
+import FaqCard from "../../components/cards/FaqCard/FaqCard";
 
 function FaqSection() {
-    const dispatch = useAppDispatch();
-    const { visibleItems, loading, error } = useAppSelector((state) => state.faqs);
+  const dispatch = useAppDispatch();
+  const { visibleItems, loading, error } = useAppSelector(
+    (state) => state.faqs
+  );
 
     useEffect(() => {
         if (visibleItems.length === 0) {

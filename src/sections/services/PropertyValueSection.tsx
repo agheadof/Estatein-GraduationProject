@@ -7,7 +7,7 @@ const PropertyValueSection = () => {
   return (
     <section
       id="property"
-      className="pb-[61px] lg-custom:pb-[90px] 2xl:pb-[110px]"
+      className="py-[61px] lg-custom:py-[90px] 2xl:py-[110px]"
     >
       <Title
         titleStyle="pb-10 lg-custom:pb-[60px] 2xl:pb-20"

@@ -8,11 +8,11 @@ import { SectionWrapper } from '../../layouts/SectionWrapper'
 import Title from '../../components/shared/Title'
 
 type Props = {
-    showTags?: boolean;
-    showDetails?: boolean;
-    heading: string;
-    paragraph: string;
-    buttonLabel?: string;
+  showTags?: boolean;
+  showDetails?: boolean;
+  heading: string;
+  paragraph: string;
+  buttonLabel?: string;
 };
 
 function PropertiesSection({
@@ -101,4 +101,4 @@ function PropertiesSection({
     )
 }
 
-export default PropertiesSection
+export default PropertiesSection;

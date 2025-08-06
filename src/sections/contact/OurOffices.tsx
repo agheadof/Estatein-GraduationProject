@@ -10,7 +10,6 @@ function OurOffices() {
         paragraph="Estatein is here to serve you across multiple locations. Explore the categories below to find the Estatein office nearest to you"
       />
       <OurOfficeTaps />
-    
     </section>
   );
 }

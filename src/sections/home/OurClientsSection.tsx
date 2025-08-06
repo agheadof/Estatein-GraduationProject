@@ -1,14 +1,16 @@
-import { SectionWrapper } from '../../layouts/SectionWrapper'
-import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
-import TestimonialCard from '../../components/cards/TestimonialCard'
+import GenericSlider from "../../components/shared/GenericSlider/GenericSlider";
+import TestimonialCard from "../../components/cards/TestimonialCard";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchTestimonials } from "../../redux/slices/testimonialsSlice";
-import Title from '../../components/shared/Title';
+import Title from "../../components/shared/Title";
+import { SectionWrapper } from "../../layouts/SectionWrapper";
 
 function OurClientsSection() {
-    const dispatch = useAppDispatch();
-    const { visibleItems, loading, error } = useAppSelector((state) => state.testimonials);
+  const dispatch = useAppDispatch();
+  const { visibleItems, loading, error } = useAppSelector(
+    (state) => state.testimonials
+  );
 
     useEffect(() => {
         if (visibleItems.length === 0) {
@@ -35,7 +37,7 @@ function OurClientsSection() {
                                 key={i}
                                 className="p-[30px] lg-custom:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl border dark:border-gray15 border-white90 bg-gray-200 dark:bg-gray-700 animate-pulse"
                             >
-                                {/* نجوم وهمية */}
+                                
                                 <div className="flex gap-2 2xl:gap-2.5 mb-6 lg-custom:mb-[30px] 2xl:mb-10">
                                     {[...Array(5)].map((_, starIdx) => (
                                         <div
@@ -45,13 +47,12 @@ function OurClientsSection() {
                                     ))}
                                 </div>
 
-                                {/* العنوان والشرح الوهمي */}
+                                
                                 <div className="mb-6 lg-custom:mb-[30px] 2xl:mb-10">
                                     <div className="h-7 lg-custom:h-8 2xl:h-9 bg-gray-300 dark:bg-gray-600 rounded w-3/4 mb-3" />
                                     <div className="h-5 lg-custom:h-6 2xl:h-7 bg-gray-300 dark:bg-gray-600 rounded w-full" />
                                 </div>
 
-                                {/* صورة العميل وبياناته الوهمية */}
                                 <div className="flex gap-2.5 2xl:gap-3 items-center">
                                     <div className="w-[50px] h-[50px] 2xl:w-[60px] 2xl:h-[60px] rounded-full bg-gray-300 dark:bg-gray-600" />
                                     <div className="flex flex-col gap-1 w-full">
