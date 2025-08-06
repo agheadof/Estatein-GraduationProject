@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
+
 export default function RotatingText() {
   const text = "Discover Your Dream Property ";
   const circleRef = useRef<HTMLDivElement>(null);
@@ -28,7 +29,7 @@ export default function RotatingText() {
   }, [isFast]);
 
   return (
-    <div className="absolute bottom-[-55px] lg-custom:bottom-0 2xl:top-[240px] 2xl:left-[-80px] lg-custom:top-[120px] lg-custom:left-[-70px] inline-block z-40">
+    <div className="">
       <style>{`
         @keyframes rotateSlow {
           0% { transform: rotate(0deg); }

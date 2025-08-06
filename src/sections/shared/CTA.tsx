@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import Title from "../../components/shared/Title";
 import MainButton from "../../components/ui/MainButton";
+import { scrollToTop } from "../../utlis/scrollToTop";
 
 
 type CTAProps = {
@@ -10,20 +12,19 @@ type CTAProps = {
 };
 
 export function CTA({ title, description, buttonLabel, className }: CTAProps) {
+  const navigate = useNavigate();
   return (
     <section
       role="region"
       aria-labelledby="cta-heading"
-<<<<<<< HEAD
-      className={`relative mx-break-out border-t border-t-white90 dark:border-t-gray15 px-break-out py-12.5 overflow-hidden flex flex-col gap-12.5 lg-custom:flex-row lg-custom:items-center lg-custom:justify-between px-4 md:px-8 lg-custom:!px-20 2xl:!px-[162px] huge:px-0  ${className ?? ""}`}>
-=======
       className={`relative mx-break-out border-t bg-gradient-to-br from-[#FBFAFF] via-[#DBCEFD] to-[#703BF7] dark:bg-none border-t-gray75 dark:border-t-gray15 px-break-out py-12.5 overflow-hidden flex flex-col gap-12.5 lg-custom:flex-row lg-custom:items-center lg-custom:justify-between px-4 md:px-8 lg-custom:!px-20 2xl:!px-[162px] huge:!max-w-[1920px] huge:!mx-auto ${className ?? ""}`}>
->>>>>>> 953284cff2ac1d101a0f231b53a888ce6829f0f1
-
       <div className="z-10 flex flex-col gap-1.5 md:gap-2.5 xl:gap-5 lg:grow lg-custom:w-[80%]">
         <Title heading={title} paragraph={description} starImg={false} paragraphStyle="w-full md:w-[85%] 2xl:w-[80%]" />
       </div>
-      <MainButton variant="normalPurple" className=" z-10" >
+      <MainButton variant="normalPurple" className=" z-10" onClick={() => {
+        navigate('/properties');
+        scrollToTop();
+      }} >
         {buttonLabel}
       </MainButton>
       <img

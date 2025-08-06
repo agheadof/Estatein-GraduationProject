@@ -1,19 +1,16 @@
 
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { get, ref } from 'firebase/database'
-import { db } from '../../firebaseConfig'
-import { Icon1 as BedIcon, Icon2 as BathIcon, Icon3 as VillaIcon } from '../../components/icons/PropertiesIcons'
-import type { ReactNode } from 'react'
+import { createSlice } from '@reduxjs/toolkit'
+import { createFetchThunk } from '../thunks/createFetchThunk'
+
 
 export type PropertyType = {
     id: string
     image: string
     title: string
     desc: string
-    details: { label: string; icon: ReactNode }[]
+    details: { label: string; icon: string }[]
     Price: string
 
-    // لبقية تفاصيل صفحة العقار
     descriptionLong?: string
     gallery?: string[]
     location?: string
@@ -29,16 +26,16 @@ const transformProperty = (property: any, id: string): PropertyType => ({
     Price: `$${property.price?.toLocaleString() || 'N/A'}`,
     details: [
         {
-            label: `${property.bedrooms || 0}-Bedroom`,
-            icon: <BedIcon />,
+            label: `${property.bedrooms|| 0}-Bedroom`,
+            icon: "bed",
         },
         {
-            label: `${property.bathrooms || 0}-Bathroom`,
-            icon: <BathIcon />,
+            label: `${property.bathrooms|| 0}-Bathroom`,
+            icon: "bath",
         },
         {
-            label: `-Villa`,
-            icon: <VillaIcon />,
+            label: `Villa`,
+            icon: "villa",
         },
     ],
 
@@ -48,23 +45,12 @@ const transformProperty = (property: any, id: string): PropertyType => ({
     tags: "Coastal Escapes - Where Waves Beckon",
 })
 
-export const fetchProperties = createAsyncThunk(
-    'properties/fetchAll',
-    async () => {
-        const snapshot = await get(ref(db, 'properties'))
-        const data = snapshot.val()
-        console.log(data);
-
-        return Object.entries(data).map(([id, prop]) =>
-            transformProperty(prop, id)
-        )
-    }
-)
+export const fetchProperties = createFetchThunk<PropertyType>("properties", "properties",  transformProperty);
 
 type PropertiesState = {
-    all: PropertyType[]
-    loading: boolean
-    error: string | null
+  all: PropertyType[]
+  loading: boolean
+  error: string | null
 }
 
 const initialState: PropertiesState = {
@@ -75,23 +61,23 @@ const initialState: PropertiesState = {
 }
 
 const propertiesSlice = createSlice({
-    name: 'properties',
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchProperties.pending, (state) => {
-                state.loading = true
-            })
-            .addCase(fetchProperties.fulfilled, (state, action) => {
-                state.loading = false
-                state.all = action.payload
-            })
-            .addCase(fetchProperties.rejected, (state, action) => {
-                state.loading = false
-                state.error = action.error.message || 'Failed to fetch'
-            })
-    },
+  name: "properties",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProperties.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(fetchProperties.fulfilled, (state, action) => {
+        state.loading = false
+        state.all = action.payload
+      })
+      .addCase(fetchProperties.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message || "Failed to fetch"
+      })
+  },
 })
 
 export default propertiesSlice.reducer
