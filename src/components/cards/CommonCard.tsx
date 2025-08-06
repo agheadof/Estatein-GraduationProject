@@ -1,6 +1,11 @@
+import { Link } from "react-router-dom";
 import type { CommonCardProps } from "../../types/CommonCard";
+import { motion } from "framer-motion";
+import { commonCardMotionConfig } from "../../utlis/Anamation";
 
 const CommonCard = ({
+  HeadingTag = "h5",
+  titleLink,
   cardImg,
   cardTitle,
   titleStyle,
@@ -10,7 +15,8 @@ const CommonCard = ({
   isArrow,
 }: CommonCardProps) => {
   return (
-    <div
+    <motion.div
+      {...commonCardMotionConfig}
       className={`relative rounded-[10px] 2xl:rounded-xl border flex flex-col justify-center ${cardStyle}`}
     >
       {isArrow && (
@@ -20,19 +26,44 @@ const CommonCard = ({
           alt="arrow icon"
         />
       )}
-      <div className={`flex gap-2.5 md:gap-4 2xl:gap-5 ${titleStyle}`}>
-        <img
-          src={cardImg}
-          alt="card image"
-        />
-        <h5 className={`text-black dark:text-white font-semibold ${titleSize}`}>{cardTitle}</h5>
+      <div
+        className={`flex items-center gap-2.5 md:gap-4 2xl:gap-5 ${titleStyle}`}
+      >
+        <div className="relative border-gradient-base border-gradient-2">
+          <div className="relative m-1.5 border-gradient-base border-gradient-1">
+            <img src={cardImg} alt="card image" className="p-2" />
+          </div>
+        </div>
+
+        {HeadingTag === Link ? (
+          <Link
+            to={titleLink!}
+            className={`text-black dark:text-white font-semibold border-b border-transparent hover:border-purple75 transform-border duration-300 ${titleSize}`}
+          >
+            {cardTitle}
+          </Link>
+        ) : HeadingTag === "a" ? (
+          <a
+            href={titleLink}
+            className={` text-black dark:text-white font-semibold border-b border-transparent hover:border-purple75 transform-border duration-300 ${titleSize}`}
+          >
+            {cardTitle}
+          </a>
+        ) : (
+          <HeadingTag
+            className={`text-black dark:text-white font-semibold ${titleSize}`}
+          >
+            {cardTitle}
+          </HeadingTag>
+        )}
       </div>
+
       {cardDesc && (
         <p className="text-sm md:text-base 2xl:text-lg font-medium leading-[150%] text-gray40 dark:text-gray60">
           {cardDesc}
         </p>
       )}
-    </div>
+    </motion.div>
   );
 };
 

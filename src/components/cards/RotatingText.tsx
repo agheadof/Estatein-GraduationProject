@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
+
 export default function RotatingText() {
   const text = "Discover Your Dream Property ";
   const circleRef = useRef<HTMLDivElement>(null);

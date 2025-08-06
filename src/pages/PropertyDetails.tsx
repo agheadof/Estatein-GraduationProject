@@ -1,13 +1,17 @@
+import { useParams } from "react-router-dom"
 import { SectionWrapper } from "../layouts/SectionWrapper"
 import PricingDetailsSection from "../sections/propertyDetails/PricingDetailsSection"
 import PropertyDetailsForm from "../sections/propertyDetails/PropertyDetailsForm"
 import PropertyGallery from "../sections/propertyDetails/PropertyGallery"
 
 function PropertyDetails() {
+  const { id } = useParams()
+
   return (
-    <div className="huge:container huge:mx-auto mt-28">
+    <div className="huge:max-w-[1920px] huge:mx-auto mt-28">
       <SectionWrapper>
-        <PropertyGallery />
+        {id && <PropertyGallery id={id} />}
+
         <PropertyDetailsForm />
         <PricingDetailsSection />
       </SectionWrapper>

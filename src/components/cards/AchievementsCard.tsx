@@ -5,14 +5,23 @@ type CardProps = {
 
 function AchievementsCard({ title, description }: CardProps) {
     return (
-        <div className='p-[30px] md:p-[10%] border-white90 dark:border-gray15 border shadow-[0px_0px_0px_10px_rgba(0,0,0,0.02)] dark:shadow-[0px_0px_0px_10px_#191919] rounded-xl '>
+        <div className='h-full flex flex-col
+            p-[30px] md:p-[10%]
+            border-white90 dark:border-gray15 border
+            shadow-[0px_0px_0px_10px_rgba(0,0,0,0.02)] dark:shadow-[0px_0px_0px_10px_#191919]
+            rounded-xl cursor-pointer
+            transition-all duration-300 ease-in-out
+            hover:-translate-y-1
+            hover:shadow-[0px_10px_20px_rgba(112,59,247,0.3)] dark:hover:shadow-[0px_10px_20px_rgba(148,108,249,0.2)]
+        '>
             <h2 className="text-black dark:text-white font-semibold text-[20px] lg-custom:text-2xl mb-4 2xl:text-[30px] md:mb-6 2xl:mb-[30px]">
                 {title}
             </h2>
-            <p className={`text-dark dark:text-gray60 text-sm lg-custom:text-base 2xl:text-lg font-medium`}>
+            <p className="text-gray40 dark:text-gray60 text-sm lg-custom:text-base 2xl:text-lg font-medium">
                 {description}
             </p>
         </div>
     )
 }
-export default AchievementsCard
+
+export default AchievementsCard;

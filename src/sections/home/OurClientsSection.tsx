@@ -1,10 +1,10 @@
 import { SectionWrapper } from '../../layouts/SectionWrapper'
-import Title from '../../components/shared/Title/Title'
 import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
 import TestimonialCard from '../../components/cards/TestimonialCard'
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchTestimonials } from "../../redux/slices/testimonialsSlice";
+import Title from '../../components/shared/Title';
 
 function OurClientsSection() {
     const dispatch = useAppDispatch();
@@ -22,7 +22,7 @@ function OurClientsSection() {
                     buttonLabel="View All Testimonials"
                 />
                 {loading ? (
-                    <p className="text-white">Loading...</p>
+                    <p className="text-black dark:text-white">Loading...</p>
                 ) : error ? (
                     <p className="text-red-500">{error}</p>
                 ) : (
