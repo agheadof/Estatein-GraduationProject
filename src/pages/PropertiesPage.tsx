@@ -7,7 +7,7 @@ import SubHero from "../components/shared/SubHero";
 function PropertiesPage() {
   return (
     <div className="huge:container huge:mx-auto">
-      <SubHero title={subHeroProperties.title} desc={subHeroProperties.desc} classes="relative" />
+      <SubHero title={subHeroProperties.title} desc={subHeroProperties.desc} classes="lg-custom:pb-[130px]" />
       <FilterProperty />
       <PropertiesSection
         heading="Discover a World of Possibilities"
