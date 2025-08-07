@@ -9,9 +9,10 @@ import {
   PropertySizeIcon,
   BuildIcon,
 } from "../../components/icons/FilterPropertyIcons";
+import { motion } from "framer-motion";
+import { FilterMotionConfig } from "../../utlis/Anamation";
 
 const FilterProperty = () => {
-  // Define select fields configuration
   const selectFields = [
     {
       name: "location",
@@ -48,10 +49,14 @@ const FilterProperty = () => {
   ];
 
   return (
-    <SectionWrapper className="lg:absolute lg-custom:top-[400px] 2xl:top-[450px] py-5 lg:py-0 w-full huge:container huge:mx-auto">
-      {/* Search Bar */}
-      <div className="mb-5 lg:mb-0 rounded-xl bg-purple90 dark:bg-gray10  border-r border-l border-1  border-gray08/60 dark:border-gray15 w-full lg:w-[81.4536%] lg:mx-auto pt-2.5 px-2.5">
-        <div className="px-4 py-2 flex justify-between items-center mb-2.5 rounded-lg  bg-white99 dark:bg-gray08 text-black dark:text-white focus:outline-none focus:border-purple-500">
+    <SectionWrapper className="mt-0 lg-custom:-mt-12 2xl:-mt-16 py-5 lg:py-0 w-full huge:container huge:mx-auto">
+      {/* Search Bar Animation */}
+      <motion.div
+                {...FilterMotionConfig}
+
+        className="mb-5 lg:mb-0 rounded-xl bg-purple70/60 dark:bg-gray10 border-r border-l border-1 border-gray08/60 dark:border-gray15 w-full lg:w-[81.4536%] lg:mx-auto pt-2.5 px-2.5"
+      >
+        <div className="px-4 py-2 flex justify-between items-center mb-2.5 rounded-lg bg-white99 dark:bg-gray08 text-black dark:text-white focus:outline-none focus:border-purple-500">
           <input
             type="text"
             placeholder="Search For A Property"
@@ -65,12 +70,14 @@ const FilterProperty = () => {
             <span className="hidden lg:block">Find Property</span>
           </MainButton>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Filter Form */}
-      <form
+      {/* Filter Form Animation */}
+      <motion.form
         onSubmit={(e) => e.preventDefault()}
-        className="p-2.5 space-y-[50px] rounded-xl w-full bg-purple90 dark:bg-gray10 border-1 border-gray08/60 dark:border-gray15"
+        {...FilterMotionConfig}
+
+        className="p-2.5 space-y-[50px] rounded-xl w-full bg-purple70/60 dark:bg-gray10 border-1 border-gray15"
       >
         <div className="grid grid-cols-1 lg-custom:grid-cols-5 gap-5">
           {selectFields.map((field, index) => (
@@ -91,7 +98,7 @@ const FilterProperty = () => {
             </FormSelect>
           ))}
         </div>
-      </form>
+      </motion.form>
     </SectionWrapper>
   );
 };

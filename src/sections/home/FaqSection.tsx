@@ -8,17 +8,17 @@ import FaqCard from "../../components/cards/FaqCard/FaqCard";
 
 function FaqSection() {
   const dispatch = useAppDispatch();
-  const { visibleItems, loading, error } = useAppSelector(
+  const { items, loading, error } = useAppSelector(
     (state) => state.faqs
   );
 
     useEffect(() => {
-        if (visibleItems.length === 0) {
+        if (items.length === 0) {
             dispatch(fetchFaqs());
         }
-    }, [dispatch, visibleItems.length]);
+    }, [dispatch, items.length]);
 
-    const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 3;
+    const skeletonCount = items.length > 0 ? items.length : 3;
 
     return (
         <SectionWrapper>
@@ -46,7 +46,7 @@ function FaqSection() {
                     <p className="text-red-500">{error}</p>
                 ) : (
                     <GenericSlider
-                        items={visibleItems}
+                        items={items}
                         renderSlide={(question, index) => question ? <FaqCard key={index} question={question} /> : null}
                         showCounter={true}
                         titleBtnLabel="View All FAQ’s"

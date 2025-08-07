@@ -5,7 +5,7 @@ type CardProps = {
 
 function AchievementsCard({ title, description }: CardProps) {
     return (
-        <div className='
+        <div className='h-full flex flex-col
             p-[30px] md:p-[10%]
             border-white90 dark:border-gray15 border
             shadow-[0px_0px_0px_10px_rgba(0,0,0,0.02)] dark:shadow-[0px_0px_0px_10px_#191919]

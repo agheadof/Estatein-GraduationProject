@@ -1,162 +1,159 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
-import TitleBtn from '../../ui/TitleBtn'
-import { NextArrowIcon, PrevArrowIcon } from '../../icons/SliderArrows'
+import React, { useEffect, useRef, useState } from "react"
+import { useKeenSlider } from "keen-slider/react"
+import "keen-slider/keen-slider.min.css"
+import TitleBtn from "../../ui/TitleBtn"
+import { NextArrowIcon, PrevArrowIcon } from "../../icons/SliderArrows"
 
 type Props<T> = {
-    items: T[]
-    renderSlide: (item: T, index: number) => React.ReactNode
-    slidesPerView?: number
-    showCounter?: boolean
-    titleBtnLabel?: string
+  items: T[]
+  renderSlide: (item: T, index: number) => React.ReactNode
+  slidesPerView?: number
+  showCounter?: boolean
+  titleBtnLabel?: string
 }
 
 const GenericSlider = <T,>({
-    items,
-    renderSlide,
-    slidesPerView = 3,
-    showCounter = true,
-    titleBtnLabel = '',
+  items,
+  renderSlide,
+  slidesPerView = 3,
+  showCounter = true,
+  titleBtnLabel = "",
 }: Props<T>) => {
-    const prevRef = useRef<HTMLButtonElement | null>(null)
-    const nextRef = useRef<HTMLButtonElement | null>(null)
-    const [currentGroup, setCurrentGroup] = useState(1)
-    const [isBeginning, setIsBeginning] = useState(true)
-    const [isEnd, setIsEnd] = useState(false)
+  const prevRef = useRef<HTMLButtonElement | null>(null)
+  const nextRef = useRef<HTMLButtonElement | null>(null)
+  const [currentGroup, setCurrentGroup] = useState(1)
+  const [isBeginning, setIsBeginning] = useState(true)
+  const [isEnd, setIsEnd] = useState(false)
+  const [currentSlidesPerGroup, setCurrentSlidesPerGroup] =
+    useState(slidesPerView)
 
-    const [currentSlidesPerGroup, setCurrentSlidesPerGroup] = useState(3)
+  const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
+    slides: {
+      perView: currentSlidesPerGroup,
+      spacing: 30,
+    },
+    rubberband: false,
+    breakpoints: {
+      "(max-width: 767px)": {
+        slides: { perView: 1, spacing: 30 },
+      },
+      "(min-width: 768px) and (max-width: 991px)": {
+        slides: { perView: 2, spacing: 30 },
+      },
+      "(min-width: 992px)": {
+        slides: { perView: slidesPerView, spacing: 30 },
+      },
+    },
+    created(slider) {
+      updateNav(slider)
+    },
+    slideChanged(slider) {
+      updateNav(slider)
+    },
+  })
 
-    useEffect(() => {
-        const handleResize = () => {
-            const width = window.innerWidth
-            if (width >= 992) {
-                setCurrentSlidesPerGroup(slidesPerView)
-            } else if (width >= 768) {
-                setCurrentSlidesPerGroup(2)
-            } else {
-                setCurrentSlidesPerGroup(1)
-            }
-        }
+  const updateNav = (slider: any) => {
+    const perView = slider.options.slides.perView || 1
+    const group = Math.floor(slider.track.details.rel / perView) + 1
+    setCurrentGroup(group)
+    setIsBeginning(slider.track.details.rel === 0)
+    setIsEnd(slider.track.details.rel + perView >= items.length)
+  }
 
-        handleResize()
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [slidesPerView])
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth
+      if (width >= 992) {
+        setCurrentSlidesPerGroup(slidesPerView)
+      } else if (width >= 768) {
+        setCurrentSlidesPerGroup(2)
+      } else {
+        setCurrentSlidesPerGroup(1)
+      }
+    }
 
-    const totalGroups = Math.ceil(items.length / currentSlidesPerGroup)
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [slidesPerView])
 
-    return (
-        <div className="w-full mt-[80px]">
-            <Swiper
+  const totalGroups = Math.ceil(items.length / currentSlidesPerGroup)
 
-                modules={[Navigation]}
-                navigation={{
-                    prevEl: prevRef.current,
-                    nextEl: nextRef.current,
-                }}
-                onBeforeInit={(swiper) => {
-                    if (
-                        swiper.params?.navigation !== undefined &&
-                        typeof swiper.params.navigation !== 'boolean'
-                    ) {
-                        swiper.params.navigation.prevEl = prevRef.current
-                        swiper.params.navigation.nextEl = nextRef.current
-                    }
-                }}
-                spaceBetween={30}
-                loop={false}
-                watchOverflow={true}
-                onSlideChange={(swiper) => {
-                    const lastVisibleIndex = swiper.activeIndex + currentSlidesPerGroup - 1
-                    const groupIndex = Math.floor(lastVisibleIndex / currentSlidesPerGroup) + 1
-                    setCurrentGroup(groupIndex)
+  return (
+    <div className="w-full mt-[80px]">
+      <div ref={sliderRef} className="keen-slider mb-[50px] w-full">
+        {items.map((item, index) => (
+          <div key={index} className="keen-slider__slide">
+            {renderSlide(item, index)}
+          </div>
+        ))}
+      </div>
 
-                    setIsBeginning(swiper.isBeginning)
-                    setIsEnd(swiper.isEnd)
-                }}
-                breakpoints={{
-                    0: {
-                        slidesPerView: 1,
-                        slidesPerGroup: 1,
-                    },
-                    768: {
-                        slidesPerView: 2,
-                        slidesPerGroup: 2,
-                    },
-                    992: {
-                        slidesPerView: slidesPerView,
-                        slidesPerGroup: slidesPerView,
-                    },
-                }}
-                className=" w-full  mb-[50px]"
-            >
-                {items.map((item, index) => (
-                    <SwiperSlide key={index} >
-                        {renderSlide(item, index)}
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+      <div className="flex justify-between items-center pt-4 2xl:pt-5 border-t border-t-white90 dark:border-t-gray15">
+        {showCounter && (
+          <p className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block">
+            {String(currentGroup).padStart(2, "0")}
+            <span className="text-gray40 dark:text-gray60">
+              {" "}
+              of {String(totalGroups).padStart(2, "0")}
+            </span>
+          </p>
+        )}
 
-            <div className="flex justify-between items-center pt-4 2xl:pt-5 border-t border-t-white90 dark:border-t-gray15">
-                {showCounter && (
-                    <p className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block">
-                        {String(currentGroup).padStart(2, '0')}
-                        <span className="text-gray40 dark:text-gray60">
-                            {' '}
-                            of {String(totalGroups).padStart(2, '0')}
-                        </span>
-                    </p>
-                )}
+        {titleBtnLabel && (
+          <div className="block md:hidden">
+            <TitleBtn label={titleBtnLabel} className="whitespace-pre-wrap" />
+          </div>
+        )}
 
-                {titleBtnLabel && (
-                    <div className="block md:hidden">
-                        <TitleBtn label={titleBtnLabel} />
-                    </div>
-                )}
+        <div className="flex items-center gap-2.5">
+          <button
+            ref={prevRef}
+            disabled={isBeginning}
+            onClick={() => slider.current?.prev()}
+            className={`
+              p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px]
+              transition-all duration-300 border-white90 dark:border-gray15
+              ${
+                isBeginning
+                  ? "bg-inherit opacity-50 cursor-not-allowed"
+                  : "bg-white97 dark:bg-gray10 border-white90 dark:border-gray15"
+              }
+            `}
+          >
+            <PrevArrowIcon />
+          </button>
 
-                <div className="flex items-center gap-2.5">
-                    <button
-                        ref={prevRef}
-                        disabled={isBeginning}
-                        className={`
-                            p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px]
-                            transition-all duration-300 border-white90 dark:border-gray15
-                            ${isBeginning
-                                ? 'bg-inherit opacity-50 cursor-not-allowed'
-                                : 'bg-white97 dark:bg-gray10 border-white90 dark:border-gray15'}
-                        `}
-                    >
-                        <PrevArrowIcon />
-                    </button>
+          {showCounter && (
+            <p className="text-black dark:text-white text-base 2xl:text-xl font-medium block md:hidden">
+              {String(currentGroup).padStart(2, "0")}
+              <span className="text-gray40 dark:text-gray60">
+                {" "}
+                of {String(totalGroups).padStart(2, "0")}
+              </span>
+            </p>
+          )}
 
-                    {showCounter && (
-                        <p className="text-black dark:text-white text-base 2xl:text-xl font-medium block md:hidden">
-                            {String(currentGroup).padStart(2, '0')}
-                            <span className="text-gray40 dark:text-gray60">
-                                {' '}
-                                of {String(totalGroups).padStart(2, '0')}
-                            </span>
-                        </p>
-                    )}
-
-                    <button
-                        ref={nextRef}
-                        disabled={isEnd}
-                        className={`
-                            p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px]
-                            transition-all duration-300 border-white90 dark:border-gray15
-                            ${isEnd
-                                ? 'bg-inherit opacity-50 cursor-not-allowed'
-                                : 'bg-white97 dark:bg-gray10'}
-                        `}
-                    >
-                        <NextArrowIcon />
-                    </button>
-                </div>
-            </div>
+          <button
+            ref={nextRef}
+            disabled={isEnd}
+            onClick={() => slider.current?.next()}
+            className={`
+              p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px]
+              transition-all duration-300 border-white90 dark:border-gray15
+              ${
+                isEnd
+                  ? "bg-inherit opacity-50 cursor-not-allowed"
+                  : "bg-white97 dark:bg-gray10"
+              }
+            `}
+          >
+            <NextArrowIcon />
+          </button>
         </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 export default GenericSlider

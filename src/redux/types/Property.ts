@@ -1,5 +1,5 @@
+import type { PropertyType } from '../../types/Property'
 import type { RootState } from '../store'
-import type { PropertyType } from '../slices/propertiesSlice'
 
 export const selectPropertiesCardsData = (state: RootState) =>
     state.properties.all

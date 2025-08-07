@@ -1,4 +1,3 @@
-// src/redux/slices/bannerSlice.ts
 import { createSlice } from "@reduxjs/toolkit";
 
 interface BannerState {

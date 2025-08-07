@@ -6,6 +6,9 @@ import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
 import PropertiesCard from '../../components/cards/PropertiesCard'
 import { SectionWrapper } from '../../layouts/SectionWrapper'
 import Title from '../../components/shared/Title'
+import { motion } from 'framer-motion';
+import { containerVariants, defaultMotionConfig, itemVariants } from '../../utlis/Anamation';
+import type { PropertyType } from '../../types/Property'
 
 type Props = {
   showTags?: boolean;
@@ -36,7 +39,9 @@ function PropertiesSection({
 
     return (
         <SectionWrapper>
-            <div className="mt-[80px] lg-custom:mt-[120px] 2xl:mt-[150px]">
+            <motion.div className="mt-[80px] lg-custom:mt-[120px] 2xl:mt-[150px]"  {...defaultMotionConfig}
+
+        variants={containerVariants}>
                 <Title
                     heading={heading}
                     paragraph={paragraph}
@@ -81,22 +86,24 @@ function PropertiesSection({
                 ) : error ? (
                     <p className="text-red-500">{error}</p>
                 ) : (
-                    <GenericSlider
+                    <GenericSlider<PropertyType>
                         items={properties}
-                        renderSlide={(property) => (
+                        renderSlide={(property, index) => (
+                          <motion.div key={index} variants={itemVariants}>
                             <PropertiesCard
-                                key={property.id}
+                                key={index}
                                 property={property}
                                 showDetails={showDetails}
                                 showTags={showTags}
                             />
+                            </motion.div>
                         )}
                         slidesPerView={3}
                         showCounter={true}
                         titleBtnLabel="View All Properties"
                     />
                 )}
-            </div>
+            </motion.div>
         </SectionWrapper>
     )
 }

@@ -1,28 +1,30 @@
-import { type PropertyType } from "../../redux/slices/propertiesSlice"
+import { shallowEqual } from "react-redux"
+import { useAppSelector } from "../../redux/hooks"
 
-interface FeaturesProps {
-  property: PropertyType
-  loading?: boolean
-  error?: string | null
-}
+const KeyFeaturesComponent = () => {
+  const property = useAppSelector((state) => {
+    let error = state.properties.error
+    let loading = state.properties.loading
+    let current = state.properties.current
+    return { error, loading, current }
+  }, shallowEqual)
 
-const KeyFeaturesComponent = ({ property, error, loading }: FeaturesProps) => {
   return (
     <div className="p-5 lg-custom:p-10 2xl:p-[50px] rounded-xl border border-gray15 flex flex-col gap-5 lg-custom:gap-10 2xl:gap-[50px] w-full lg-custom:w-1/2">
       <h3 className="text-white font-semibold text-lg leading-[150%] lg-custom:text-xl 2xl:text-2xl">
         Key Features and Amenities
       </h3>
 
-      {loading ? (
+      {property.loading ? (
         <p className="text-white text-center">Loading...</p>
-      ) : error ? (
-        <p className="text-red-500 text-center">{error}</p>
+      ) : property.error ? (
+        <p className="text-red-500 text-center">{property.error}</p>
       ) : (
         <div className="flex flex-wrap gap-3">
-          {property.features &&
-            property.features.map((feature: string, index: number) => (
+          {property.current?.features &&
+            property.current?.features.map((feature: string, index: number) => (
               <div
-                key={`${property.id}-${index}`}
+                key={`${property.current?.id}-${index}`}
                 className="flex items-center gap-2 border-l border-purple60 px-3 py-2 bg-[linear-gradient(to_right,#1A1A1A_0%,#1A1A1A00_100%)] rounded-md"
               >
                 <img
