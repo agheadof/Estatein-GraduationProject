@@ -1,10 +1,10 @@
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
 
 interface NavItemProps {
-  to: string
-  label: string
-  onClick?: () => void
-  mobile?: boolean
+  to: string;
+  label: string;
+  onClick?: () => void;
+  mobile?: boolean;
 }
 
 const NavItem: React.FC<NavItemProps> = ({
@@ -29,7 +29,7 @@ const NavItem: React.FC<NavItemProps> = ({
     >
       {label}
     </NavLink>
-  )
-}
+  );
+};
 
-export default NavItem
+export default NavItem;
