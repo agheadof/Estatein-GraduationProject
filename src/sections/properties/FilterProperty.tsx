@@ -49,7 +49,7 @@ const FilterProperty = () => {
   ];
 
   return (
-    <SectionWrapper className="mt-0 lg-custom:-mt-12 2xl:-mt-16 py-5 lg:py-0 w-full huge:container huge:mx-auto">
+    <SectionWrapper className="mt-0 lg-custom:-mt-12 2xl:-mt-16 py-5 lg:py-0 w-full">
       {/* Search Bar Animation */}
       <motion.div
                 {...FilterMotionConfig}

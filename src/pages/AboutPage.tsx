@@ -8,7 +8,7 @@ import ValuedClientsSection from "../sections/about/ValuedClientsSection"
 
 function AboutPage() {
   return (
-    <div className="huge:max-w-[1920px] huge:mx-auto">
+    <div className="">
       <Hero2 />
       <OurValues />
       <AchievementsSection/>

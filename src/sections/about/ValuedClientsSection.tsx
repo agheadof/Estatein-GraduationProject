@@ -4,7 +4,7 @@ import { SectionWrapper } from "../../layouts/SectionWrapper";
 
 function ValuedClientsSection() {
   return (
-    <SectionWrapper className="mb-20 lg-custom:mb-[120px] 2xl:mb-[150px]">
+    <SectionWrapper className="pb-20 lg-custom:mb-[120px] 2xl:mb-[150px]">
         <Title 
         heading="Our Valued Clients"
         paragraph="At Estatein, we have had the privilege of working with a diverse range of clients across various industries. Here are some of the clients we've had the pleasure of serving"

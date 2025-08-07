@@ -22,9 +22,9 @@ const TeamSection = () => {
   const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 4;
 
   return (
-    <SectionWrapper>
+    <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
       <motion.section
-        className="flex flex-col gap-4 lg-custom:gap-[60px] 2xl:gap-20 mb-20 lg-custom:mb-[120px] 2xl:mb-[150px]"
+        className="flex flex-col gap-4 lg-custom:gap-[60px] 2xl:gap-20 "
         {...defaultMotionConfig}
         variants={containerVariants}
       >

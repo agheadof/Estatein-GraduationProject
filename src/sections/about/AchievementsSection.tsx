@@ -21,7 +21,7 @@ function AchievementsSection() {
 
   return (
     <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
-      <motion.div
+      <motion.section
         {...defaultMotionConfig}
         variants={containerVariants}
       >
@@ -66,7 +66,7 @@ function AchievementsSection() {
             ))}
           </div>
         )}
-      </motion.div>
+      </motion.section>
     </SectionWrapper>
   );
 }

@@ -2,12 +2,13 @@ import CommonCard from "../../components/cards/CommonCard";
 import UnlockCardComponent from "../../components/cards/UnlockCardComponent";
 import Title from "../../components/shared/Title";
 import { managementData } from "../../data/managementData";
+import { SectionWrapper } from "../../layouts/SectionWrapper";
 
 const ManagementSection = () => {
   return (
+    <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
     <section
       id="management"
-      className="pb-[61px] lg-custom:pb-[90px] 2xl:pb-[110px]"
     >
       <Title
         titleStyle="pb-10 lg-custom:pb-[60px] 2xl:pb-20"
@@ -36,6 +37,7 @@ const ManagementSection = () => {
         />
       </div>
     </section>
+    </SectionWrapper>
   );
 };
 

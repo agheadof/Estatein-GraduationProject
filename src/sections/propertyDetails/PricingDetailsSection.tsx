@@ -6,8 +6,8 @@ import { SectionWrapper } from "../../layouts/SectionWrapper";
 
 const PricingDetailsSection = () => {
   return (
-    <SectionWrapper>
-      <section className="pb-[61px] lg-custom:pb-[90px] 2xl:pb-[110px]">
+    <SectionWrapper >
+      <section className="">
         <Title
           titleStyle="pb-10 lg-custom:pb-[60px] 2xl:pb-20"
           heading="Comprehensive Pricing Details"
