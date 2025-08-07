@@ -7,7 +7,7 @@ import AboutPage from './pages/AboutPage'
 import ServicesPage from './pages/ServicesPage'
 import PropertiesPage from './pages/PropertiesPage'
 import ContactPage from './pages/ContactPage'
-import PropertyDetails from './pages/PropertyDetails'
+import PropertyDetailsPage from './pages/PropertyDetailsPage'
 import MainLayout from './layouts/MainLayout'
 import { Provider } from 'react-redux'
 import store from './redux/store'
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       { path: 'services', element: <ServicesPage /> },
       { path: 'properties', element: <PropertiesPage /> },
       { path: 'contact', element: <ContactPage /> },
-      { path: 'properties/:id', element: <PropertyDetails /> }, 
+      { path: 'properties/:id', element: <PropertyDetailsPage /> }, 
     ],
   },
 ])

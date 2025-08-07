@@ -1,15 +1,14 @@
 
 import { createSlice } from '@reduxjs/toolkit'
 import { createFetchThunk } from '../thunks/createFetchThunk'
-import { Icon1 as BedIcon, Icon2 as BathIcon, Icon3 as VillaIcon } from '../../components/icons/PropertiesIcons'
-import type { ReactNode } from 'react'
+
 
 export type PropertyType = {
     id: string
     image: string
     title: string
     desc: string
-    details: { label: string; icon: ReactNode }[]
+    details: { label: string; icon: string }[]
     Price: string
 
     descriptionLong?: string
@@ -27,16 +26,16 @@ const transformProperty = (property: any, id: string): PropertyType => ({
     Price: `$${property.price?.toLocaleString() || 'N/A'}`,
     details: [
         {
-            label: `${property.bedrooms || 0}-Bedroom`,
-            icon: <BedIcon />,
+            label: `${property.bedrooms|| 0}-Bedroom`,
+            icon: "bed",
         },
         {
-            label: `${property.bathrooms || 0}-Bathroom`,
-            icon: <BathIcon />,
+            label: `${property.bathrooms|| 0}-Bathroom`,
+            icon: "bath",
         },
         {
-            label: `-Villa`,
-            icon: <VillaIcon />,
+            label: `Villa`,
+            icon: "villa",
         },
     ],
 

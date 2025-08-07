@@ -8,7 +8,7 @@ type TopBannerProps = {
 const TopBanner = ({ isVisible, onClose }: TopBannerProps) => {
   return (
     <div
-      className={`relative flex justify-start md:justify-center border-b border-white90 dark:border-gray15 bg-white97 dark:bg-gray10 pt-10 pb-5 px-4 md:py-3.5 2xl:py-[18px] 2xl:px-8 bg-[url("/assets/images/TopBanner/AbstractDesign.png")] bg-no-repeat bg-cover 
+      className={`relative z-50 flex justify-start md:justify-center border-b border-white90 dark:border-gray15 bg-white97 dark:bg-gray10 pt-10 pb-5 px-4 md:py-3.5 2xl:py-[18px] 2xl:px-8 bg-[url("/assets/images/TopBanner/AbstractDesign.png")] bg-no-repeat bg-cover 
          transition-all duration-500 ease-in-out transform 
           ${isVisible ? "translate-y-0 opacity-100" : "-translate-y-full"}
    `}

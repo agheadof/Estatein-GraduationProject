@@ -1,9 +1,9 @@
 import FormInput from "./FormInput";
-import type { FormData } from "../../types/Form";
+import type { CustomFormData } from "../../types/Form";
 
 type Props = {
-  formData: FormData;
-  errors: Partial<Record<keyof FormData, string>>; // Corrected type
+  formData: CustomFormData;
+  errors: Partial<Record<keyof CustomFormData, string>>; 
   handleChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -28,9 +28,9 @@ function SharedFields({ formData, handleChange, errors }: Props) {
         placeholder="Enter Last Name"
         value={formData.lastName || ""}
         onChange={handleChange}
-        error={errors.lastName} // Fixed typo from errors.LastName
+        error={errors.lastName} 
       />
-      {/* <FormInput
+      <FormInput
         label="Email"
         name="email"
         placeholder="Enter your Email"
@@ -47,7 +47,7 @@ function SharedFields({ formData, handleChange, errors }: Props) {
         onChange={handleChange}
         error={errors.phone}
         type="tel"
-      /> */}
+      />
     </>
   );
 }

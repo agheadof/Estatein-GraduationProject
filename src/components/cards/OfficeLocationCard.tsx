@@ -1,6 +1,8 @@
+import { commonCardMotionConfig } from "../../utlis/Anamation";
 import { EmailIcon, LocationIcon, PhoneIcon } from "../icons/FormIcons";
 import LocationInfoBox from "../ui/LocationInfoBox";
 import MainButton from "../ui/MainButton";
+import { motion } from "framer-motion";
 
 type OfficeLocationCardProps = {
   branch: string;
@@ -21,7 +23,8 @@ function OfficeLocationCard({
   city,
 }: OfficeLocationCardProps) {
   return (
-    <div className="flex flex-col min-h-[409px] lg-custom:min-w-[372px] 2xl:min-w-[472px] border border-white90 dark:border-gray15 rounded-lg 2xl:rounded-xl p-6 lg-custom:p-10 2xl:p-[50px] gap-6 lg-custom:gap-[30px] 2xl:gap-10 transition-all duration-300 transform hover:scale-[1.01]  hover:shadow-[0px_10px_20px_rgba(112,59,247,0.3)] dark:hover:shadow-[0px_10px_20px_rgba(148,108,249,0.2)] hover:border-purple60/50">
+    <motion.div
+  {...commonCardMotionConfig} className="flex flex-col min-h-[409px] lg-custom:min-w-[372px] 2xl:min-w-[472px] border border-white90 dark:border-gray15 rounded-lg 2xl:rounded-xl p-6 lg-custom:p-10 2xl:p-[50px] gap-6 lg-custom:gap-[30px] 2xl:gap-10 transition-all duration-300 transform hover:scale-[1.01]  hover:shadow-[0px_10px_20px_rgba(112,59,247,0.3)] dark:hover:shadow-[0px_10px_20px_rgba(148,108,249,0.2)] hover:border-purple60/50">
       <div>
       <p className="text-sm/[1.5] 2xl:text-lg font-medium text-black dark:text-white mb-1 lg-custom:mb-1.5 2xl:mb-2.5">
         {branch}
@@ -57,8 +60,7 @@ function OfficeLocationCard({
         />
       </div>
       <MainButton variant="normalPurple" className="2xl:text-lg" >Get Direction</MainButton>
-    </div>
-  );
+    </motion.div>);
 }
 
 export default OfficeLocationCard;
