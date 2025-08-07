@@ -26,7 +26,7 @@ const ExperienceSectionCard = ({ step, title, description }: ExperienceSectionCa
           <h2 className="text-black dark:text-white font-semibold text-lg md:text-xl huge:text-[26px] leading-[150%]">
             {title}
           </h2>
-          <p className="fot-medium text-sm md:text-base huge:text-lg leading-[150%] text-gray40 dark:text-gray60">
+          <p className="font-medium text-sm md:text-base huge:text-lg leading-[150%] text-gray40 dark:text-gray60">
             {description}
           </p>
         </div>
