@@ -39,13 +39,14 @@ export type CheckboxProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export type FormData = {
+
+export type CustomFormData = {
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   inquiryType?: string;
-  hearAboutUs?: string; 
+  hearAboutUs?: string;
   selectedProperty?: string;
   location?: string;
   propertyType?: string;
@@ -53,7 +54,7 @@ export type FormData = {
   bedrooms?: string;
   budget?: string;
   message: string;
-  preferredContact?: string[];
+  preferredContact?: string;
 };
 
 export type FormType = "inquiry" | "property" | "detailed";

@@ -1,23 +1,5 @@
-
-import { createSlice } from '@reduxjs/toolkit'
-import { createFetchThunk } from '../thunks/createFetchThunk'
-import { Icon1 as BedIcon, Icon2 as BathIcon, Icon3 as VillaIcon } from '../../components/icons/PropertiesIcons'
-import type { ReactNode } from 'react'
-
-export type PropertyType = {
-    id: string
-    image: string
-    title: string
-    desc: string
-    details: { label: string; icon: ReactNode }[]
-    Price: string
-
-    descriptionLong?: string
-    gallery?: string[]
-    location?: string
-    [key: string]: any
-    tags?: string;
-}
+import type { PropertyType } from "../../types/Property";
+import { createGenericSlice } from "./createGenericSlice";
 
 const transformProperty = (property: any, id: string): PropertyType => ({
     id,
@@ -27,16 +9,16 @@ const transformProperty = (property: any, id: string): PropertyType => ({
     Price: `$${property.price?.toLocaleString() || 'N/A'}`,
     details: [
         {
-            label: `${property.bedrooms || 0}-Bedroom`,
-            icon: <BedIcon />,
+            label: `${property.bedrooms|| 0}-Bedroom`,
+            icon: "bed",
         },
         {
-            label: `${property.bathrooms || 0}-Bathroom`,
-            icon: <BathIcon />,
+            label: `${property.bathrooms|| 0}-Bathroom`,
+            icon: "bath",
         },
         {
-            label: `-Villa`,
-            icon: <VillaIcon />,
+            label: `Villa`,
+            icon: "villa",
         },
     ],
 
@@ -46,39 +28,11 @@ const transformProperty = (property: any, id: string): PropertyType => ({
     tags: "Coastal Escapes - Where Waves Beckon",
 })
 
-export const fetchProperties = createFetchThunk<PropertyType>("properties", "properties",  transformProperty);
-
-type PropertiesState = {
-  all: PropertyType[]
-  loading: boolean
-  error: string | null
-}
-
-const initialState: PropertiesState = {
-    all: [],
-    // properties: [],
-    loading: false,
-    error: null,
-}
-
-const propertiesSlice = createSlice({
+const { slice, fetchEntities } = createGenericSlice<PropertyType, PropertyType>({
   name: "properties",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchProperties.pending, (state) => {
-        state.loading = true
-      })
-      .addCase(fetchProperties.fulfilled, (state, action) => {
-        state.loading = false
-        state.all = action.payload
-      })
-      .addCase(fetchProperties.rejected, (state, action) => {
-        state.loading = false
-        state.error = action.error.message || "Failed to fetch"
-      })
-  },
-})
+  transform: transformProperty,
+  itemsPerPage: 4,
+});
 
-export default propertiesSlice.reducer
+export const fetchProperties = fetchEntities;
+export default slice.reducer;

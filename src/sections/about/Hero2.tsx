@@ -20,7 +20,6 @@ const Hero2 = () => {
             />
             <CountUpComponent />
           </div>
-
           <div className="relative border border-white90 dark:border-gray15 rounded-xl overflow-hidden lg-custom:w-[48%] ">
             <img
               src="/assets/images/AbstractDesign5.png"

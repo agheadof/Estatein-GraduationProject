@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import MainButton from "../ui/MainButton";
 import { useNavigate } from 'react-router-dom';
+import { Icon1 as BedIcon, Icon2 as BathIcon, Icon3 as VillaIcon } from '../../components/icons/PropertiesIcons'
 type Props = {
     property: {
         image: string;
@@ -8,7 +9,7 @@ type Props = {
         desc: string;
         details: {
             label: string;
-            icon: ReactNode;
+            icon: string;
         }[];
         Price: string;
         id: string
@@ -17,8 +18,12 @@ type Props = {
     };
     showDetails?: boolean;
     showTags?: boolean;
-
 };
+const iconMap: Record<string, ReactNode> = {
+    bed: <BedIcon />,
+    bath: <BathIcon />,
+    villa: <VillaIcon />,
+}
 function PropertiesCard({ property, showDetails = true, showTags = false }: Props) {
     const navigate = useNavigate();
     return (
@@ -41,7 +46,7 @@ function PropertiesCard({ property, showDetails = true, showTags = false }: Prop
                 <div className=" flex flex-wrap gap-1.5 2xl:gap-2.5 mb-5 lg-custom:mb-6 2xl:mb-[30px]">
                     {showDetails && property.details?.map((item, index) => (
                         <div key={index} className="flex justify-center items-center py-1.5 2xl:py-2 px-3.5 2xl:px-3.5 dark:bg-gray10 bg-purple97 border dark:border-gray15 border-white90 rounded-[28px] gap-1">
-                            <span className=" dark:text-white text-black w-5 2xl:w-6 h-5 2xl:h-6 ">{item.icon}</span>
+                            <span className=" dark:text-white text-black w-5 2xl:w-6 h-5 2xl:h-6 ">{iconMap[item.icon]}</span>
                             <span className=" dark:text-white text-black text-sm 2xl:text-lg font-medium whitespace-nowrap ">{item.label}</span>
                         </div>
                     ))}
