@@ -15,7 +15,7 @@ const TeamCardComponent = ({ name, role, image }: TeamCardProps) => {
           alt={name}
           className="rounded-[10px] 2xl:rounded-xl w-full h-[268px] lg-custom:h-[220px] 2xl:h-[253px] object-top object-cover "
         />
-        <div className="bg-purple90 dark:bg-purple60 absolute bottom-0 py-3.5 px-[26px] rounded-[43px] transform translate-y-1/2 left-1/2 -translate-x-1/2 flex items-center justify-center gap-3 cursor-pointer">
+        <div className="bg-purple70 dark:bg-purple60 absolute bottom-0 py-3.5 px-[26px] rounded-[43px] transform translate-y-1/2 left-1/2 -translate-x-1/2 flex items-center justify-center gap-3 cursor-pointer">
           <img
             src="/assets/icons/Team/twitter.svg"
             alt="icon"
