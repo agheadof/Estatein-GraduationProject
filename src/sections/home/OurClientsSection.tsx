@@ -78,7 +78,7 @@ function OurClientsSection() {
                         titleBtnLabel="View All Testimonials"
                     />
                 )}
-                <button className="text-white absolute left-5 bottom-[75px] text-sm underline cursor-pointer" onClick={()=>setShowReviewModal(true)}>Add a review</button>
+                <button className="text-white absolute left-[50%] -translate-x-[50%] bottom-[0px] text-sm underline cursor-pointer" onClick={()=>setShowReviewModal(true)}>Add a review</button>
                 {showReviewModal &&
                 <ReviewModal closeModal={handleCloseModal}/> }
             </div>

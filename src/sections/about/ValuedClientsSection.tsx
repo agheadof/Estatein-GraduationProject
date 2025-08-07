@@ -15,7 +15,6 @@ function ValuedClientsSection() {
         <div className="cards_container flex flex-col lg-custom:flex-row items-center gap-10 2xl:gap-[50px]">
             {/* cards go here */}
         </div>
-
     </SectionWrapper>
   )
 }
