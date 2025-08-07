@@ -1,16 +1,14 @@
-import { type PropertyType } from "../../redux/slices/propertiesSlice"
+import { shallowEqual } from "react-redux"
+import { useAppSelector } from "../../redux/hooks"
 
-interface DescriptionProps {
-  property: PropertyType
-  loading?: boolean
-  error?: string | null
-}
+const DescriptionComponent = () => {
+  const property = useAppSelector((state) => {
+    let error = state.properties.error
+    let loading = state.properties.loading
+    let current = state.properties.current
+    return { error, loading, current }
+  }, shallowEqual)
 
-const DescriptionComponent = ({
-  property,
-  error,
-  loading,
-}: DescriptionProps) => {
   const castingToNumber = (input: string) => {
     const result = input.replace(/\D/g, "").padStart(2, "0")
     return result
@@ -23,19 +21,19 @@ const DescriptionComponent = ({
           Description
         </h3>
 
-        {loading ? (
+        {property.loading ? (
           <p className="text-white">Loading...</p>
-        ) : error ? (
-          <p className="text-red-500">{error}</p>
+        ) : property.error ? (
+          <p className="text-red-500">{property.error}</p>
         ) : (
           <p className="text-gray60 font-medium text-sm leading-[150%] lg-custom:text-base 2xl:text-lg">
-            {property?.descriptionLong || "No description available."}
+            {property.current?.descriptionLong || "No description available."}
           </p>
         )}
       </div>
 
-      {!loading && !error && property && (
-        <div className="flex gap-20 border-t border-t-gray15 pt-4">
+      {!property.loading && !property.error && property.current && (
+        <div className="flex flex-wrap md:flex-nowrap gap-10 md:gap-5 lg-custom:gap-10 border-t border-t-gray15 pt-4 justify-between">
           <div className="flex flex-col">
             <div className="flex gap-1 lg-custom:gap-1.5">
               <img
@@ -48,40 +46,49 @@ const DescriptionComponent = ({
               </span>
             </div>
             <span className="text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-lg">
-              {castingToNumber(property.details[0].label)}
+              {castingToNumber(property.current.details[0].label)}
             </span>
           </div>
 
-          <div className="flex flex-col">
-            <div className="flex gap-1 lg-custom:gap-1.5">
-              <img
-                src="/assets/icons/FeaturedProperties/bathroom.svg"
-                alt="icon"
-                className="w-5 h-5 2xl:w-6 2xl:h-6"
-              />
-              <span className="text-gray60 font-medium leading-[150%] text-sm 2xl:text-lg">
-                Bathrooms
+          <div className="flex gap-2.5">
+            <span className="h-full w-px bg-gray15 align-middle" />
+
+            <div className="flex flex-col">
+              <div className="flex gap-1 lg-custom:gap-1.5">
+                <img
+                  src="/assets/icons/FeaturedProperties/bathroom.svg"
+                  alt="icon"
+                  className="w-5 h-5 2xl:w-6 2xl:h-6"
+                />
+                <span className="text-gray60 font-medium leading-[150%] text-sm 2xl:text-lg">
+                  Bathrooms
+                </span>
+              </div>
+              <span className="text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-lg">
+                {castingToNumber(property.current.details[1].label)}
               </span>
             </div>
-            <span className="text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-lg">
-              {castingToNumber(property.details[1].label)}
-            </span>
           </div>
 
-          <div className="flex flex-col">
-            <div className="flex gap-1 lg-custom:gap-1.5">
-              <img
-                src="/assets/icons/FeaturedProperties/area.svg"
-                alt="icon"
-                className="w-5 h-5 2xl:w-6 2xl:h-6"
-              />
-              <span className="text-gray60 font-medium leading-[150%] text-sm 2xl:text-lg">
-                Area (m²)
+          <div className="flex gap-2.5 w-full md:w-auto border-t border-t-gray15 pt-4 md:border-0 md:pt-0">
+            <span className="hidden md:flex h-full w-px bg-gray15 align-middle" />
+            <div className="flex flex-col">
+              <div className="flex gap-1 lg-custom:gap-1.5">
+                <img
+                  src="/assets/icons/FeaturedProperties/area.svg"
+                  alt="icon"
+                  className="w-5 h-5 2xl:w-6 2xl:h-6"
+                />
+                <span className="text-gray60 font-medium leading-[150%] text-sm 2xl:text-lg text-nowrap">
+                  Area (m²)
+                </span>
+              </div>
+              <span className="text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-lg">
+                {`${castingToNumber(
+                  property.current.details[2].label
+                )} Square Feet`}
               </span>
             </div>
-            <span className="text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-lg">
-              {castingToNumber(property.details[2].label)}
-            </span>
           </div>
         </div>
       )}

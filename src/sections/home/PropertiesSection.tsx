@@ -8,6 +8,7 @@ import { SectionWrapper } from '../../layouts/SectionWrapper'
 import Title from '../../components/shared/Title'
 import { motion } from 'framer-motion';
 import { containerVariants, defaultMotionConfig, itemVariants } from '../../utlis/Anamation';
+import type { PropertyType } from '../../types/Property'
 
 type Props = {
   showTags?: boolean;
@@ -85,12 +86,12 @@ function PropertiesSection({
                 ) : error ? (
                     <p className="text-red-500">{error}</p>
                 ) : (
-                    <GenericSlider
+                    <GenericSlider<PropertyType>
                         items={properties}
-                        renderSlide={(property) => (
-                          <motion.div key={property.id} variants={itemVariants}>
+                        renderSlide={(property, index) => (
+                          <motion.div key={index} variants={itemVariants}>
                             <PropertiesCard
-                                key={property.id}
+                                key={index}
                                 property={property}
                                 showDetails={showDetails}
                                 showTags={showTags}
