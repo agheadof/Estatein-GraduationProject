@@ -7,7 +7,7 @@ export type PropertyType = {
   image: string
   title: string
   desc: string
-  details: { label: string; icon: string | React.ReactNode }[]
+  details: { label: string; icon: string }[]
   Price: string
 
   descriptionLong?: string
