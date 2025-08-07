@@ -12,6 +12,7 @@ type Props<T> = {
   slidesPerView?: number
   showCounter?: boolean
   titleBtnLabel?: string
+  counterClassName?: string
 }
 
 const GenericSlider = <T,>({
@@ -20,6 +21,7 @@ const GenericSlider = <T,>({
   slidesPerView = 3,
   showCounter = true,
   titleBtnLabel = "",
+  counterClassName = "",
 }: Props<T>) => {
   const prevRef = useRef<HTMLButtonElement | null>(null)
   const nextRef = useRef<HTMLButtonElement | null>(null)
@@ -55,11 +57,16 @@ const GenericSlider = <T,>({
   })
 
   const updateNav = (slider: any) => {
-    const perView = slider.options.slides.perView || 1
-    const group = Math.floor(slider.track.details.rel / perView) + 1
-    setCurrentGroup(group)
-    setIsBeginning(slider.track.details.rel === 0)
-    setIsEnd(slider.track.details.rel + perView >= items.length)
+    const details = slider?.track?.details
+    const rel = details?.rel
+    const perView = slider?.options?.slides?.perView || 1
+
+    if (details && rel != null) {
+      const group = Math.ceil(rel / perView) + 1
+      setCurrentGroup(group)
+      setIsBeginning(rel === 0)
+      setIsEnd(rel + perView >= items.length)
+    }
   }
 
   useEffect(() => {

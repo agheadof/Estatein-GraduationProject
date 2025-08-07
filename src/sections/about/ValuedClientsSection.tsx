@@ -4,11 +4,11 @@ import GenericSlider from "../../components/shared/GenericSlider/GenericSlider"
 import Title from "../../components/shared/Title"
 import { SectionWrapper } from "../../layouts/SectionWrapper"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import { fetchClients } from "../../redux/thunks/clientThunk"
+import { fetchClients } from "../../redux/slices/clientsSlice"
 
 function ValuedClientsSection() {
   const dispatch = useAppDispatch()
-  const { data, error, loading } = useAppSelector((state) => state.clients)
+  const { items, error, loading } = useAppSelector((state) => state.clients)
   useEffect(() => {
     dispatch(fetchClients())
   }, [])
@@ -28,12 +28,13 @@ function ValuedClientsSection() {
           <p className="text-red-500">{error}</p>
         ) : (
           <GenericSlider
-            items={data}
+            items={items}
             renderSlide={(client, index) =>
               client ? <ClientCard key={index} {...client} /> : null
             }
             showCounter={true}
             slidesPerView={2}
+            counterClassName="justify-center md:justify-between"
           />
         )}
       </div>

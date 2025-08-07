@@ -51,23 +51,6 @@ select {
     auto;
 }
 
-@layer utilities {
-  .bg-gradient-custom {
-    background: linear-gradient(
-      95.93deg,
-      #262626 -26.82%,
-      rgba(38, 38, 38, 0) 40.46%
-    );
-  }
-
-  .bg-gradient-custom-light {
-    background: linear-gradient(
-      95.93deg,
-      #946cf9 -26.82%,
-      rgba(38, 38, 38, 0) 40.46%
-    );
-  }
-}
 .afasd {
   background-color: rgba(228, 228, 231, 1);
 }
