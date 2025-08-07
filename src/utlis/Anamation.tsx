@@ -16,7 +16,7 @@ export const FadeSlideUpText = ({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 1, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration, delay, ease: "easeOut" }}
@@ -42,7 +42,7 @@ export const FadeInMotion = ({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y }}
+      initial={{ opacity: 1, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration, delay, ease: "easeOut" }}
@@ -63,7 +63,7 @@ export const ZoomInFade = ({
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 1, scale: 0.8 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ delay, duration, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.4 }}
@@ -84,7 +84,7 @@ export const RotateFadeIn = ({
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, rotate: -10 }}
+      initial={{ opacity: 1, rotate: -10 }}
       whileInView={{ opacity: 1, rotate: 0 }}
       transition={{ delay, duration, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.3 }}
@@ -105,7 +105,7 @@ export const SlideRightFade = ({
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, x: 100 }}
+      initial={{ opacity: 1, x: 100 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ delay, duration, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.4 }}
@@ -126,7 +126,7 @@ export const ScaleIn = ({
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
+      initial={{ opacity: 1, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ delay, duration, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.4 }}
@@ -173,45 +173,45 @@ export const flipCardVariants = {
 export const defaultMotionConfig = {
   initial: "hidden",
   whileInView: "show",
-  viewport: { once: true, amount: 0.3 },
+  viewport: { once: true, amount: 0.20 },
 };
 
 export const titleMotionConfig = {
   initial: { opacity: 1, y: 40 },
   whileInView: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: easeIn },
-  viewport: { once: true, amount: 0.5 }, // 👈 مهم جداً
+  viewport: { once: true, amount: 0.5 },
 };
 
 export const commonCardMotionConfig = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 1, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.3 },
   transition: { duration: 0.6, ease: easeIn },
 };
 
 export const GenericSliderMotionConfig = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 1, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.3 },
   transition: { duration: 0.6, ease: easeOut },
 };
 
 export const SwiperSlideMotionConfig = {
-  initial: { opacity: 0, scale: 0.95 },
+  initial: { opacity: 1, scale: 0.95 },
   whileInView: { opacity: 1, scale: 1 },
   viewport: { once: true },
 };
 
 export const FilterMotionConfig = {
-  initial: { opacity: 0, y: 50 },
+  initial: { opacity: 1, y: 50 },
   whileInView: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: easeOut },
   viewport: { once: true, amount: 0.2 },
 };
 
 export const fadeUp = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 1, y: 60 },
   show: {
     opacity: 1,
     y: 0,
@@ -220,7 +220,7 @@ export const fadeUp = {
 };
 
 export const fadeLeft = {
-  hidden: { opacity: 0, x: -40 },
+  hidden: { opacity: 1, x: -40 },
   show: {
     opacity: 1,
     x: 0,
@@ -229,7 +229,7 @@ export const fadeLeft = {
 };
 
 export const fadeRight = {
-  hidden: { opacity: 0, x: 40 },
+  hidden: { opacity: 1, x: 40 },
   show: {
     opacity: 1,
     x: 0,
