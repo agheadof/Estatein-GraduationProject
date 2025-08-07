@@ -35,6 +35,7 @@ function ValuedClientsSection() {
             }
             showCounter={true}
             slidesPerView={2}
+            counterClassName="justify-center md:justify-between"
           />
         )}
       </div>

@@ -10,6 +10,7 @@ type Props<T> = {
   slidesPerView?: number
   showCounter?: boolean
   titleBtnLabel?: string
+  counterClassName?: string
 }
 
 const GenericSlider = <T,>({
@@ -18,6 +19,7 @@ const GenericSlider = <T,>({
   slidesPerView = 3,
   showCounter = true,
   titleBtnLabel = "",
+  counterClassName = "",
 }: Props<T>) => {
   const prevRef = useRef<HTMLButtonElement | null>(null)
   const nextRef = useRef<HTMLButtonElement | null>(null)
@@ -53,11 +55,16 @@ const GenericSlider = <T,>({
   })
 
   const updateNav = (slider: any) => {
-    const perView = slider.options.slides.perView || 1
-    const group = Math.floor(slider.track.details.rel / perView) + 1
-    setCurrentGroup(group)
-    setIsBeginning(slider.track.details.rel === 0)
-    setIsEnd(slider.track.details.rel + perView >= items.length)
+    const details = slider?.track?.details
+    const rel = details?.rel
+    const perView = slider?.options?.slides?.perView || 1
+
+    if (details && rel != null) {
+      const group = Math.ceil(rel / perView) + 1
+      setCurrentGroup(group)
+      setIsBeginning(rel === 0)
+      setIsEnd(rel + perView >= items.length)
+    }
   }
 
   useEffect(() => {
@@ -89,7 +96,9 @@ const GenericSlider = <T,>({
         ))}
       </div>
 
-      <div className="flex justify-between items-center pt-4 2xl:pt-5 border-t border-t-white90 dark:border-t-gray15">
+      <div
+        className={`${counterClassName} flex justify-between items-center pt-4 2xl:pt-5 border-t border-t-white90 dark:border-t-gray15`}
+      >
         {showCounter && (
           <p className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block">
             {String(currentGroup).padStart(2, "0")}
