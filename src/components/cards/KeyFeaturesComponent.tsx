@@ -25,7 +25,7 @@ const KeyFeaturesComponent = () => {
             property.current?.features.map((feature: string, index: number) => (
               <div
                 key={`${property.current?.id}-${index}`}
-                className="flex items-center gap-2 border-l border-purple60 px-3 py-2 bg-[linear-gradient(to_right,#1A1A1A_0%,#1A1A1A00_100%)] rounded-md"
+                className="flex items-center gap-2 border-l border-purple60 px-3 py-2 bg-[linear-gradient(to_right,#1A1A1A_0%,#1A1A1A00_100%)] "
               >
                 <img
                   src="/assets/icons/FeaturedProperties/FeaturesIcon.svg"
