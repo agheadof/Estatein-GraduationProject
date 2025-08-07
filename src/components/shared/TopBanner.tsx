@@ -15,7 +15,7 @@ const TopBanner = ({ isVisible, onClose }: TopBannerProps) => {
     >
       <div className="flex gap-1.5 2xl:gap-2.5 text-[10px] min-[380px]:text-xs md:text-sm 2xl:text-lg font-medium leading-[150%] text-black dark:text-white">
         <p>✨ Discover Your Dream Property with Estatein</p>
-        <Link to="/" className="underline">
+        <Link to="/" className="underline hover:text-purple60 duration-300">
           Learn More
         </Link>
       </div>
