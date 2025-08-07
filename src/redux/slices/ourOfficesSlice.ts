@@ -12,6 +12,7 @@ export type OfficeLocation = {
   phone: string;
   city: string;
   category: string;
+  mapLink: string;
 };
 
 interface OfficeLocationState {

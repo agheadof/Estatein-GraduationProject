@@ -1,12 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";
-import faqsReducer from "./slices/faqsSlice";
-import achievementReducer from "./slices/achievementSlice";
-import teamReducer from "./slices/teamSlice";
+import { configureStore } from "@reduxjs/toolkit"
+import faqsReducer from "./slices/faqsSlice"
+import achievementReducer from "./slices/achievementSlice"
+import teamReducer from "./slices/teamSlice"
 import officesReducer from "./slices/ourOfficesSlice"
 import propertiesReducer from "./slices/propertiesSlice"
-import testimonialsReducer from "./slices/testimonialsSlice";
-import themeReducer from "./slices/themeSlice";
-import bannerReducer from './slices/bannerSlice'
+import testimonialsReducer from "./slices/testimonialsSlice"
+import themeReducer from "./slices/themeSlice"
+import bannerReducer from "./slices/bannerSlice"
+import clientsReducer from "./slices/clientsSlice"
 
 const store = configureStore({
   reducer: {
@@ -18,10 +19,11 @@ const store = configureStore({
     testimonials: testimonialsReducer,
     offices: officesReducer,
     banner: bannerReducer,
+    clients: clientsReducer,
   },
-});
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
-export default store;
+export default store

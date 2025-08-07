@@ -1,31 +1,72 @@
 import { useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import type { Variants, Transition } from "framer-motion";
+
+import AlertIcon from "../icons/AlertIcon";
 
 type FormAlertProps = {
   message: string;
   onClose: () => void;
 };
 
+const backdropVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 0.5 },
+};
+const cardVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring", 
+      stiffness: 300,
+      damping: 20,
+    } as Transition, 
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.8,
+    transition: { duration: 0.2 },
+  },
+};
+
 function AlertMessage({ message, onClose }: FormAlertProps) {
   useEffect(() => {
-    const timer = setTimeout(() => {
-      onClose();
-    }, 3000); // Auto-close after 3 seconds
+    const timer = setTimeout(onClose, 2000);
     return () => clearTimeout(timer);
   }, [onClose]);
 
   return (
-    <div className="w-full bg-green-50 text-purple60 dark:bg-purple95 dark:text-green-100 border border-green-300 dark:border-purple60 shadow-sm rounded-md px-5 py-3 flex items-center gap-3 transition-opacity duration-300 animate-fadeIn">
-      <svg
-        className="w-5 h-5 text-purple60 dark:text-purple95 shrink-0"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 bg-black z-50"
+        variants={backdropVariants}
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        onClick={onClose}
+      />
+
+      <motion.div
+        className="fixed inset-0 flex items-center justify-center z-50 p-4"
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        variants={cardVariants}
       >
-        <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      <span className="text-sm font-medium">{message}</span>
-    </div>
+        <div
+          className=" bg-white dark:bg-gray08 border dark:border-gray15 border-white90 rounded-2xl shadow-xl max-w-sm w-full p-6 text-center relative flex flex-col justify-center items-center gap-5"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <AlertIcon />
+          <p className=" text-gray40 dark:text-gray60 text-sm lg-custom:text-base 2xl:text-lg font-medium leading-[150%]">
+            {message}
+          </p>
+          
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 

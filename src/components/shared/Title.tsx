@@ -1,4 +1,6 @@
+import { motion } from "framer-motion";
 import TitleBtn from "../ui/TitleBtn";
+import { titleMotionConfig } from "../../utlis/Anamation";
 
 type TitleProps = {
   starImg?: boolean;
@@ -18,7 +20,10 @@ const Title = ({
   buttonLabel,
 }: TitleProps) => {
   return (
-    <div className={`${titleStyle}`}>
+    <motion.div
+      {...titleMotionConfig}
+      className={`${titleStyle}`}
+    >
       {starImg && (
         <div className="lg-custom:mb-1.5 2xl:mb-2.5">
           <img
@@ -34,7 +39,7 @@ const Title = ({
             {heading}
           </h2>
           <p
-            className={ `text-gray40 dark:text-gray60 text-sm lg-custom:text-base 2xl:text-lg font-medium ${paragraphStyle}`}
+            className={`text-gray40 dark:text-gray60 text-sm lg-custom:text-base 2xl:text-lg font-medium ${paragraphStyle}`}
           >
             {paragraph}
           </p>
@@ -45,7 +50,7 @@ const Title = ({
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

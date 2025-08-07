@@ -70,6 +70,8 @@
 
 import { Link } from "react-router-dom";
 import type { CommonCardProps } from "../../types/CommonCard";
+import { motion } from "framer-motion";
+import { commonCardMotionConfig } from "../../utlis/Anamation";
 
 const CommonCard = ({
   HeadingTag = "h5",
@@ -83,8 +85,9 @@ const CommonCard = ({
   isArrow,
 }: CommonCardProps) => {
   return (
-    <div
-      className={`group relative rounded-[10px] 2xl:rounded-xl border flex flex-col justify-center cursor-pointer ${cardStyle}`}
+    <motion.div
+      {...commonCardMotionConfig}
+      className={`group relative rounded-[10px] 2xl:rounded-xl border flex flex-col justify-center ${cardStyle}`}
     >
       {isArrow && (
         <img
@@ -130,7 +133,7 @@ const CommonCard = ({
           {cardDesc}
         </p>
       )}
-    </div>
+    </motion.div>
   );
 };
 

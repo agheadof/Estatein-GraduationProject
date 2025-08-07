@@ -1,16 +1,16 @@
 import { useState } from "react";
-import type { FormData } from "../types/Form";
-type FormErrors = Partial<Record<keyof FormData | "agreed", string>>;
+import type { CustomFormData } from "../types/Form";
 
+type FormErrors = Partial<Record<keyof CustomFormData | "agreed", string>>;
 
-export function useFormHandler(initialValues?: Partial<FormData>) {
-  const [formData, setFormData] = useState<FormData>({
+export function useFormHandler(initialValues?: Partial<CustomFormData>) {
+  const [formData, setFormData] = useState<CustomFormData>({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
     message: "",
-    preferredContact: [],
+    preferredContact: "phone",
     inquiryType: "",
     hearAboutUs: "",
     ...initialValues,
@@ -18,7 +18,6 @@ export function useFormHandler(initialValues?: Partial<FormData>) {
 
   const [agreed, setAgreed] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
-
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -30,26 +29,21 @@ export function useFormHandler(initialValues?: Partial<FormData>) {
     setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target;
-    setFormData((prev) => {
-      const prevContact = prev.preferredContact || [];
-      const updatedContact = checked
-        ? [...prevContact, value]
-        : prevContact.filter((c) => c !== value);
-      return { ...prev, preferredContact: updatedContact };
-    });
-    setErrors((prev) => ({ ...prev, preferredContact: undefined }));
+  const handleRadioChange = (value: string) => {
+    setFormData((prev) => ({ ...prev, preferredContact: value }));
+    setErrors((prev) => ({
+      ...prev,
+      preferredContact: undefined,
+      email: undefined,
+      phone: undefined,
+    }));
   };
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<Record<keyof FormData, string>> = {};
+    const newErrors: FormErrors = {};
 
-    const requiredFields: (keyof FormData)[] = [
-      "firstName",
-      "lastName",
-      "budget",
-    ];
+    const requiredFields: (keyof CustomFormData)[] = ["firstName", "lastName"];
+
     requiredFields.forEach((key) => {
       if (!formData[key]) {
         newErrors[key] = `${
@@ -58,14 +52,14 @@ export function useFormHandler(initialValues?: Partial<FormData>) {
       }
     });
 
-    if (!formData.preferredContact?.length) {
-      newErrors.preferredContact = "At least one contact method is required";
+    if (!formData.preferredContact) {
+      newErrors.preferredContact = "Please select a preferred contact method";
     } else {
-      if (formData.preferredContact.includes("email") && !formData.email) {
-        newErrors.email = "Email is required when selected as contact method";
+      if (formData.preferredContact === "email" && !formData.email) {
+        newErrors.email = "Email is required";
       }
-      if (formData.preferredContact.includes("phone") && !formData.phone) {
-        newErrors.phone = "Phone is required when selected as contact method";
+      if (formData.preferredContact === "phone" && !formData.phone) {
+        newErrors.phone = "Phone is required";
       }
     }
 
@@ -73,18 +67,25 @@ export function useFormHandler(initialValues?: Partial<FormData>) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (onSubmit?: (data: FormData) => void) => {
-    if (!agreed) {
-      setErrors((prev) => ({ ...prev, agreed: "You must agree to the terms" }));
-      return false;
-    }
+  const handleSubmit = (
+    onSubmit?: (data: CustomFormData) => void | Promise<void>
+  ) => {
+    return async () => {
+      if (!agreed) {
+        setErrors((prev) => ({
+          ...prev,
+          agreed: "You must agree to the terms",
+        }));
+        return false;
+      }
 
-    if (!validateForm()) {
-      return false;
-    }
+      if (!validateForm()) {
+        return false;
+      }
 
-    onSubmit?.(formData);
-    return true;
+      await onSubmit?.(formData); 
+      return true;
+    };
   };
 
   const resetForm = () => {
@@ -94,7 +95,7 @@ export function useFormHandler(initialValues?: Partial<FormData>) {
       email: "",
       phone: "",
       message: "",
-      preferredContact: [],
+      preferredContact: "phone",
       inquiryType: "",
       hearAboutUs: "",
       ...initialValues,
@@ -107,7 +108,7 @@ export function useFormHandler(initialValues?: Partial<FormData>) {
     formData,
     setFormData,
     handleChange,
-    handleCheckboxChange,
+    handleRadioChange,
     handleSubmit,
     resetForm,
     agreed,
