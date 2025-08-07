@@ -79,7 +79,7 @@ const ChatBot = () => {
       <div className="fixed bottom-6 left-6 z-50 group">
         <button
           onClick={() => setIsOpen((prev) => !prev)}
-          className="w-[50px] h-[50px] rounded-full bg-gray15 border-none font-semibold flex items-center justify-center shadow-[0_0_0_4px_rgba(180,160,255,0.253)] cursor-pointer overflow-hidden transition-all duration-300 group-hover:w-[140px] group-hover:rounded-full group-hover:bg-purple70"
+          className="w-[50px] h-[50px] rounded-full  bg-purple75 dark:bg-gray15 border-none font-semibold flex items-center justify-center shadow-[0_0_0_4px_rgba(180,160,255,0.253)] cursor-pointer overflow-hidden transition-all duration-300 group-hover:w-[140px] group-hover:rounded-full group-hover:bg-purple70"
           aria-label="Open Chatbot"
         >
           <img
