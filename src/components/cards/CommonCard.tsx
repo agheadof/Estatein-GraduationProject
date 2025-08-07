@@ -87,7 +87,7 @@ const CommonCard = ({
   return (
     <motion.div
       {...commonCardMotionConfig}
-      className={`relative rounded-[10px] 2xl:rounded-xl border flex flex-col justify-center ${cardStyle}`}
+      className={`group relative rounded-[10px] 2xl:rounded-xl border flex flex-col justify-center ${cardStyle}`}
     >
       {isArrow && (
         <img

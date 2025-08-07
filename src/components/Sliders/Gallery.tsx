@@ -55,6 +55,8 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
   const goPrev = () => instanceRef.current?.prev()
   const goNext = () => instanceRef.current?.next()
 
+  if (!images || !Array.isArray(images)) return null
+
   return (
     <div
       className={`bg-white97 dark:bg-gray10 border border-white90 dark:border-gray15 rounded-xl p-5 md:p-10 2xl:p-12 flex flex-col items-center gap-5 2xl:gap-8 w-full mx-auto ${className}`}
@@ -63,7 +65,7 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
         ref={thumbsRef}
         className="keen-slider bg-white99 dark:bg-gray08 p-2.5 2xl:p-5 rounded-xl border border-white90 dark:border-gray15 order-2 md:order-1"
       >
-        {images.map((src, idx) => (
+        {images?.map((src, idx) => (
           <div
             onClick={() => instanceRef.current?.moveToIdx(idx)}
             key={idx}
@@ -82,7 +84,7 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
       </div>
 
       <div ref={sliderRef} className="keen-slider order-1 md:order-2">
-        {images.map((src, idx) => (
+        {images?.map((src, idx) => (
           <div
             key={idx}
             className="keen-slider__slide w-[249px] md:[507px] 2xl:h-[583px]"
@@ -112,7 +114,7 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
               key={idx}
               className={`w-2.5 h-0.5 md:w-5 md:h-1.5 rounded-[60px] transition-all duration-300 ${
                 currentSlide === idx
-                  ?  " bg-purple90 dark:bg-purple60"
+                  ? " bg-purple90 dark:bg-purple60"
                   : "bg-gray30 cursor-pointer"
               }`}
             />

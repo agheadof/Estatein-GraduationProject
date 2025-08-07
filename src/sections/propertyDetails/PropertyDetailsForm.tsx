@@ -29,8 +29,8 @@ function PropertyDetailsForm() {
   }
 
   return (
-    <SectionWrapper>
-      <div className="grid grid-cols-1 xl:grid-cols-[32.5%_65.5%] 2xl:grid-cols-[30.3%_70.7%] gap-y-10 md:gap-x-10 2xl:gap-x-[100px] xl:gap-x-[80px] lg-custom:my-30 2xl:!my-[150px]">
+    <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
+      <div className="grid grid-cols-1 xl:grid-cols-[32.21%_61.53%] 2xl:grid-cols-[33.38%_61.38%] gap-y-10 md:gap-x-10 xl:gap-x-[80px] 2xl:gap-x-[100px]">
         <Title
           titleStyle="w-full"
           starImg={true}

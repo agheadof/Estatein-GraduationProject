@@ -21,7 +21,7 @@ function AchievementsSection() {
 
   return (
     <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
-      <motion.div
+      <motion.section
         {...defaultMotionConfig}
         variants={containerVariants}
       >
@@ -55,7 +55,7 @@ function AchievementsSection() {
         ) : error ? (
           <p className="text-red-500">{error}</p>
         ) : (
-          <div className="grid gap-5 md:grid-cols-3 md:gap-[30px] 2xl:gap-10">
+          <div className="grid gap-5 md:grid-cols-3 md:gap-[30px] 2xl:gap-10  pt-10 md:pt-[60px] 2xl:pt-20">
             {visibleItems.map((achievement) => (
               <motion.div key={achievement.id} variants={itemVariants}>
                 <AchievementsCard
@@ -66,7 +66,7 @@ function AchievementsSection() {
             ))}
           </div>
         )}
-      </motion.div>
+      </motion.section>
     </SectionWrapper>
   );
 }

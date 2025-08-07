@@ -18,36 +18,38 @@ function TeamGallery() {
           className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         />
 
+
         <div className="relative z-10 grid grid-cols-1 lg-custom:gap-5 gap-[55px] sm:auto-rows-auto">
           <div className="grid grid-cols-2 lg-custom:gap-5 gap-2.5 auto-rows-[71px] sm:auto-rows-auto">
             <img
               src="/assets/images/Explore/1.webp"
               alt="Team Gallery"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-[10px]"
             />
             <img
               src="/assets/images/Explore/2.webp"
               alt="Team Gallery"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-[10px]"
             />
             <img
               src="/assets/images/Explore/3.webp"
               alt="Team Gallery"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-[10px]"
             />
             <div className="grid grid-cols-2 gap-2.5 auto-rows-[71px] sm:auto-rows-auto lg-custom:gap-5">
               <img
                 src="/assets/images/Explore/4.webp"
                 alt="Team Gallery"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-[10px]"
               />
               <img
                 src="/assets/images/Explore/5.webp"
                 alt="Team Gallery"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-[10px]"
               />
             </div>
           </div>
+
 
           <div className="grid lg-custom:grid-cols-2 grid-cols-1 gap-5 sm:auto-rows-auto">
             <Title
@@ -59,7 +61,7 @@ function TeamGallery() {
             <img
               src="/assets/images/Explore/6.webp"
               alt="Team Gallery"
-              className="w-full h-full object-cover object-center min-h-[135px]"
+              className="w-full h-full object-cover object-center min-h-[135px] rounded-[10px]"
             />
           </div>
         </div>
