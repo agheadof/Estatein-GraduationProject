@@ -14,6 +14,20 @@ const ChatBot = () => {
   const [showWelcomeTip, setShowWelcomeTip] = useState(true);
   const [typingMessage, setTypingMessage] = useState<string | null>(null);
   const chatRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 200) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
 
   // Show welcome tip effect on mount
   WelcomeTipEffect(setShowWelcomeTip);
@@ -59,29 +73,31 @@ const ChatBot = () => {
   return (
     <>
       {/* Welcome Tip */}
-      <AnimatePresence>
-        {showWelcomeTip && (
-          <motion.div
-
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.4 }}
-            className="fixed bottom-[90px] left-14 bg-gray20 text-white px-4 py-3 rounded-lg rounded-bl-none shadow-lg z-50 max-w-[280px] text-sm"
-          >
-            <p className="font-semibold mb-1">{chatbotTexts.welcomeTitle}</p>
-            <p>{chatbotTexts.welcomeMessage}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+<AnimatePresence>
+  {showWelcomeTip && isVisible && (
+    <motion.div
+      initial={{ opacity: 0, x: 0 }}
+      animate={{ opacity: 1, x: 60 }}
+      exit={{ opacity: 0, x: 0 }}
+      transition={{ duration: 0.4 }}
+      className="fixed bottom-[90px] left-5 bg-gray20 text-white px-4 py-3 rounded-lg rounded-bl-none shadow-lg z-50 max-w-[280px] text-sm"
+    >
+      <p className="font-semibold mb-1">{chatbotTexts.welcomeTitle}</p>
+      <p>{chatbotTexts.welcomeMessage}</p>
+    </motion.div>
+  )}
+</AnimatePresence>
 
       {/* Toggle Button */}
-      <div className="fixed bottom-6 left-6 z-50 group">
-        <button
-          onClick={() => setIsOpen((prev) => !prev)}
-          className="w-[50px] h-[50px] rounded-full  bg-purple75 dark:bg-gray15 border-none font-semibold flex items-center justify-center shadow-[0_0_0_4px_rgba(180,160,255,0.253)] cursor-pointer overflow-hidden transition-all duration-300 group-hover:w-[140px] group-hover:rounded-full group-hover:bg-purple70"
-          aria-label="Open Chatbot"
-        >
+      <div
+        className={`fixed bottom-6 left-6 z-50 group
+  transform transition-all duration-500
+  ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-24 opacity-0"}`}
+      >        <button
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="w-[50px] h-[50px] rounded-full bg-purple75 dark:bg-transparent  border-none font-semibold flex items-center justify-center shadow-[0_0_0_4px_rgba(180,160,255,0.253)] cursor-pointer overflow-hidden transition-all duration-300 group-hover:w-[140px] group-hover:rounded-full group-hover:bg-purple70"
+        aria-label="Open Chatbot"
+      >
           <img
             src="/assets/icons/bot.svg"
             alt="Chat Icon"

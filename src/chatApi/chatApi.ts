@@ -20,8 +20,7 @@ export const sendChatMessage = async (userMessage: string): Promise<ChatResponse
         messages: [
 {
   role: "system",
-  content: `You are Estatein's real estate assistant. You specialize in answering questions about real estate only — including property listings, pricing, booking appointments, ownership transfer, legal processes, and investment strategies. 
-You do not respond to any unrelated topics (e.g., history, travel, tech). Answer professionally, clearly, and concisely.`
+  content: `اجب عن كل شيئ باللهجة السورية`
 },
           {
             role: "user",
