@@ -24,7 +24,7 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
     ${isBannerVisible ? "top-[78px] md:top-[49px] 2xl:top-[63px]" : "top-0"}`}
     >
       <SectionWrapper>
-        <div className="flex justify-between items-center huge:container huge:mx-auto">
+        <div className="flex justify-between items-center">
           {/* Logo */}
           <NavLink
             to="/"

@@ -74,7 +74,7 @@ function InquiryForm({
     <>
       {showAlert && (
         <AlertMessage
-          message="Your message has been sent successfully!"
+          message="All set! Your message is in good hands."
           onClose={() => setShowAlert(false)}
         />
       )}

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { Variants, Transition } from "framer-motion";
 
-import AlertIcon from "../icons/alertIcon";
+import AlertIcon from "../icons/AlertIcon";
 
 type FormAlertProps = {
   message: string;
@@ -33,7 +33,7 @@ const cardVariants: Variants = {
 
 function AlertMessage({ message, onClose }: FormAlertProps) {
   useEffect(() => {
-    const timer = setTimeout(onClose, 1500);
+    const timer = setTimeout(onClose, 2000);
     return () => clearTimeout(timer);
   }, [onClose]);
 

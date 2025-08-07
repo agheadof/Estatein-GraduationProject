@@ -24,7 +24,7 @@ function TeamCardComponentForm() {
     <>
       {showAlert && (
         <AlertMessage
-          message="Your message has been sent successfully!"
+          message="High five! 🖐 Your greeting just flew in."
           onClose={() => setShowAlert(false)}
         />
       )}
@@ -44,7 +44,7 @@ function TeamCardComponentForm() {
         )}
         <button
           type="submit"
-          className="bg-purple90 dark:bg-purple60 absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center justify-center p-3.5 lg-custom:p-2 2xl:p-2.5 rounded-full cursor-pointer"
+          className="bg-purple70 dark:bg-purple60  absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center justify-center p-3.5 lg-custom:p-2 2xl:p-2.5 rounded-full cursor-pointer"
         >
           <img
             src="/assets/icons/Team/send.svg"
