@@ -6,7 +6,7 @@ export const WelcomeTipEffect = (setShowWelcomeTip: Dispatch<SetStateAction<bool
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowWelcomeTip(false);
-    }, 6000);
+    }, 9000);
     return () => clearTimeout(timer);
   }, [setShowWelcomeTip]);
 };
