@@ -46,7 +46,7 @@ const CustomCursor = () => {
 
       setTimeout(() => {
         setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
-      }, 600); 
+      }, 600);
     };
 
     window.addEventListener("click", handleClick);
