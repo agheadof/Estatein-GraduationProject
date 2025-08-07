@@ -52,7 +52,7 @@ function OurOfficeTaps() {
       </div>
 
       <div
-        className={`grid md:grid-cols-2 grid-cols-1 gap-5 transition-opacity duration-300 ${isFading ? "opacity-0" : "opacity-100"
+        className={`grid xl:grid-cols-2 grid-cols-1 gap-5 transition-opacity duration-300 ${isFading ? "opacity-0" : "opacity-100"
           }`}
       >
         {loading
