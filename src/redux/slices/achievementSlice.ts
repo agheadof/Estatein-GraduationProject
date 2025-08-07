@@ -3,6 +3,7 @@ import type { Achievement } from "../types/achievement";
 
 const { slice, fetchEntities } = createGenericSlice<Achievement, Achievement>({
   name: "achievements",
+  path: "achievements",
   itemsPerPage: 3,
 });
 

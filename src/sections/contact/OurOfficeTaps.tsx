@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import OfficeLocationCard from "../../components/cards/OfficeLocationCard";
-import { fetchOffices } from "../../redux/thunks/officesThunks";
-import { setActiveTab } from "../../redux/slices/ourOfficesSlice";
+import { fetchOffices, setActiveTab } from "../../redux/slices/ourOfficesSlice";
 import { selectFilteredOffices } from "../../redux/selectors/offices";
 import type { RootState, AppDispatch } from "../../redux/store";
 
