@@ -8,6 +8,7 @@ function FormInput({
   placeholder,
   type = "text",
   error,
+  className
 }: InputProps) {
   return (
     <div className="flex flex-col w-full relative">
@@ -24,7 +25,7 @@ function FormInput({
         onChange={onChange}
         placeholder={placeholder}
         type={type}
-        className="rounded-lg bg-white97 dark:bg-gray10 text-gray60 dark:text-gray40 2xl:text-lg text-sm/[20px] font-medium border-1 border-white90 dark:border-gray15 2xl:px-5 2xl:py-6 px-5 py-4"
+        className={`rounded-lg bg-white97 dark:bg-gray10 text-gray60 dark:text-gray40 2xl:text-lg text-sm/[20px] font-medium border-1 border-white90 dark:border-gray15 2xl:px-5 2xl:py-6 px-5 py-4 ${className}`}
       />
       {error && (
         <p className="text-red-500 text-sm mt-1 absolute left-0 top-full">

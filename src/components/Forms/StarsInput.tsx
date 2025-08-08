@@ -12,13 +12,13 @@ function StarsInput({ label, onChange }: StarsInputProps) {
 
   const handleClick = (rating: number) => {
     setSelectedRating(rating);
-    onChange(rating)
+    onChange(rating);
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <p className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 text-base/[1.5] 2xl:text-xl text-black dark:text-white font-semibold">{label}</p>
-      <div className="flex gap-1">
+    <div className="flex flex-col gap-3">
+      <p className="text-base/[1.5] 2xl:text-xl text-black dark:text-white font-semibold">{label}</p>
+      <div className="flex gap-3 px-2">
         {[1, 2, 3, 4, 5].map((star) => {
           const isFilled = hoverRating !== null 
             ? star <= hoverRating 
@@ -30,11 +30,11 @@ function StarsInput({ label, onChange }: StarsInputProps) {
               onMouseEnter={() => setHoverRating(star)}
               onMouseLeave={() => setHoverRating(null)}
               onClick={() => handleClick(star)}
-              className="cursor-pointer transition-all"
+              className="cursor-pointer transition-all "
             >
               <StarIcon
                 className="w-6 h-6"
-                fill={isFilled ? "#FFD700" : "#E0E0E0"}
+                fill={isFilled ? "#FFD700" : "#fbfaff"}
                 stroke="#FFD700"
               />
             </div>

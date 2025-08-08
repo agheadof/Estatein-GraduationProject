@@ -8,6 +8,7 @@ export type InputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   type?: string;
+  className?:string;
 };
 
 export type SelectProps = {
