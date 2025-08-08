@@ -1,6 +1,12 @@
 import type { ReactNode } from "react"
 import MainButton from "../ui/MainButton"
 import { useNavigate } from "react-router-dom"
+import {
+  Icon1 as BedIcon,
+  Icon2 as BathIcon,
+  Icon3 as VillaIcon,
+} from "../../components/icons/PropertiesIcons"
+
 type Props = {
   property: {
     image: string
@@ -8,7 +14,7 @@ type Props = {
     desc: string
     details: {
       label: string
-      icon: ReactNode
+      icon: string
     }[]
     Price: string
     id: string
@@ -24,6 +30,18 @@ function PropertiesCard({
   showTags = false,
 }: Props) {
   const navigate = useNavigate()
+  const iconMap: Record<string, ReactNode> = {
+    bed: <BedIcon />,
+    bath: <BathIcon />,
+    villa: <VillaIcon />,
+  }
+  function truncateWords(text: string, wordLimit: number): string {
+    const words = text.split(" ");
+    if (words.length <= wordLimit) return text;
+    return words.slice(0, wordLimit).join(" ") + "…";
+  }
+
+
   return (
     <>
       <div className=" h-full p-6 lg-custom:p-[30px] 2xl:p-[40px] border dark:border-gray15 border-white90 rounded-xl ">
@@ -41,28 +59,32 @@ function PropertiesCard({
           <h2 className=" line-clamp-1 text-lg lg-custom:text-xl 2xl:text-2xl font-semibold dark:text-white text-black mb-0.5 lg-custom:mb-1 2xl:mb-1.5 ">
             {property.title}
           </h2>
-          <p className=" line-clamp-2 text-sm lg-custom:text-base 2xl:text-lg text-gray40 dark:text-gray60 font-medium ">
-            {property.desc}{" "}
-            <span className=" dark:text-white text-black">Read More</span>
+          <p className=" line-clamp-2 inline text-sm lg-custom:text-base 2xl:text-lg text-gray40 dark:text-gray60 font-medium ">
+            {truncateWords(property.desc, 10)}{" "}
+
           </p>
+          <span className=" dark:text-white text-black">Read More</span>
         </div>
-        <div className=" flex flex-wrap gap-1.5 2xl:gap-2.5 mb-4 lg-custom:mb-5 2xl:mb-[30px]">
+
+        <div className="flex gap-1 mb-4 lg-custom:mb-5 2xl:mb-[30px]">
           {showDetails &&
             property.details?.map((item, index) => (
               <div
                 key={index}
-                className=" flex justify-center items-center py-1.5 2xl:py-2 px-3.5 2xl:px-3.5 dark:bg-gray10 bg-purple97 border dark:border-gray15 border-white90 rounded-[28px] gap-1"
+                className="flex-shrink flex justify-center items-center py-[4px] px-[10px] bg-purple97 dark:bg-gray10 border dark:border-gray15 border-white90 rounded-full gap-[4px] max-w-full"
+                
               >
-                <span className=" dark:text-white text-black w-5 2xl:w-6 h-5 2xl:h-6 ">
-                  {item.icon}
+                <span className="text-black dark:text-white w-3 2xl:w-4 h-3 2xl:h-4 flex items-center justify-center">
+                  {iconMap[item.icon] ?? null}
                 </span>
-                <span className=" dark:text-white text-black font-medium whitespace-nowrap ">
+                <span className="text-black dark:text-white md:text-[10px] lg-custom:text-[9px] xl:text-sm whitespace-nowrap">
                   {item.label}
                 </span>
               </div>
             ))}
         </div>
-        <div className=" flex items-center justify-between gap-[30px] lg-custom:gap-[40px] 2xl:gap-[50px] ">
+
+        <div className=" flex items-center justify-between gap-2.5 ">
           <div className=" flex flex-col">
             <span className=" text-sm 2xl:text-lg text-gray40 dark:text-gray60 font-medium ">
               Price
@@ -75,7 +97,7 @@ function PropertiesCard({
           <MainButton
             variant="normalPurple"
             onClick={() => navigate(`/properties/${property.id}`)}
-            className=" text-[clamp(12px,1vw,18px)] md:px-[clamp(16px,5%,22px)] md:py-[clamp(8px,5%,18px)]"
+            className=" whitespace-nowrap lg-custom:!text-[10px] xl:!text-xs 2xl:!text-[13px] 2xl:!py-[18px] 2xl:!px-6 "
           >
             View Property Details
           </MainButton>

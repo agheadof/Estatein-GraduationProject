@@ -11,11 +11,11 @@ import { containerVariants, defaultMotionConfig, itemVariants } from '../../utli
 import type { PropertyType } from '../../types/Property'
 
 type Props = {
-  showTags?: boolean;
-  showDetails?: boolean;
-  heading: string;
-  paragraph: string;
-  buttonLabel?: string;
+    showTags?: boolean;
+    showDetails?: boolean;
+    heading: string;
+    paragraph: string;
+    buttonLabel?: string;
 };
 
 function PropertiesSection({
@@ -35,13 +35,13 @@ function PropertiesSection({
         }
     }, [dispatch, properties.length])
 
-    const skeletonCount = properties.length > 0 ? properties.length : 3; 
+    const skeletonCount = properties.length > 0 ? properties.length : 3;
 
     return (
         <SectionWrapper>
             <motion.div className="mt-[80px] lg-custom:mt-[120px] 2xl:mt-[150px]"  {...defaultMotionConfig}
 
-        variants={containerVariants}>
+                variants={containerVariants}>
                 <Title
                     heading={heading}
                     paragraph={paragraph}
@@ -89,13 +89,13 @@ function PropertiesSection({
                     <GenericSlider<PropertyType>
                         items={properties}
                         renderSlide={(property, index) => (
-                          <motion.div key={index} variants={itemVariants}>
-                            <PropertiesCard
-                                key={index}
-                                property={property}
-                                showDetails={showDetails}
-                                showTags={showTags}
-                            />
+                            <motion.div key={index} variants={itemVariants}>
+                                <PropertiesCard
+                                    key={index}
+                                    property={property}
+                                    showDetails={showDetails}
+                                    showTags={showTags}
+                                />
                             </motion.div>
                         )}
                         slidesPerView={3}
