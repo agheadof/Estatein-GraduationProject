@@ -21,7 +21,7 @@ const TopBanner = ({ isVisible, onClose }: TopBannerProps) => {
       </div>
       <img
         src="/assets/icons/close.svg"
-        className="absolute top-2 min-[340px]:top-9 right-4 md:top-3.5 2xl:top-[18px] 2xl:right-8 dark:bg-white/10 bg-black rounded-full w-[26px] h-[26px] p-1"
+        className="close_icon absolute top-2 min-[340px]:top-9 right-4 md:top-3.5 2xl:top-[18px] 2xl:right-8 dark:bg-white/10 bg-black rounded-full w-[26px] h-[26px] p-1"
         alt=""
         onClick={onClose}
       />

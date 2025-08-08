@@ -1,15 +1,23 @@
+import { motion } from "framer-motion";
 import Title from "../../components/shared/Title";
-import { SectionWrapper } from "../../layouts/SectionWrapper";
+import { fadeUp } from "../../utlis/Anamation";
 
 function TeamGallery() {
   return (
-    <SectionWrapper>
-      <section className="relative bg-white97 dark:bg-gray10 border-1 border-white90 dark:border-gray15 rounded-xl 2xl:p-20 lg-custom:p-[60px] p-6 overflow-hidden">
+    <div className="px-4 md:px-8 lg-custom:!px-20 2xl:!px-[162px]">
+<motion.div
+  variants={fadeUp}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: true, amount: 0.3 }}
+        className="relative bg-white97 dark:bg-gray10 border-1 border-white90 dark:border-gray15 rounded-xl 2xl:p-20 lg-custom:p-[60px] p-6 overflow-hidden"
+      >
         <img
           src="/assets/images/AbstractDesign4.png"
           alt="Team Gallery Background"
-          className="absolute inset-0 w-full h-[100%] object-cover z-0 pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         />
+
 
         <div className="relative z-10 grid grid-cols-1 lg-custom:gap-5 gap-[55px] sm:auto-rows-auto">
           <div className="grid grid-cols-2 lg-custom:gap-5 gap-2.5 auto-rows-[71px] sm:auto-rows-auto">
@@ -42,6 +50,7 @@ function TeamGallery() {
             </div>
           </div>
 
+
           <div className="grid lg-custom:grid-cols-2 grid-cols-1 gap-5 sm:auto-rows-auto">
             <Title
               starImg={true}
@@ -56,8 +65,8 @@ function TeamGallery() {
             />
           </div>
         </div>
-      </section>
-    </SectionWrapper>
+      </motion.div>
+    </div>
   );
 }
 

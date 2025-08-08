@@ -32,7 +32,7 @@ const FaqPopup = ({ question, answer, onClick }: FaqPopupProps) => {
           {answer}
         </p>
         <CloseIcon
-          className="w-6 h-6 text-purple65 absolute top-4 right-4 cursor-pointer"
+          className="close_icon w-6 h-6 text-purple65 absolute top-4 right-4 cursor-pointer"
           onClick={onClick}
         />
       </motion.div>
