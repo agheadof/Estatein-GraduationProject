@@ -7,13 +7,13 @@ import { motion } from "framer-motion"
 import { GenericSliderMotionConfig } from "../../../utlis/Anamation"
 
 type Props<T> = {
-  items: T[]
-  renderSlide: (item: T, index: number) => React.ReactNode
-  slidesPerView?: number
-  showCounter?: boolean
-  titleBtnLabel?: string
-  counterClassName?: string
-}
+  items: T[];
+  renderSlide: (item: T, index: number) => React.ReactNode;
+  slidesPerView?: number;
+  showCounter?: boolean;
+  titleBtnLabel?: string;
+  counterClassName?: string;
+};
 
 const GenericSlider = <T,>({
   items,
@@ -23,13 +23,13 @@ const GenericSlider = <T,>({
   titleBtnLabel = "",
   counterClassName = "",
 }: Props<T>) => {
-  const prevRef = useRef<HTMLButtonElement | null>(null)
-  const nextRef = useRef<HTMLButtonElement | null>(null)
-  const [currentGroup, setCurrentGroup] = useState(1)
-  const [isBeginning, setIsBeginning] = useState(true)
-  const [isEnd, setIsEnd] = useState(false)
+  const prevRef = useRef<HTMLButtonElement | null>(null);
+  const nextRef = useRef<HTMLButtonElement | null>(null);
+  const [currentGroup, setCurrentGroup] = useState(1);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
   const [currentSlidesPerGroup, setCurrentSlidesPerGroup] =
-    useState(slidesPerView)
+    useState(slidesPerView);
 
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     slides: {
@@ -49,12 +49,12 @@ const GenericSlider = <T,>({
       },
     },
     created(slider) {
-      updateNav(slider)
+      updateNav(slider);
     },
     slideChanged(slider) {
-      updateNav(slider)
+      updateNav(slider);
     },
-  })
+  });
 
   useEffect(() => {
     if (!slider || !slider.current) return
@@ -82,36 +82,36 @@ const GenericSlider = <T,>({
   }, [items.length, currentSlidesPerGroup, slider])
 
   const updateNav = (slider: any) => {
-    const details = slider?.track?.details
-    const rel = details?.rel
-    const perView = slider?.options?.slides?.perView || 1
+    const details = slider?.track?.details;
+    const rel = details?.rel;
+    const perView = slider?.options?.slides?.perView || 1;
 
     if (details && rel != null) {
-      const group = Math.ceil(rel / perView) + 1
-      setCurrentGroup(group)
-      setIsBeginning(rel === 0)
-      setIsEnd(rel + perView >= items.length)
+      const group = Math.ceil(rel / perView) + 1;
+      setCurrentGroup(group);
+      setIsBeginning(rel === 0);
+      setIsEnd(rel + perView >= items.length);
     }
-  }
+  };
 
   useEffect(() => {
     const handleResize = () => {
-      const width = window.innerWidth
+      const width = window.innerWidth;
       if (width >= 992) {
-        setCurrentSlidesPerGroup(slidesPerView)
+        setCurrentSlidesPerGroup(slidesPerView);
       } else if (width >= 768) {
-        setCurrentSlidesPerGroup(2)
+        setCurrentSlidesPerGroup(2);
       } else {
-        setCurrentSlidesPerGroup(1)
+        setCurrentSlidesPerGroup(1);
       }
-    }
+    };
 
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [slidesPerView])
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [slidesPerView]);
 
-  const totalGroups = Math.ceil(items.length / currentSlidesPerGroup)
+  const totalGroups = Math.ceil(items.length / currentSlidesPerGroup);
 
   return (
     <motion.div className="w-full mt-[80px]" {...GenericSliderMotionConfig}>
@@ -192,4 +192,4 @@ const GenericSlider = <T,>({
   )
 }
 
-export default GenericSlider
+export default GenericSlider;
