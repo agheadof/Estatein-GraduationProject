@@ -9,6 +9,8 @@ import MainButton from "../ui/MainButton";
 import PreferredContactMethod from "./PreferredContactMethod";
 import AlertMessage from "../ui/AlertMessage";
 import type { CustomFormData } from "../../types/Form";
+import { ref, push, serverTimestamp } from "firebase/database";
+import { db } from "../../firebaseConfig";
 
 type InquiryFormProps = {
   type: "inquiry" | "contact" | "property";
@@ -66,10 +68,21 @@ function InquiryForm({
       : "grid p-0 m-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] 2xl:gap-[50px]";
   
   const onSubmit = async (data: CustomFormData) => {
-    console.log("Form submitted:", data);
-    setShowAlert(true);
-    resetForm();
+    const payload = {
+      ...data,
+      type,
+      createdAt: serverTimestamp(),
+      agreed,
+    };
+
+    try {
+      await push(ref(db, `forms/${type}`), payload);
+      setShowAlert(true);
+      resetForm();
+    } catch (error) {
+      console.error("Error submitting form:", error);}
   };
+
   return (
     <>
       {showAlert && (

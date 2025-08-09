@@ -62,6 +62,7 @@ const transformProperty = (property: any, id: string): PropertyType => ({
 
 export const fetchProperties = createFetchThunk<PropertyType>(
   "properties",
+  "properties",
   transformProperty
 )
 

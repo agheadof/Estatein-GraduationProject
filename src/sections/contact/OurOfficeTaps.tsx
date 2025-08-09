@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import OfficeLocationCard from "../../components/cards/OfficeLocationCard";
-import { fetchOffices } from "../../redux/thunks/officesThunks";
-import { setActiveTab } from "../../redux/slices/ourOfficesSlice";
+import { fetchOffices, setActiveTab } from "../../redux/slices/ourOfficesSlice";
 import { selectFilteredOffices } from "../../redux/selectors/offices";
 import type { RootState, AppDispatch } from "../../redux/store";
 
@@ -53,7 +52,7 @@ function OurOfficeTaps() {
       </div>
 
       <div
-        className={`grid md:grid-cols-2 grid-cols-1 gap-5 transition-opacity duration-300 ${isFading ? "opacity-0" : "opacity-100"
+        className={`grid xl:grid-cols-2 grid-cols-1 gap-5 transition-opacity duration-300 ${isFading ? "opacity-0" : "opacity-100"
           }`}
       >
         {loading
