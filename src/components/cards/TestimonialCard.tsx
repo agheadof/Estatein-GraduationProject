@@ -5,6 +5,8 @@ type Props = {
     review: string
     clientImage: string
     location: string
+    show: boolean
+    rate: number
   }
 }
 
@@ -12,7 +14,7 @@ function TestimonialCard({ client }: Props) {
   return (
     <div className="p-[30px] lg-custom:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl dark:bg-gray08 bg-white99 border dark:border-gray15 border-white90 ">
       <div className="flex gap-2 2xl:gap-2.5 mb-6 lg-custom:mb-[30px] 2xl:mb-10">
-        {[...Array(5)].map((_, i) => (
+        {[...Array(client.rate)].map((_, i) => (
           <div
             key={i}
             className="flex justify-center items-center p-1.5 lg-custom:p-2 2xl:p-2.5 dark:bg-gray10 bg-white97 border dark:border-gray15 border-white90 rounded-full w-[30px] h-[30px] lg-custom:w-[38px] lg-custom:h-[36px] 2xl:w-11 2xl:h-11"
