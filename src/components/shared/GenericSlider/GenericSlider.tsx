@@ -3,17 +3,17 @@ import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import TitleBtn from "../../ui/TitleBtn"
 import { NextArrowIcon, PrevArrowIcon } from "../../icons/SliderArrows"
-import { motion } from 'framer-motion'
-import { GenericSliderMotionConfig} from '../../../utlis/Anamation'
+import { motion } from "framer-motion"
+import { GenericSliderMotionConfig } from "../../../utlis/Anamation"
 
 type Props<T> = {
-  items: T[]
-  renderSlide: (item: T, index: number) => React.ReactNode
-  slidesPerView?: number
-  showCounter?: boolean
-  titleBtnLabel?: string
-  counterClassName?: string
-}
+  items: T[];
+  renderSlide: (item: T, index: number) => React.ReactNode;
+  slidesPerView?: number;
+  showCounter?: boolean;
+  titleBtnLabel?: string;
+  counterClassName?: string;
+};
 
 const GenericSlider = <T,>({
   items,
@@ -23,13 +23,13 @@ const GenericSlider = <T,>({
   titleBtnLabel = "",
   counterClassName = "",
 }: Props<T>) => {
-  const prevRef = useRef<HTMLButtonElement | null>(null)
-  const nextRef = useRef<HTMLButtonElement | null>(null)
-  const [currentGroup, setCurrentGroup] = useState(1)
-  const [isBeginning, setIsBeginning] = useState(true)
-  const [isEnd, setIsEnd] = useState(false)
+  const prevRef = useRef<HTMLButtonElement | null>(null);
+  const nextRef = useRef<HTMLButtonElement | null>(null);
+  const [currentGroup, setCurrentGroup] = useState(1);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
   const [currentSlidesPerGroup, setCurrentSlidesPerGroup] =
-    useState(slidesPerView)
+    useState(slidesPerView);
 
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     slides: {
@@ -49,58 +49,83 @@ const GenericSlider = <T,>({
       },
     },
     created(slider) {
-      updateNav(slider)
+      updateNav(slider);
     },
     slideChanged(slider) {
-      updateNav(slider)
+      updateNav(slider);
     },
-  })
+  });
+
+  useEffect(() => {
+    if (!slider || !slider.current) return
+
+    slider.current.update()
+
+    const details = slider.current.track?.details
+    const rel = details?.rel ?? 0
+    const perView =
+      typeof slider.current?.options?.slides === "object" &&
+      slider.current.options.slides !== null &&
+      "perView" in slider.current.options.slides
+        ? (slider.current.options.slides.perView as number) ||
+          currentSlidesPerGroup ||
+          1
+        : currentSlidesPerGroup || 1
+
+    const maxRel = Math.max(0, Math.ceil(Math.max(0, items.length - perView)))
+
+    if (rel > maxRel) {
+      slider.current.moveToIdx(Math.max(0, maxRel))
+    }
+
+    requestAnimationFrame(() => updateNav(slider.current))
+  }, [items.length, currentSlidesPerGroup, slider])
 
   const updateNav = (slider: any) => {
-    const details = slider?.track?.details
-    const rel = details?.rel
-    const perView = slider?.options?.slides?.perView || 1
+    const details = slider?.track?.details;
+    const rel = details?.rel;
+    const perView = slider?.options?.slides?.perView || 1;
 
     if (details && rel != null) {
-      const group = Math.ceil(rel / perView) + 1
-      setCurrentGroup(group)
-      setIsBeginning(rel === 0)
-      setIsEnd(rel + perView >= items.length)
+      const group = Math.ceil(rel / perView) + 1;
+      setCurrentGroup(group);
+      setIsBeginning(rel === 0);
+      setIsEnd(rel + perView >= items.length);
     }
-  }
+  };
 
   useEffect(() => {
     const handleResize = () => {
-      const width = window.innerWidth
+      const width = window.innerWidth;
       if (width >= 992) {
-        setCurrentSlidesPerGroup(slidesPerView)
+        setCurrentSlidesPerGroup(slidesPerView);
       } else if (width >= 768) {
-        setCurrentSlidesPerGroup(2)
+        setCurrentSlidesPerGroup(2);
       } else {
-        setCurrentSlidesPerGroup(1)
+        setCurrentSlidesPerGroup(1);
       }
-    }
+    };
 
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [slidesPerView])
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [slidesPerView]);
 
-  const totalGroups = Math.ceil(items.length / currentSlidesPerGroup)
+  const totalGroups = Math.ceil(items.length / currentSlidesPerGroup);
 
   return (
-        <motion.div
-            className="w-full mt-[80px]"
-            {...GenericSliderMotionConfig}
-        >      <div ref={sliderRef} className="keen-slider mb-[50px] w-full">
+    <motion.div className="w-full mt-[80px]" {...GenericSliderMotionConfig}>
+      {" "}
+      <div ref={sliderRef} className="keen-slider mb-[50px] w-full">
         {items.map((item, index) => (
           <div key={index} className="keen-slider__slide">
             {renderSlide(item, index)}
           </div>
         ))}
       </div>
-
-      <motion.div className="flex justify-between items-center pt-4 2xl:pt-5 border-t border-t-white90 dark:border-t-gray15">
+      <motion.div
+        className={`${counterClassName} flex justify-between items-center pt-4 2xl:pt-5 border-t border-t-white90 dark:border-t-gray15`}
+      >
         {showCounter && (
           <p className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block">
             {String(currentGroup).padStart(2, "0")}
@@ -118,7 +143,7 @@ const GenericSlider = <T,>({
         )}
 
         <div className="flex items-center gap-2.5">
-                    <motion.button
+          <motion.button
             ref={prevRef}
             disabled={isBeginning}
             onClick={() => slider.current?.prev()}
@@ -133,7 +158,7 @@ const GenericSlider = <T,>({
             `}
           >
             <PrevArrowIcon />
-                    </motion.button>
+          </motion.button>
 
           {showCounter && (
             <p className="text-black dark:text-white text-base 2xl:text-xl font-medium block md:hidden">
@@ -145,7 +170,7 @@ const GenericSlider = <T,>({
             </p>
           )}
 
-                    <motion.button
+          <motion.button
             ref={nextRef}
             disabled={isEnd}
             onClick={() => slider.current?.next()}
@@ -160,11 +185,11 @@ const GenericSlider = <T,>({
             `}
           >
             <NextArrowIcon />
-                   </motion.button>
-                </div>
-            </motion.div>
-        </motion.div>
+          </motion.button>
+        </div>
+      </motion.div>
+    </motion.div>
   )
 }
 
-export default GenericSlider
+export default GenericSlider;

@@ -1,7 +1,7 @@
 
 import { createSlice} from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { fetchOffices } from "../thunks/officesThunks";
+import { createFetchThunk } from "../thunks/createFetchThunk";
 
 export type OfficeLocation = {
   id: string;
@@ -28,6 +28,7 @@ const initialState: OfficeLocationState = {
   error: null,
   activeTab: "all",
 };
+export const fetchOffices = createFetchThunk<OfficeLocation>("locations","locations")
 
 const officesSlice = createSlice({
   name: "offices",

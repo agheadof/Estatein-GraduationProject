@@ -3,6 +3,7 @@ import type { Faqs } from "../types/FAQ";
 
 const { slice, fetchEntities } = createGenericSlice<Faqs, Faqs>({
   name: "faqs",
+  path: "faqs",
   itemsPerPage: 3, 
 });
 

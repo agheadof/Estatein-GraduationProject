@@ -11,7 +11,7 @@ type FaqPopupProps = {
 const FaqPopup = ({ question, answer, onClick }: FaqPopupProps) => {
   return createPortal(
     <motion.div
-      className="fixed h-screen z-50 inset-0 bg-black/10 dark:bg-white/40 backdrop-blur-md flex justify-center items-center"
+      className="fixed h-screen z-50 inset-0 bg-[#00000033] dark:bg-[#e3e3e380] backdrop-blur-xs flex justify-center items-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -32,7 +32,7 @@ const FaqPopup = ({ question, answer, onClick }: FaqPopupProps) => {
           {answer}
         </p>
         <CloseIcon
-          className="w-6 h-6 text-purple65 absolute top-4 right-4 cursor-pointer"
+          className="close_icon w-6 h-6 text-purple65 absolute top-4 right-4 cursor-pointer"
           onClick={onClick}
         />
       </motion.div>

@@ -1,66 +1,213 @@
-import { createPortal } from "react-dom";
-import FormInput from "../Forms/FormInput";
-import { useState } from "react";
-import StarsInput from "../Forms/StarsInput";
-import FormSelect from "../Forms/FormSelect";
+import { createPortal } from "react-dom"
+import { useRef, useState } from "react"
+import { db } from "../../firebaseConfig"
+import { push, ref, set } from "firebase/database"
+import StarRating from "../Forms/StarsInput"
+import FormInput from "../Forms/FormInput"
+import { ImageIcon } from "../icons/ImgIcon"
+import FormTextarea from "../Forms/FormTextarea"
 
 type ReviewModalProps = {
-
-    closeModal: () => void;
+  closeModal: () => void
+  setAlertMessage: React.Dispatch<React.SetStateAction<string | null>>
 }
 
-function ReviewModal({closeModal}:ReviewModalProps) {
-    const [titleInput,setTitleInput] = useState<string>('');
-    const [descValue,setDescValue] = useState<string>('');
+function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
+  const formRef = useRef<HTMLFormElement>(null)
+  const [imageUrl, setImageUrl] = useState("")
+  const [uploading, setUploading] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const imgRef = useRef<HTMLInputElement>(null)
+  const [errors, setErrors] = useState<{ [key: string]: string }>({})
+  const [rating, setRating] = useState<number>(0)
+
+  const handleImageUpload = async (
+    file: File,
+    cb: (url: string) => void,
+    setUploading: (v: boolean) => void
+  ) => {
+    setUploading(true)
+    const formData = new FormData()
+    formData.append("image", file)
+
+    const res = await fetch(
+      `https://api.imgbb.com/1/upload?key=edeee7c6c2851a590946b20e9ce00b5d`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
+
+    const data = await res.json()
+    if (data?.success) {
+      cb(data.data.url)
+    }
+    setUploading(false)
+  }
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file && file.type.startsWith("image/")) {
+      handleImageUpload(file, (url) => setImageUrl(url), setUploading)
+    } else {
+      setErrors((prev) => ({
+        ...prev,
+        image: "Only valid image formats are allowed",
+      }))
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const form = formRef.current
+    if (!form) return
+
+    const get = (name: string) =>
+      (form.elements.namedItem(name) as HTMLInputElement)?.value.trim() || ""
+
+    const data = {
+      name: get("name"),
+      location: get("location"),
+      subject: get("subject"),
+      review: get("review"),
+      clientImage: imageUrl,
+      rating: rating,
+      show: false,
+    }
+
+    const newErrors: { [key: string]: string } = {}
+    if (!data.name) newErrors.name = "Name is required"
+    if (!data.location) newErrors.location = "Location is required"
+    if (!data.subject) newErrors.subject = "Subject is required"
+    if (!data.review) newErrors.review = "Review is required"
+    if (!data.clientImage) newErrors.image = "Image is required"
+    if (rating === 0) newErrors.rating = "Rating is required"
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      return
+    }
+
+    setErrors({})
+    setLoading(true)
+
+    try {
+      const newRef = push(ref(db, "testimonials"))
+      await set(newRef, data)
+      setAlertMessage("✅ Review submitted!")
+      form.reset()
+      setImageUrl("")
+      closeModal()
+    } catch (err) {
+      setAlertMessage("❌ Something went wrong")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return createPortal(
-    <div 
-    className="fixed h-screen z-50 inset-0 bg-purple60/30 dark:bg-gray30/40 backdrop-blur-sm flex justify-center items-center"
-    onClick={closeModal}
+    <div
+      className="fixed h-screen z-50 inset-0 bg-gray08/50 dark:bg-gray08/10 backdrop-blur-sm flex justify-center overflow-y-auto items-start lg-custom:items-center"
+      onClick={closeModal}
     >
+      <form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        className="modal_content rounded-xl border border-purple60 bg-[#dcceff82] dark:bg-gray15/95 backdrop-blur-xl my-8
+        p-6 w-[85%] max-w-[800px] h-max overflow-y-auto flex flex-col gap-8 justify-start"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="w-full flex flex-col lg-custom:flex-row items-start justify-between">
+          <div className="flex flex-col gap-5 w-full lg-custom:w-[47%]">
+            <FormInput
+              label="Subject"
+              name="subject"
+              placeholder="Enter brief subject"
+              error={errors.subject}
+              className="border border-purple60"
+            />
 
-        <div className="modal_content rounded-xl border border-purple60 bg-gray-400 " onClick={(e)=>e.stopPropagation()}>
-            <FormInput label="Breif:"
-                type="text" 
-                onChange={(e)=>setTitleInput(e.target.value)}
-                name="review_title"
-                value={titleInput}
-                placeholder="enter breif"
-                />
-            <FormInput label="Description"
-                type="text" 
-                onChange={(e)=>setDescValue(e.target.value)}
-                name="review_description"
-                value={descValue}
-                placeholder="enter description"
-                />
-            <StarsInput />
-            <FormInput label="Your Name"
-                    type="text" 
-                    onChange={(e)=>setDescValue(e.target.value)}
-                    name="review_userName"
-                    value={descValue}
-                    placeholder="enter your name"
-                    />
-           <FormInput label="descripe your opinion"
-                type="text" 
-                onChange={(e)=>setDescValue(e.target.value)}
-                name="review_description"
-                value={descValue}
-                placeholder="enter description"
-                />
-            {/* <FormSelect>
-                options goes here
-            </FormSelect> */}
-            {/* <div className="imgINput_container">
-                image input logic goes here
-                <input type="file" className="hidden"/>
-            </div> */}
+            <div>
+              <FormTextarea
+                label="Description"
+                name="review"
+                error={errors.review}
+                className="w-full p-2"
+              />
+            </div>
+
+            <div>
+              <label className="font-semibold text-black dark:text-white mb-1 block">
+                Your Rating
+              </label>
+              <StarRating value={rating} onChange={setRating} />
+              {errors.rating && (
+                <p className="text-red-600 text-xs">{errors.rating}</p>
+              )}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-5 w-full lg-custom:w-[47%]">
+            <div>
+              <label className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 2xl:text-xl text-base/[1.5] dark:text-white text-black font-semibold">
+                Your Image:
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                ref={imgRef}
+                onChange={handleImageChange}
+              />
+              <div
+                className="w-1/2 text-white h-[120px] rounded-lg border border-purple60 cursor-pointer flex items-center justify-center"
+                onClick={() => imgRef.current?.click()}
+              >
+                {uploading ? (
+                  <p>Uploading...</p>
+                ) : imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    className="w-3/4 h-full object-cover object-top"
+                  />
+                ) : (
+                  <ImageIcon />
+                )}
+              </div>
+              {errors.image && (
+                <p className="text-red-600 text-xs">{errors.image}</p>
+              )}
+            </div>
+
+            <FormInput
+              label="Your Name"
+              name="name"
+              placeholder="Enter your name"
+              error={errors.name}
+              className="border border-purple60"
+            />
+
+            <FormInput
+              label="Region"
+              name="location"
+              placeholder="Enter your location"
+              error={errors.location}
+              className="border border-purple60"
+            />
+          </div>
         </div>
 
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-purple60 rounded-lg px-4 py-2 text-white font-medium cursor-pointer hover:bg-gray08 duration-200 disabled:opacity-60"
+        >
+          {loading ? "Submitting..." : "Submit"}
+        </button>
+      </form>
     </div>,
     document.body
-  );
+  )
 }
 
 export default ReviewModal

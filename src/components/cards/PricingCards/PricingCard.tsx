@@ -14,7 +14,7 @@ const PricingCard = ({ cardTitle, details, isTwoItem }: PricingCardProps) => {
     <div
       className={`grid gap-5 border-t border-white90 dark:border-gray15
         ${
-          isTwoItem ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2"
+          isTwoItem ? "grid-cols-1" : "grid-cols-1 lg-custom:grid-cols-2"
         } py-5 md:py-[30px] 2xl:py-10`}
     >
       {cards.map((card, index) => (
@@ -51,6 +51,16 @@ const PricingCard = ({ cardTitle, details, isTwoItem }: PricingCardProps) => {
         <>
           {renderRow(details.slice(0, 2))}
           {renderRow(details.slice(2, 4))}
+        </>
+      ) : details.length === 3 ? (
+        <>
+          {renderRow(details.slice(0, 2))}
+          {renderRow(details.slice(2, 3))}
+        </>
+      ) : details.length === 2 ? (
+        <>
+          {renderRow(details.slice(0, 1))}
+          {renderRow(details.slice(1, 2))}
         </>
       ) : (
         renderRow(details)
