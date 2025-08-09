@@ -17,7 +17,7 @@ const FaqList = () => {
 }, [dispatch]);
 
 useEffect(() => {
-  console.log('visibleItems', visibleItems);
+  console.log('visibleItemsaaa', visibleItems);
 }, [visibleItems]);
 
   return (

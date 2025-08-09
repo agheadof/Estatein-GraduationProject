@@ -3,6 +3,7 @@ import type { Value } from "../types/value";
 
 const { slice, fetchEntities } = createGenericSlice<Value, Value>({
   name: "values",
+  path: "values",
   itemsPerPage: 4,
 });
 
