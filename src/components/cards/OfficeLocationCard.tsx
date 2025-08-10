@@ -38,24 +38,24 @@ function OfficeLocationCard({
           {details}
         </p>
       </div>
-      <div className="flex items-center flex-wrap lg-custom:gap-2.5 gap-2">
+      <div className="flex items-center flex-wrap lg-custom:gap-2.5 gap-2 ">
         <LocationInfoBox
           icon={
-            <EmailIcon className="text-black dark:text-white group-hover:text-purple60" />
+            <EmailIcon className="text-black dark:text-white group-hover:text-purple60 " />
           }
           text={email}
           className="group"
         />
         <LocationInfoBox
           icon={
-            <PhoneIcon className="text-black dark:text-white group-hover:text-purple60" />
+            <PhoneIcon className="text-black dark:text-white group-hover:text-purple60 " />
           }
           text={phone}
           className="group"
         />
         <LocationInfoBox
           icon={
-            <LocationIcon className="text-black dark:text-white group-hover:text-purple60" />
+            <LocationIcon className="text-black dark:text-white group-hover:text-purple60 " />
           }
           text={city}
           className="group"

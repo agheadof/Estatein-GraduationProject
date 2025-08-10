@@ -12,6 +12,7 @@ export interface GenericState<T> {
 
 interface CreateGenericSliceOptions<T, R, State> {
   name: string;
+  path: string;
   transform?: (item: T, id: string) => R;
   itemsPerPage?: number;
   reducers?: SliceCaseReducers<State & GenericState<R>>;
@@ -20,12 +21,13 @@ interface CreateGenericSliceOptions<T, R, State> {
 
 export const createGenericSlice = <T, R, State = {}>({
   name,
+  path,
   transform,
   itemsPerPage = 3,
   reducers: customReducers,
   extraInitialState = {},
 }: CreateGenericSliceOptions<T, R, State>) => {
-  const fetchEntities = createFetchThunk(name, transform);
+  const fetchEntities = createFetchThunk(name, path, transform);
 
   const initialState: GenericState<R> & State = {
     items: [],

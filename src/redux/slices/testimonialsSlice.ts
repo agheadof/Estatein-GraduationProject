@@ -1,10 +1,38 @@
-import { createGenericSlice } from "./createGenericSlice";
-import type { testimonials } from "../types/Testimonial";
+import { createSlice } from "@reduxjs/toolkit"
+import type { testimonials } from "../types/Testimonial"
 
-const { slice, fetchEntities } = createGenericSlice<testimonials, testimonials>({
+type TestimonialsState = {
+  items: testimonials[]
+  loading: boolean
+  error: string | null
+}
+
+const initialState: TestimonialsState = {
+  items: [],
+  loading: true,
+  error: null,
+}
+
+const testimonialsSlice = createSlice({
   name: "testimonials",
-  itemsPerPage: 3,
-});
+  initialState,
+  reducers: {
+    setTestimonials: (state, action) => {
+      state.items = action.payload
+      state.loading = false
+      state.error = null
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload
+    },
+    setError: (state, action) => {
+      state.error = action.payload
+      state.loading = false
+    },
+  },
+})
 
-export const fetchTestimonials = fetchEntities;
-export default slice.reducer;
+export const { setTestimonials, setLoading, setError } =
+  testimonialsSlice.actions
+
+export default testimonialsSlice.reducer
