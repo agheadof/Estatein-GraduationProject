@@ -3,16 +3,19 @@ import PricingDetailsSection from "../sections/propertyDetails/PricingDetailsSec
 import PropertyDetailsForm from "../sections/propertyDetails/PropertyDetailsForm";
 import PropertyGallery from "../sections/propertyDetails/PropertyGallery";
 import FaqSection from "../sections/home/FaqSection";
+import { SectionWrapper } from "../layouts/SectionWrapper";
 
 function PropertyDetailsPage() {
   const { id } = useParams();
 
   return (
-    <div className="huge:max-w-[1920px] huge:mx-auto mt-28">
-      {id && <PropertyGallery id={id} />}
+    <div className="mt-28">
+      <SectionWrapper>{id && <PropertyGallery id={id} />}</SectionWrapper>
       <PropertyDetailsForm />
       <PricingDetailsSection />
-      <FaqSection />
+      <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
+        <FaqSection />
+      </SectionWrapper>
     </div>
   );
 }

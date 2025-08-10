@@ -36,11 +36,10 @@ function PropertiesCard({
     villa: <VillaIcon />,
   }
   function truncateWords(text: string, wordLimit: number): string {
-    const words = text.split(" ");
-    if (words.length <= wordLimit) return text;
-    return words.slice(0, wordLimit).join(" ") + "…";
+    const words = text.split(" ")
+    if (words.length <= wordLimit) return text
+    return words.slice(0, wordLimit).join(" ") + "…"
   }
-
 
   return (
     <>
@@ -61,7 +60,6 @@ function PropertiesCard({
           </h2>
           <p className=" line-clamp-2 inline text-sm lg-custom:text-base 2xl:text-lg text-gray40 dark:text-gray60 font-medium ">
             {truncateWords(property.desc, 10)}{" "}
-
           </p>
           <span className=" dark:text-white text-black">Read More</span>
         </div>
@@ -72,7 +70,6 @@ function PropertiesCard({
               <div
                 key={index}
                 className="flex-shrink flex justify-center items-center py-[4px] px-[10px] bg-purple97 dark:bg-gray10 border dark:border-gray15 border-white90 rounded-full gap-[4px] max-w-full"
-                
               >
                 <span className="text-black dark:text-white w-3 2xl:w-4 h-3 2xl:h-4 flex items-center justify-center">
                   {iconMap[item.icon] ?? null}

@@ -2,12 +2,14 @@ import CommonCard from "../../components/cards/CommonCard";
 import UnlockCardComponent from "../../components/cards/UnlockCardComponent";
 import Title from "../../components/shared/Title";
 import { investmentsData } from "../../data/investmentsData";
+import { SectionWrapper } from "../../layouts/SectionWrapper";
 
 const InvestmentsSection = () => {
   return (
+    <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
     <section
       id="investments"
-      className="flex flex-col items-center xl:flex-row gap-10 md:gap-[50px] 2xl:gap-[60px] pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]"
+      className="flex flex-col items-center xl:flex-row gap-10 md:gap-[50px] 2xl:gap-[60px] "
     >
       <div className="grid min-lg-custom:grid-cols-2 xl:grid-cols-1 gap-[30px] lg-custom::gap-10 2xl:gap-[50px]">
         <Title
@@ -37,6 +39,7 @@ const InvestmentsSection = () => {
         ))}
       </div>
     </section>
+    </SectionWrapper>
   );
 };
 

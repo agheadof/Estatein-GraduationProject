@@ -9,7 +9,7 @@ type Ripple = {
 
 const CustomCursor = () => {
   const [cursorColor, setCursorColor] = useState("#703BF7");
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: -20, y: -20 });
   const [ripples, setRipples] = useState<Ripple[]>([]);
 
   const springConfig = { damping: 25, stiffness: 300 };
@@ -46,7 +46,7 @@ const CustomCursor = () => {
 
       setTimeout(() => {
         setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
-      }, 600); 
+      }, 600);
     };
 
     window.addEventListener("click", handleClick);
