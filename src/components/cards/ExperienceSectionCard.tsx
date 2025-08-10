@@ -1,12 +1,12 @@
 export type ExperienceSectionCardProps = {
-  step: string;
+  stepNum: string;
   title: string;
   description: string;
 }
-const ExperienceSectionCard = ({ step, title, description }: ExperienceSectionCardProps) => {
+const ExperienceSectionCard = ({ stepNum, title, description }: ExperienceSectionCardProps) => {
   return (
     <div className='flex flex-col gap-0 items-start font-urbanist'>
-      <p className='text-black dark:text-white font-medium leading-[150%] text-base lg-custom:text-xl border-l border-l-[#703BF7] px-5 py-4'>Step {step}</p>
+      <p className='text-black dark:text-white font-medium leading-[150%] text-base lg-custom:text-xl border-l border-l-[#703BF7] px-5 py-4'>{stepNum}</p>
       <div className='
           card_container_border 
           bg-[linear-gradient(117deg,rgba(112,59,247,1)_0%,rgba(228,228,231,1)_24%)]
