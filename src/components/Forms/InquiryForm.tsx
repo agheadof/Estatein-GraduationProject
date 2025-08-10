@@ -27,7 +27,7 @@ function InquiryForm({
     formData,
     handleChange,
     handleSubmit,
-    resetForm, 
+    resetForm,
     agreed,
     setAgreed,
     handleRadioChange,
@@ -66,7 +66,7 @@ function InquiryForm({
       : type === "contact"
       ? "grid p-0 m-0 grid-cols-1 md:grid-cols-3 gap-[20px] md:gap-[30px] 2xl:gap-[50px]"
       : "grid p-0 m-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] 2xl:gap-[50px]";
-  
+
   const onSubmit = async (data: CustomFormData) => {
     const payload = {
       ...data,
@@ -80,7 +80,8 @@ function InquiryForm({
       setShowAlert(true);
       resetForm();
     } catch (error) {
-      console.error("Error submitting form:", error);}
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
