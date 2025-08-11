@@ -1,4 +1,4 @@
-import { Outlet} from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/shared/NavBar/Navbar";
 import Footer from "../components/shared/Footer/Footer";
 import { defaultLinks } from "../data/footerData";
@@ -6,7 +6,7 @@ import { CTA } from "../sections/shared/CTA";
 import Scroll2Top from "../components/ui/Scroll2Top";
 import Loader from "../components/ui/Loader";
 import TopBanner from "../components/shared/TopBanner";
-import { useEffect,  useState } from "react";
+import { useEffect, useState } from "react";
 import ChatBot from "../components/shared/ChatBot/ChatBot";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { hideBanner, showBanner } from "../redux/slices/bannerSlice";
@@ -15,10 +15,14 @@ import PageTransitionWrapper from "../utlis/TransitionWrapper";
 
 
 const MainLayout = () => {
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const isBannerVisible = useAppSelector((state) => state.banner.isVisible);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasClosedBanner, setHasClosedBanner] = useState<boolean>(false);
+
+  const noBannerOrCTAPages = ["/allFaq", "/allTestimonials", "/allProperties"];
+  const hideBannerAndCTA = noBannerOrCTAPages.includes(location.pathname);
 
   useEffect(() => {
     const timeout = setTimeout(() => setIsLoading(false), 2000);
@@ -52,22 +56,28 @@ const MainLayout = () => {
       {isLoading && <Loader />}
       {!isLoading && (
         <>
-          {isBannerVisible && !hasClosedBanner && (
+          {isBannerVisible && !hasClosedBanner && !hideBannerAndCTA && (
             <TopBanner
               isVisible={isBannerVisible}
               onClose={handleBannerClose}
             />
           )}
-          <Navbar isBannerVisible={isBannerVisible && !hasClosedBanner} />
+          <Navbar
+            isBannerVisible={
+              isBannerVisible && !hasClosedBanner && !hideBannerAndCTA
+            }
+          />
 
           <PageTransitionWrapper>
             <main>
               <Outlet />
-              <CTA
-                title="Start Your Real Estate Journey Today"
-                description="Your dream property is just a click away. Whether you're looking for a new home, a strategic investment, or expert real estate advice, Estatein is here to assist you every step of the way. Take the first step towards your real estate goals and explore our available properties or get in touch with our team for personalized assistance."
-                buttonLabel="Explore Properties"
-              />
+              {!hideBannerAndCTA && (
+                <CTA
+                  title="Start Your Real Estate Journey Today"
+                  description="Your dream property is just a click away. Whether you're looking for a new home, a strategic investment, or expert real estate advice, Estatein is here to assist you every step of the way. Take the first step towards your real estate goals and explore our available properties or get in touch with our team for personalized assistance."
+                  buttonLabel="Explore Properties"
+                />
+              )}
             </main>
           </PageTransitionWrapper>
 

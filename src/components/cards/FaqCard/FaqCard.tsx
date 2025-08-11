@@ -19,7 +19,8 @@ function FaqCard({ question }: Props) {
 
   return (
     <>
-      <div  className=" h-[242px] lg-custom:h-[282px] 2xl:h-[346px]  flex flex-col items-start justify-between border dark:border-gray15 border-white90 p-[30px] lg-custom:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl ">
+      <div className="h-[242px] lg-custom:h-[282px] 2xl:h-[346px]  
+      flex flex-col items-start justify-between border dark:border-gray15 border-white90 p-[30px] lg-custom:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl ">
         <h2 className="line-clamp-2 dark:text-white text-black text-lg lg-custom:text-xl 2xl:text-2xl font-semibold mb-[20px] lg-custom:mb-[24px] 2xl:mb-[30px] ">
           {question.question}
         </h2>

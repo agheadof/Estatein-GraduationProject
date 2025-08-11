@@ -6,9 +6,10 @@ type TitleProps = {
   starImg?: boolean;
   titleStyle?: string;
   heading: string;
-  paragraph: string;
+  paragraph?: string;
   paragraphStyle?: string;
   buttonLabel?: string;
+  navigateTo?: string;
 };
 
 const Title = ({
@@ -18,12 +19,10 @@ const Title = ({
   paragraph,
   paragraphStyle,
   buttonLabel,
+  navigateTo,
 }: TitleProps) => {
   return (
-    <motion.div
-      {...titleMotionConfig}
-      className={`${titleStyle}`}
-    >
+    <motion.div {...titleMotionConfig} className={`${titleStyle}`}>
       {starImg && (
         <div className="lg-custom:mb-1.5 2xl:mb-2.5">
           <img
@@ -46,7 +45,7 @@ const Title = ({
         </div>
         {buttonLabel && (
           <div className="hidden lg-custom:block">
-            <TitleBtn label={buttonLabel} />
+            <TitleBtn label={buttonLabel} navigateTo={navigateTo} />
           </div>
         )}
       </div>
