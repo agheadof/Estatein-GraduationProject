@@ -13,6 +13,7 @@ import { hideBanner, showBanner } from "../redux/slices/bannerSlice";
 import CustomCursor from "../components/shared/CustomCursor";
 import PageTransitionWrapper from "../utlis/TransitionWrapper";
 
+
 const MainLayout = () => {
   const dispatch = useAppDispatch();
   const isBannerVisible = useAppSelector((state) => state.banner.isVisible);
@@ -48,7 +49,6 @@ const MainLayout = () => {
     <div className="flex flex-col min-h-screen font-urbanist flex-grow bg-white99 dark:bg-gray08 overflow-hidden">
       <CustomCursor />
       <ChatBot />
-
       {isLoading && <Loader />}
       {!isLoading && (
         <>
