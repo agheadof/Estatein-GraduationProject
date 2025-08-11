@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import PaginationComponent from "../components/PaginationComponent";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { listenToTestimonials } from "../utlis/firebaseListeners/testimonialsListener";
 import { SectionWrapper } from "../layouts/SectionWrapper";
 import Title from "../components/shared/Title";
 import FaqCard from "../components/cards/FaqCard/FaqCard";
+import { fetchFaqs } from "../redux/slices/faqsSlice";
 
 const AllFaqsPage = () => {
   const dispatch = useAppDispatch();
@@ -18,9 +18,9 @@ const AllFaqsPage = () => {
 
   useEffect(() => {
     if (items.length === 0) {
-      dispatch(listenToTestimonials());
+      dispatch(fetchFaqs());
     }
-  }, [dispatch, items]);
+  }, [dispatch, items.length]);
 
   const pageSize = 6;
   const totalPages = Math.ceil(items.length / pageSize);

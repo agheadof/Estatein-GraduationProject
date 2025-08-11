@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import PaginationComponent from "../components/PaginationComponent";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { listenToTestimonials } from "../utlis/firebaseListeners/testimonialsListener";
 import { SectionWrapper } from "../layouts/SectionWrapper";
 import Title from "../components/shared/Title";
 import PropertiesCard from "../components/cards/PropertiesCard";
+import { fetchProperties } from "../redux/slices/propertiesSlice";
 
 const AllPropertiesPage = () => {
   const dispatch = useAppDispatch();
@@ -21,9 +21,9 @@ const AllPropertiesPage = () => {
 
   useEffect(() => {
     if (items.length === 0) {
-      dispatch(listenToTestimonials());
+      dispatch(fetchProperties());
     }
-  }, [dispatch, items]);
+  }, [dispatch, items.length]);
 
   const pageSize = 6;
   const totalPages = Math.ceil(items.length / pageSize);

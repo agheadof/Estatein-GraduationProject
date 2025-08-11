@@ -21,7 +21,7 @@ function AllClientsPage() {
     if (items.length === 0) {
       dispatch(listenToTestimonials());
     }
-  }, [dispatch, items]);
+  }, [dispatch, items.length]);
 
   const pageSize = 6;
   const totalPages = Math.ceil(items.length / pageSize);
