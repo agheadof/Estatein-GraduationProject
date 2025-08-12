@@ -9,7 +9,7 @@ import themeReducer from "./slices/themeSlice"
 import bannerReducer from "./slices/bannerSlice"
 import clientsReducer from "./slices/clientsSlice"
 
-const store = configureStore({
+const store: any = configureStore({
   reducer: {
     theme: themeReducer,
     faqs: faqsReducer,

@@ -1,30 +1,34 @@
-import { useEffect } from "react";
-import AchievementsCard from "../../components/cards/AchievementsCard";
-import { SectionWrapper } from "../../layouts/SectionWrapper";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchAchievements } from "../../redux/slices/achievementSlice";
-import Title from "../../components/shared/Title";
-import { containerVariants, defaultMotionConfig, itemVariants } from "../../utlis/Anamation";
-import { motion } from "framer-motion";
+import { useEffect } from "react"
+import AchievementsCard from "../../components/cards/AchievementsCard"
+import { SectionWrapper } from "../../layouts/SectionWrapper"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import { fetchAchievements } from "../../redux/slices/achievementSlice"
+import Title from "../../components/shared/Title"
+import {
+  containerVariants,
+  defaultMotionConfig,
+  itemVariants,
+} from "../../utlis/Anamation"
+import { motion } from "framer-motion"
+import type { Achievement } from "../../redux/types/achievement"
 
 function AchievementsSection() {
-  const dispatch = useAppDispatch();
-  const { visibleItems, loading, error } = useAppSelector((state) => state.achievements);
+  const dispatch = useAppDispatch()
+  const { visibleItems, loading, error } = useAppSelector(
+    (state) => state.achievements
+  )
 
   useEffect(() => {
     if (visibleItems.length === 0) {
-      dispatch(fetchAchievements());
+      fetchAchievements(dispatch)
     }
-  }, [dispatch, visibleItems.length]);
+  }, [dispatch, visibleItems.length])
 
-  const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 3;
+  const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 3
 
   return (
     <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
-      <motion.section
-        {...defaultMotionConfig}
-        variants={containerVariants}
-      >
+      <motion.section {...defaultMotionConfig} variants={containerVariants}>
         <Title
           starImg={true}
           heading="Our Achievements"
@@ -56,7 +60,7 @@ function AchievementsSection() {
           <p className="text-red-500">{error}</p>
         ) : (
           <div className="grid gap-5 md:grid-cols-3 md:gap-[30px] 2xl:gap-10  pt-10 md:pt-[60px] 2xl:pt-20">
-            {visibleItems.map((achievement) => (
+            {visibleItems.map((achievement: Achievement) => (
               <motion.div key={achievement.id} variants={itemVariants}>
                 <AchievementsCard
                   title={achievement.title}
@@ -68,7 +72,7 @@ function AchievementsSection() {
         )}
       </motion.section>
     </SectionWrapper>
-  );
+  )
 }
 
-export default AchievementsSection;
+export default AchievementsSection

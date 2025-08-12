@@ -1,25 +1,28 @@
-import { useEffect } from "react";
-import TeamCardComponent from "../../components/cards/TeamCardComponent";
-import { SectionWrapper } from "../../layouts/SectionWrapper";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchTeams } from "../../redux/slices/teamSlice";
-import Title from "../../components/shared/Title";
-import { containerVariants, defaultMotionConfig, itemVariants } from "../../utlis/Anamation";
-import { motion } from "framer-motion";
+import { useEffect } from "react"
+import TeamCardComponent from "../../components/cards/TeamCardComponent"
+import { SectionWrapper } from "../../layouts/SectionWrapper"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import { fetchTeams } from "../../redux/slices/teamSlice"
+import Title from "../../components/shared/Title"
+import {
+  containerVariants,
+  defaultMotionConfig,
+  itemVariants,
+} from "../../utlis/Anamation"
+import { motion } from "framer-motion"
+import type { Team } from "../../redux/types/team"
 
 const TeamSection = () => {
-  const dispatch = useAppDispatch();
-  const { visibleItems, loading, error } = useAppSelector(
-    (state) => state.team
-  );
+  const dispatch = useAppDispatch()
+  const { visibleItems, loading, error } = useAppSelector((state) => state.team)
 
   useEffect(() => {
     if (visibleItems.length === 0) {
-      dispatch(fetchTeams());
+      fetchTeams(dispatch)
     }
-  }, [dispatch, visibleItems.length]);
+  }, [dispatch, visibleItems.length])
 
-  const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 4;
+  const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 4
 
   return (
     <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
@@ -67,7 +70,7 @@ const TeamSection = () => {
             variants={containerVariants}
             {...defaultMotionConfig}
           >
-            {visibleItems.map((team) => (
+            {visibleItems.map((team: Team) => (
               <motion.div key={team.id} variants={itemVariants}>
                 <TeamCardComponent
                   key={team.id}
@@ -81,7 +84,7 @@ const TeamSection = () => {
         )}
       </motion.section>
     </SectionWrapper>
-  );
-};
+  )
+}
 
-export default TeamSection;
+export default TeamSection
