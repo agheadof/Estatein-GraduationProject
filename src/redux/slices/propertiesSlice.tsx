@@ -1,4 +1,3 @@
-// ourPropertiesSlice.ts
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import type { PropertyType } from "../types/PropertyType"
 

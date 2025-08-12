@@ -49,9 +49,10 @@ function PropertiesSection({
           paragraph={paragraph}
           buttonLabel={buttonLabel}
           paragraphStyle="2xl:max-w-[1200px] lg-custom:max-w-[975px] w-full"
+          navigateTo="allProperties"
         />
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[80px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
             {[...Array(skeletonCount)].map((_, index) => (
               <div
                 key={index}
@@ -97,6 +98,7 @@ function PropertiesSection({
                   property={property}
                   showDetails={showDetails}
                   showTags={showTags}
+                  navigateTo="allProperties"
                 />
               </motion.div>
             )}

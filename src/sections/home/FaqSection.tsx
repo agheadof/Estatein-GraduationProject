@@ -24,9 +24,10 @@ function FaqSection() {
         paragraph="Find answers to common questions about Estatein's services, property listings, and the real estate process. We're here to provide clarity and assist you every step of the way."
         buttonLabel="View All FAQ’s"
         paragraphStyle="2xl:max-w-[1236px] lg-custom:max-w-[1003px] w-full"
+        navigateTo="allFaq"
       />
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
           {[...Array(skeletonCount)].map((_, i) => (
             <div
               key={i}
@@ -48,6 +49,7 @@ function FaqSection() {
           }
           showCounter={true}
           titleBtnLabel="View All FAQ’s"
+          navigateTo="allFaq"
         />
       )}
     </section>

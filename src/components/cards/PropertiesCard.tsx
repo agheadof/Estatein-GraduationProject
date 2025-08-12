@@ -1,44 +1,44 @@
-import type { ReactNode } from "react"
-import MainButton from "../ui/MainButton"
-import { useNavigate } from "react-router-dom"
+import type { ReactNode } from "react";
+import MainButton from "../ui/MainButton";
+import { useNavigate } from "react-router-dom";
 import {
   Icon1 as BedIcon,
   Icon2 as BathIcon,
   Icon3 as VillaIcon,
-} from "../../components/icons/PropertiesIcons"
+} from "../../components/icons/PropertiesIcons";
 
 type Props = {
   property: {
-    image: string
-    title: string
-    desc: string
+    image: string;
+    title: string;
+    desc: string;
     details: {
-      label: string
-      icon: string
-    }[]
-    Price: string
-    id: string
-    showDetails?: boolean
-    tags?: string
-  }
-  showDetails?: boolean
-  showTags?: boolean
-}
+      label: string;
+      icon: string;
+    }[];
+    Price: string;
+    id: string;
+    showDetails?: boolean;
+    tags?: string;
+  };
+  showDetails?: boolean;
+  showTags?: boolean;
+};
 function PropertiesCard({
   property,
   showDetails = true,
   showTags = false,
 }: Props) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const iconMap: Record<string, ReactNode> = {
     bed: <BedIcon />,
     bath: <BathIcon />,
     villa: <VillaIcon />,
-  }
+  };
   function truncateWords(text: string, wordLimit: number): string {
-    const words = text.split(" ")
-    if (words.length <= wordLimit) return text
-    return words.slice(0, wordLimit).join(" ") + "…"
+    const words = text.split(" ");
+    if (words.length <= wordLimit) return text;
+    return words.slice(0, wordLimit).join(" ") + "…";
   }
 
   return (
@@ -101,7 +101,7 @@ function PropertiesCard({
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default PropertiesCard
+export default PropertiesCard;

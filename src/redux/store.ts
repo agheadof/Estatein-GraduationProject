@@ -8,6 +8,7 @@ import testimonialsReducer from "./slices/testimonialsSlice"
 import themeReducer from "./slices/themeSlice"
 import bannerReducer from "./slices/bannerSlice"
 import clientsReducer from "./slices/clientsSlice"
+import valuesReducer from "./slices/valueSlice"
 
 const store: any = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store: any = configureStore({
     offices: officesReducer,
     banner: bannerReducer,
     clients: clientsReducer,
+    values: valuesReducer,
   },
 })
 
