@@ -1,17 +1,17 @@
-import { useKeenSlider } from "keen-slider/react"
-import "keen-slider/keen-slider.min.css"
-import { useEffect, useState } from "react"
-import { ArrowLeft, ArrowRight } from "../icons/GalleryIcons"
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
+import { useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight } from "../icons/GalleryIcons";
 
 interface GalleryProps {
-  images: string[]
-  perView: number
-  thumbNumber: number
-  className?: string
+  images: string[];
+  perView: number;
+  thumbNumber: number;
+  className?: string;
 }
 
 const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: false,
     initial: 0,
@@ -22,9 +22,9 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
     },
     mode: "free-snap",
     slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel)
+      setCurrentSlide(slider.track.details.rel);
     },
-  })
+  });
 
   const [thumbsRef, thumbsInstanceRef] = useKeenSlider<HTMLDivElement>({
     loop: false,
@@ -32,30 +32,30 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
       perView: thumbNumber,
       spacing: 15,
     },
-  })
+  });
   useEffect(() => {
-    const container = thumbsInstanceRef.current?.container
-    if (!container) return
+    const container = thumbsInstanceRef.current?.container;
+    if (!container) return;
 
-    const slides = container.querySelectorAll(".keen-slider__slide")
-    const activeSlide = slides[currentSlide] as HTMLElement
+    const slides = container.querySelectorAll(".keen-slider__slide");
+    const activeSlide = slides[currentSlide] as HTMLElement;
 
-    if (!activeSlide) return
+    if (!activeSlide) return;
 
-    const offsetLeft = activeSlide.offsetLeft
+    const offsetLeft = activeSlide.offsetLeft;
 
-    const scrollTo = offsetLeft
+    const scrollTo = offsetLeft;
 
     container.scrollTo({
       left: scrollTo,
       behavior: "smooth",
-    })
-  }, [currentSlide])
+    });
+  }, [currentSlide]);
 
-  const goPrev = () => instanceRef.current?.prev()
-  const goNext = () => instanceRef.current?.next()
+  const goPrev = () => instanceRef.current?.prev();
+  const goNext = () => instanceRef.current?.next();
 
-  if (!images || !Array.isArray(images)) return null
+  if (!images || !Array.isArray(images)) return null;
 
   return (
     <div data-aos="fade-up"
@@ -134,7 +134,7 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Gallery
+export default Gallery;

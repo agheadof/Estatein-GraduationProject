@@ -17,23 +17,23 @@ type Props = {
 };
 
 function PropertiesSection({
-    heading,
-    paragraph,
-    buttonLabel,
-    showDetails = true,
-    showTags = false,
+  heading,
+  paragraph,
+  buttonLabel,
+  showDetails = true,
+  showTags = false,
 }: Props) {
-    const dispatch = useAppDispatch()
-    const properties = useAppSelector(selectPropertiesCardsData)
-    const { loading, error } = useAppSelector((state) => state.properties)
+  const dispatch = useAppDispatch();
+  const properties = useAppSelector(selectPropertiesCardsData);
+  const { loading, error } = useAppSelector((state) => state.properties);
 
-    useEffect(() => {
-        if (properties.length === 0) {
-            dispatch(fetchProperties())
-        }
-    }, [dispatch, properties.length])
+  useEffect(() => {
+    if (properties.length === 0) {
+      dispatch(fetchProperties());
+    }
+  }, [dispatch, properties.length]);
 
-    const skeletonCount = properties.length > 0 ? properties.length : 3; 
+  const skeletonCount = properties.length > 0 ? properties.length : 3;
 
     return (
       <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
@@ -55,26 +55,26 @@ function PropertiesSection({
                 >
                   <div className="w-full h-[210px] lg-custom:h-[255px] 2xl:h-[318px] rounded-[10px] mb-4 lg-custom:mb-5 2xl:mb-[30px] bg-gray-300 dark:bg-gray-600" />
 
-                  <div className="w-32 h-7 2xl:h-9 rounded-[28px] bg-gray-300 dark:bg-gray-600 mb-5" />
+                <div className="w-32 h-7 2xl:h-9 rounded-[28px] bg-gray-300 dark:bg-gray-600 mb-5" />
 
-                  <div className="h-7 lg-custom:h-8 2xl:h-9 bg-gray-300 dark:bg-gray-600 rounded mb-1 lg-custom:mb-1.5 2xl:mb-2 w-3/4" />
+                <div className="h-7 lg-custom:h-8 2xl:h-9 bg-gray-300 dark:bg-gray-600 rounded mb-1 lg-custom:mb-1.5 2xl:mb-2 w-3/4" />
 
-                  <div className="h-5 lg-custom:h-6 2xl:h-7 bg-gray-300 dark:bg-gray-600 rounded mb-6 w-full" />
+                <div className="h-5 lg-custom:h-6 2xl:h-7 bg-gray-300 dark:bg-gray-600 rounded mb-6 w-full" />
 
-                  <div className="flex flex-wrap gap-1.5 2xl:gap-2.5 mb-5 lg-custom:mb-6 2xl:mb-[30px]">
-                    {[...Array(3)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-[100px] 2xl:w-[120px] h-8 2xl:h-10 rounded-[28px] bg-gray-300 dark:bg-gray-600"
-                      />
-                    ))}
+                <div className="flex flex-wrap gap-1.5 2xl:gap-2.5 mb-5 lg-custom:mb-6 2xl:mb-[30px]">
+                  {[...Array(3)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="w-[100px] 2xl:w-[120px] h-8 2xl:h-10 rounded-[28px] bg-gray-300 dark:bg-gray-600"
+                    />
+                  ))}
+                </div>
+
+                <div className="flex items-center justify-between gap-[30px] lg-custom:gap-[40px] 2xl:gap-[50px]">
+                  <div className="flex flex-col">
+                    <div className="h-5 2xl:h-6 w-20 bg-gray-300 dark:bg-gray-600 rounded mb-1" />
+                    <div className="h-7 lg-custom:h-8 2xl:h-9 w-28 bg-gray-300 dark:bg-gray-600 rounded" />
                   </div>
-
-                  <div className="flex items-center justify-between gap-[30px] lg-custom:gap-[40px] 2xl:gap-[50px]">
-                    <div className="flex flex-col">
-                      <div className="h-5 2xl:h-6 w-20 bg-gray-300 dark:bg-gray-600 rounded mb-1" />
-                      <div className="h-7 lg-custom:h-8 2xl:h-9 w-28 bg-gray-300 dark:bg-gray-600 rounded" />
-                    </div>
 
                     <div className="w-48 h-10 2xl:h-12 bg-purple-500 rounded-lg opacity-70" />
                   </div>

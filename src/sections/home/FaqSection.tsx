@@ -28,7 +28,7 @@ function FaqSection() {
 
       />
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
           {[...Array(skeletonCount)].map((_, i) => (
             <div
               key={i}
@@ -50,6 +50,7 @@ function FaqSection() {
           }
           showCounter={true}
           titleBtnLabel="View All FAQ’s"
+          navigateTo="allFaq"
         />
       )}
     </section>

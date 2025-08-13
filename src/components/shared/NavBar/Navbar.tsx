@@ -15,10 +15,12 @@ import {
   navMobileItemAos,
   navMobileContactAos,
 } from "../../../utlis/Anamation";
+import LogoIcon from "../../icons/LogoIcon";
 
 type NavbarProps = {
   isBannerVisible: boolean;
 };
+
 
 const Navbar = ({ isBannerVisible }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -44,13 +46,11 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
             onClick={() => {
               setIsMenuOpen(false);
               scrollToTop();
+              setIsMenuOpen(false);
+              scrollToTop();
             }}
           >
-            <img
-              src="/assets/icons/Navbar/logo.svg"
-              alt="Logo"
-              className="w-24 md:w-28 2xl:w-40"
-            />
+            <LogoIcon className="w-24 md:w-28 2xl:w-40 text-white" />
           </NavLink>
 
           {/* Desktop Menu */}

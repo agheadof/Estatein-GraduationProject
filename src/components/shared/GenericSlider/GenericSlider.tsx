@@ -11,6 +11,7 @@ type Props<T> = {
   showCounter?: boolean;
   titleBtnLabel?: string;
   counterClassName?: string;
+  navigateTo: string;
 };
 
 const GenericSlider = <T,>({
@@ -20,6 +21,7 @@ const GenericSlider = <T,>({
   showCounter = true,
   titleBtnLabel = "",
   counterClassName = "",
+  navigateTo,
 }: Props<T>) => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
@@ -55,12 +57,12 @@ const GenericSlider = <T,>({
   });
 
   useEffect(() => {
-    if (!slider || !slider.current) return
+    if (!slider || !slider.current) return;
 
-    slider.current.update()
+    slider.current.update();
 
-    const details = slider.current.track?.details
-    const rel = details?.rel ?? 0
+    const details = slider.current.track?.details;
+    const rel = details?.rel ?? 0;
     const perView =
       typeof slider.current?.options?.slides === "object" &&
       slider.current.options.slides !== null &&
@@ -68,16 +70,16 @@ const GenericSlider = <T,>({
         ? (slider.current.options.slides.perView as number) ||
           currentSlidesPerGroup ||
           1
-        : currentSlidesPerGroup || 1
+        : currentSlidesPerGroup || 1;
 
-    const maxRel = Math.max(0, Math.ceil(Math.max(0, items.length - perView)))
+    const maxRel = Math.max(0, Math.ceil(Math.max(0, items.length - perView)));
 
     if (rel > maxRel) {
-      slider.current.moveToIdx(Math.max(0, maxRel))
+      slider.current.moveToIdx(Math.max(0, maxRel));
     }
 
-    requestAnimationFrame(() => updateNav(slider.current))
-  }, [items.length, currentSlidesPerGroup, slider])
+    requestAnimationFrame(() => updateNav(slider.current));
+  }, [items.length, currentSlidesPerGroup, slider]);
 
   const updateNav = (slider: any) => {
     const details = slider?.track?.details;
@@ -135,7 +137,11 @@ const GenericSlider = <T,>({
 
         {titleBtnLabel && (
           <div className="block md:hidden">
-            <TitleBtn label={titleBtnLabel} className="whitespace-pre-wrap" />
+            <TitleBtn
+              label={titleBtnLabel}
+              className="whitespace-pre-wrap"
+              navigateTo={navigateTo}
+            />
           </div>
         )}
 

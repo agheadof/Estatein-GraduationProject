@@ -1,33 +1,33 @@
-import GenericSlider from "../../components/shared/GenericSlider/GenericSlider"
-import TestimonialCard from "../../components/cards/TestimonialCard"
-import { useEffect, useState } from "react"
-import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import Title from "../../components/shared/Title"
-import { SectionWrapper } from "../../layouts/SectionWrapper"
-import ReviewModal from "../../components/cards/ReviewModal"
-import AlertMessage from "../../components/ui/AlertMessage"
-import { listenToTestimonials } from "../../utlis/firebaseListeners/testimonialsListener"
+import GenericSlider from "../../components/shared/GenericSlider/GenericSlider";
+import TestimonialCard from "../../components/cards/TestimonialCard";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import Title from "../../components/shared/Title";
+import { SectionWrapper } from "../../layouts/SectionWrapper";
+import ReviewModal from "../../components/cards/ReviewModal";
+import AlertMessage from "../../components/ui/AlertMessage";
+import { listenToTestimonials } from "../../utlis/firebaseListeners/testimonialsListener";
 
 function OurClientsSection() {
-  const [showReviewModal, setShowReviewModal] = useState<boolean>(false)
-  const [alertMessage, setAlertMessage] = useState<string | null>(null)
+  const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
   const handleCloseModal = () => {
-    setShowReviewModal(false)
-  }
+    setShowReviewModal(false);
+  };
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const { items, loading, error } = useAppSelector(
     (state) => state.testimonials
-  )
+  );
 
   useEffect(() => {
     if (items.length === 0) {
-      dispatch(listenToTestimonials())
+      dispatch(listenToTestimonials());
     }
-  }, [dispatch, items])
+  }, [dispatch, items]);
 
-  const skeletonCount = items.length > 0 ? items.length : 3
+  const skeletonCount = items.length > 0 ? items.length : 3;
 
   return (
     <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
@@ -41,7 +41,7 @@ function OurClientsSection() {
 
         />
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[80px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
             {[...Array(skeletonCount)].map((_, i) => (
               <div
                 key={i}
@@ -80,6 +80,7 @@ function OurClientsSection() {
             slidesPerView={3}
             showCounter={true}
             titleBtnLabel="View All Testimonials"
+            navigateTo="allTestimonials"
           />
         )}
         <button
@@ -102,7 +103,7 @@ function OurClientsSection() {
         )}
       </section>
     </SectionWrapper>
-  )
+  );
 }
 
-export default OurClientsSection
+export default OurClientsSection;

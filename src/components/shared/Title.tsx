@@ -5,12 +5,12 @@ type TitleProps = {
   starImg?: boolean;
   titleStyle?: string;
   heading: string;
-  paragraph: string;
+  paragraph?: string;
   paragraphStyle?: string;
   buttonLabel?: string;
   anamation?: string;
     animKey?: string; // مفتاح فريد
-
+  navigateTo?: string;
 };
 
 const Title = ({
@@ -22,7 +22,7 @@ const Title = ({
   buttonLabel,
   anamation,
     animKey,
-
+navigateTo
 }: TitleProps) => {
     const ref = useOneTimeAOS(animKey);
 
@@ -52,7 +52,7 @@ const Title = ({
         </div>
         {buttonLabel && (
           <div className="hidden lg-custom:block">
-            <TitleBtn label={buttonLabel} />
+            <TitleBtn label={buttonLabel} navigateTo={navigateTo} />
           </div>
         )}
       </div>
