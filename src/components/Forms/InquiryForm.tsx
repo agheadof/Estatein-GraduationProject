@@ -67,23 +67,35 @@ function InquiryForm({
       ? "grid p-0 m-0 grid-cols-1 md:grid-cols-3 gap-[20px] md:gap-[30px] 2xl:gap-[50px]"
       : "grid p-0 m-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] 2xl:gap-[50px]";
 
-  const onSubmit = async (data: CustomFormData) => {
-    const payload = {
-      ...data,
-      type,
-      createdAt: serverTimestamp(),
-      agreed,
-    };
-
-    try {
-      await push(ref(db, `forms/${type}`), payload);
-      setShowAlert(true);
-      resetForm();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
+const onSubmit = async (data: CustomFormData) => {
+  const payload = {
+    ...data,
+    type,
+    createdAt: serverTimestamp(), 
+    agreed,
   };
 
+  try {
+    const formsRef = ref(db, `forms/${type}`);
+    await push(formsRef, payload);
+
+    await push(ref(db, "notifications"), {
+      name: `${data.firstName || ""} ${data.lastName || ""}`.trim() || undefined,
+      email: data.email || undefined,
+      message: (data.message || data.inquiryType || "").toString().trim(),
+      formType: type,
+      createdAt: Date.now(),
+    });
+
+    setShowAlert(true);
+    resetForm();
+  } catch (error) {
+    console.error("Error submitting form:", error);
+  }
+};
+
+
+  
   return (
     <>
       {showAlert && (
