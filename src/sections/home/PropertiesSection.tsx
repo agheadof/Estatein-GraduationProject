@@ -1,20 +1,20 @@
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { useEffect } from 'react'
-import { fetchProperties } from '../../redux/slices/propertiesSlice'
-import { selectPropertiesCardsData } from '../../redux/types/Property'
-import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
-import PropertiesCard from '../../components/cards/PropertiesCard'
-import { SectionWrapper } from '../../layouts/SectionWrapper'
-import Title from '../../components/shared/Title'
-import type { PropertyType } from '../../types/Property'
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import { useEffect } from "react"
+import { selectPropertiesCardsData } from "../../redux/types/Property"
+import GenericSlider from "../../components/shared/GenericSlider/GenericSlider"
+import PropertiesCard from "../../components/cards/PropertiesCard"
+import { SectionWrapper } from "../../layouts/SectionWrapper"
+import Title from "../../components/shared/Title"
+import type { PropertyType } from "../../types/Property"
+import { listenToProperties } from "../../utlis/firebaseListeners/propertiesListener"
 
 type Props = {
-  showTags?: boolean;
-  showDetails?: boolean;
-  heading: string;
-  paragraph: string;
-  buttonLabel?: string;
-};
+  showTags?: boolean
+  showDetails?: boolean
+  heading: string
+  paragraph: string
+  buttonLabel?: string
+}
 
 function PropertiesSection({
   heading,
@@ -23,17 +23,17 @@ function PropertiesSection({
   showDetails = true,
   showTags = false,
 }: Props) {
-  const dispatch = useAppDispatch();
-  const properties = useAppSelector(selectPropertiesCardsData);
-  const { loading, error } = useAppSelector((state) => state.properties);
+  const dispatch = useAppDispatch()
+  const properties = useAppSelector(selectPropertiesCardsData)
+  const { loading, error } = useAppSelector((state) => state.properties)
 
   useEffect(() => {
     if (properties.length === 0) {
-      dispatch(fetchProperties());
+      dispatch(listenToProperties())
     }
-  }, [dispatch, properties.length]);
+  }, [dispatch, properties.length])
 
-  const skeletonCount = properties.length > 0 ? properties.length : 3;
+  const skeletonCount = properties.length > 0 ? properties.length : 3
 
     return (
       <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
@@ -76,34 +76,35 @@ function PropertiesSection({
                     <div className="h-7 lg-custom:h-8 2xl:h-9 w-28 bg-gray-300 dark:bg-gray-600 rounded" />
                   </div>
 
-                    <div className="w-48 h-10 2xl:h-12 bg-purple-500 rounded-lg opacity-70" />
-                  </div>
+                  <div className="w-48 h-10 2xl:h-12 bg-purple-500 rounded-lg opacity-70" />
                 </div>
-              ))}
-            </div>
-          ) : error ? (
-            <p className="text-red-500">{error}</p>
-          ) : (
-            <GenericSlider<PropertyType>
-              items={properties}
-              renderSlide={(property, index) => (
-                <div key={index}>
-                  <PropertiesCard
-                    key={index}
-                    property={property}
-                    showDetails={showDetails}
-                    showTags={showTags}
-                  />
-                </div>
-              )}
-              slidesPerView={3}
-              showCounter={true}
-              titleBtnLabel="View All Properties"
-            />
-          )}
-        </div>
-      </SectionWrapper>
-    );
+              </div>
+            ))}
+          </div>
+        ) : error ? (
+          <p className="text-red-500">{error}</p>
+        ) : (
+          <GenericSlider<PropertyType>
+            items={properties}
+            navigateTo="allProperties"
+            renderSlide={(property, index) => (
+              <div key={index} >
+                <PropertiesCard
+                  key={index}
+                  property={property}
+                  showDetails={showDetails}
+                  showTags={showTags}
+                />
+              </div>
+            )}
+            slidesPerView={3}
+            showCounter={true}
+            titleBtnLabel="View All Properties"
+          />
+        )}
+      </div>
+    </SectionWrapper>
+  )
 }
 
-export default PropertiesSection;
+export default PropertiesSection

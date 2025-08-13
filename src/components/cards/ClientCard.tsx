@@ -4,13 +4,13 @@ import icon1 from "/assets/icons/ValuedClients/domain.svg";
 import icon2 from "/assets/icons/ValuedClients/category.svg";
 
 interface Client {
-  id: string;
+  id?: string;
   title?: string;
   name?: string;
-  domain: string;
-  category: string;
-  review: string;
-  since: string;
+  domain?: string;
+  category?: string;
+  review?: string;
+  since?: string;
   website?: string;
 }
 

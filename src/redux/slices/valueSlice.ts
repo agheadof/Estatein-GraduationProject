@@ -1,12 +1,12 @@
 import { createGenericSlice } from "./createGenericSlice";
 import type { Value } from "../types/value";
 
-const { slice, fetchEntities } = createGenericSlice<Value, Value>({
+const { slice, startListening } = createGenericSlice<Value, Value>({
   name: "values",
   path: "values",
   itemsPerPage: 4,
 });
 
-export const fetchValues = fetchEntities;
-export default slice.reducer;
+export const fetchValues = startListening;
 
+export default slice.reducer;

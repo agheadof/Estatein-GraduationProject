@@ -6,6 +6,7 @@ import { SectionWrapper } from "../layouts/SectionWrapper";
 import Title from "../components/shared/Title";
 import FaqCard from "../components/cards/FaqCard/FaqCard";
 import { fetchFaqs } from "../redux/slices/faqsSlice";
+import type { Faqs } from "../redux/types/FAQ";
 
 const AllFaqsPage = () => {
   const dispatch = useAppDispatch();
@@ -55,7 +56,7 @@ const AllFaqsPage = () => {
         <p className="text-red-500">{error}</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedItems.map((question, index) => (
+          {displayedItems.map((question:Faqs, index:number) => (
             <FaqCard key={index} question={question} />
           ))}
         </div>

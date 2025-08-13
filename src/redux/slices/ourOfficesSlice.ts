@@ -1,63 +1,42 @@
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import type { OfficeLocation } from "../types/OfficeLocation"
 
-import { createSlice} from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { createFetchThunk } from "../thunks/createFetchThunk";
-
-export type OfficeLocation = {
-  id: string;
-  branch: string;
-  address: string;
-  details: string;
-  email: string;
-  phone: string;
-  city: string;
-  category: string;
-  mapLink: string;
-};
-
-interface OfficeLocationState {
-  offices: OfficeLocation[];
-  loading: boolean;
-  error: string | null;
-  activeTab: "all" | "regional" | "international";
+type OfficesState = {
+  items: OfficeLocation[]
+  loading: boolean
+  error: string | null
+  activeTab: "all" | "regional" | "international"
 }
 
-const initialState: OfficeLocationState = {
-  offices: [],
+const initialState: OfficesState = {
+  items: [],
   loading: true,
   error: null,
   activeTab: "all",
-};
-export const fetchOffices = createFetchThunk<OfficeLocation>("locations","locations")
+}
 
 const officesSlice = createSlice({
   name: "offices",
   initialState,
   reducers: {
-    setActiveTab: (
-      state,
-      action: PayloadAction<OfficeLocationState["activeTab"]>
-    ) => {
-      state.activeTab = action.payload;
+    setOffices: (state, action: PayloadAction<OfficeLocation[]>) => {
+      state.items = action.payload ?? []
+      state.loading = false
+      state.error = null
+    },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload
+    },
+    setError: (state, action: PayloadAction<string | null>) => {
+      state.error = action.payload
+      state.loading = false
+    },
+    setActiveTab: (state, action: PayloadAction<OfficesState["activeTab"]>) => {
+      state.activeTab = action.payload
     },
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchOffices.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchOffices.fulfilled, (state, action) => {
-        state.loading = false;
-        state.offices = action.payload;
-      })
-      .addCase(fetchOffices.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Failed to load offices.";
-      });
-  },
-});
+})
 
-export const { setActiveTab } = officesSlice.actions;
-
-export default officesSlice.reducer;
+export const { setOffices, setLoading, setError, setActiveTab } =
+  officesSlice.actions
+export default officesSlice.reducer

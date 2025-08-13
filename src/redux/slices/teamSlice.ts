@@ -1,12 +1,11 @@
-import { createGenericSlice } from "./createGenericSlice";
-import type { Team } from "../types/team";
+import { createGenericSlice } from "./createGenericSlice"
+import type { Team } from "../types/team"
 
-const { slice, fetchEntities } = createGenericSlice<Team, Team>({
+const { slice, startListening } = createGenericSlice<Team, Team>({
   name: "team",
   path: "team",
   itemsPerPage: 4,
-});
+})
 
-export const fetchTeams = fetchEntities;
-export default slice.reducer;
-
+export const fetchTeams = startListening
+export default slice.reducer

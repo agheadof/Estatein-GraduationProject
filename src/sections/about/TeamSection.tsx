@@ -1,24 +1,23 @@
-import { useEffect } from "react";
-import TeamCardComponent from "../../components/cards/TeamCardComponent";
-import { SectionWrapper } from "../../layouts/SectionWrapper";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchTeams } from "../../redux/slices/teamSlice";
-import Title from "../../components/shared/Title";
+import { useEffect } from "react"
+import TeamCardComponent from "../../components/cards/TeamCardComponent"
+import { SectionWrapper } from "../../layouts/SectionWrapper"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import { fetchTeams } from "../../redux/slices/teamSlice"
+import Title from "../../components/shared/Title"
+import type { Team } from "../../redux/types/team"
 import { teamItemAos } from "../../utlis/Anamation";
 
 const TeamSection = () => {
-  const dispatch = useAppDispatch();
-  const { visibleItems, loading, error } = useAppSelector(
-    (state) => state.team
-  );
+  const dispatch = useAppDispatch()
+  const { visibleItems, loading, error } = useAppSelector((state) => state.team)
 
   useEffect(() => {
     if (visibleItems.length === 0) {
-      dispatch(fetchTeams());
+      fetchTeams(dispatch)
     }
-  }, [dispatch, visibleItems.length]);
+  }, [dispatch, visibleItems.length])
 
-  const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 4;
+  const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 4
 
   return (
     <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
@@ -61,10 +60,13 @@ const TeamSection = () => {
         ) : error ? (
           <p className="text-red-500">{error}</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-4 2xl:gap-[30px] gap-[20px]">
-            {visibleItems.map((team, index) => (
-              <div
-                key={team.id}
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-4 2xl:gap-[30px] gap-[20px]"
+            
+            
+          >
+            {visibleItems.map((team: Team, index:number) => (
+              <div key={team.id}
                 {...teamItemAos(index)} >
                 <TeamCardComponent
                   key={team.id}
@@ -73,12 +75,13 @@ const TeamSection = () => {
                   image={team.clientImage}
                 />
               </div>
+           
             ))}
           </div>
         )}
       </section>
     </SectionWrapper>
-  );
-};
+  )
+}
 
-export default TeamSection;
+export default TeamSection
