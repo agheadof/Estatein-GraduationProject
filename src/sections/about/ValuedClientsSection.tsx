@@ -1,21 +1,21 @@
-import { useEffect } from "react";
 import ClientCard from "../../components/cards/ClientCard";
 import GenericSlider from "../../components/shared/GenericSlider/GenericSlider";
 import Title from "../../components/shared/Title";
 import { SectionWrapper } from "../../layouts/SectionWrapper";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchClients } from "../../redux/slices/clientsSlice";
+import { useAppSelector } from "../../redux/hooks";
+import type { Client } from "../../redux/types/client";
+
 
 function ValuedClientsSection() {
-  const dispatch = useAppDispatch();
-  const { items, error, loading } = useAppSelector((state) => state.clients);
-  useEffect(() => {
-    dispatch(fetchClients());
-  }, []);
+  const { items, error, loading } = useAppSelector((state) => state.clients) as {
+    items: Client[];
+    loading: boolean;
+    error: string | null;
+  };
 
   return (
     <SectionWrapper className="pb-20 lg-custom:mb-[120px] 2xl:mb-[150px]">
-      <Title
+       <Title
         heading="Our Valued Clients"
         paragraph="At Estatein, we have had the privilege of working with a diverse range of clients across various industries. Here are some of the clients we've had the pleasure of serving"
         starImg
@@ -23,22 +23,20 @@ function ValuedClientsSection() {
         anamation="fade-up"
 
       />
-      <div className="cards_container flex flex-col lg-custom:flex-row items-center gap-10 2xl:gap-[50px]">
-        {loading ? (
-          <div>Loading ...</div>
-        ) : error ? (
-          <p className="text-red-500">{error}</p>
-        ) : (
-          <GenericSlider
-            items={items}
-            renderSlide={(client, index) =>
-              client ? <ClientCard key={index} {...client} /> : null
-            }
-            showCounter={true}
-            slidesPerView={2}
-            counterClassName="justify-center md:justify-between"
-          />
-        )}
+     <div className="cards_container flex flex-col lg-custom:flex-row items-center gap-10 2xl:gap-[50px]">
+      {loading && <p>Loading...</p>}
+      {error && <p className="text-red-500">{error}</p>}
+
+      {!loading && !error && items.length > 0 && (
+        <GenericSlider
+          items={items}
+          renderSlide={(client) => <ClientCard key={client.id} {...client} />}
+          showCounter={true}
+          slidesPerView={2}
+          counterClassName="justify-center md:justify-between"
+          navigateTo="/" 
+        />
+      )}
       </div>
     </SectionWrapper>
   );

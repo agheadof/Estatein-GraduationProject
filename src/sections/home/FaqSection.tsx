@@ -1,21 +1,21 @@
-import GenericSlider from "../../components/shared/GenericSlider/GenericSlider";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchFaqs } from "../../redux/slices/faqsSlice";
-import Title from "../../components/shared/Title";
-import FaqCard from "../../components/cards/FaqCard/FaqCard";
+import GenericSlider from "../../components/shared/GenericSlider/GenericSlider"
+import { useEffect } from "react"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import { fetchFaqs } from "../../redux/slices/faqsSlice"
+import Title from "../../components/shared/Title"
+import FaqCard from "../../components/cards/FaqCard/FaqCard"
 
 function FaqSection() {
-  const dispatch = useAppDispatch();
-  const { items, loading, error } = useAppSelector((state) => state.faqs);
+  const dispatch = useAppDispatch()
+  const { items, loading, error } = useAppSelector((state) => state.faqs)
 
   useEffect(() => {
     if (items.length === 0) {
-      dispatch(fetchFaqs());
+      fetchFaqs(dispatch)
     }
-  }, [dispatch, items.length]);
+  }, [dispatch, items.length])
 
-  const skeletonCount = items.length > 0 ? items.length : 3;
+  const skeletonCount = items.length > 0 ? items.length : 3
 
   return (
     <section>
@@ -54,7 +54,7 @@ function FaqSection() {
         />
       )}
     </section>
-  );
+  )
 }
 
-export default FaqSection;
+export default FaqSection

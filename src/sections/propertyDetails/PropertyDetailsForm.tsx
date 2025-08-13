@@ -1,31 +1,31 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react"
+import { useParams } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 
-import { fetchProperties } from "../../redux/slices/propertiesSlice";
-import type { RootState, AppDispatch } from "../../redux/store";
+import type { RootState, AppDispatch } from "../../redux/store"
 
-import InquiryForm from "../../components/Forms/InquiryForm";
-import Title from "../../components/shared/Title";
-import { SectionWrapper } from "../../layouts/SectionWrapper";
+import InquiryForm from "../../components/Forms/InquiryForm"
+import Title from "../../components/shared/Title"
+import { SectionWrapper } from "../../layouts/SectionWrapper"
+import { listenToProperties } from "../../utlis/firebaseListeners/propertiesListener"
 
 function PropertyDetailsForm() {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>()
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>()
 
   const property = useSelector((state: RootState) =>
-    state.properties.all.find((p) => p.id === id)
-  );
+    state.properties.all.find((p: any) => p.id === id)
+  )
 
-  const loading = useSelector((state: RootState) => state.properties.loading);
+  const loading = useSelector((state: RootState) => state.properties.loading)
 
   useEffect(() => {
-    dispatch(fetchProperties());
-  }, [dispatch]);
+    dispatch(listenToProperties())
+  }, [dispatch])
 
   if (loading || !property) {
-    return <div className="text-center text-red-200 py-20">Loading...</div>;
+    return <div className="text-center text-red-200 py-20">Loading...</div>
   }
 
   return (
@@ -47,7 +47,7 @@ function PropertyDetailsForm() {
         </div>
       </div>
     </SectionWrapper>
-  );
+  )
 }
 
-export default PropertyDetailsForm;
+export default PropertyDetailsForm

@@ -10,7 +10,7 @@ import bannerReducer from "./slices/bannerSlice"
 import clientsReducer from "./slices/clientsSlice"
 import valuesReducer from "./slices/valueSlice"
 
-const store = configureStore({
+const store: any = configureStore({
   reducer: {
     theme: themeReducer,
     faqs: faqsReducer,
@@ -22,6 +22,7 @@ const store = configureStore({
     banner: bannerReducer,
     clients: clientsReducer,
     values: valuesReducer,
+    
   },
 })
 

@@ -5,18 +5,21 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchAchievements } from "../../redux/slices/achievementSlice";
 import Title from "../../components/shared/Title";
 import { teamItemAos } from "../../utlis/Anamation";
+import type { Achievement } from "../../redux/types/achievement";
 
 function AchievementsSection() {
-  const dispatch = useAppDispatch();
-  const { visibleItems, loading, error } = useAppSelector((state) => state.achievements);
+  const dispatch = useAppDispatch()
+  const { visibleItems, loading, error } = useAppSelector(
+    (state) => state.achievements
+  )
 
   useEffect(() => {
     if (visibleItems.length === 0) {
-      dispatch(fetchAchievements());
+      fetchAchievements(dispatch)
     }
-  }, [dispatch, visibleItems.length]);
+  }, [dispatch, visibleItems.length])
 
-  const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 3;
+  const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 3
 
   return (
     <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
@@ -59,7 +62,7 @@ function AchievementsSection() {
             data-aos="fade-up"
             data-aos-duration="500"
           >
-            {visibleItems.map((achievement, index) => (
+            {visibleItems.map((achievement: Achievement, index:number) => (
               <div
                 key={achievement.id}
                 {...teamItemAos(index)} >
@@ -74,7 +77,7 @@ function AchievementsSection() {
         )}
       </section>
     </SectionWrapper>
-  );
+  )
 }
 
-export default AchievementsSection;
+export default AchievementsSection

@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useEffect } from "react";
 import { fetchValues } from "../../redux/slices/valueSlice";
 import { ourValues } from "../../data/ourValues";
+import type { Value } from "../../redux/types/value";
 
 
 const FaqList = () => {
@@ -13,7 +14,7 @@ const FaqList = () => {
     (state) => state.values
   );
   useEffect(() => {
-  dispatch(fetchValues());   
+  dispatch(fetchValues);   
 }, [dispatch]);
 
 useEffect(() => {
@@ -36,7 +37,7 @@ useEffect(() => {
                 {loading ? ( <p>Loading...</p> ) : error ? (
           <p className="text-red-500">{error}</p>
         ) : (
-              visibleItems.map((values, index) => (
+              visibleItems.map((values:Value, index:number) => (
                   <ValueCard
                     key={index}
                     titleSize="2xl:text-2xl lg-custom:text-xl text-lg"
