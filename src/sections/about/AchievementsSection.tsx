@@ -62,7 +62,7 @@ function AchievementsSection() {
             {visibleItems.map((achievement, index) => (
               <div
                 key={achievement.id}
-                {...teamItemAos(index, true)} >
+                {...teamItemAos(index)} >
 
                 <AchievementsCard
                   title={achievement.title}
