@@ -91,14 +91,14 @@ function InquiryForm({
           onClose={() => setShowAlert(false)}
         />
       )}
-      <form
+      <form 
         className={`${formPadding} flex flex-col w-full rounded-xl border-1 border-white90 dark:border-gray15 relative`}
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit(onSubmit);
         }}
       >
-        <div className={gridClass}>
+        <div data-aos="fade-up"  className={gridClass}>
           <SharedFields
             formData={formData}
             handleChange={handleChange}
@@ -178,7 +178,7 @@ function InquiryForm({
                 />
               </div>
 
-              <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-2 p-0 m-0 flex flex-col justify-between relative">
+              <div  className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-2 p-0 m-0 flex flex-col justify-between relative">
                 <label className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 2xl:text-xl text-base/[1.5] text-black dark:text-white font-semibold">
                   Preferred Contact Method
                 </label>

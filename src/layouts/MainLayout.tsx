@@ -1,4 +1,4 @@
-import { Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Navbar from "../components/shared/NavBar/Navbar";
 import Footer from "../components/shared/Footer/Footer";
 import { defaultLinks } from "../data/footerData";
@@ -11,13 +11,23 @@ import ChatBot from "../components/shared/ChatBot/ChatBot";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { hideBanner, showBanner } from "../redux/slices/bannerSlice";
 import CustomCursor from "../components/shared/CustomCursor";
-import PageTransitionWrapper from "../utlis/TransitionWrapper";
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 
 const MainLayout = () => {
   const dispatch = useAppDispatch();
   const isBannerVisible = useAppSelector((state) => state.banner.isVisible);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasClosedBanner, setHasClosedBanner] = useState<boolean>(false);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      offset: 0,
+      once: false,
+      mirror: true
+    });
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => setIsLoading(false), 2000);
@@ -60,7 +70,6 @@ const MainLayout = () => {
           )}
           <Navbar isBannerVisible={isBannerVisible && !hasClosedBanner} />
 
-          <PageTransitionWrapper>
             <main>
               <Outlet />
               <CTA
@@ -69,7 +78,6 @@ const MainLayout = () => {
                 buttonLabel="Explore Properties"
               />
             </main>
-          </PageTransitionWrapper>
 
           <Scroll2Top />
           <Footer

@@ -58,7 +58,7 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
   if (!images || !Array.isArray(images)) return null
 
   return (
-    <div
+    <div data-aos="fade-up"
       className={`bg-white97 dark:bg-gray10 border border-white90 dark:border-gray15 rounded-xl p-5 md:p-10 2xl:p-12 flex flex-col items-center gap-5 2xl:gap-8 w-full mx-auto ${className}`}
     >
       <div

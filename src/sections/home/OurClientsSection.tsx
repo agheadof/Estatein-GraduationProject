@@ -37,6 +37,8 @@ function OurClientsSection() {
           paragraph="Read the success stories and heartfelt testimonials from our valued clients. Discover why they chose Estatein for their real estate needs."
           buttonLabel="View All Testimonials"
           paragraphStyle="2xl:max-w-[1181px] lg-custom:max-w-[960px] w-full"
+                    anamation="fade-up"
+
         />
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[80px]">

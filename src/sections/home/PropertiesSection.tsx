@@ -6,8 +6,6 @@ import GenericSlider from '../../components/shared/GenericSlider/GenericSlider'
 import PropertiesCard from '../../components/cards/PropertiesCard'
 import { SectionWrapper } from '../../layouts/SectionWrapper'
 import Title from '../../components/shared/Title'
-import { motion } from 'framer-motion';
-import { containerVariants, defaultMotionConfig, itemVariants } from '../../utlis/Anamation';
 import type { PropertyType } from '../../types/Property'
 
 type Props = {
@@ -39,12 +37,14 @@ function PropertiesSection({
 
     return (
       <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
-        <motion.div {...defaultMotionConfig} variants={containerVariants}>
+        <div >
           <Title
             heading={heading}
             paragraph={paragraph}
             buttonLabel={buttonLabel}
             paragraphStyle="2xl:max-w-[1200px] lg-custom:max-w-[975px] w-full"
+            anamation="fade-up"
+
           />
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[80px]">
@@ -87,21 +87,21 @@ function PropertiesSection({
             <GenericSlider<PropertyType>
               items={properties}
               renderSlide={(property, index) => (
-                <motion.div key={index} variants={itemVariants}>
+                <div key={index}>
                   <PropertiesCard
                     key={index}
                     property={property}
                     showDetails={showDetails}
                     showTags={showTags}
                   />
-                </motion.div>
+                </div>
               )}
               slidesPerView={3}
               showCounter={true}
               titleBtnLabel="View All Properties"
             />
           )}
-        </motion.div>
+        </div>
       </SectionWrapper>
     );
 }

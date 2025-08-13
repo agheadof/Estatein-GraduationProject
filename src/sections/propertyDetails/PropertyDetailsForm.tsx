@@ -36,6 +36,7 @@ function PropertyDetailsForm() {
           starImg={true}
           heading={`Inquire About ${property.title}`}
           paragraph="Interested in this property? Fill out the form below, and our real estate experts will get back to you with more details, including scheduling a viewing and answering any questions you may have."
+          data-aos="fade-left"
         />
         <div className="w-full">
           <InquiryForm

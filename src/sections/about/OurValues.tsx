@@ -29,8 +29,9 @@ useEffect(() => {
             starImg={true}
             heading="Our Values"
             paragraph="Our story is one of continuous growth and evolution. We started as a small team with big dreams, determined to create a real estate platform that transcended the ordinary."
+            anamation="fade-right"
           />
-          <div className="lg:w-2/3 w-full bg-purple90 dark:bg-gray10 p-2.5  rounded-xl hover:bg-purple75 transition duration-300">
+          <div data-aos="fade-left" className="lg:w-2/3 w-full bg-purple90 dark:bg-gray10 p-2.5  rounded-xl hover:bg-purple75 transition duration-300">
             <div className="bg-white99 dark:bg-gray08 p-6 lg:p-[55px] grid grid-cols-1 min-lg-custom:grid-cols-2  rounded-xl justify-center gap-[30px]">
                 {loading ? ( <p>Loading...</p> ) : error ? (
           <p className="text-red-500">{error}</p>
