@@ -145,9 +145,9 @@ const GenericSlider = <T,>({
           </div>
         )}
 
-        <div   className="flex items-center gap-2.5">
+        <div           data-aos="fade-left"
+  className="flex items-center gap-2.5">
           <button
-          data-aos="fade-left"
             ref={prevRef}
             disabled={isBeginning}
             onClick={() => slider.current?.prev()}
@@ -175,7 +175,6 @@ const GenericSlider = <T,>({
           )}
 
           <button
-          data-aos="fade-left"
           
             ref={nextRef}
             disabled={isEnd}
