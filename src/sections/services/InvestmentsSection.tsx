@@ -33,7 +33,7 @@ const InvestmentsSection = () => {
             key={index}
             cardStyle="p-6 md:p-10 2xl:p-[50px] gap-4 md:gap-5 2xl:gap-[30px] bg-white99 dark:bg-gray08 border-white90 dark:border-gray15"
             cardImg={card.cardImg}
-            cardTitle={card.cardTitle}
+            cardTitle_1={card.cardTitle_1}
             cardDesc={card.cardDesc}
           />
         ))}

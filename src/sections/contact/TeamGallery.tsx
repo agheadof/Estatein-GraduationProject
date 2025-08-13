@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Title from "../../components/shared/Title";
-import { fadeUp } from "../../utlis/Anamation";
+import { fadeUp } from "../../utlis/Animation";
 
 function TeamGallery() {
   return (

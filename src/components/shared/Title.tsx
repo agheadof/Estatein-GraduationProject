@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import TitleBtn from "../ui/TitleBtn";
-import { titleMotionConfig } from "../../utlis/Anamation";
+import { titleMotionConfig } from "../../utlis/Animation";
 
 type TitleProps = {
   starImg?: boolean;

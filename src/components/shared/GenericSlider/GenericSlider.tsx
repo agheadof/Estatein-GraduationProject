@@ -4,7 +4,7 @@ import "keen-slider/keen-slider.min.css";
 import TitleBtn from "../../ui/TitleBtn";
 import { NextArrowIcon, PrevArrowIcon } from "../../icons/SliderArrows";
 import { motion } from "framer-motion";
-import { GenericSliderMotionConfig } from "../../../utlis/Anamation";
+import { GenericSliderMotionConfig } from "../../../utlis/Animation";
 
 type Props<T> = {
   items: T[];

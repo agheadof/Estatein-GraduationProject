@@ -4,12 +4,18 @@ import { SectionWrapper } from "../../layouts/SectionWrapper";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchAchievements } from "../../redux/slices/achievementSlice";
 import Title from "../../components/shared/Title";
-import { containerVariants, defaultMotionConfig, itemVariants } from "../../utlis/Anamation";
+import {
+  containerVariants,
+  defaultMotionConfig,
+  itemVariants,
+} from "../../utlis/Animation";
 import { motion } from "framer-motion";
 
 function AchievementsSection() {
   const dispatch = useAppDispatch();
-  const { visibleItems, loading, error } = useAppSelector((state) => state.achievements);
+  const { visibleItems, loading, error } = useAppSelector(
+    (state) => state.achievements
+  );
 
   useEffect(() => {
     if (visibleItems.length === 0) {
@@ -21,10 +27,7 @@ function AchievementsSection() {
 
   return (
     <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
-      <motion.section
-        {...defaultMotionConfig}
-        variants={containerVariants}
-      >
+      <motion.section {...defaultMotionConfig} variants={containerVariants}>
         <Title
           starImg={true}
           heading="Our Achievements"
@@ -33,7 +36,7 @@ function AchievementsSection() {
         />
 
         {loading ? (
-          <div className="grid gap-5 md:grid-cols-3 md:gap-[30px] 2xl:gap-10">
+          <div className="grid gap-5 md:grid-cols-3 md:gap-[30px] 2xl:gap-10 pt-10 md:pt-[60px] 2xl:pt-20">
             {[...Array(skeletonCount)].map((_, i) => (
               <div
                 key={i}
@@ -55,7 +58,7 @@ function AchievementsSection() {
         ) : error ? (
           <p className="text-red-500">{error}</p>
         ) : (
-          <div className="grid gap-5 md:grid-cols-3 md:gap-[30px] 2xl:gap-10  pt-10 md:pt-[60px] 2xl:pt-20">
+          <div className="grid gap-5 md:grid-cols-3 md:gap-[30px] 2xl:gap-10 pt-10 md:pt-[60px] 2xl:pt-20">
             {visibleItems.map((achievement) => (
               <motion.div key={achievement.id} variants={itemVariants}>
                 <AchievementsCard

@@ -10,7 +10,7 @@ import {
   BuildIcon,
 } from "../../components/icons/FilterPropertyIcons";
 import { motion } from "framer-motion";
-import { FilterMotionConfig } from "../../utlis/Anamation";
+import { FilterMotionConfig } from "../../utlis/Animation";
 
 const FilterProperty = () => {
   const selectFields = [

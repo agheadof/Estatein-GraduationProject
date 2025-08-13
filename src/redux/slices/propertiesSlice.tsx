@@ -32,18 +32,9 @@ const transformProperty = (property: any, id: string): PropertyType => ({
   desc: property.description?.slice(0, 100) + "...",
   Price: `$${property.price?.toLocaleString() || "N/A"}`,
   details: [
-    {
-      label: `${property.bedrooms || 0}-Bedroom`,
-      icon: "bed",
-    },
-    {
-      label: `${property.bathrooms || 0}-Bathroom`,
-      icon: "bath",
-    },
-    {
-      label: `Villa`,
-      icon: "villa",
-    },
+    { label: `${property.bedrooms || 0}-Bedroom`, icon: "bed" },
+    { label: `${property.bathrooms || 0}-Bathroom`, icon: "bath" },
+    { label: `Villa`, icon: "villa" },
   ],
 
   descriptionLong: property.description,
@@ -51,13 +42,11 @@ const transformProperty = (property: any, id: string): PropertyType => ({
   location: property.location,
   tags: "Coastal Escapes - Where Waves Beckon",
   features: property.features || [],
-  additionalFees: {
-    inspection: property.inspection || 0,
-    insurance: property.insurance || 0,
-    legalFees: property.legalFees || 0,
-    mortgageFees: property.mortgageFees || 0,
-    transferTax: property.transferTax || 0,
-  },
+
+  additionalFees: property.additionalFees || {},
+  monthlyCosts: property.monthlyCosts || {},
+  monthlyExpenses: property.monthlyExpenses || {},
+  totalInitialCosts: property.totalInitialCosts || {},
 });
 
 export const fetchProperties = createFetchThunk<PropertyType>(

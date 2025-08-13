@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import type { CommonCardProps } from "../../types/CommonCard";
-import { commonCardMotionConfig } from "../../utlis/Anamation";
+import { commonCardMotionConfig } from "../../utlis/Animation";
 
 const ValueCard = ({
   cardImg,
-  cardTitle,
+  cardTitle_1,
   titleStyle,
   titleSize = "text-xl lg-custom:text-2xl",
   cardDesc,
@@ -14,7 +14,7 @@ const ValueCard = ({
   return (
     <motion.div
       {...commonCardMotionConfig}
-      className={`bg-white99 dark:bg-gray08 flex flex-col justify-center gap-3.5 lg-custom:gap-4 2xl:gap-5 group ${cardStyle}`}
+      className={`bg-white99 dark:bg-gray08 flex flex-col justify-start gap-3.5 lg-custom:gap-4 2xl:gap-5 group ${cardStyle}`}
     >
       {children}
       <div
@@ -28,7 +28,7 @@ const ValueCard = ({
         <h5
           className={`text-black dark:text-white font-semibold group-hover:text-purple75 transition-colors duration-300 ${titleSize}`}
         >
-          {cardTitle}
+          {cardTitle_1}
         </h5>
       </div>
       {cardDesc && (

@@ -11,7 +11,7 @@ import {
   containerVariants,
   defaultMotionConfig,
   itemVariants,
-} from "../../utlis/Anamation";
+} from "../../utlis/Animation";
 import type { PropertyType } from "../../types/Property";
 
 type Props = {
