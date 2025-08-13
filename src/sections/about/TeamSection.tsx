@@ -65,7 +65,7 @@ const TeamSection = () => {
             {visibleItems.map((team, index) => (
               <div
                 key={team.id}
-                {...teamItemAos(index, true)} >
+                {...teamItemAos(index)} >
                 <TeamCardComponent
                   key={team.id}
                   name={team.name}

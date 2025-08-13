@@ -5,14 +5,16 @@ import icon2 from "/assets/icons/ValuedClients/category.svg";
 
 interface Client {
   id: string;
-  category: string;
+  title?: string;
+  name?: string;
   domain: string;
-  name: string;
+  category: string;
   review: string;
   since: string;
+  website?: string;
 }
 
-function ClientCard({ since, name, domain, category, review }: Client) {
+function ClientCard({ since, title, domain, category, review, website }: Client) {
   return (
     <div
       className="Client_card_about_last 
@@ -21,7 +23,7 @@ function ClientCard({ since, name, domain, category, review }: Client) {
         rounded-xl p-6 lg-custom:p-[40px] 2xl:p-[50px] 
         shadow-[0px_0px_0px_6px_#f1f1f3] dark:shadow-[0px_0px_0px_6px_#191919] 
         lg-custom:shadow-[0px_0px_0px_8px_#f1f1f3] dark:lg-custom:shadow-[0px_0px_0px_8px_#191919] 
-        flex flex-col gap-[30px] 2xl:gap-[40px] 
+        flex flex-col gap-[30px] 2xl:gap-[40px] h-full
         duration-300 hover:shadow-[0px_10px_20px_rgba(112,59,247,0.1)] 
         dark:hover:shadow-[0px_10px_20px_rgba(148,108,249,0.2)]"
     >
@@ -31,14 +33,14 @@ function ClientCard({ since, name, domain, category, review }: Client) {
             Since {since}
           </p>
           <h4 className="font-semibold text-xl lg-custom:text-2xl 2xl:text-[30px] text-gray08 dark:text-white leading-[150%]">
-            {name}
+            {title}
           </h4>
         </div>
         <MainButton
           variant="darkBg"
           className="max-xl:w-full py-[14px] px-5 2xl:px-6"
         >
-          Visit Website
+          <a href={website}>Visit Website </a>
         </MainButton>
       </div>
 

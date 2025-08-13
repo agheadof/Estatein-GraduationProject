@@ -9,7 +9,7 @@ type TitleProps = {
   paragraphStyle?: string;
   buttonLabel?: string;
   anamation?: string;
-    animKey?: string; // مفتاح فريد
+    animKey?: string; 
   navigateTo?: string;
 };
 

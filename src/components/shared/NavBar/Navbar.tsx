@@ -8,7 +8,6 @@ import { navData } from "../../../data/navData";
 import { scrollToTop } from "../../../utlis/scrollToTop";
 import AOS from "aos";
 import {
-  navRootAos,
   navDesktopItemAos,
   navDesktopContactAos,
   navMobileContainerAos,
@@ -33,7 +32,6 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
 
   return (
     <nav
-      {...navRootAos()}
       className={`bg-purple70/60 backdrop-blur-xl dark:backdrop-blur-none dark:bg-gray10 dark:text-white py-5 lg-custom:py-3.5 2xl:py-5 fixed w-full z-50 border-b-2 border-purple75 dark:border-b-2 dark:border-b-gray15 transition-all duration-700 ease-in-out ${
         isBannerVisible ? "top-[78px] md:top-[49px] 2xl:top-[63px]" : "top-0"
       }`}
@@ -44,8 +42,6 @@ const Navbar = ({ isBannerVisible }: NavbarProps) => {
           <NavLink
             to="/"
             onClick={() => {
-              setIsMenuOpen(false);
-              scrollToTop();
               setIsMenuOpen(false);
               scrollToTop();
             }}
