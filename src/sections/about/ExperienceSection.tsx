@@ -1,12 +1,20 @@
 import ExperienceSectionCard from '../../components/cards/ExperienceSectionCard';
 import { SectionWrapper } from '../../layouts/SectionWrapper';
-import { fakeDataForTesting } from '../../data/ExperienceSectionData';
 import Title from '../../components/shared/Title';
 import { getCenterOutAos, getFadeUpOnce } from '../../utlis/Anamation';
-
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { subscribeExperience } from "../../redux/slices/experienceSlice";
+import { useEffect } from "react";
 
 
 function ExperienceSection() {
+  const dispatch = useAppDispatch();
+  const { items, loading, error } = useAppSelector((state) => state.experience);
+
+  useEffect(() => {
+    dispatch(subscribeExperience());
+  }, [dispatch]);
+
   return (
     <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
       <section
@@ -20,20 +28,35 @@ function ExperienceSection() {
           anamation="fade-up"
 
         />
-        <div
+
+        {loading ? (
+          // Skeleton Loader
+          <div className="grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-3 gap-y-[30px] gap-x-[0px] md:gap-x-[20px] md:gap-y-[40px] huge:gap-x-[30px] huge:gap-y-[50px] mt-10 lg-custom:mt-[60px] 2xl:mt-[80px] animate-pulse">
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div
+                key={idx}
+                className="w-full h-[200px] bg-gray-200 dark:bg-gray-700 rounded-xl"
+              ></div>
+            ))}
+          </div>
+        ) : error ? (
+          <p className="text-red-500">{error}</p>
+        ) : (
+          <div
           className="cards_container grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-3 gap-y-[30px] gap-x-[0px] md:gap-x-[20px] md:gap-y-[40px] huge:gap-x-[30px] huge:gap-y-[50px] mt-10 lg-custom:mt-[60px] 2xl:mt-[80px]"
           {...getFadeUpOnce(500)}
         >
-          {fakeDataForTesting.map((item, idx) => (
-            <div key={idx} {...getCenterOutAos(idx)}>
-              <ExperienceSectionCard
-                description={item.description}
-                title={item.title}
-                step={item.step}
-              />
-            </div>
-          ))}
-        </div>
+            {items.map((item, idx) => (
+              <div key={idx} {...getCenterOutAos(idx)}>
+                <ExperienceSectionCard
+                  description={item.description}
+                  title={item.title}
+                  step={item.step}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </section>
     </SectionWrapper>
   );

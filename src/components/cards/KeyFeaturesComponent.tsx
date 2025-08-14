@@ -10,8 +10,11 @@ const KeyFeaturesComponent = () => {
   }, shallowEqual);
 
   return (
-    <div data-aos="fade-left" className="p-5 lg-custom:p-10 2xl:p-[50px] rounded-xl border border-gray15 flex flex-col gap-5 lg-custom:gap-10 2xl:gap-[50px] w-full lg-custom:w-1/2">
-      <h3 className="text-white font-semibold text-lg leading-[150%] lg-custom:text-xl 2xl:text-2xl">
+    <div
+      data-aos="fade-left"
+      className="p-5 lg-custom:p-10 2xl:p-[50px] rounded-xl border border-white90 dark:border-gray15 flex flex-col gap-5 lg-custom:gap-10 2xl:gap-[50px] w-full lg-custom:w-1/2"
+    >
+      <h3 className="text-black dark:text-white font-semibold text-lg leading-[150%] lg-custom:text-xl 2xl:text-2xl">
         Key Features and Amenities
       </h3>
 

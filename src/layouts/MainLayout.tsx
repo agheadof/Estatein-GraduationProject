@@ -25,7 +25,7 @@ const MainLayout = () => {
       duration: 1000,
       offset: 0,
       once: false,
-      mirror: true
+      mirror: true,
     });
   }, []);
 
@@ -61,7 +61,7 @@ const MainLayout = () => {
       {isLoading && <Loader />}
       {!isLoading && (
         <>
-          {isBannerVisible && !hasClosedBanner  && (
+          {isBannerVisible && !hasClosedBanner && (
             <TopBanner
               isVisible={isBannerVisible}
               onClose={handleBannerClose}
@@ -69,15 +69,14 @@ const MainLayout = () => {
           )}
           <Navbar isBannerVisible={isBannerVisible && !hasClosedBanner} />
 
-            <main>
-              <Outlet />
-                <CTA
-                  title="Start Your Real Estate Journey Today"
-                  description="Your dream property is just a click away. Whether you're looking for a new home, a strategic investment, or expert real estate advice, Estatein is here to assist you every step of the way. Take the first step towards your real estate goals and explore our available properties or get in touch with our team for personalized assistance."
-                  buttonLabel="Explore Properties"
-                />
-              
-            </main>
+          <main>
+            <Outlet />
+            <CTA
+              title="Start Your Real Estate Journey Today"
+              description="Your dream property is just a click away. Whether you're looking for a new home, a strategic investment, or expert real estate advice, Estatein is here to assist you every step of the way. Take the first step towards your real estate goals and explore our available properties or get in touch with our team for personalized assistance."
+              buttonLabel="Explore Properties"
+            />
+          </main>
 
           <Scroll2Top />
           <Footer

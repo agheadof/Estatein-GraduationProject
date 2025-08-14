@@ -9,8 +9,9 @@ type TitleProps = {
   paragraphStyle?: string;
   buttonLabel?: string;
   anamation?: string;
-    animKey?: string; 
+  animKey?: string;
   navigateTo?: string;
+  onClick?: () => void;
 };
 
 const Title = ({
@@ -23,6 +24,7 @@ const Title = ({
   anamation,
   animKey,
   navigateTo,
+  onClick,
 }: TitleProps) => {
   const ref = useOneTimeAOS(animKey);
 
@@ -50,7 +52,11 @@ const Title = ({
         </div>
         {buttonLabel && (
           <div className="hidden lg-custom:block">
-            <TitleBtn label={buttonLabel} navigateTo={navigateTo} />
+            <TitleBtn
+              label={buttonLabel}
+              navigateTo={navigateTo}
+              onClick={onClick}
+            />
           </div>
         )}
       </div>

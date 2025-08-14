@@ -6,6 +6,7 @@ import {
   Icon2 as BathIcon,
   Icon3 as VillaIcon,
 } from "../../components/icons/PropertiesIcons";
+import { scrollToTop } from "../../utlis/scrollToTop";
 
 type Props = {
   property: {
@@ -104,8 +105,10 @@ function PropertiesCard({
         {property.id && (
           <MainButton
             variant="normalPurple"
-            onClick={() => navigate(`/properties/${property.id}`)}
-            className="whitespace-nowrap lg-custom:!text-[10px] xl:!text-xs 2xl:!text-[13px] 2xl:!py-[18px] 2xl:!px-6"
+            onClick={() => (
+              navigate(`/properties/${property.id}`), scrollToTop()
+            )}
+            className=" whitespace-nowrap lg-custom:!text-[10px] xl:!text-xs 2xl:!text-[13px] 2xl:!py-[18px] 2xl:!px-6 "
           >
             View Property Details
           </MainButton>

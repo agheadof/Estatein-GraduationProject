@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchFaqs } from "../../redux/slices/faqsSlice";
 import Title from "../../components/shared/Title";
 import FaqCard from "../../components/cards/FaqCard/FaqCard";
+import { scrollToTop } from "../../utlis/scrollToTop";
 
 function FaqSection() {
   const dispatch = useAppDispatch();
@@ -11,7 +12,7 @@ function FaqSection() {
 
   useEffect(() => {
     if (items.length === 0) {
-      const unsubscribe = dispatch(fetchFaqs());
+            const unsubscribe = dispatch(fetchFaqs());
 
       return () => {
         if (typeof unsubscribe === "function") {
@@ -31,6 +32,8 @@ function FaqSection() {
         buttonLabel="View All FAQ’s"
         paragraphStyle="2xl:max-w-[1236px] lg-custom:max-w-[1003px] w-full"
         anamation="fade-up"
+        navigateTo="allFaq"
+        onClick={() => scrollToTop()}
       />
 
       {loading ? (

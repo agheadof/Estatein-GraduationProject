@@ -16,12 +16,6 @@ interface PropertyGalleryProps {
 }
 
 const PropertyGallery = ({ id }: PropertyGalleryProps) => {
-  const SkeletonBox = ({ className = "" }) => (
-    <div
-      className={`border dark:border-gray15 border-white90 rounded-[10px] 2xl:rounded-lg bg-gray-200 dark:bg-gray-700 animate-pulse ${className}`}
-    ></div>
-  );
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -69,8 +63,16 @@ const PropertyGallery = ({ id }: PropertyGalleryProps) => {
     [current?.gallery]
   );
 
+  // main SkeletonBox style
+  const SkeletonBox = ({ className = "" }) => (
+    <div
+      className={`rounded-[10px] 2xl:rounded-lg bg-gray-300 dark:bg-gray-600 animate-pulse ${className}`}
+    ></div>
+  );
+
   if (loading)
     return (
+      // Skeleton Loader
       <div className="flex flex-col gap-12">
         <div className="flex justify-between items-center">
           <div className="flex flex-col lg-custom:flex-row items-center gap-5">
@@ -81,12 +83,11 @@ const PropertyGallery = ({ id }: PropertyGalleryProps) => {
         </div>
 
         <div
-          className="bg-white97 dark:bg-gray10 border border-white90 dark:border-gray15 rounded-xl p-5 md:p-10 2xl:p-12 
+          className="bg-gray-200 dark:bg-gray-700 rounded-xl p-5 md:p-10 2xl:p-12 
         flex flex-col items-center gap-5 2xl:gap-8 w-full mx-auto"
         >
           {/* Thumbnails Skeleton */}
-
-          <SkeletonBox className="w-full h-36 rounded-lg bg-white" />
+          <SkeletonBox className="w-full h-36 rounded-lg bg-gray-300 dark:bg-gray-600" />
 
           {/* Main Image Skeleton */}
           <div className="flex justify-between gap-5 w-full">
@@ -108,24 +109,20 @@ const PropertyGallery = ({ id }: PropertyGalleryProps) => {
         </div>
 
         <div className="flex flex-col lg-custom:flex-row gap-5">
-          <div className="p-5 lg-custom:p-10 2xl:p-[50px] rounded-[10px] border border-white90 dark:border-gray15 flex flex-col gap-5 lg-custom:gap-10 2xl:gap-[50px] w-full lg-custom:w-1/2 h-fit">
-            <SkeletonBox className="h-9 w-[30%] bg-gray10" />
+          {/* description box */}
+          <div className="p-5 lg-custom:p-10 2xl:p-[50px] bg-gray-200 dark:bg-gray-700 rounded-[10px] border border-white90 dark:border-gray15 flex flex-col gap-5 lg-custom:gap-10 2xl:gap-[50px] w-full lg-custom:w-1/2 h-fit">
+            <SkeletonBox className="h-9 w-[30%]" />
             <SkeletonBox className="h-9 w-full" />
-            <div className="flex flex-wrap md:flex-nowrap gap-10 md:gap-5 lg-custom:gap-10 border-t border-t-white90 dark:border-t-gray15 pt-4 justify-between">
+            <div className="flex flex-wrap md:flex-nowrap gap-10 md:gap-5 lg-custom:gap-10 pt-4 justify-between">
               <SkeletonBox className="flex-1 h-16" />
-              <div className="flex flex-1 gap-4">
-                <span className="h-full w-px bg-white90 dark:bg-gray15 align-middle" />
-                <SkeletonBox className="flex-1 h-16" />
-              </div>
-              <div className="flex flex-1 gap-4">
-                <span className="h-full w-px bg-white90 dark:bg-gray15 align-middle" />
-                <SkeletonBox className="flex-1 h-16" />
-              </div>
+              <SkeletonBox className="flex-1 h-16" />
+              <SkeletonBox className="flex-1 h-16" />
             </div>
           </div>
 
-          <div className="p-5 lg-custom:p-10 2xl:p-[50px] rounded-xl border border-white90 dark:border-gray15 flex flex-col gap-5 lg-custom:gap-10 2xl:gap-[50px] w-full lg-custom:w-1/2 animate-pulse">
-            <SkeletonBox className="h-9 w-1/2 bg-gray10" />
+          {/* key Features box */}
+          <div className="p-5 lg-custom:p-10 2xl:p-[50px] bg-gray-200 dark:bg-gray-700 rounded-xl border border-white90 dark:border-gray15 flex flex-col gap-5 lg-custom:gap-10 2xl:gap-[50px] w-full lg-custom:w-1/2">
+            <SkeletonBox className="h-9 w-1/2" />
             <SkeletonBox className="h-60 w-full" />
           </div>
         </div>
@@ -133,7 +130,7 @@ const PropertyGallery = ({ id }: PropertyGalleryProps) => {
     );
 
   return (
-    <div  className="flex flex-col gap-12 text-white">
+    <div className="flex flex-col gap-12 text-black dark:text-white">
       <div className="flex justify-between items-center">
         <div className="flex flex-col lg-custom:flex-row items-center gap-5">
           <h1 className="font-semibold text-xl 2xl:text-3xl">
