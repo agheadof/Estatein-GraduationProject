@@ -3,7 +3,7 @@ import { type ReactNode } from "react";
 type BtnVaritans = "normalPurple" | "darkBg" | "lightMode";
 
 type MainButtonProps = {
-  children: ReactNode;
+  children?: ReactNode;
   onClick?: () => void;
   className?: string;
   variant: BtnVaritans;
