@@ -4,7 +4,6 @@ import NavItem from "./NavItem";
 import HamburgerButton from "./HamburgerButton";
 import ToggleButton from "../../ui/ToggleButton";
 import { SectionWrapper } from "../../../layouts/SectionWrapper";
-import { navData } from "../../../data/navData";
 import { scrollToTop } from "../../../utlis/scrollToTop";
 import AOS from "aos";
 import {
@@ -15,6 +14,7 @@ import {
   navMobileContactAos,
 } from "../../../utlis/Anamation";
 import LogoIcon from "../../icons/LogoIcon";
+import { navData } from "../../../data/NavData";
 
 type NavbarProps = {
   isBannerVisible: boolean;

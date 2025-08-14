@@ -7,7 +7,7 @@ function FormSelect({
   name,
   value,
   placeholder,
-  onChange, // ✅ onChange: (value: string) => void
+  onChange, 
   options,
   error,
   classExtra = "bg-white97 dark:bg-gray10",
@@ -18,10 +18,9 @@ function FormSelect({
   const [selected, setSelected] = useState<string>(value || "");
   const selectRef = useRef<HTMLDivElement>(null);
 
-  // نرسل فقط قيمة string
   const handleSelect = (opt: string) => {
     setSelected(opt);
-    onChange(opt); // ✅ هنا نرسل القيمة فقط
+    onChange(opt); 
     setIsOpen(false);
   };
 

@@ -1,12 +1,8 @@
 import CountUpComponent from "../../components/cards/CountUpComponent"
 import Title from "../../components/shared/Title"
 import { SectionWrapper } from "../../layouts/SectionWrapper"
-import { useAppSelector } from "../../redux/hooks";
 
 const Hero2 = () => {
-  const isBannerVisible = useAppSelector(
-    (state) => state.banner.isVisible
-  );
 
   return (
     <SectionWrapper>

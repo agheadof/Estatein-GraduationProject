@@ -7,6 +7,20 @@ import { SectionWrapper } from "../../layouts/SectionWrapper";
 import ReviewModal from "../../components/cards/ReviewModal";
 import AlertMessage from "../../components/ui/AlertMessage";
 import { listenToTestimonials } from "../../utlis/firebaseListeners/testimonialsListener";
+import type { Client } from "../../redux/types/client";
+
+function isValidClient(client: any): client is Client {
+  return (
+    client &&
+    typeof client.name === "string" &&
+    typeof client.subject === "string" &&
+    typeof client.review === "string" &&
+    typeof client.clientImage === "string" &&
+    typeof client.location === "string" &&
+    typeof client.show === "boolean" &&
+    typeof client.rate === "number"
+  );
+}
 
 function OurClientsSection() {
   const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
@@ -18,7 +32,11 @@ function OurClientsSection() {
 
   const dispatch = useAppDispatch();
   const { items, loading, error } = useAppSelector(
-    (state) => state.testimonials
+    (state: any) => state.testimonials as {
+      items: Client[];
+      loading: boolean;
+      error: string | null;
+    }
   );
 
   useEffect(() => {
@@ -37,8 +55,7 @@ function OurClientsSection() {
           paragraph="Read the success stories and heartfelt testimonials from our valued clients. Discover why they chose Estatein for their real estate needs."
           buttonLabel="View All Testimonials"
           paragraphStyle="2xl:max-w-[1181px] lg-custom:max-w-[960px] w-full"
-                    anamation="fade-up"
-
+          anamation="fade-up"
         />
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
@@ -75,7 +92,9 @@ function OurClientsSection() {
           <GenericSlider
             items={items}
             renderSlide={(client, index) =>
-              client ? <TestimonialCard key={index} client={client} /> : null
+              isValidClient(client) ? (
+                <TestimonialCard key={index} client={client} />
+              ) : null
             }
             slidesPerView={3}
             showCounter={true}

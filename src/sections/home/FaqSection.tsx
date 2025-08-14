@@ -11,7 +11,7 @@ function FaqSection() {
 
   useEffect(() => {
     if (items.length === 0) {
-      fetchFaqs(dispatch)
+      fetchFaqs()
     }
   }, [dispatch, items.length])
 

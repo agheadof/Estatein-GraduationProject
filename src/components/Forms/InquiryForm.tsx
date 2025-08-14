@@ -4,7 +4,7 @@ import FormCheckbox from "./FormCheckbox";
 import { useFormHandler } from "../../hooks/useFormHandler";
 import SharedFields from "./SharedFields";
 import FormTextarea from "./FormTextarea";
-import { EmailIcon, PhoneIcon, LocationIcon } from "../icons/FormIcons";
+import { EmailIcon, PhoneIcon } from "../icons/FormIcons";
 import MainButton from "../ui/MainButton";
 import PreferredContactMethod from "./PreferredContactMethod";
 import AlertMessage from "../ui/AlertMessage";
@@ -20,8 +20,6 @@ type InquiryFormProps = {
 
 function InquiryForm({
   type,
-  propertyTitle,
-  propertyLocation,
 }: InquiryFormProps) {
   const {
     formData,
@@ -57,45 +55,43 @@ function InquiryForm({
     type === "property"
       ? "p-5 lg-custom:p-[40px] 2xl:p-[50px] gap-[30px] lg-custom:gap-[40px] 2xl:!gap-[50px]"
       : type === "contact"
-      ? "p-5 lg-custom:p-[40px] 2xl:p-[50px] mt-10 xl:mt-[60px] 2xl:mt-[80px] gap-10 lg-custom:gap-[60px] 2xl:gap-[50px]"
-      : "p-5 xl:p-[50px] 2xl:p-[100px] mt-10 xl:mt-[60px] 2xl:mt-[80px] gap-[30px] 2xl:!gap-[50px]";
+        ? "p-5 lg-custom:p-[40px] 2xl:p-[50px] mt-10 xl:mt-[60px] 2xl:mt-[80px] gap-10 lg-custom:gap-[60px] 2xl:gap-[50px]"
+        : "p-5 xl:p-[50px] 2xl:p-[100px] mt-10 xl:mt-[60px] 2xl:mt-[80px] gap-[30px] 2xl:!gap-[50px]";
 
   const gridClass =
     type === "property"
       ? "grid p-0 m-0 grid-cols-1 lg:grid-cols-2 gap-x-[30px] gap-y-[20px]"
       : type === "contact"
-      ? "grid p-0 m-0 grid-cols-1 md:grid-cols-3 gap-[20px] md:gap-[30px] 2xl:gap-[50px]"
-      : "grid p-0 m-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] 2xl:gap-[50px]";
+        ? "grid p-0 m-0 grid-cols-1 md:grid-cols-3 gap-[20px] md:gap-[30px] 2xl:gap-[50px]"
+        : "grid p-0 m-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] 2xl:gap-[50px]";
 
-const onSubmit = async (data: CustomFormData) => {
-  const payload = {
-    ...data,
-    type,
-    createdAt: serverTimestamp(), 
-    agreed,
+  const onSubmit = async (data: CustomFormData) => {
+    const payload = {
+      ...data,
+      type,
+      createdAt: serverTimestamp(),
+      agreed,
+    };
+
+    try {
+      const formsRef = ref(db, `forms/${type}`);
+      await push(formsRef, payload);
+
+      await push(ref(db, "notifications"), {
+        name: `${data.firstName || ""} ${data.lastName || ""}`.trim() || undefined,
+        email: data.email || undefined,
+        message: (data.message || data.inquiryType || "").toString().trim(),
+        formType: type,
+        createdAt: Date.now(),
+      });
+
+      setShowAlert(true);
+      resetForm();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
-  try {
-    const formsRef = ref(db, `forms/${type}`);
-    await push(formsRef, payload);
-
-    await push(ref(db, "notifications"), {
-      name: `${data.firstName || ""} ${data.lastName || ""}`.trim() || undefined,
-      email: data.email || undefined,
-      message: (data.message || data.inquiryType || "").toString().trim(),
-      formType: type,
-      createdAt: Date.now(),
-    });
-
-    setShowAlert(true);
-    resetForm();
-  } catch (error) {
-    console.error("Error submitting form:", error);
-  }
-};
-
-
-  
   return (
     <>
       {showAlert && (
@@ -104,14 +100,14 @@ const onSubmit = async (data: CustomFormData) => {
           onClose={() => setShowAlert(false)}
         />
       )}
-      <form 
+      <form
         className={`${formPadding} flex flex-col w-full rounded-xl border-1 border-white90 dark:border-gray15 relative`}
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit(onSubmit);
         }}
       >
-        <div data-aos="fade-up"  className={gridClass}>
+        <div data-aos="fade-up" className={gridClass}>
           <SharedFields
             formData={formData}
             handleChange={handleChange}
@@ -125,7 +121,9 @@ const onSubmit = async (data: CustomFormData) => {
                 name="inquiryType"
                 placeholder="Select Inquiry Type"
                 value={formData.inquiryType || ""}
-                onChange={handleChange}
+                onChange={(value) =>
+                  handleChange({ target: { name: "inquiryType", value } } as any)
+                }
                 options={["General", "Support", "Sales"]}
                 error={errors.inquiryType}
               />
@@ -134,7 +132,9 @@ const onSubmit = async (data: CustomFormData) => {
                 name="hearAboutUs"
                 placeholder="Select"
                 value={formData.hearAboutUs || ""}
-                onChange={handleChange}
+                onChange={(value) =>
+                  handleChange({ target: { name: "hearAboutUs", value } } as any)
+                }
                 options={["Friend", "Social Media", "Search Engine"]}
                 error={errors.hearAboutUs}
               />
@@ -148,7 +148,9 @@ const onSubmit = async (data: CustomFormData) => {
                 name="location"
                 placeholder="Select Location"
                 value={formData.location || ""}
-                onChange={handleChange}
+                onChange={(value) =>
+                  handleChange({ target: { name: "location", value } } as any)
+                }
                 options={["London", "Paris", "New York"]}
                 error={errors.location}
               />
@@ -157,7 +159,9 @@ const onSubmit = async (data: CustomFormData) => {
                 name="propertyType"
                 placeholder="Select Property Type"
                 value={formData.propertyType || ""}
-                onChange={handleChange}
+                onChange={(value) =>
+                  handleChange({ target: { name: "propertyType", value } } as any)
+                }
                 options={["Villa", "Apartment", "Studio"]}
                 error={errors.propertyType}
               />
@@ -166,7 +170,9 @@ const onSubmit = async (data: CustomFormData) => {
                 name="bathrooms"
                 placeholder="Select no. of Bathrooms"
                 value={formData.bathrooms || ""}
-                onChange={handleChange}
+                onChange={(value) =>
+                  handleChange({ target: { name: "bathrooms", value } } as any)
+                }
                 options={["1", "2", "3+"]}
                 error={errors.bathrooms}
               />
@@ -175,7 +181,9 @@ const onSubmit = async (data: CustomFormData) => {
                 name="bedrooms"
                 placeholder="Select no. of Bedrooms"
                 value={formData.bedrooms || ""}
-                onChange={handleChange}
+                onChange={(value) =>
+                  handleChange({ target: { name: "bedrooms", value } } as any)
+                }
                 options={["1", "2", "3+"]}
                 error={errors.bedrooms}
               />
@@ -185,13 +193,15 @@ const onSubmit = async (data: CustomFormData) => {
                   name="budget"
                   placeholder="Select Budget"
                   value={formData.budget || ""}
-                  onChange={handleChange}
+                  onChange={(value) =>
+                    handleChange({ target: { name: "budget", value } } as any)
+                  }
                   options={["<1000", "1000-2000", ">2000"]}
                   error={errors.budget}
                 />
               </div>
 
-              <div  className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-2 p-0 m-0 flex flex-col justify-between relative">
+              <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-2 p-0 m-0 flex flex-col justify-between relative">
                 <label className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 2xl:text-xl text-base/[1.5] text-black dark:text-white font-semibold">
                   Preferred Contact Method
                 </label>
@@ -204,7 +214,9 @@ const onSubmit = async (data: CustomFormData) => {
                     name="phone"
                     value={formData.phone || ""}
                     placeholder="Enter Your Number"
-                    onChange={handleChange}
+                    onChange={(value) =>
+                      handleChange({ target: { name: "phone", value } } as any)
+                    }
                     onRadioChange={handleRadioChange}
                     checked={formData.preferredContact === "phone"}
                   />
@@ -216,74 +228,51 @@ const onSubmit = async (data: CustomFormData) => {
                     name="email"
                     value={formData.email || ""}
                     placeholder="Enter Your Email"
-                    onChange={handleChange}
+                    onChange={(value) =>
+                      handleChange({ target: { name: "email", value } } as any)
+                    }
                     onRadioChange={handleRadioChange}
                     checked={formData.preferredContact === "email"}
                   />
                 </div>
-                {errors.preferredContact && (
-                  <p className="mt-1 text-sm text-red-500">
-                    {errors.preferredContact}
-                  </p>
+                {errors.phone && formData.preferredContact === "phone" && (
+                  <span className="text-red-600">{errors.phone}</span>
                 )}
-                {errors.phone && (
-                  <p className="absolute left-0 top-full mt-1 text-sm text-red-500">
-                    {errors.phone}
-                  </p>
-                )}
-                {errors.email && (
-                  <p className="absolute left-0 top-full mt-1 text-sm text-red-500">
-                    {errors.email}
-                  </p>
+                {errors.email && formData.preferredContact === "email" && (
+                  <span className="text-red-600">{errors.email}</span>
                 )}
               </div>
             </>
           )}
 
-          {isProperty && (
-            <div className="col-span-full p-0 m-0 flex flex-col justify-between">
-              <label className="mb-4 2xl:text-xl text-base/[1.5] text-black dark:text-white font-semibold">
-                {propertyTitle}
-              </label>
-              <div className="flex justify-between rounded-lg border-1 border-white90 bg-white97 2xl:px-5 2xl:py-6 px-5 py-4 2xl:text-xl/[20px] text-sm/[20px] font-medium
-               text-gray15 dark:border-gray15 dark:bg-gray10 dark:text-white90">
-                {propertyTitle}, {propertyLocation}
-                <LocationIcon className="text-black dark:text-white" />
-              </div>
-            </div>
-          )}
-
-          <FormTextarea
-            label="Message"
-            name="message"
-            className="col-span-full p-0 m-0"
-            value={formData.message || ""}
-            onChange={handleChange}
-            error={errors.message}
-          />
-        </div>
-
-        <div className="p-0 m-0 gap-5 flex flex-col md:flex-row md:items-center md:justify-between">
-          <div className="p-0 m-0 flex flex-col relative">
-            <FormCheckbox
-              label={`I agree with <a href="#" class="underline">Terms of Use</a> and <a href="#" class="underline">Privacy Policy</a>`}
-              checked={agreed}
-              onChange={(e) => setAgreed(e.target.checked)}
+          <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-2">
+            <FormTextarea
+              label="Message"
+              name="message"
+              value={formData.message || ""}
+              onChange={(value) =>
+                handleChange({ target: { name: "message", value } } as any)
+              }
+              error={errors.message}
             />
-            {errors.agreed && (
-              <p className="absolute left-0 top-full mt-1 text-sm text-red-500">
-                {errors.agreed}
-              </p>
-            )}
           </div>
-          <MainButton
-            className="normalPurple 2xl:py-4.5 2xl:px-11.5 lg-custom:py-3.5 lg-custom:px-[34px] 2xl:text-lg text-sm/[24px]"
-            variant="normalPurple"
-            onClick={() => handleSubmit(onSubmit)()}
-          >
-            Send Your Message
-          </MainButton>
         </div>
+
+        <FormCheckbox
+          checked={agreed}
+          onChange={() => setAgreed(!agreed)}
+          label={` I agree to the <a class="underline underline-offset-2" href="/privacy-policy"> privacy policy</a>`}
+        />
+
+        <MainButton
+          className="mt-6 xl:mt-8"
+          disabled={!agreed}
+          type="submit"
+          variant="normalPurple"
+        >
+          Send Inquiry
+        </MainButton>
+
       </form>
     </>
   );

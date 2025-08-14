@@ -1,8 +1,9 @@
-export interface Client {
-  id: string
-  category: string
-  domain: string
-  name: string
-  review: string
-  since: string
-}
+export type Client = {
+  name: string;
+  subject: string;
+  review: string;
+  clientImage: string;
+  location: string;
+  show: boolean;
+  rate: number;
+};
