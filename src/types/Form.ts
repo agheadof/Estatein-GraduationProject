@@ -17,12 +17,13 @@ export type SelectProps = {
   value: string
   error?: string
   placeholder?: string
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  onChange: (value: string) => void 
   options: string[]
   classExtra?: string
   classIcon?: string
   children?: React.ReactNode
 }
+
 
 export type TextareaProps = {
   label: string

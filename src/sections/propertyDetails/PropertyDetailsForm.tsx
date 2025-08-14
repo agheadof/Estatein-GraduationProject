@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchProperties } from "../../redux/slices/propertiesSlice";
 import type { RootState, AppDispatch } from "../../redux/store";
 
 import InquiryForm from "../../components/Forms/InquiryForm";
 import Title from "../../components/shared/Title";
 import { SectionWrapper } from "../../layouts/SectionWrapper";
+import { listenToProperties } from "../../utlis/firebaseListeners/propertiesListener";
 
 function PropertyDetailsForm() {
   const { id } = useParams<{ id: string }>();
@@ -15,13 +15,13 @@ function PropertyDetailsForm() {
   const dispatch = useDispatch<AppDispatch>();
 
   const property = useSelector((state: RootState) =>
-    state.properties.all.find((p) => p.id === id)
+    state.properties.all.find((p: any) => p.id === id)
   );
 
   const loading = useSelector((state: RootState) => state.properties.loading);
 
   useEffect(() => {
-    dispatch(fetchProperties());
+    dispatch(listenToProperties());
   }, [dispatch]);
 
   // main SkeletonBox style
@@ -80,6 +80,7 @@ function PropertyDetailsForm() {
           starImg={true}
           heading={`Inquire About ${property.title}`}
           paragraph="Interested in this property? Fill out the form below, and our real estate experts will get back to you with more details, including scheduling a viewing and answering any questions you may have."
+          data-aos="fade-left"
         />
 
         <div className="w-full">

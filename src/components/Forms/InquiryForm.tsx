@@ -67,23 +67,35 @@ function InquiryForm({
       ? "grid p-0 m-0 grid-cols-1 md:grid-cols-3 gap-[20px] md:gap-[30px] 2xl:gap-[50px]"
       : "grid p-0 m-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px] 2xl:gap-[50px]";
 
-  const onSubmit = async (data: CustomFormData) => {
-    const payload = {
-      ...data,
-      type,
-      createdAt: serverTimestamp(),
-      agreed,
-    };
-
-    try {
-      await push(ref(db, `forms/${type}`), payload);
-      setShowAlert(true);
-      resetForm();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
+const onSubmit = async (data: CustomFormData) => {
+  const payload = {
+    ...data,
+    type,
+    createdAt: serverTimestamp(), 
+    agreed,
   };
 
+  try {
+    const formsRef = ref(db, `forms/${type}`);
+    await push(formsRef, payload);
+
+    await push(ref(db, "notifications"), {
+      name: `${data.firstName || ""} ${data.lastName || ""}`.trim() || undefined,
+      email: data.email || undefined,
+      message: (data.message || data.inquiryType || "").toString().trim(),
+      formType: type,
+      createdAt: Date.now(),
+    });
+
+    setShowAlert(true);
+    resetForm();
+  } catch (error) {
+    console.error("Error submitting form:", error);
+  }
+};
+
+
+  
   return (
     <>
       {showAlert && (
@@ -92,14 +104,14 @@ function InquiryForm({
           onClose={() => setShowAlert(false)}
         />
       )}
-      <form
+      <form 
         className={`${formPadding} flex flex-col w-full rounded-xl border-1 border-white90 dark:border-gray15 relative`}
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit(onSubmit);
         }}
       >
-        <div className={gridClass}>
+        <div data-aos="fade-up"  className={gridClass}>
           <SharedFields
             formData={formData}
             handleChange={handleChange}
@@ -179,7 +191,7 @@ function InquiryForm({
                 />
               </div>
 
-              <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-2 p-0 m-0 flex flex-col justify-between relative">
+              <div  className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-2 p-0 m-0 flex flex-col justify-between relative">
                 <label className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 2xl:text-xl text-base/[1.5] text-black dark:text-white font-semibold">
                   Preferred Contact Method
                 </label>

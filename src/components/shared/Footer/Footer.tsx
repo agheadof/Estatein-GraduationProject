@@ -6,7 +6,6 @@ import {
   TwitterIcon,
   YoutubeIcon,
 } from "../../icons/FooterIcons";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FooterNewsletter } from "./Newsletter";
 import LogoIcon from "../../icons/LogoIcon";
@@ -15,12 +14,7 @@ import {
   fetchSocialLinks,
   type SocialLink,
 } from "../../../redux/slices/footerLinksSlice";
-import {
-  defaultMotionConfig,
-  fadeLeft,
-  fadeRight,
-  fadeUp,
-} from "../../../utlis/Animation";
+import type { AppDispatch, RootState } from "../../../redux/store"; // استبدل بمسار store الصحيح
 
 type FooterProps = {
   links?: {
@@ -33,10 +27,10 @@ type FooterProps = {
 };
 
 export default function Footer({ links, footerNote }: FooterProps) {
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch<AppDispatch>();
 
   const { links: socialLinks, loading } = useSelector(
-    (state: any) => state.footerLinks
+    (state: RootState) => state.footerLinks
   );
 
   useEffect(() => {
@@ -47,25 +41,16 @@ export default function Footer({ links, footerNote }: FooterProps) {
     <footer className="bg-purple97 dark:bg-gray10 text-black dark:text-white">
       <div className="huge:max-w-[1920px] huge:mx-auto px-4 md:px-8 lg-custom:!px-[120px] 2xl:!px-[162px]">
         <div className="pt-[50px] pb-5 md:pt-20 md:pb-3 2xl:pb-[16px] 2xl:pt-[100px]">
-          <motion.div
-            className="flex flex-col lg-custom:flex-row justify-between gap-[50px] lg-custom:gap-5"
-            variants={fadeUp}
-            {...defaultMotionConfig}
-          >
-            <motion.div
-              className="flex flex-col gap-5 lg-custom:gap-6 2xl:gap-[30px]"
-              variants={fadeUp}
-              {...defaultMotionConfig}
-            >
+          {/* Top Section */}
+          <div className="flex flex-col lg-custom:flex-row justify-between gap-[50px] lg-custom:gap-5">
+            {/* Logo & Newsletter */}
+            <div className="flex flex-col gap-5 lg-custom:gap-6 2xl:gap-[30px]">
               <LogoIcon className="w-28 h-8 2xl:w-40 2xl:h-12 text-black dark:text-white" />
               <FooterNewsletter />
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="grid grid-cols-2 lg-custom:grid-cols-5 gap-5 lg-custom:gap-[10px] 2xl:gap-[100px]"
-              variants={fadeRight}
-              {...defaultMotionConfig}
-            >
+            {/* Footer Links */}
+            <div className="grid grid-cols-2 lg-custom:grid-cols-5 gap-5 lg-custom:gap-[10px] 2xl:gap-[100px]">
               {links?.map(({ title, to, items }, i) => (
                 <div
                   key={i}
@@ -83,39 +68,27 @@ export default function Footer({ links, footerNote }: FooterProps) {
                       key={j}
                       to={to}
                       onClick={scrollToTop}
-                      className="font-medium text-black dark:text-white 2xl:whitespace-nowrap hover:text-gray60 text-sm md:text-base lg-custom:!text-sm lg:!text[18px] 2xl:!text-lg transition-colors leading-6"
+                      className="font-medium text-black dark:text-white 2xl:whitespace-nowrap hover:text-gray60 text-sm md:text-base lg-custom:!text-sm lg:!text-[18px] 2xl:!text-lg transition-colors leading-6"
                     >
                       {label}
                     </Link>
                   ))}
                 </div>
               ))}
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          <motion.div
-            className="mt-10 border-t border-gray30 pt-8"
-            variants={fadeUp}
-            {...defaultMotionConfig}
-          >
+          {/* Bottom Section */}
+          <div className="mt-10 border-t border-gray30 pt-8">
             <div className="flex flex-col-reverse gap-[20px] lg-custom:flex-row justify-between items-center">
-              <motion.div
-                className="flex justify-center items-center flex-wrap gap-[10px] md:gap-[38px] text-black dark:text-white font-medium lg-custom:text-sm 2xl:text-[18px] leading-6"
-                variants={fadeLeft}
-                {...defaultMotionConfig}
-              >
+              <div className="flex justify-center items-center flex-wrap gap-[10px] md:gap-[38px] text-black dark:text-white font-medium lg-custom:text-sm 2xl:text-[18px] leading-6">
                 <p>{footerNote}</p>
                 <Link to={"/"}>Terms & Conditions</Link>
-              </motion.div>
+              </div>
 
               {/* Social Media Links */}
-              <motion.div
-                className="flex space-x-4 mt-4 lg:mt-0"
-                variants={fadeRight}
-                {...defaultMotionConfig}
-              >
+              <div className="flex space-x-4 mt-4 lg:mt-0">
                 {loading ? (
-                  // Skeleton Loader
                   <div className="animate-pulse flex gap-2 lg-custom:gap-2.5">
                     {Array.from({ length: 4 }).map((_, index) => (
                       <div
@@ -157,9 +130,9 @@ export default function Footer({ links, footerNote }: FooterProps) {
                     );
                   })
                 )}
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </footer>

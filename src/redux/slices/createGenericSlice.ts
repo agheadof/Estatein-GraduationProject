@@ -1,22 +1,27 @@
-import { createSlice, type Draft, type SliceCaseReducers } from "@reduxjs/toolkit";
-import { createFetchThunk } from "../thunks/createFetchThunk";
+import {
+  createSlice,
+  type Draft,
+  type SliceCaseReducers,
+} from "@reduxjs/toolkit"
+import type store from "../store"
+import { genericListener } from "../../utlis/firebaseListeners/genericListener"
 
 export interface GenericState<T> {
-  items: T[];
-  visibleItems: T[];
-  loading: boolean;
-  error: string | null;
-  itemsPerPage: number;
-  currentPage: number;
+  items: T[]
+  visibleItems: T[]
+  loading: boolean
+  error: string | null
+  itemsPerPage: number
+  currentPage: number
 }
 
 interface CreateGenericSliceOptions<T, R, State> {
-  name: string;
-  path: string;
-  transform?: (item: T, id: string) => R;
-  itemsPerPage?: number;
-  reducers?: SliceCaseReducers<State & GenericState<R>>;
-  extraInitialState?: Partial<State & GenericState<R>>;
+  name: string
+  path: string
+  transform?: (item: T, id: string) => R
+  itemsPerPage?: number
+  reducers?: SliceCaseReducers<State & GenericState<R>>
+  extraInitialState?: Partial<State & GenericState<R>>
 }
 
 export const createGenericSlice = <T, R, State = {}>({
@@ -27,50 +32,44 @@ export const createGenericSlice = <T, R, State = {}>({
   reducers: customReducers,
   extraInitialState = {},
 }: CreateGenericSliceOptions<T, R, State>) => {
-  const fetchEntities = createFetchThunk(name, path, transform);
-
   const initialState: GenericState<R> & State = {
     items: [],
     visibleItems: [],
-    loading: false,
+    loading: true,
     error: null,
     itemsPerPage,
     currentPage: 1,
     ...extraInitialState,
-  } as GenericState<R> & State;
+  } as GenericState<R> & State
 
   const slice = createSlice({
     name,
     initialState,
     reducers: {
+      setItems: (state, action: { payload: R[] }) => {
+        state.loading = false
+        state.items = action.payload as Draft<R>[]
+        const startIndex = (state.currentPage - 1) * state.itemsPerPage
+        const endIndex = startIndex + state.itemsPerPage
+        state.visibleItems = state.items.slice(startIndex, endIndex)
+      },
       paginate: (state, action: { payload: number }) => {
-        const page = action.payload;
-        const startIndex = (page - 1) * state.itemsPerPage;
-        const endIndex = startIndex + state.itemsPerPage;
-        state.currentPage = page;
-        state.visibleItems = state.items.slice(startIndex, endIndex);
+        const page = action.payload
+        const startIndex = (page - 1) * state.itemsPerPage
+        const endIndex = startIndex + state.itemsPerPage
+        state.currentPage = page
+        state.visibleItems = state.items.slice(startIndex, endIndex)
       },
       ...customReducers,
     },
-    extraReducers: (builder) => {
-      builder
-        .addCase(fetchEntities.pending, (state) => {
-          state.loading = true;
-          state.error = null;
-        })
-        .addCase(fetchEntities.fulfilled, (state, action) => {
-          state.loading = false;
-          state.items = action.payload as unknown as Draft<R>[];
-          const startIndex = (state.currentPage - 1) * state.itemsPerPage;
-          const endIndex = startIndex + state.itemsPerPage;
-          state.visibleItems = state.items.slice(startIndex, endIndex);
-        })
-        .addCase(fetchEntities.rejected, (state, action) => {
-          state.loading = false;
-          state.error = action.error.message || "Failed to load data";
-        });
-    },
-  });
+  })
 
-  return { slice, fetchEntities, actions: slice.actions };
-};
+  // هذه الدالة لازم تستقبل dispatch من برا
+  const startListening = (dispatch: typeof store.dispatch) => {
+    return genericListener<T, R>(path, transform, (items) => {
+      dispatch(slice.actions.setItems(items))
+    })
+  }
+
+  return { slice, actions: slice.actions, startListening }
+}

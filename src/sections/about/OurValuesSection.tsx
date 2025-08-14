@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useEffect } from "react";
 import { fetchValues } from "../../redux/slices/valueSlice";
 import { ourValues } from "../../data/ourValues";
+import type { Value } from "../../redux/types/value";
 
 const OurValuesSection = () => {
   const dispatch = useAppDispatch();
@@ -12,8 +13,12 @@ const OurValuesSection = () => {
     (state) => state.values
   );
   useEffect(() => {
-    dispatch(fetchValues());
+    dispatch(fetchValues);
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log("visibleItems", visibleItems);
+  }, [visibleItems]);
 
   // main SkeletonBox style
   const SkeletonBox = () => (
@@ -27,20 +32,22 @@ const OurValuesSection = () => {
       </div>
     </div>
   );
-
   return (
     <>
       <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
-        <section className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-10 lg-custom:gap-[60px] 2xl:gap-20">
+        <section className="flex flex-col lg:flex-row items-center justify-center lg:justify-between xl:space-x-[80px] gap-10 lg:gap-0">
           <Title
             titleStyle="leading-[1.5] lg:w-1/3 w-full"
             starImg={true}
             heading="Our Values"
             paragraph="Our story is one of continuous growth and evolution. We started as a small team with big dreams, determined to create a real estate platform that transcended the ordinary."
+            anamation="fade-right"
           />
-          <div className="lg:w-2/3 w-full bg-purple90 dark:bg-gray10 p-2.5  rounded-xl hover:bg-purple75 transition duration-300">
+          <div
+            data-aos="fade-left"
+            className="lg:w-2/3 w-full bg-purple90 dark:bg-gray10 p-2.5  rounded-xl hover:bg-purple75 transition duration-300"
+          >
             <div className="bg-white99 dark:bg-gray08 p-6 lg:p-[55px] grid grid-cols-1 min-lg-custom:grid-cols-2  rounded-xl justify-center gap-[30px]">
-              {/* Skeleton Loader */}
               {loading ? (
                 <>
                   {Array.from({ length: 4 }).map((_, index) => (
@@ -50,7 +57,7 @@ const OurValuesSection = () => {
               ) : error ? (
                 <p className="text-red-500">{error}</p>
               ) : (
-                visibleItems.map((values, index) => (
+                visibleItems.map((values: Value, index: number) => (
                   <ValueCard
                     key={index}
                     titleSize="2xl:text-2xl lg-custom:text-xl text-lg"

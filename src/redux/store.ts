@@ -15,7 +15,7 @@ import footerLinksReducer from "./slices/footerLinksSlice"
 // import contactLinksReducer from "./slices/contactSlice"
 
 
-const store = configureStore({
+const store: any = configureStore({
   reducer: {
     theme: themeReducer,
     faqs: faqsReducer,

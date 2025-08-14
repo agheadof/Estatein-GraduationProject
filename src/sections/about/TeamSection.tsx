@@ -4,33 +4,25 @@ import { SectionWrapper } from "../../layouts/SectionWrapper";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchTeams } from "../../redux/slices/teamSlice";
 import Title from "../../components/shared/Title";
-import {
-  containerVariants,
-  defaultMotionConfig,
-  itemVariants,
-} from "../../utlis/Animation";
-import { motion } from "framer-motion";
+import type { Team } from "../../redux/types/team"
+import { teamItemAos } from "../../utlis/Anamation";
 
 const TeamSection = () => {
-  const dispatch = useAppDispatch();
-  const { visibleItems, loading, error } = useAppSelector(
-    (state) => state.team
-  );
+  const dispatch = useAppDispatch()
+  const { visibleItems, loading, error } = useAppSelector((state) => state.team)
 
   useEffect(() => {
     if (visibleItems.length === 0) {
-      dispatch(fetchTeams());
+      fetchTeams(dispatch)
     }
-  }, [dispatch, visibleItems.length]);
+  }, [dispatch, visibleItems.length])
 
-  const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 4;
+  const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 4
 
   return (
     <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
-      <motion.section
+      <section
         className="flex flex-col gap-4 lg-custom:gap-[60px] 2xl:gap-20 "
-        {...defaultMotionConfig}
-        variants={containerVariants}
       >
         <Title
           heading="Meet the Estatein Team"
@@ -38,6 +30,8 @@ const TeamSection = () => {
           starImg={true}
           titleStyle="mb-2 md:mb-[10px] lg-custom:mb-[14px]"
           paragraphStyle="w-full"
+          anamation="fade-up"
+
         />
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-4 2xl:gap-[30px] gap-[20px]">
@@ -66,26 +60,28 @@ const TeamSection = () => {
         ) : error ? (
           <p className="text-red-500">{error}</p>
         ) : (
-          <motion.div
+          <div
             className="grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-4 2xl:gap-[30px] gap-[20px]"
-            variants={containerVariants}
-            {...defaultMotionConfig}
+            
+            
           >
-            {visibleItems.map((team) => (
-              <motion.div key={team.id} variants={itemVariants}>
+            {visibleItems.map((team: Team, index:number) => (
+              <div key={team.id}
+                {...teamItemAos(index)} >
                 <TeamCardComponent
                   key={team.id}
                   name={team.name}
                   role={team.role}
                   image={team.clientImage}
                 />
-              </motion.div>
+              </div>
+           
             ))}
-          </motion.div>
+          </div>
         )}
-      </motion.section>
+      </section>
     </SectionWrapper>
-  );
-};
+  )
+}
 
-export default TeamSection;
+export default TeamSection

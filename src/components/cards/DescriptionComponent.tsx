@@ -15,7 +15,10 @@ const DescriptionComponent = () => {
   };
 
   return (
-    <div className="p-5 lg-custom:p-10 2xl:p-[50px] rounded-[10px] border border-white90 dark:border-gray15 flex flex-col gap-5 lg-custom:gap-10 2xl:gap-[50px] w-full lg-custom:w-1/2 h-fit">
+    <div
+      data-aos="fade-right"
+      className="p-5 lg-custom:p-10 2xl:p-[50px] rounded-[10px] border border-white90 dark:border-gray15 flex flex-col gap-5 lg-custom:gap-10 2xl:gap-[50px] w-full lg-custom:w-1/2 h-fit"
+    >
       <div className="flex flex-col gap-1.5 lg-custom:gap-2.5 2xl:gap-3.5">
         <h3 className="text-black dark:text-white font-semibold text-lg leading-[150%] lg-custom:text-xl 2xl:text-2xl">
           Description
