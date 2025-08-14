@@ -120,6 +120,7 @@ const FilterProperty = () => {
             <FormSelect
               key={index}
               name={field.name}
+              
               placeholder={field.placeholder}
               value={filters[field.name as keyof typeof filters]}
               onChange={(val) => handleChange(field.name, val)}

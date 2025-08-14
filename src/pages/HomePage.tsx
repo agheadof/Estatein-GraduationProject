@@ -11,7 +11,7 @@ function HomePage() {
     <>
       <Hero />
       <SiteFeaturesSection data={SiteFeaturesHomeData} />
-      <div className="">
+      <div>
         <PropertiesSection
           heading="Featured Properties"
           paragraph={`Explore our handpicked selection of featured properties. Each listing offers a glimpse into exceptional homes and investments available through Estatein. Click "View Details" for more information.`}

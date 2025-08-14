@@ -7,6 +7,7 @@ import { SectionWrapper } from "../../layouts/SectionWrapper";
 import Title from "../../components/shared/Title";
 import type { PropertyType } from "../../types/Property";
 import { listenToProperties } from "../../utlis/firebaseListeners/propertiesListener";
+import { scrollToTop } from "../../utlis/scrollToTop";
 
 type Props = {
   showTags?: boolean;
@@ -45,6 +46,7 @@ function PropertiesSection({
           paragraphStyle="2xl:max-w-[1200px] lg-custom:max-w-[975px] w-full"
           anamation="fade-up"
           navigateTo="allProperties"
+          onClick={() => scrollToTop()}
         />
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[80px]">

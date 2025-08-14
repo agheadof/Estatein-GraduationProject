@@ -7,6 +7,7 @@ import { SectionWrapper } from "../../layouts/SectionWrapper";
 import ReviewModal from "../../components/cards/ReviewModal";
 import AlertMessage from "../../components/ui/AlertMessage";
 import { listenToTestimonials } from "../../utlis/firebaseListeners/testimonialsListener";
+import { scrollToTop } from "../../utlis/scrollToTop";
 
 function OurClientsSection() {
   const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
@@ -39,6 +40,7 @@ function OurClientsSection() {
           paragraphStyle="2xl:max-w-[1181px] lg-custom:max-w-[960px] w-full"
           anamation="fade-up"
           navigateTo="allTestimonials"
+          onClick={() => scrollToTop()}
         />
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
