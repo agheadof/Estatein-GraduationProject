@@ -9,6 +9,7 @@ function OurOffices() {
           starImg={true}
           heading="Discover Our Office Locations"
           paragraph="Estatein is here to serve you across multiple locations. Explore the categories below to find the Estatein office nearest to you"
+          anamation="fade-up"
         />
         <OurOfficeTaps />
     </SectionWrapper>

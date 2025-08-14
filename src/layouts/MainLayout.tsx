@@ -1,4 +1,4 @@
-import { Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Navbar from "../components/shared/NavBar/Navbar";
 import Footer from "../components/shared/Footer/Footer";
 import { defaultLinks } from "../data/footerData";
@@ -6,18 +6,29 @@ import { CTA } from "../sections/shared/CTA";
 import Scroll2Top from "../components/ui/Scroll2Top";
 import Loader from "../components/ui/Loader";
 import TopBanner from "../components/shared/TopBanner";
-import { useEffect,  useState } from "react";
+import { useEffect, useState } from "react";
 import ChatBot from "../components/shared/ChatBot/ChatBot";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { hideBanner, showBanner } from "../redux/slices/bannerSlice";
 import CustomCursor from "../components/shared/CustomCursor";
-import PageTransitionWrapper from "../utlis/TransitionWrapper";
+import 'aos/dist/aos.css';
+import AOS from 'aos';
+import DebugFirebase from "../debug";
 
 const MainLayout = () => {
   const dispatch = useAppDispatch();
   const isBannerVisible = useAppSelector((state) => state.banner.isVisible);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasClosedBanner, setHasClosedBanner] = useState<boolean>(false);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      offset: 0,
+      once: false,
+      mirror: true
+    });
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => setIsLoading(false), 2000);
@@ -47,12 +58,12 @@ const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen font-urbanist flex-grow bg-white99 dark:bg-gray08 overflow-hidden">
       <CustomCursor />
+      <DebugFirebase/>
       <ChatBot />
-
       {isLoading && <Loader />}
       {!isLoading && (
         <>
-          {isBannerVisible && !hasClosedBanner && (
+          {isBannerVisible && !hasClosedBanner  && (
             <TopBanner
               isVisible={isBannerVisible}
               onClose={handleBannerClose}
@@ -60,16 +71,15 @@ const MainLayout = () => {
           )}
           <Navbar isBannerVisible={isBannerVisible && !hasClosedBanner} />
 
-          <PageTransitionWrapper>
             <main>
               <Outlet />
-              <CTA
-                title="Start Your Real Estate Journey Today"
-                description="Your dream property is just a click away. Whether you're looking for a new home, a strategic investment, or expert real estate advice, Estatein is here to assist you every step of the way. Take the first step towards your real estate goals and explore our available properties or get in touch with our team for personalized assistance."
-                buttonLabel="Explore Properties"
-              />
+                <CTA
+                  title="Start Your Real Estate Journey Today"
+                  description="Your dream property is just a click away. Whether you're looking for a new home, a strategic investment, or expert real estate advice, Estatein is here to assist you every step of the way. Take the first step towards your real estate goals and explore our available properties or get in touch with our team for personalized assistance."
+                  buttonLabel="Explore Properties"
+                />
+              
             </main>
-          </PageTransitionWrapper>
 
           <Scroll2Top />
           <Footer

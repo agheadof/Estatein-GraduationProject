@@ -4,32 +4,34 @@ import { SectionWrapper } from "../../layouts/SectionWrapper";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchAchievements } from "../../redux/slices/achievementSlice";
 import Title from "../../components/shared/Title";
-import { containerVariants, defaultMotionConfig, itemVariants } from "../../utlis/Anamation";
-import { motion } from "framer-motion";
+import { teamItemAos } from "../../utlis/Anamation";
+import type { Achievement } from "../../redux/types/achievement";
 
 function AchievementsSection() {
-  const dispatch = useAppDispatch();
-  const { visibleItems, loading, error } = useAppSelector((state) => state.achievements);
+  const dispatch = useAppDispatch()
+  const { visibleItems, loading, error } = useAppSelector(
+    (state) => state.achievements
+  )
 
   useEffect(() => {
     if (visibleItems.length === 0) {
-      dispatch(fetchAchievements());
+      fetchAchievements(dispatch)
     }
-  }, [dispatch, visibleItems.length]);
+  }, [dispatch, visibleItems.length])
 
-  const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 3;
+  const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 3
 
   return (
     <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
-      <motion.section
-        {...defaultMotionConfig}
-        variants={containerVariants}
+      <section
+
       >
         <Title
           starImg={true}
           heading="Our Achievements"
           paragraph="Our story is one of continuous growth and evolution. We started as a small team with big dreams, determined to create a real estate platform that transcended the ordinary."
           paragraphStyle="w-[95%]"
+          anamation="fade-up"
         />
 
         {loading ? (
@@ -55,20 +57,27 @@ function AchievementsSection() {
         ) : error ? (
           <p className="text-red-500">{error}</p>
         ) : (
-          <div className="grid gap-5 md:grid-cols-3 md:gap-[30px] 2xl:gap-10  pt-10 md:pt-[60px] 2xl:pt-20">
-            {visibleItems.map((achievement) => (
-              <motion.div key={achievement.id} variants={itemVariants}>
+          <div
+            className="grid gap-5 md:grid-cols-3 md:gap-[30px] 2xl:gap-10 pt-10 md:pt-[60px] 2xl:pt-20"
+            data-aos="fade-up"
+            data-aos-duration="500"
+          >
+            {visibleItems.map((achievement: Achievement, index:number) => (
+              <div
+                key={achievement.id}
+                {...teamItemAos(index)} >
+
                 <AchievementsCard
                   title={achievement.title}
                   description={achievement.description}
                 />
-              </motion.div>
+              </div>
             ))}
           </div>
         )}
-      </motion.section>
+      </section>
     </SectionWrapper>
-  );
+  )
 }
 
-export default AchievementsSection;
+export default AchievementsSection

@@ -3,8 +3,6 @@ import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import TitleBtn from "../../ui/TitleBtn"
 import { NextArrowIcon, PrevArrowIcon } from "../../icons/SliderArrows"
-import { motion } from "framer-motion"
-import { GenericSliderMotionConfig } from "../../../utlis/Anamation"
 
 type Props<T> = {
   items: T[];
@@ -13,6 +11,7 @@ type Props<T> = {
   showCounter?: boolean;
   titleBtnLabel?: string;
   counterClassName?: string;
+  navigateTo: string;
 };
 
 const GenericSlider = <T,>({
@@ -22,6 +21,7 @@ const GenericSlider = <T,>({
   showCounter = true,
   titleBtnLabel = "",
   counterClassName = "",
+  navigateTo,
 }: Props<T>) => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
@@ -57,12 +57,12 @@ const GenericSlider = <T,>({
   });
 
   useEffect(() => {
-    if (!slider || !slider.current) return
+    if (!slider || !slider.current) return;
 
-    slider.current.update()
+    slider.current.update();
 
-    const details = slider.current.track?.details
-    const rel = details?.rel ?? 0
+    const details = slider.current.track?.details;
+    const rel = details?.rel ?? 0;
     const perView =
       typeof slider.current?.options?.slides === "object" &&
       slider.current.options.slides !== null &&
@@ -70,16 +70,16 @@ const GenericSlider = <T,>({
         ? (slider.current.options.slides.perView as number) ||
           currentSlidesPerGroup ||
           1
-        : currentSlidesPerGroup || 1
+        : currentSlidesPerGroup || 1;
 
-    const maxRel = Math.max(0, Math.ceil(Math.max(0, items.length - perView)))
+    const maxRel = Math.max(0, Math.ceil(Math.max(0, items.length - perView)));
 
     if (rel > maxRel) {
-      slider.current.moveToIdx(Math.max(0, maxRel))
+      slider.current.moveToIdx(Math.max(0, maxRel));
     }
 
-    requestAnimationFrame(() => updateNav(slider.current))
-  }, [items.length, currentSlidesPerGroup, slider])
+    requestAnimationFrame(() => updateNav(slider.current));
+  }, [items.length, currentSlidesPerGroup, slider]);
 
   const updateNav = (slider: any) => {
     const details = slider?.track?.details;
@@ -114,20 +114,19 @@ const GenericSlider = <T,>({
   const totalGroups = Math.ceil(items.length / currentSlidesPerGroup);
 
   return (
-    <motion.div className="w-full mt-[80px]" {...GenericSliderMotionConfig}>
-      {" "}
-      <div ref={sliderRef} className="keen-slider mb-[50px] w-full">
+    <div data-aos="fade-up" className="w-full mt-[80px] " >
+      <div ref={sliderRef} className="keen-slider mb-[50px] w-full ">
         {items.map((item, index) => (
           <div key={index} className="keen-slider__slide">
             {renderSlide(item, index)}
           </div>
         ))}
       </div>
-      <motion.div
+      <div 
         className={`${counterClassName} flex justify-between items-center pt-4 2xl:pt-5 border-t border-t-white90 dark:border-t-gray15`}
       >
         {showCounter && (
-          <p className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block">
+          <p data-aos="fade-right" className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block">
             {String(currentGroup).padStart(2, "0")}
             <span className="text-gray40 dark:text-gray60">
               {" "}
@@ -138,12 +137,17 @@ const GenericSlider = <T,>({
 
         {titleBtnLabel && (
           <div className="block md:hidden">
-            <TitleBtn label={titleBtnLabel} className="whitespace-pre-wrap" />
+            <TitleBtn
+              label={titleBtnLabel}
+              className="whitespace-pre-wrap"
+              navigateTo={navigateTo}
+            />
           </div>
         )}
 
-        <div className="flex items-center gap-2.5">
-          <motion.button
+        <div           data-aos="fade-left"
+  className="flex items-center gap-2.5">
+          <button
             ref={prevRef}
             disabled={isBeginning}
             onClick={() => slider.current?.prev()}
@@ -158,7 +162,7 @@ const GenericSlider = <T,>({
             `}
           >
             <PrevArrowIcon />
-          </motion.button>
+          </button>
 
           {showCounter && (
             <p className="text-black dark:text-white text-base 2xl:text-xl font-medium block md:hidden">
@@ -170,7 +174,8 @@ const GenericSlider = <T,>({
             </p>
           )}
 
-          <motion.button
+          <button
+          
             ref={nextRef}
             disabled={isEnd}
             onClick={() => slider.current?.next()}
@@ -185,10 +190,10 @@ const GenericSlider = <T,>({
             `}
           >
             <NextArrowIcon />
-          </motion.button>
+          </button>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   )
 }
 

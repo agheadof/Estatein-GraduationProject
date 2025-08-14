@@ -1,16 +1,14 @@
-import { motion } from "framer-motion";
 import Title from "../../components/shared/Title";
-import { fadeUp } from "../../utlis/Anamation";
+import {  tgContainerAos, tgImgAos, tgRightImgAos } from "../../utlis/Anamation";
 
 function TeamGallery() {
   return (
     <div className="px-4 md:px-8 lg-custom:!px-20 2xl:!px-[162px]">
-<motion.div
-  variants={fadeUp}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ once: true, amount: 0.3 }}
+      <div
+
         className="relative bg-white97 dark:bg-gray10 border-1 border-white90 dark:border-gray15 rounded-xl 2xl:p-20 lg-custom:p-[60px] p-6 overflow-hidden"
+        {...tgContainerAos()}
+
       >
         <img
           src="/assets/images/AbstractDesign4.png"
@@ -25,27 +23,37 @@ function TeamGallery() {
               src="/assets/images/Explore/1.webp"
               alt="Team Gallery"
               className="w-full h-full object-cover rounded-[10px]"
+              {...tgImgAos(0)}
+
             />
             <img
               src="/assets/images/Explore/2.webp"
               alt="Team Gallery"
               className="w-full h-full object-cover rounded-[10px]"
+              {...tgImgAos(100)}
+
             />
             <img
               src="/assets/images/Explore/3.webp"
               alt="Team Gallery"
               className="w-full h-full object-cover rounded-[10px]"
+              {...tgImgAos(200)}
+
             />
             <div className="grid grid-cols-2 gap-2.5 auto-rows-[71px] sm:auto-rows-auto lg-custom:gap-5">
               <img
                 src="/assets/images/Explore/4.webp"
                 alt="Team Gallery"
                 className="w-full h-full object-cover rounded-[10px]"
+                {...tgImgAos(300)}
+
               />
               <img
                 src="/assets/images/Explore/5.webp"
                 alt="Team Gallery"
                 className="w-full h-full object-cover rounded-[10px]"
+                {...tgImgAos(400)}
+
               />
             </div>
           </div>
@@ -57,15 +65,18 @@ function TeamGallery() {
               titleStyle=""
               heading="Explore Estatein's World"
               paragraph="Step inside the world of Estatein, where professionalism meets warmth, and expertise meets passion. Our gallery offers a glimpse into our team and workspaces, inviting you to get to know us better."
+              anamation="fade-up"
+
             />
             <img
               src="/assets/images/Explore/6.webp"
               alt="Team Gallery"
               className="w-full h-full object-cover object-center min-h-[135px] rounded-[10px]"
+              {...tgRightImgAos(120)}
             />
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
