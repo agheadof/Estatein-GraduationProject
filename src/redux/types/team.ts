@@ -3,4 +3,5 @@ export type Team = {
   name: string;
   role: string;
   clientImage: string;
+  twitterLink?: string;
 };
