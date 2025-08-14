@@ -9,7 +9,7 @@ type TitleProps = {
   paragraphStyle?: string;
   buttonLabel?: string;
   anamation?: string;
-    animKey?: string; // مفتاح فريد
+  animKey?: string; // مفتاح فريد
   navigateTo?: string;
 };
 
@@ -21,21 +21,19 @@ const Title = ({
   paragraphStyle,
   buttonLabel,
   anamation,
-    animKey,
-navigateTo
+  animKey,
+  navigateTo,
 }: TitleProps) => {
-    const ref = useOneTimeAOS(animKey);
+  const ref = useOneTimeAOS(animKey);
 
   return (
-    <div  ref={ref} data-aos={anamation} 
-      className={`${titleStyle}`}
-    >
+    <div ref={ref} data-aos={anamation} className={`${titleStyle}`}>
       {starImg && (
         <div className="lg-custom:mb-1.5 2xl:mb-2.5">
           <img
             src="/assets/icons/MainTitle/stars.svg"
             alt="icon"
-            className="w-[68px] h-[30px] -ml-2 md:-ml-2.5 2xl:-ml-5"
+            className="2x:w-[68px] 2xl:h-[30px] h-[24px] w-[54.72px] -ml-2 md:-ml-2.5 2xl:-ml-5"
           />
         </div>
       )}
