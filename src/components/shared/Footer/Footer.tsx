@@ -54,7 +54,7 @@ export default function Footer({ links = [], footerNote, logo }: FooterProps) {
             <div className="flex flex-col-reverse gap-[20px] lg-custom:flex-row justify-between items-center">
               <div className="flex justify-center items-center flex-wrap gap-[10px] md:gap-[38px] text-black dark:text-white font-medium lg-custom:text-sm 2xl:text-[18px] leading-6">
                 <p>{footerNote}</p>
-                <Link to={"/"}>Terms & Conditions</Link>
+                <Link to={"/under-process"}>Terms & Conditions</Link>
               </div>
 
               <div className="flex space-x-4 mt-4 lg:mt-0">
