@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { db } from "../../firebaseConfig";
 import { ref, onValue } from "firebase/database";
 
-type ExperienceItem = {
+export type ExperienceItem = {
     step: number;
     title: string;
     description: string;
 };
 
-type ExperienceState = {
+export type ExperienceState = {
     items: ExperienceItem[];
     loading: boolean;
     error: string | null;

@@ -3,7 +3,7 @@ import { SectionWrapper } from '../../layouts/SectionWrapper';
 import Title from '../../components/shared/Title';
 import { getCenterOutAos, getFadeUpOnce } from '../../utlis/Anamation';
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { subscribeExperience } from "../../redux/slices/experienceSlice";
+import { subscribeExperience, type ExperienceItem } from "../../redux/slices/experienceSlice";
 import { useEffect } from "react";
 
 
@@ -46,7 +46,7 @@ function ExperienceSection() {
           className="cards_container grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-3 gap-y-[30px] gap-x-[0px] md:gap-x-[20px] md:gap-y-[40px] huge:gap-x-[30px] huge:gap-y-[50px] mt-10 lg-custom:mt-[60px] 2xl:mt-[80px]"
           {...getFadeUpOnce(500)}
         >
-            {items.map((item, idx) => (
+            {items.map((item:ExperienceItem, idx:number) => (
               <div key={idx} {...getCenterOutAos(idx)}>
                 <ExperienceSectionCard
                   description={item.description}
