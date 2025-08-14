@@ -2,17 +2,18 @@ import ClientCard from "../../components/cards/ClientCard";
 import GenericSlider from "../../components/shared/GenericSlider/GenericSlider";
 import Title from "../../components/shared/Title";
 import { SectionWrapper } from "../../layouts/SectionWrapper";
-import { useAppSelector } from "../../redux/hooks";
-import type { Client } from "../../redux/types/client";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchClients } from "../../redux/slices/clientsSlice";
+import { useEffect } from "react";
 
 function ValuedClientsSection() {
-  const { items, error, loading } = useAppSelector(
-    (state) => state.clients
-  ) as {
-    items: Client[];
-    loading: boolean;
-    error: string | null;
-  };
+  const dispatch = useAppDispatch();
+  const { items, error, loading } = useAppSelector((state) => state.clients);
+
+  useEffect(() => {
+    const stop = fetchClients(dispatch);
+    return typeof stop === "function" ? stop : undefined;
+  }, [dispatch]);
 
   // main SkeletonBox style
   const SkeletonBox = () => (
@@ -25,7 +26,6 @@ function ValuedClientsSection() {
       <div className="w-full h-[159px] lg-custom:h-[155px] rounded-xl bg-gray-300 dark:bg-gray-600"></div>
     </div>
   );
-
   return (
     <SectionWrapper className="pb-20 lg-custom:mb-[120px] 2xl:mb-[150px]">
       <Title

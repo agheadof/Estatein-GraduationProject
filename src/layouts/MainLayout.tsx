@@ -11,9 +11,8 @@ import ChatBot from "../components/shared/ChatBot/ChatBot";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { hideBanner, showBanner } from "../redux/slices/bannerSlice";
 import CustomCursor from "../components/shared/CustomCursor";
-import "aos/dist/aos.css";
-import AOS from "aos";
-import DebugFirebase from "../debug";
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 
 const MainLayout = () => {
   const dispatch = useAppDispatch();
@@ -58,7 +57,6 @@ const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen font-urbanist flex-grow bg-white99 dark:bg-gray08 overflow-hidden">
       <CustomCursor />
-      <DebugFirebase />
       <ChatBot />
       {isLoading && <Loader />}
       {!isLoading && (

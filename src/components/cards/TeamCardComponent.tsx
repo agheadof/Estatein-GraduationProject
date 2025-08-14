@@ -4,9 +4,10 @@ interface TeamCardProps {
   name: string
   role: string
   image: string
+  twitterLink?: string
 }
 
-const TeamCardComponent = ({ name, role, image }: TeamCardProps) => {
+const TeamCardComponent = ({ name, role, image, twitterLink }: TeamCardProps) => {
   return (
     <div className="flex flex-col w-full gap-10 lg-custom:gap-[50px] p-5 lg-custom:p-6 2xl:p-[30px] border border-gray15 rounded-xl ">
       <div className="relative  ">
@@ -21,6 +22,13 @@ const TeamCardComponent = ({ name, role, image }: TeamCardProps) => {
             alt="icon"
             className="w-5 h-5 2xl:w-6 2xl:h-6 "
           />
+          <a
+            href={twitterLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Twitter"
+            className="absolute inset-0"
+          />
         </div>
       </div>
       <div className="flex flex-col gap-4 lg-custom:gap-5 2xl:gap-6 ">
@@ -33,7 +41,7 @@ const TeamCardComponent = ({ name, role, image }: TeamCardProps) => {
           </p>
         </div>
         <div className="relative w-full ">
-          <TeamCardComponentForm/>
+          <TeamCardComponentForm />
         </div>
       </div>
     </div>

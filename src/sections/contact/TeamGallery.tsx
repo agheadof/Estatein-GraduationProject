@@ -1,9 +1,10 @@
 import Title from "../../components/shared/Title";
+import { SectionWrapper } from "../../layouts/SectionWrapper";
 import { tgContainerAos, tgImgAos, tgRightImgAos } from "../../utlis/Anamation";
 
 function TeamGallery() {
   return (
-    <div className="px-4 md:px-8 lg-custom:!px-20 2xl:!px-[162px]">
+    <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
       <div
         className="relative bg-white97 dark:bg-gray10 border-1 border-white90 dark:border-gray15 rounded-xl 2xl:p-20 lg-custom:p-[60px] p-6 overflow-hidden"
         {...tgContainerAos()}
@@ -67,7 +68,7 @@ function TeamGallery() {
           </div>
         </div>
       </div>
-    </div>
+    </SectionWrapper>
   );
 }
 

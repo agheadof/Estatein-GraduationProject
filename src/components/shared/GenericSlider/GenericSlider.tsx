@@ -11,7 +11,7 @@ type Props<T> = {
   showCounter?: boolean;
   titleBtnLabel?: string;
   counterClassName?: string;
-  navigateTo: string;
+  navigateTo?: string;
 };
 
 const GenericSlider = <T,>({

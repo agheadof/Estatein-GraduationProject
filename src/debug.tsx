@@ -12,7 +12,7 @@ function DebugFirebase() {
     fetchData();
   }, []);
 
-  // return <p>Check console</p>;
+  return <p>Check console</p>;
 }
 
 export default DebugFirebase;
