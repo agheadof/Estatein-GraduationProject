@@ -14,14 +14,21 @@ import {
   fetchSocialLinks,
   type SocialLink,
 } from "../../../redux/slices/footerLinksSlice";
-import type { AppDispatch, RootState } from "../../../redux/store"; // استبدل بمسار store الصحيح
+import type { AppDispatch, RootState } from "../../../redux/store";
+
+type FooterLinkItem = {
+  label: string;
+  to: string;
+};
+
+type FooterLinkColumn = {
+  title: string;
+  to: string;
+  items: FooterLinkItem[];
+};
 
 type FooterProps = {
-  links?: {
-    title: string;
-    to: string;
-    items: { label: string; to: string }[];
-  }[];
+  links?: FooterLinkColumn[];
   footerNote?: string;
   logo: string;
 };
@@ -37,6 +44,38 @@ export default function Footer({ links, footerNote }: FooterProps) {
     dispatch(fetchSocialLinks());
   }, [dispatch]);
 
+  const renderSocialIcon = (link: SocialLink) => {
+    let IconComponent;
+    switch (link.platform.toLowerCase()) {
+      case "facebook":
+        IconComponent = FacebookIcon;
+        break;
+      case "linkedin":
+        IconComponent = LinkedinIcon;
+        break;
+      case "twitter":
+        IconComponent = TwitterIcon;
+        break;
+      case "youtube":
+        IconComponent = YoutubeIcon;
+        break;
+      default:
+        return null;
+    }
+
+    return (
+      <a
+        key={link.platform}
+        href={link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-[52px] h-[52px] bg-purple70 dark:bg-gray08 rounded-full flex items-center justify-center hover:bg-purple60 hover:-translate-y-1 duration-300 ease-in-out"
+      >
+        <IconComponent className="h-6 w-6 text-gray-800 dark:text-gray-400" />
+      </a>
+    );
+  };
+
   return (
     <footer className="bg-purple97 dark:bg-gray10 text-black dark:text-white">
       <div className="huge:max-w-[1920px] huge:mx-auto px-4 md:px-8 lg-custom:!px-[120px] 2xl:!px-[162px]">
@@ -51,30 +90,32 @@ export default function Footer({ links, footerNote }: FooterProps) {
 
             {/* Footer Links */}
             <div className="grid grid-cols-2 lg-custom:grid-cols-5 gap-5 lg-custom:gap-[10px] 2xl:gap-[100px]">
-              {links?.map(({ title, to, items }, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col space-y-2 pb-5 border-b odd:border-r border-r-white90 dark:border-r-gray15 border-white90 dark:border-gray15 lg-custom:pb-0 lg-custom:border-none"
-                >
-                  <Link
-                    to={to}
-                    onClick={scrollToTop}
-                    className="font-medium text-base 2xl:whitespace-nowrap md:text-[18px] 2xl:text-lg text-purple70 dark:text-gray40 hover:text-purple70 transition-colors mb-4"
+              {links?.map(
+                ({ title, to, items }: FooterLinkColumn, i: number) => (
+                  <div
+                    key={i}
+                    className="flex flex-col space-y-2 pb-5 border-b odd:border-r border-r-white90 dark:border-r-gray15 lg-custom:pb-0 lg-custom:border-none"
                   >
-                    {title}
-                  </Link>
-                  {items.map(({ label, to }, j) => (
                     <Link
-                      key={j}
                       to={to}
                       onClick={scrollToTop}
-                      className="font-medium text-black dark:text-white 2xl:whitespace-nowrap hover:text-gray60 text-sm md:text-base lg-custom:!text-sm lg:!text-[18px] 2xl:!text-lg transition-colors leading-6"
+                      className="font-medium text-base 2xl:whitespace-nowrap md:text-[18px] 2xl:text-lg text-purple70 dark:text-gray40 hover:text-purple70 transition-colors mb-4"
                     >
-                      {label}
+                      {title}
                     </Link>
-                  ))}
-                </div>
-              ))}
+                    {items.map(({ label, to }: FooterLinkItem, j: number) => (
+                      <Link
+                        key={j}
+                        to={to}
+                        onClick={scrollToTop}
+                        className="font-medium text-black dark:text-white 2xl:whitespace-nowrap hover:text-gray60 text-sm md:text-base lg-custom:!text-sm lg:!text-[18px] 2xl:!text-lg transition-colors leading-6"
+                      >
+                        {label}
+                      </Link>
+                    ))}
+                  </div>
+                )
+              )}
             </div>
           </div>
 
@@ -88,49 +129,16 @@ export default function Footer({ links, footerNote }: FooterProps) {
 
               {/* Social Media Links */}
               <div className="flex space-x-4 mt-4 lg:mt-0">
-                {/* skelton loader */}
-                {loading ? (
-                  <div className="animate-pulse flex gap-2 lg-custom:gap-2.5">
-                    {Array.from({ length: 4 }).map((_, index) => (
+                {loading
+                  ? Array.from({ length: 4 }).map((_, index) => (
                       <div
                         key={index}
-                        className="w-[52px] h-[52px] bg-purple70 rounded-full"
+                        className="w-[52px] h-[52px] bg-purple70 rounded-full animate-pulse"
                       ></div>
-                    ))}
-                  </div>
-                ) : (
-                  socialLinks.map((link: SocialLink) => {
-                    let IconComponent;
-                    switch (link.platform.toLowerCase()) {
-                      case "facebook":
-                        IconComponent = FacebookIcon;
-                        break;
-                      case "linkedin":
-                        IconComponent = LinkedinIcon;
-                        break;
-                      case "twitter":
-                        IconComponent = TwitterIcon;
-                        break;
-                      case "youtube":
-                        IconComponent = YoutubeIcon;
-                        break;
-                      default:
-                        return null;
-                    }
-
-                    return (
-                      <a
-                        key={link.platform}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-[52px] h-[52px] bg-purple70 dark:bg-gray08 rounded-full flex items-center justify-center hover:bg-purple60 hover:-translate-y-1 duration-300 ease-in-out"
-                      >
-                        <IconComponent className="h-6 w-6 text-gray-800 dark:text-gray-400" />
-                      </a>
-                    );
-                  })
-                )}
+                    ))
+                  : socialLinks.map((link: SocialLink) =>
+                      renderSocialIcon(link)
+                    )}
               </div>
             </div>
           </div>

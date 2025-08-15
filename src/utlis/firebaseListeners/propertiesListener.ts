@@ -1,15 +1,10 @@
 import { onValue, ref } from "firebase/database"
 import type { AppDispatch } from "../../redux/store"
 import { db } from "../../firebaseConfig"
-import type { PropertyType } from "../../types/Property"
-import {
-  setError,
-  setLoading,
-  setProperties,
-} from "../../redux/slices/propertiesSlice"
+import { setError, setLoading, setProperties } from "../../redux/slices/propertiesSlice"
 
-const transformProperty = (property: any, id: string): PropertyType => ({
-  id,
+const transformProperty = (property: any, id: string) => ({
+  id, 
   image: property.images?.[0] || "",
   title: property.type || "Property",
   desc: property.description?.slice(0, 100) + "...",
@@ -23,7 +18,6 @@ const transformProperty = (property: any, id: string): PropertyType => ({
   gallery: property.images,
   location: property.location,
   tags: property.tags,
-  // tags: "Coastal Escapes - Where Waves Beckon",
   features: property.features || [],
   additionalFees: {
     inspection: property.inspection || 0,
@@ -45,13 +39,15 @@ export const listenToProperties = () => (dispatch: AppDispatch) => {
       if (snapshot.exists()) {
         const data = snapshot.val()
         const formatted = Object.entries(data).map(([id, value]) =>
-          transformProperty(value, id)
+          transformProperty(value, id.toString()) 
         )
 
         dispatch(setProperties(formatted))
       } else {
         dispatch(setProperties([]))
       }
+
+      dispatch(setLoading(false))
     },
     (error) => {
       dispatch(setError(error.message))

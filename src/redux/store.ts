@@ -13,6 +13,8 @@ import pricingReducer from "./slices/pricingSlice";
 import experienceReducer from "./slices/experienceSlice"
 import footerLinksReducer from "./slices/footerLinksSlice"
 import contactLinksReducer from "./slices/contactSlice";
+import outboundMailer from "./slices/createEmailSlice.ts";
+
 
 const store: any = configureStore({
   reducer: {
@@ -30,6 +32,7 @@ const store: any = configureStore({
     experience: experienceReducer,
     footerLinks: footerLinksReducer,
     contactLinks: contactLinksReducer,
+    outboundMailer,
   },
 })
 

@@ -1,12 +1,8 @@
 import { onValue, ref } from "firebase/database"
 import type { AppDispatch } from "../../redux/store"
-import {
-  setError,
-  setLoading,
-  setTestimonials,
-} from "../../redux/slices/testimonialsSlice"
+import { setError, setLoading, setTestimonials,} from "../../redux/slices/testimonialsSlice"
 import { db } from "../../firebaseConfig"
-import type { testimonials } from "../../redux/types/Testimonial"
+import type { Client } from "../../redux/types/client"
 
 export const listenToTestimonials = () => (dispatch: AppDispatch) => {
   dispatch(setLoading(true))
@@ -18,7 +14,7 @@ export const listenToTestimonials = () => (dispatch: AppDispatch) => {
     (snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val()
-        const formatted = (Object.values(data) as testimonials[]).filter(
+        const formatted = (Object.values(data) as Client[]).filter(
           (item) => item.show === true
         )
 

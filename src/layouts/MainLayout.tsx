@@ -13,6 +13,8 @@ import { hideBanner, showBanner } from "../redux/slices/bannerSlice";
 import CustomCursor from "../components/shared/CustomCursor";
 import 'aos/dist/aos.css';
 import AOS from 'aos';
+import LogoIcon from "../components/icons/LogoIcon";
+import { navData } from "../data/NavData";
 
 const MainLayout = () => {
   const dispatch = useAppDispatch();
@@ -65,9 +67,16 @@ const MainLayout = () => {
             <TopBanner
               isVisible={isBannerVisible}
               onClose={handleBannerClose}
+              message="✨ Discover Your Dream Property with Estatein"
+              linkText = "Learn More"
+              link = "/properties"
             />
           )}
-          <Navbar isBannerVisible={isBannerVisible && !hasClosedBanner} />
+          <Navbar
+            isBannerVisible={isBannerVisible && !hasClosedBanner}
+            logo={LogoIcon} 
+            navData={navData} 
+            />
 
           <main>
             <Outlet />

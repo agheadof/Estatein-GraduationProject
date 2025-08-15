@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-
+import { useEffect, useRef, useState, useMemo } from "react";
 
 export default function RotatingText() {
-  const text = "Discover Your Dream Property ";
+  const text = "Discover Your Dream Property✨ ";
   const circleRef = useRef<HTMLDivElement>(null);
   const [radius, setRadius] = useState(88);
   const [isFast, setIsFast] = useState(false);
@@ -10,11 +9,9 @@ export default function RotatingText() {
   useEffect(() => {
     const updateRadius = () => {
       if (circleRef.current) {
-        const { width } = circleRef.current.getBoundingClientRect();
-        setRadius(width / 2);
+        setRadius(circleRef.current.offsetWidth / 2);
       }
     };
-
     updateRadius();
     window.addEventListener("resize", updateRadius);
     return () => window.removeEventListener("resize", updateRadius);
@@ -22,10 +19,12 @@ export default function RotatingText() {
 
   useEffect(() => {
     if (isFast) {
-      const timer = setTimeout(() => setIsFast(false), 1000); 
+      const timer = setTimeout(() => setIsFast(false), 1000);
       return () => clearTimeout(timer);
     }
   }, [isFast]);
+
+  const letters = useMemo(() => text.split(""), [text]);
 
   return (
     <div className="absolute bottom-[-55px] lg-custom:bottom-0 2xl:top-[240px] 2xl:left-[-80px] lg-custom:top-[120px] lg-custom:left-[-70px] inline-block z-40">
@@ -50,27 +49,16 @@ export default function RotatingText() {
       `}</style>
 
       <div className="border border-gray15 rounded-full">
-        <div
-          ref={circleRef}
-          className="relative w-28 h-28 lg-custom:w-32 lg-custom:h-32 2xl:w-44 2xl:h-44 flex items-center justify-center rounded-full bg-grey08 overflow-hidden"
-          onClick={() => setIsFast(true)}
-        >
-          <div
-            className={`absolute w-full h-full rounded-full ${
-              isFast ? "rotate-fast" : "rotate-slow"
-            }`}
-          >
+        <div ref={circleRef} className="relative w-28 h-28 lg-custom:w-32 lg-custom:h-32 2xl:w-44 2xl:h-44 flex items-center justify-center rounded-full bg-grey08 overflow-hidden"
+            onClick={() => setIsFast(true)} >
+          <div className={`absolute w-full h-full rounded-full ${isFast ? "rotate-fast" : "rotate-slow"}`}>
             <div className="absolute w-full h-full rounded-full bg-white99 dark:bg-gray08 z-0" />
-
-            {text.split("").map((char, i) => (
-              <span
-                key={i}
-                className="absolute left-1/2 text-[11px] 2xl:text-[15px] font-semibold z-10 p-[8px]"
+            {letters.map((char, i) => (
+              <span key={i} className="absolute left-1/2 text-[11px] 2xl:text-[15px] font-semibold z-10 p-[8px]"
                 style={{
-                  transform: `rotate(${(360 / text.length) * i}deg)`,
+                  transform: `rotate(${(360 / letters.length) * i}deg)`,
                   transformOrigin: `0 ${radius}px`,
-                }}
-              >
+                }}>
                 {char}
               </span>
             ))}

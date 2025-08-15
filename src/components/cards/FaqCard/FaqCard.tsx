@@ -1,7 +1,6 @@
 import { useState } from "react";
 import TitleBtn from "../../ui/TitleBtn";
 import FaqPopup from "./FaqPopup";
-import { AnimatePresence } from "framer-motion";
 
 type Props = {
   question: {
@@ -32,7 +31,6 @@ function FaqCard({ question }: Props) {
         <TitleBtn label="Read More" btnStyle={true} onClick={handleShowPopup} />
       </div>
 
-      <AnimatePresence>
         {showPopup && (
           <FaqPopup
             key="faq-popup"
@@ -41,7 +39,6 @@ function FaqCard({ question }: Props) {
             onClick={() => setShowPopup(false)}
           />
         )}
-      </AnimatePresence>
     </>
   );
 }

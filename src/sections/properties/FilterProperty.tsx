@@ -1,18 +1,34 @@
 import { SectionWrapper } from "../../layouts/SectionWrapper";
 import FormSelect from "../../components/Forms/FormSelect";
 import MainButton from "../../components/ui/MainButton";
-import { SearchIcon, LocationIcon, PropertyIcon, PricingIcon, PropertySizeIcon, BuildIcon } from "../../components/icons/FilterPropertyIcons";
-import { useState } from "react";
+import { SearchIcon, LocationIcon, PropertyIcon, PricingIcon, PropertySizeIcon, BuildIcon,} from "../../components/icons/FilterPropertyIcons";
+import { useState, useMemo, useCallback, type JSX } from "react";
 import { fetchFilteredProperties } from "../../redux/thunks/filteredProperties";
 import { useAppDispatch } from "../../redux/types/typed-hooks";
 import { useNavigate } from "react-router-dom";
 import { scrollToTop } from "../../utlis/scrollToTop";
 
+type Filters = {
+  searchTerm: string;
+  location: string;
+  propertyType: string;
+  pricingRange: string;
+  propertySize: string;
+  buildYear: string;
+};
+
+type SelectField = {
+  name: keyof Filters;
+  placeholder: string;
+  options: string[];
+  icon: JSX.Element;
+};
+
 const FilterProperty = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<Filters>({
     searchTerm: "",
     location: "",
     propertyType: "",
@@ -21,14 +37,14 @@ const FilterProperty = () => {
     buildYear: "",
   });
 
-  const handleChange = (name: string, value: string) => {
+  const handleChange = useCallback((name: keyof Filters, value: string) => {
     setFilters((prev) => ({
       ...prev,
       [name]: value,
     }));
-  };
+  }, []);
 
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     const hasAnyValue = Object.values(filters).some((val) => val.trim() !== "");
     if (!hasAnyValue) {
       alert("Please enter at least one input value ...");
@@ -42,61 +58,57 @@ const FilterProperty = () => {
         navigate("/search-results", { state: { data } });
         scrollToTop();
       } else {
-        alert("Something wrong happend...");
+        alert("Something wrong happened...");
       }
     } catch (error) {
       console.error(error);
-      alert("Something wrong happend...");
+      alert("Something wrong happened...");
     }
-  };
+  }, [filters, dispatch, navigate]);
 
-  const selectFields = [
-    {
-      name: "location",
-      placeholder: "Location",
-      options: ["Dharwad", "Hubli", "Belgaum", "Mysore", "Bangalore"],
-      icon: <LocationIcon className="text-black dark:text-white" />,
-    },
-    {
-      name: "propertyType",
-      placeholder: "Property Type",
-      options: ["villa", "apartment", "house"],
-      icon: <PropertyIcon className="text-black dark:text-white" />,
-    },
-    {
-      name: "pricingRange",
-      placeholder: "Pricing Range",
-      options: ["100 - 99999", "100000-200000", "200000-500000", "500000+"],
-      icon: <PricingIcon className="text-black dark:text-white" />,
-    },
-    {
-      name: "propertySize",
-      placeholder: "Property Size",
-      options: ["1", "2", "3+"],
-      icon: <PropertySizeIcon className="text-black dark:text-white" />,
-    },
-    {
-      name: "buildYear",
-      placeholder: "Build Year",
-      options: ["2023", "2024", "2025"],
-      icon: <BuildIcon className="text-black dark:text-white" />,
-    },
-  ];
+  const selectFields: SelectField[] = useMemo(() => [
+      {
+        name: "location",
+        placeholder: "Location",
+        options: ["Dharwad", "Hubli", "Belgaum", "Mysore", "Bangalore"],
+        icon: <LocationIcon className="text-black dark:text-white" />,
+      },
+      {
+        name: "propertyType",
+        placeholder: "Property Type",
+        options: ["villa", "apartment", "house"],
+        icon: <PropertyIcon className="text-black dark:text-white" />,
+      },
+      {
+        name: "pricingRange",
+        placeholder: "Pricing Range",
+        options: ["100 - 99999", "100000-200000", "200000-500000", "500000+"],
+        icon: <PricingIcon className="text-black dark:text-white" />,
+      },
+      {
+        name: "propertySize",
+        placeholder: "Property Size",
+        options: ["1", "2", "3+"],
+        icon: <PropertySizeIcon className="text-black dark:text-white" />,
+      },
+      {
+        name: "buildYear",
+        placeholder: "Build Year",
+        options: ["2023", "2024", "2025"],
+        icon: <BuildIcon className="text-black dark:text-white" />,
+      },
+    ],
+    []
+  );
 
   return (
     <SectionWrapper className="mt-0 lg-custom:-mt-12 2xl:-mt-16 py-5 lg:py-0 w-full">
       <div className="mb-5 lg:mb-0 rounded-xl bg-purple70/60 dark:bg-gray10 border-r border-l border-1 border-gray08/60 dark:border-gray15 w-full lg:w-[81.4536%] lg:mx-auto pt-2.5 px-2.5">
-        <div
-          data-aos="fade-up"
-          className="px-4 py-2 flex justify-between items-center mb-2.5 rounded-lg bg-white99 dark:bg-gray08 text-black dark:text-white focus:outline-none focus:border-purple-500"
-        >
-          <input
-            type="text"
-            placeholder="Search For A Property"
+        <div data-aos="fade-up"
+          className="px-4 py-2 flex justify-between items-center mb-2.5 rounded-lg bg-white99 dark:bg-gray08 text-black dark:text-white focus:outline-none focus:border-purple-500">
+          <input type="text" placeholder="Search For A Property"
             className="w-full md:w-8/12 outline-none bg-transparent placeholder:text-black dark:placeholder:text-gray40"
-            value={filters.searchTerm}
-            onChange={(e) => handleChange("searchTerm", e.target.value)}
-          />
+            value={filters.searchTerm} onChange={(e) => handleChange("searchTerm", e.target.value)} />
           <MainButton
             variant="normalPurple"
             onClick={handleSearch}
@@ -116,13 +128,12 @@ const FilterProperty = () => {
           data-aos="fade-up"
           className="grid grid-cols-1 lg-custom:grid-cols-5 gap-5"
         >
-          {selectFields.map((field, index) => (
+          {selectFields.map((field) => (
             <FormSelect
-              key={index}
+              key={field.name}
               name={field.name}
-              
               placeholder={field.placeholder}
-              value={filters[field.name as keyof typeof filters]}
+              value={filters[field.name]}
               onChange={(val) => handleChange(field.name, val)}
               options={field.options}
               error=""

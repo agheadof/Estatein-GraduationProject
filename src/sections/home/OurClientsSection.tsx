@@ -1,6 +1,4 @@
-import GenericSlider from "../../components/shared/GenericSlider/GenericSlider";
-import TestimonialCard from "../../components/cards/TestimonialCard";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import Title from "../../components/shared/Title";
 import { SectionWrapper } from "../../layouts/SectionWrapper";
@@ -9,6 +7,9 @@ import AlertMessage from "../../components/ui/AlertMessage";
 import { listenToTestimonials } from "../../utlis/firebaseListeners/testimonialsListener";
 import type { Client } from "../../redux/types/client";
 import { scrollToTop } from "../../utlis/scrollToTop";
+import Card from "../../components/cards/TestimonialCard/Card";
+import type { RootState } from "../../redux/store";
+import GenericSlider from "../../components/shared/GenericSlider";
 
 function isValidClient(client: any): client is Client {
   return (
@@ -24,33 +25,33 @@ function isValidClient(client: any): client is Client {
 }
 
 function OurClientsSection() {
-  const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
+  const [showReviewModal, setShowReviewModal] = useState(false);
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
-  const handleCloseModal = () => {
-    setShowReviewModal(false);
-  };
-
   const dispatch = useAppDispatch();
+
   const { items, loading, error } = useAppSelector(
-    (state: any) => state.testimonials as {
-      items: Client[];
-      loading: boolean;
-      error: string | null;
-    }
+    (state: RootState) => state.testimonials
   );
 
   useEffect(() => {
-    if (items.length === 0) {
+    if (!items || items.length === 0) {
       dispatch(listenToTestimonials());
     }
   }, [dispatch, items]);
 
-  const skeletonCount = items.length > 0 ? items.length : 3;
+  const handleCloseModal = () => setShowReviewModal(false);
+
+  const validClients = useMemo(
+    () => items.filter(isValidClient),
+    [items]
+  );
+
+  const skeletonCount = items?.length > 0 ? items.length : 3;
 
   return (
     <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
-      <section className="relative ">
+      <section className="relative">
         <Title
           heading="What Our Clients Say"
           paragraph="Read the success stories and heartfelt testimonials from our valued clients. Discover why they chose Estatein for their real estate needs."
@@ -91,18 +92,15 @@ function OurClientsSection() {
         ) : error ? (
           <p className="text-red-500">{error}</p>
         ) : (
-          <GenericSlider
-            items={items}
-            renderSlide={(client, index) =>
-              isValidClient(client) ? (
-                <TestimonialCard key={index} client={client} />
-              ) : null
-            }
+          <GenericSlider<Client>
+            items={validClients}
+            renderSlide={(client: Client) => <Card key={client.name} client={client} />}
             slidesPerView={3}
-            showCounter={true}
+            showCounter
             titleBtnLabel="View All Testimonials"
             navigateTo="allTestimonials"
           />
+
         )}
         <button
           className="absolute left-[50%] -translate-x-[50%] bottom-[0px] text-sm cursor-pointer text-black dark:text-white hover:underline"

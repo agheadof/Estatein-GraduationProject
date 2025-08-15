@@ -1,4 +1,4 @@
-import GenericSlider from "../../components/shared/GenericSlider/GenericSlider";
+import GenericSlider from "../../components/shared/GenericSlider";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchFaqs } from "../../redux/slices/faqsSlice";

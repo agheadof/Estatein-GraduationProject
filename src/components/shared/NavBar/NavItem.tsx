@@ -7,16 +7,9 @@ interface NavItemProps {
   mobile?: boolean;
 }
 
-const NavItem: React.FC<NavItemProps> = ({
-  to,
-  label,
-  onClick,
-  mobile = false,
-}) => {
+const NavItem: React.FC<NavItemProps> = ({ to, label, onClick, mobile = false,}) => {
   return (
-    <NavLink
-      to={to}
-      onClick={onClick}
+    <NavLink to={to} onClick={onClick}
       className={({ isActive }) =>
         isActive
           ? mobile
@@ -25,8 +18,7 @@ const NavItem: React.FC<NavItemProps> = ({
           : mobile
           ? "block py-2 px-4 text-white"
           : " transition-all duration-75 ease-in-out"
-      }
-    >
+      }>
       {label}
     </NavLink>
   );
