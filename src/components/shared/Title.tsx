@@ -9,8 +9,9 @@ type TitleProps = {
   paragraphStyle?: string;
   buttonLabel?: string;
   anamation?: string;
-    animKey?: string; 
+  animKey?: string;
   navigateTo?: string;
+  onClick?: () => void;
 };
 
 const Title = ({
@@ -21,21 +22,20 @@ const Title = ({
   paragraphStyle,
   buttonLabel,
   anamation,
-    animKey,
-navigateTo
+  animKey,
+  navigateTo,
+  onClick,
 }: TitleProps) => {
-    const ref = useOneTimeAOS(animKey);
+  const ref = useOneTimeAOS(animKey);
 
   return (
-    <div  ref={ref} data-aos={anamation} 
-      className={`${titleStyle}`}
-    >
+    <div ref={ref} data-aos={anamation} className={`${titleStyle}`}>
       {starImg && (
         <div className="lg-custom:mb-1.5 2xl:mb-2.5">
           <img
             src="/assets/icons/MainTitle/stars.svg"
             alt="icon"
-            className="w-[68px] h-[30px] -ml-2 md:-ml-2.5 2xl:-ml-5"
+            className="2x:w-[68px] 2xl:h-[30px] h-[24px] w-[54.72px] -ml-2 md:-ml-2.5 2xl:-ml-5"
           />
         </div>
       )}
@@ -52,7 +52,11 @@ navigateTo
         </div>
         {buttonLabel && (
           <div className="hidden lg-custom:block">
-            <TitleBtn label={buttonLabel} navigateTo={navigateTo} />
+            <TitleBtn
+              label={buttonLabel}
+              navigateTo={navigateTo}
+              onClick={onClick}
+            />
           </div>
         )}
       </div>

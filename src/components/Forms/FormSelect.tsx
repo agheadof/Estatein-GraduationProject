@@ -7,7 +7,7 @@ function FormSelect({
   name,
   value,
   placeholder,
-  onChange, // ✅ onChange: (value: string) => void
+  onChange,
   options,
   error,
   classExtra = "bg-white97 dark:bg-gray10",
@@ -18,10 +18,9 @@ function FormSelect({
   const [selected, setSelected] = useState<string>(value || "");
   const selectRef = useRef<HTMLDivElement>(null);
 
-  // نرسل فقط قيمة string
   const handleSelect = (opt: string) => {
     setSelected(opt);
-    onChange(opt); // ✅ هنا نرسل القيمة فقط
+    onChange(opt); 
     setIsOpen(false);
   };
 
@@ -54,20 +53,19 @@ function FormSelect({
         className={`relative bg-purple90 flex flex-col border-1 rounded-lg border-white90 dark:border-gray15 hover:text-purple75 transition-colors duration-300 ${classExtra}`}
       >
         <div
-          className="flex gap-2.5 px-5 py-6 pr-12 items-center cursor-pointer"
+          className={`flex gap-2.5 px-5 py-6 pr-12 items-center cursor-pointer`}
           onClick={() => setIsOpen((prev) => !prev)}
         >
           {children}
-          <span className="text-black dark:text-gray40 text-lg/[20px] lg-custom:text-sm font-medium">
+          <span className={`text-black dark:text-gray40 text-lg/[20px] lg-custom:text-sm font-medium`}>
             {selected || placeholder || "Select"}
           </span>
 
-          <DropdownIcon
-            className={`absolute right-5 top-1/2 transform -translate-y-1/2 text-black dark:text-white transition-transform duration-200 cursor-pointer ${
-              isOpen ? "rotate-180" : ""
-            } ${classIcon}`}
-            onClick={() => setIsOpen((prev) => !prev)}
-          />
+          <div onClick={() => setIsOpen((prev) => !prev)}>
+            <DropdownIcon
+              className={`absolute right-5 top-1/2 transform -translate-y-1/2 text-black dark:text-white transition-transform duration-200 cursor-pointer ${isOpen ? "rotate-180" : ""} ${classIcon}`}
+            />
+          </div>
         </div>
 
         {isOpen && (
@@ -75,9 +73,7 @@ function FormSelect({
             {options.map((opt) => (
               <li
                 key={opt}
-                className={`px-5 py-3 hover:bg-purple75 dark:hover:bg-purple90 cursor-pointer text-black dark:text-gray40 text-sm font-medium ${
-                  selected === opt ? "bg-purple90 dark:bg-purple90" : ""
-                }`}
+                className={`px-5 py-3 hover:bg-purple75 dark:hover:bg-purple90 cursor-pointer text-black dark:text-gray40 text-sm font-medium ${selected === opt ? "bg-purple90 dark:bg-purple90" : ""}`}
                 onClick={() => handleSelect(opt)}
               >
                 {opt}

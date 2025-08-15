@@ -3,54 +3,54 @@ import type { CommonCardProps } from "../types/CommonCard";
 
 export const SiteFeaturesServicesData: CommonCardProps[] = [
     {
-        cardTitle: "Find Your Dream Home",
+        cardTitle_1: "Find Your Dream Home",
         cardImg: "/assets/icons/CardUnderHero/home.svg",
         HeadingTag: Link,
-        titleLink: "/properties"
+        titleLink_1: "/properties"
     },
     {
-        cardTitle: "Unlock Property Value",
+        cardTitle_1: "Unlock Property Value",
         cardImg: "/assets/icons/CardUnderHero/unlock.svg",
         HeadingTag: "a",
-        titleLink: "/services/#property"
+        titleLink_1: "/services/#property"
     },
     {
-        cardTitle: "Effortless Property Management",
+        cardTitle_1: "Effortless Property Management",
         cardImg: "/assets/icons/CardUnderHero/effortless.svg",
         HeadingTag: "a",
-        titleLink: "/services/#management"
+        titleLink_1: "/services/#management"
     },
     {
-        cardTitle: "Smart Investments, Informed Decisions",
+        cardTitle_1: "Smart Investments, Informed Decisions",
         cardImg: "/assets/icons/CardUnderHero/smart.svg",
         HeadingTag: "a",
-        titleLink: "/services/#investments"
+        titleLink_1: "/services/#investments"
     },
 ]
 
 export const SiteFeaturesHomeData: CommonCardProps[] = [
     {
-        cardTitle: "Find Your Dream Home",
+        cardTitle_1: "Find Your Dream Home",
         cardImg: "/assets/icons/CardUnderHero/home.svg",
         HeadingTag: Link,
-        titleLink: "/properties"
+        titleLink_1: "/properties"
     },
     {
-        cardTitle: "Unlock Property Value",
+        cardTitle_1: "Unlock Property Value",
         cardImg: "/assets/icons/CardUnderHero/unlock.svg",
         HeadingTag: Link,
-        titleLink: "/services"
+        titleLink_1: "/services"
     },
     {
-        cardTitle: "Effortless Property Management",
+        cardTitle_1: "Effortless Property Management",
         cardImg: "/assets/icons/CardUnderHero/effortless.svg",
         HeadingTag: Link,
-        titleLink: "/services"
+        titleLink_1: "/services"
     },
     {
-        cardTitle: "Smart Investments, Informed Decisions",
+        cardTitle_1: "Smart Investments, Informed Decisions",
         HeadingTag: Link,
         cardImg: "/assets/icons/CardUnderHero/smart.svg",
-        titleLink: "/services"
+        titleLink_1: "/services"
     },
 ]

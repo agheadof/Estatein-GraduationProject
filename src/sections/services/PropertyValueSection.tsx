@@ -27,7 +27,7 @@ const PropertyValueSection = () => {
                 key={index}
                 cardStyle="p-6 md:p-10 2xl:p-[50px] gap-4 md:gap-5 2xl:gap-[30px] border-white90 dark:border-gray15 h-full  "
                 cardImg={card.cardImg}
-                cardTitle={card.cardTitle}
+                cardTitle_1={card.cardTitle_1}
                 cardDesc={card.cardDesc}
               />
             </div>

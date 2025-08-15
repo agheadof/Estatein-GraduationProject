@@ -9,6 +9,10 @@ import themeReducer from "./slices/themeSlice"
 import bannerReducer from "./slices/bannerSlice"
 import clientsReducer from "./slices/clientsSlice"
 import valuesReducer from "./slices/valueSlice"
+import pricingReducer from "./slices/pricingSlice";
+import experienceReducer from "./slices/experienceSlice"
+import footerLinksReducer from "./slices/footerLinksSlice"
+// import contactLinksReducer from "./slices/contactSlice"
 import outboundMailer from "./slices/createEmailSlice.ts";
 
 
@@ -24,6 +28,10 @@ const store: any = configureStore({
     banner: bannerReducer,
     clients: clientsReducer,
     values: valuesReducer,
+        pricing: pricingReducer,
+    experience: experienceReducer,
+    footerLinks: footerLinksReducer,
+    // contactLinks: contactLinksReducer,
     outboundMailer,
 
     

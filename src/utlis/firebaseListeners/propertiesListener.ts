@@ -22,7 +22,8 @@ const transformProperty = (property: any, id: string): PropertyType => ({
   descriptionLong: property.description,
   gallery: property.images,
   location: property.location,
-  tags: "Coastal Escapes - Where Waves Beckon",
+  tags: property.tags,
+  // tags: "Coastal Escapes - Where Waves Beckon",
   features: property.features || [],
   additionalFees: {
     inspection: property.inspection || 0,

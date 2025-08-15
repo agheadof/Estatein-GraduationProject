@@ -46,16 +46,16 @@ const aos = {
 };
 
 // ===== Patterns (Stagger Helpers) =====
-const centerOutOrder = (n: number) =>
-  n === 5 ? [2, 1, 3, 0, 4] :
-  n === 4 ? [1, 2, 0, 3] :
-  n === 3 ? [1, 0, 2]   :
-  Array.from({ length: n }, (_, i) => i);
+// const centerOutOrder = (n: number) =>
+//   n === 5 ? [2, 1, 3, 0, 4] :
+//   n === 4 ? [1, 2, 0, 3] :
+//   n === 3 ? [1, 0, 2]   :
+//   Array.from({ length: n }, (_, i) => i);
 
-const centerOutDelay = (i: number, total: number, start = 140, step = 110) => {
-  const ord = centerOutOrder(total)[i] ?? i;
-  return start + ord * step;
-};
+// const centerOutDelay = (i: number, total: number, start = 140, step = 110) => {
+//   const ord = centerOutOrder(total)[i] ?? i;
+//   return start + ord * step;
+// };
 
 const twoColsWaveDelay = (i: number, rowStep = 160, rightBonus = 90) => {
   const col = i % 2;               

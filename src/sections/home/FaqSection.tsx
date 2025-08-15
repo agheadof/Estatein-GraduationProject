@@ -1,21 +1,28 @@
-import GenericSlider from "../../components/shared/GenericSlider/GenericSlider"
-import { useEffect } from "react"
-import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import { fetchFaqs } from "../../redux/slices/faqsSlice"
-import Title from "../../components/shared/Title"
-import FaqCard from "../../components/cards/FaqCard/FaqCard"
+import GenericSlider from "../../components/shared/GenericSlider/GenericSlider";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchFaqs } from "../../redux/slices/faqsSlice";
+import Title from "../../components/shared/Title";
+import FaqCard from "../../components/cards/FaqCard/FaqCard";
+import { scrollToTop } from "../../utlis/scrollToTop";
 
 function FaqSection() {
-  const dispatch = useAppDispatch()
-  const { items, loading, error } = useAppSelector((state) => state.faqs)
+  const dispatch = useAppDispatch();
+  const { items, loading, error } = useAppSelector((state) => state.faqs);
 
   useEffect(() => {
     if (items.length === 0) {
-      fetchFaqs(dispatch)
-    }
-  }, [dispatch, items.length])
+            const unsubscribe = dispatch(fetchFaqs());
 
-  const skeletonCount = items.length > 0 ? items.length : 3
+      return () => {
+        if (typeof unsubscribe === "function") {
+          unsubscribe();
+        }
+      };
+    }
+  }, [dispatch, items.length]);
+
+  const skeletonCount = items.length > 0 ? items.length : 3;
 
   return (
     <section>
@@ -25,8 +32,10 @@ function FaqSection() {
         buttonLabel="View All FAQ’s"
         paragraphStyle="2xl:max-w-[1236px] lg-custom:max-w-[1003px] w-full"
         anamation="fade-up"
-
+        navigateTo="allFaq"
+        onClick={() => scrollToTop()}
       />
+
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
           {[...Array(skeletonCount)].map((_, i) => (
@@ -54,7 +63,7 @@ function FaqSection() {
         />
       )}
     </section>
-  )
+  );
 }
 
-export default FaqSection
+export default FaqSection;

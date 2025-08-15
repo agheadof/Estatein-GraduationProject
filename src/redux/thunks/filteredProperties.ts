@@ -17,8 +17,6 @@ export const fetchFilteredProperties = createAsyncThunk<
       if (!snapshot.exists()) return [];
 
       let results: PropertyType[] = Object.values(snapshot.val()) as PropertyType[];
-
-      // معالجة نطاق السعر
       let minPrice: number | null = null;
       let maxPrice: number | null = null;
 
@@ -33,17 +31,14 @@ export const fetchFilteredProperties = createAsyncThunk<
         }
       }
 
-      // معالجة حجم العقار (عدد الغرف)
       let minBedrooms: number | null = null;
       if (filters.propertySize) {
         minBedrooms = parseInt(filters.propertySize, 10);
       }
 
-      // الفلترة
       results = results.filter((prop) => {
         const bedroomsCount = Number(prop.bedrooms);
 
-        // فلترة بالكلمة العامة (searchTerm)
         if (filters.searchTerm) {
           const search = filters.searchTerm.toLowerCase();
           const propValues = Object.values(prop).map(v => String(v).toLowerCase());
@@ -54,12 +49,10 @@ export const fetchFilteredProperties = createAsyncThunk<
         if (filters.propertyType && prop.type !== filters.propertyType) return false;
         if (filters.buildYear && prop.buildYear !== filters.buildYear) return false;
 
-        // فلترة السعر
         if (minPrice !== null && maxPrice !== null) {
           if (prop.price < minPrice || prop.price > maxPrice) return false;
         }
 
-        // فلترة حجم العقار
         if (minBedrooms !== null) {
           if (filters.propertySize?.endsWith("+")) {
             if (bedroomsCount < minBedrooms) return false;

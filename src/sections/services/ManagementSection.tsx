@@ -3,14 +3,17 @@ import UnlockCardComponent from "../../components/cards/UnlockCardComponent";
 import Title from "../../components/shared/Title";
 import { managementData } from "../../data/managementData";
 import { SectionWrapper } from "../../layouts/SectionWrapper";
-import { pvCardAos, pvGridAos, pvSectionAos, pvUnlockAos } from "../../utlis/Anamation";
+import {
+  pvCardAos,
+  pvGridAos,
+  pvSectionAos,
+  pvUnlockAos,
+} from "../../utlis/Anamation";
 
 const ManagementSection = () => {
   return (
     <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
-      <section {...pvSectionAos()}
-        id="management"
-      >
+      <section {...pvSectionAos()} id="management">
         <Title
           titleStyle="pb-10 lg-custom:pb-[60px] 2xl:pb-20"
           heading="Effortless Property Management"
@@ -18,21 +21,25 @@ const ManagementSection = () => {
           paragraphStyle="w-[81.203%]"
         />
 
-        <div {...pvGridAos()} className="grid gap-5 2xl:gap-[30px] grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+        <div
+          {...pvGridAos()}
+          className="grid gap-5 2xl:gap-[30px] grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+        >
           {managementData.map((card, index) => (
             <div key={index} {...pvCardAos(index)}>
-
               <CommonCard
                 key={index}
                 cardStyle="p-6 md:p-10 2xl:p-[50px] gap-4 md:gap-5 2xl:gap-[30px] border-white90 dark:border-gray15 h-full"
                 cardImg={card.cardImg}
-                cardTitle={card.cardTitle}
+                cardTitle_1={card.cardTitle_1}
                 cardDesc={card.cardDesc}
               />
             </div>
-
           ))}
-          <div className="col-span-1 md:col-span-2" {...pvUnlockAos(managementData.length)}>
+          <div
+            className="col-span-1 md:col-span-2"
+            {...pvUnlockAos(managementData.length)}
+          >
             <UnlockCardComponent
               cardStyle='col-span-1 md:col-span-2 p-6 md:py-[45.5px] md:px-10 2xl:py-[59.5px] 2xl:px-[50px] bg-[url("/assets/images/AbstractDesign2.png")] bg-no-repeat bg-cover'
               title="Experience Effortless Property Management"
@@ -42,7 +49,6 @@ const ManagementSection = () => {
             />
           </div>
         </div>
-
       </section>
     </SectionWrapper>
   );
