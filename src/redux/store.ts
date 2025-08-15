@@ -12,8 +12,7 @@ import valuesReducer from "./slices/valueSlice"
 import pricingReducer from "./slices/pricingSlice";
 import experienceReducer from "./slices/experienceSlice"
 import footerLinksReducer from "./slices/footerLinksSlice"
-// import contactLinksReducer from "./slices/contactSlice"
-
+import contactLinksReducer from "./slices/contactSlice";
 
 const store: any = configureStore({
   reducer: {
@@ -30,7 +29,7 @@ const store: any = configureStore({
     pricing: pricingReducer,
     experience: experienceReducer,
     footerLinks: footerLinksReducer,
-    // contactLinks: contactLinksReducer,
+    contactLinks: contactLinksReducer,
   },
 })
 

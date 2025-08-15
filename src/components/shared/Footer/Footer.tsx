@@ -88,12 +88,13 @@ export default function Footer({ links, footerNote }: FooterProps) {
 
               {/* Social Media Links */}
               <div className="flex space-x-4 mt-4 lg:mt-0">
+                {/* skelton loader */}
                 {loading ? (
                   <div className="animate-pulse flex gap-2 lg-custom:gap-2.5">
                     {Array.from({ length: 4 }).map((_, index) => (
                       <div
                         key={index}
-                        className="w-[52px] h-[52px] bg-purple70 dark:bg-gray-600 rounded-full"
+                        className="w-[52px] h-[52px] bg-purple70 rounded-full"
                       ></div>
                     ))}
                   </div>
