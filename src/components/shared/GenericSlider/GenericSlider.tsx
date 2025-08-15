@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
-import TitleBtn from "../../ui/TitleBtn";
-import { NextArrowIcon, PrevArrowIcon } from "../../icons/SliderArrows";
-import { motion } from "framer-motion";
-import { GenericSliderMotionConfig } from "../../../utlis/Anamation";
+import React, { useEffect, useRef, useState } from "react"
+import { useKeenSlider } from "keen-slider/react"
+import "keen-slider/keen-slider.min.css"
+import TitleBtn from "../../ui/TitleBtn"
+import { NextArrowIcon, PrevArrowIcon } from "../../icons/SliderArrows"
 
 type Props<T> = {
   items: T[];
@@ -13,7 +11,7 @@ type Props<T> = {
   showCounter?: boolean;
   titleBtnLabel?: string;
   counterClassName?: string;
-  navigateTo: string;
+  navigateTo?: string;
 };
 
 const GenericSlider = <T,>({
@@ -116,20 +114,19 @@ const GenericSlider = <T,>({
   const totalGroups = Math.ceil(items.length / currentSlidesPerGroup);
 
   return (
-    <motion.div className="w-full mt-[80px]" {...GenericSliderMotionConfig}>
-      {" "}
-      <div ref={sliderRef} className="keen-slider mb-[50px] w-full">
+    <div data-aos="fade-up" className="w-full mt-[80px] " >
+      <div ref={sliderRef} className="keen-slider mb-[50px] w-full ">
         {items.map((item, index) => (
           <div key={index} className="keen-slider__slide">
             {renderSlide(item, index)}
           </div>
         ))}
       </div>
-      <motion.div
+      <div 
         className={`${counterClassName} flex justify-between items-center pt-4 2xl:pt-5 border-t border-t-white90 dark:border-t-gray15`}
       >
         {showCounter && (
-          <p className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block">
+          <p data-aos="fade-right" className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block">
             {String(currentGroup).padStart(2, "0")}
             <span className="text-gray40 dark:text-gray60">
               {" "}
@@ -148,8 +145,9 @@ const GenericSlider = <T,>({
           </div>
         )}
 
-        <div className="flex items-center gap-2.5">
-          <motion.button
+        <div           data-aos="fade-left"
+  className="flex items-center gap-2.5">
+          <button
             ref={prevRef}
             disabled={isBeginning}
             onClick={() => slider.current?.prev()}
@@ -164,7 +162,7 @@ const GenericSlider = <T,>({
             `}
           >
             <PrevArrowIcon />
-          </motion.button>
+          </button>
 
           {showCounter && (
             <p className="text-black dark:text-white text-base 2xl:text-xl font-medium block md:hidden">
@@ -176,7 +174,8 @@ const GenericSlider = <T,>({
             </p>
           )}
 
-          <motion.button
+          <button
+          
             ref={nextRef}
             disabled={isEnd}
             onClick={() => slider.current?.next()}
@@ -191,11 +190,11 @@ const GenericSlider = <T,>({
             `}
           >
             <NextArrowIcon />
-          </motion.button>
+          </button>
         </div>
-      </motion.div>
-    </motion.div>
-  );
-};
+      </div>
+    </div>
+  )
+}
 
 export default GenericSlider;

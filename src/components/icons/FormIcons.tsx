@@ -2,11 +2,13 @@ type IconProps = {
   className?: string;
   hoverClassName?: string;
   color?: string;
-  onClick?: ()=> void;
+  onClick?: () => void;
 };
-export function PhoneIcon({ className = "", }: IconProps) {
+
+export function PhoneIcon({ className = "", onClick }: IconProps) {
   return (
     <svg
+      onClick={onClick}
       viewBox="0 0 25 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -22,9 +24,10 @@ export function PhoneIcon({ className = "", }: IconProps) {
   );
 }
 
-export function EmailIcon({ className = "" }: IconProps) {
+export function EmailIcon({ className = "", onClick }: IconProps) {
   return (
     <svg
+      onClick={onClick}
       viewBox="0 0 25 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -41,9 +44,11 @@ export function EmailIcon({ className = "" }: IconProps) {
     </svg>
   );
 }
+
 export function DropdownIcon({ className = "", onClick }: IconProps) {
   return (
     <svg
+      onClick={onClick}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -59,9 +64,11 @@ export function DropdownIcon({ className = "", onClick }: IconProps) {
     </svg>
   );
 }
-export function LocationIcon({ className = "" }: IconProps) {
+
+export function LocationIcon({ className = "", onClick }: IconProps) {
   return (
     <svg
+      onClick={onClick}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

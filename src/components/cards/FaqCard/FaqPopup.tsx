@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import CloseIcon from "../../icons/CloseIcon";
 
 type FaqPopupProps = {
-  question: string;
-  answer: string;
+  question?: string;
+  answer?: string;
   onClick: () => void;
 };
 

@@ -1,6 +1,5 @@
-import { motion } from "framer-motion";
 import TitleBtn from "../ui/TitleBtn";
-import { titleMotionConfig } from "../../utlis/Anamation";
+import { useOneTimeAOS } from "../../hooks/useOneTimeAOS";
 
 type TitleProps = {
   starImg?: boolean;
@@ -9,6 +8,8 @@ type TitleProps = {
   paragraph?: string;
   paragraphStyle?: string;
   buttonLabel?: string;
+  anamation?: string;
+    animKey?: string; 
   navigateTo?: string;
 };
 
@@ -19,16 +20,20 @@ const Title = ({
   paragraph,
   paragraphStyle,
   buttonLabel,
+  anamation,
+  animKey,
   navigateTo,
 }: TitleProps) => {
+  const ref = useOneTimeAOS(animKey);
+
   return (
-    <motion.div {...titleMotionConfig} className={`${titleStyle}`}>
+    <div ref={ref} data-aos={anamation} className={`${titleStyle}`}>
       {starImg && (
         <div className="lg-custom:mb-1.5 2xl:mb-2.5">
           <img
             src="/assets/icons/MainTitle/stars.svg"
             alt="icon"
-            className="w-[68px] h-[30px] -ml-2 md:-ml-2.5 2xl:-ml-5"
+            className="2x:w-[68px] 2xl:h-[30px] h-[24px] w-[54.72px] -ml-2 md:-ml-2.5 2xl:-ml-5"
           />
         </div>
       )}
@@ -49,7 +54,7 @@ const Title = ({
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

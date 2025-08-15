@@ -2,17 +2,14 @@ import ExperienceSectionCard from '../../components/cards/ExperienceSectionCard'
 import { SectionWrapper } from '../../layouts/SectionWrapper';
 import { fakeDataForTesting } from '../../data/ExperienceSectionData';
 import Title from '../../components/shared/Title';
-import { containerVariants, defaultMotionConfig, flipCardVariants } from "../../utlis/Anamation";
-import { motion } from "framer-motion";
+import { getCenterOutAos, getFadeUpOnce } from '../../utlis/Anamation';
 
 
 
 function ExperienceSection() {
   return (
     <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
-      <motion.section
-        {...defaultMotionConfig}
-        variants={containerVariants}
+      <section
       >
         <Title
           heading="Navigating the Estatein Experience"
@@ -20,19 +17,24 @@ function ExperienceSection() {
           starImg={true}
           titleStyle="mb-2 md:mb-[10px] lg-custom:mb-[14px]"
           paragraphStyle="w-full lg-custom:max-w-[1000px] 2xl:max-w-[1279px]"
+          anamation="fade-up"
+
         />
-        <div className="cards_container grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-3 gap-y-[30px] gap-x-[0px] md:gap-x-[20px] md:gap-y-[40px] huge:gap-x-[30px] huge:gap-y-[50px] mt-10 lg-custom:mt-[60px] 2xl:mt-[80px]">
+        <div
+          className="cards_container grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-3 gap-y-[30px] gap-x-[0px] md:gap-x-[20px] md:gap-y-[40px] huge:gap-x-[30px] huge:gap-y-[50px] mt-10 lg-custom:mt-[60px] 2xl:mt-[80px]"
+          {...getFadeUpOnce(500)}
+        >
           {fakeDataForTesting.map((item, idx) => (
-            <motion.div variants={flipCardVariants} key={idx}>
+            <div key={idx} {...getCenterOutAos(idx)}>
               <ExperienceSectionCard
                 description={item.description}
                 title={item.title}
                 step={item.step}
               />
-            </motion.div>
+            </div>
           ))}
         </div>
-      </motion.section>
+      </section>
     </SectionWrapper>
   );
 }

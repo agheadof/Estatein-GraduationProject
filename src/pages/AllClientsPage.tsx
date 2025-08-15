@@ -6,6 +6,7 @@ import PaginationComponent from "../components/PaginationComponent";
 import TestimonialCard from "../components/cards/TestimonialCard";
 import { SectionWrapper } from "../layouts/SectionWrapper";
 import Title from "../components/shared/Title";
+import type { Client } from "../redux/types/client";
 
 function AllClientsPage() {
   const dispatch = useAppDispatch();
@@ -74,7 +75,7 @@ function AllClientsPage() {
         <p className="text-red-500">{error}</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedItems.map((client, index) => (
+          {displayedItems.map((client:Client, index:number) => (
             <TestimonialCard key={index} client={client} />
           ))}
         </div>

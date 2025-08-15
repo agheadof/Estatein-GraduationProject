@@ -1,40 +1,41 @@
-import { useEffect } from "react";
-import PaginationComponent from "../components/PaginationComponent";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { SectionWrapper } from "../layouts/SectionWrapper";
-import Title from "../components/shared/Title";
-import PropertiesCard from "../components/cards/PropertiesCard";
-import { fetchProperties } from "../redux/slices/propertiesSlice";
+import { useEffect } from "react"
+import PaginationComponent from "../components/PaginationComponent"
+import { useNavigate, useSearchParams } from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
+import { SectionWrapper } from "../layouts/SectionWrapper"
+import Title from "../components/shared/Title"
+import PropertiesCard from "../components/cards/PropertiesCard"
+import { listenToProperties } from "../utlis/firebaseListeners/propertiesListener"
+import type { PropertyType } from "../types/Property"
 
 const AllPropertiesPage = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const {
     all: items,
     loading,
     error,
-  } = useAppSelector((state) => state.properties);
+  } = useAppSelector((state) => state.properties)
 
-  const [searchParams] = useSearchParams();
-  const currentPage = Number(searchParams.get("page")) || 1;
+  const [searchParams] = useSearchParams()
+  const currentPage = Number(searchParams.get("page")) || 1
 
   useEffect(() => {
     if (items.length === 0) {
-      dispatch(fetchProperties());
+      dispatch(listenToProperties())
     }
-  }, [dispatch, items.length]);
+  }, [dispatch, items.length])
 
-  const pageSize = 6;
-  const totalPages = Math.ceil(items.length / pageSize);
+  const pageSize = 6
+  const totalPages = Math.ceil(items.length / pageSize)
 
-  const start = (currentPage - 1) * pageSize;
-  const displayedItems = items.slice(start, start + pageSize);
-  const skeletonCount = items.length > 0 ? items.length : 3;
+  const start = (currentPage - 1) * pageSize
+  const displayedItems = items.slice(start, start + pageSize)
+  const skeletonCount = items.length > 0 ? items.length : 3
 
   const handlePageChange = (page: number) => {
-    navigate(`?page=${page}`);
-  };
+    navigate(`?page=${page}`)
+  }
   return (
     <SectionWrapper className="mt-[118px] lg-custom:mt-[130px] 2xl:mt-[150px] mb-12">
       <Title
@@ -81,7 +82,7 @@ const AllPropertiesPage = () => {
         <p className="text-red-500">{error}</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedItems.map((property, index) => (
+          {displayedItems.map((property:PropertyType, index:number) => (
             <PropertiesCard key={index} property={property} />
           ))}
         </div>
@@ -97,7 +98,7 @@ const AllPropertiesPage = () => {
         </div>
       )}
     </SectionWrapper>
-  );
-};
+  )
+}
 
-export default AllPropertiesPage;
+export default AllPropertiesPage

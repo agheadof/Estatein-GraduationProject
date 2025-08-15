@@ -3,7 +3,6 @@ import CountUpComponent from "../../components/cards/CountUpComponent";
 import RotatingText from "../../components/cards/RotatingText";
 import { heroContent } from "../../data/heroContent";
 import { useAppSelector } from "../../redux/hooks";
-import { FadeSlideUpText } from "../../utlis/Anamation";
 
 const Hero = () => {
   const isBannerVisible = useAppSelector((state) => state.banner.isVisible);
@@ -20,7 +19,6 @@ const Hero = () => {
       <div className="flex justify-center lg-custom:w-[50%] flex-col gap-10 lg-custom:gap-[4vh] 2xl:gap-[5vh]  px-4 lg-custom:px-0 lg-custom:pl-20 2xl:pl-[162px] ">
 
         {/* === Title and Description === */}
-        <FadeSlideUpText>
           <div className="flex flex-col gap-4 lg-custom:gap-5 2xl:gap-6 mt-20 lg-custom:mt-0">
             <h1 className="text-[28px] lg-custom:text-[45px] 2xl:text-[60px] font-semibold leading-[120%]">
               {heroContent.title}
@@ -30,7 +28,6 @@ const Hero = () => {
               {heroContent.description}
             </p>
           </div>
-        </FadeSlideUpText>
 
 
         {/* === Call-to-Action Buttons === */}

@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useEffect } from "react";
 import { fetchValues } from "../../redux/slices/valueSlice";
 import { ourValues } from "../../data/ourValues";
+import type { Value } from "../../redux/types/value";
 
 
 const FaqList = () => {
@@ -13,7 +14,7 @@ const FaqList = () => {
     (state) => state.values
   );
   useEffect(() => {
-  dispatch(fetchValues());   
+  dispatch(fetchValues);   
 }, [dispatch]);
 
 useEffect(() => {
@@ -29,13 +30,14 @@ useEffect(() => {
             starImg={true}
             heading="Our Values"
             paragraph="Our story is one of continuous growth and evolution. We started as a small team with big dreams, determined to create a real estate platform that transcended the ordinary."
+            anamation="fade-right"
           />
-          <div className="lg:w-2/3 w-full bg-purple90 dark:bg-gray10 p-2.5  rounded-xl hover:bg-purple75 transition duration-300">
+          <div data-aos="fade-left" className="lg:w-2/3 w-full bg-purple90 dark:bg-gray10 p-2.5  rounded-xl hover:bg-purple75 transition duration-300">
             <div className="bg-white99 dark:bg-gray08 p-6 lg:p-[55px] grid grid-cols-1 min-lg-custom:grid-cols-2  rounded-xl justify-center gap-[30px]">
                 {loading ? ( <p>Loading...</p> ) : error ? (
           <p className="text-red-500">{error}</p>
         ) : (
-              visibleItems.map((values, index) => (
+              visibleItems.map((values:Value, index:number) => (
                   <ValueCard
                     key={index}
                     titleSize="2xl:text-2xl lg-custom:text-xl text-lg"

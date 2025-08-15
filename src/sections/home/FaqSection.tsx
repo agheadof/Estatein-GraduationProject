@@ -1,21 +1,21 @@
-import GenericSlider from "../../components/shared/GenericSlider/GenericSlider";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchFaqs } from "../../redux/slices/faqsSlice";
-import Title from "../../components/shared/Title";
-import FaqCard from "../../components/cards/FaqCard/FaqCard";
+import GenericSlider from "../../components/shared/GenericSlider/GenericSlider"
+import { useEffect } from "react"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import { fetchFaqs } from "../../redux/slices/faqsSlice"
+import Title from "../../components/shared/Title"
+import FaqCard from "../../components/cards/FaqCard/FaqCard"
 
 function FaqSection() {
-  const dispatch = useAppDispatch();
-  const { items, loading, error } = useAppSelector((state) => state.faqs);
+  const dispatch = useAppDispatch()
+  const { items, loading, error } = useAppSelector((state) => state.faqs)
 
   useEffect(() => {
     if (items.length === 0) {
-      dispatch(fetchFaqs());
+      fetchFaqs()
     }
-  }, [dispatch, items.length]);
+  }, [dispatch, items.length])
 
-  const skeletonCount = items.length > 0 ? items.length : 3;
+  const skeletonCount = items.length > 0 ? items.length : 3
 
   return (
     <section>
@@ -24,7 +24,8 @@ function FaqSection() {
         paragraph="Find answers to common questions about Estatein's services, property listings, and the real estate process. We're here to provide clarity and assist you every step of the way."
         buttonLabel="View All FAQ’s"
         paragraphStyle="2xl:max-w-[1236px] lg-custom:max-w-[1003px] w-full"
-        navigateTo="allFaq"
+        anamation="fade-up"
+
       />
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
@@ -53,7 +54,7 @@ function FaqSection() {
         />
       )}
     </section>
-  );
+  )
 }
 
-export default FaqSection;
+export default FaqSection

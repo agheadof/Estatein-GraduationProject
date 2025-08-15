@@ -13,6 +13,7 @@ const PricingDetailsSection = () => {
           heading="Comprehensive Pricing Details"
           paragraph="At Estatein, transparency is key. We want you to have a clear understanding of all costs associated with your property investment. Below, we break down the pricing for Seaside Serenity Villa to help you make an informed decision"
           paragraphStyle="w-full md:w-[81.203%]"
+          anamation="fade-up"
         />
         <NoteComponent />
 

@@ -1,6 +1,4 @@
-import { motion } from "framer-motion";
 import type { CommonCardProps } from "../../types/CommonCard";
-import { commonCardMotionConfig } from "../../utlis/Anamation";
 
 const ValueCard = ({
   cardImg,
@@ -12,8 +10,7 @@ const ValueCard = ({
   children,
 }: CommonCardProps) => {
   return (
-    <motion.div
-      {...commonCardMotionConfig}
+    <div
       className={`bg-white99 dark:bg-gray08 flex flex-col justify-center gap-3.5 lg-custom:gap-4 2xl:gap-5 group ${cardStyle}`}
     >
       {children}
@@ -36,7 +33,7 @@ const ValueCard = ({
           {cardDesc}
         </p>
       )}
-    </motion.div>
+    </div>
   );
 };
 

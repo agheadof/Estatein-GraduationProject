@@ -133,7 +133,7 @@ const PropertyGallery = ({ id }: PropertyGalleryProps) => {
     );
 
   return (
-    <div className="flex flex-col gap-12 text-black dark:text-white">
+    <div  className="flex flex-col gap-12 text-white">
       <div className="flex justify-between items-center">
         <div className="flex flex-col lg-custom:flex-row items-center gap-5">
           <h1 className="font-semibold text-xl 2xl:text-3xl">

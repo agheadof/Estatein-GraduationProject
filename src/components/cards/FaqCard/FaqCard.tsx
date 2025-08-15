@@ -5,8 +5,8 @@ import { AnimatePresence } from "framer-motion";
 
 type Props = {
   question: {
-    question: string;
-    description: string;
+    question?: string;
+    description?: string;
   };
 };
 

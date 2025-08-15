@@ -15,6 +15,7 @@ import ThemeController from "./components/shared/ThemeController";
 import AllFaqsPage from "./pages/AllFaqsPage";
 import AllClientsPage from "./pages/AllClientsPage";
 import AllPropertiesPage from "./pages/AllPropertiesPage";
+import SearchResults from "./pages/SearchResult";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
       { path: "properties", element: <PropertiesPage /> },
       { path: "contact", element: <ContactPage /> },
       { path: "properties/:id", element: <PropertyDetailsPage /> },
-
+      { path: "/search-results", element: <SearchResults /> },
       { path: "allFaq", element: <AllFaqsPage /> },
       { path: "allTestimonials", element: <AllClientsPage /> },
       { path: "allProperties", element: <AllPropertiesPage /> },
