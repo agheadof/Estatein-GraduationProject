@@ -1,20 +1,21 @@
-import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import { useEffect } from "react"
-import { selectPropertiesCardsData } from "../../redux/types/Property"
-import GenericSlider from "../../components/shared/GenericSlider/GenericSlider"
-import PropertiesCard from "../../components/cards/PropertiesCard"
-import { SectionWrapper } from "../../layouts/SectionWrapper"
-import Title from "../../components/shared/Title"
-import type { PropertyType } from "../../types/Property"
-import { listenToProperties } from "../../utlis/firebaseListeners/propertiesListener"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useEffect } from "react";
+import { selectPropertiesCardsData } from "../../redux/types/Property";
+import GenericSlider from "../../components/shared/GenericSlider/GenericSlider";
+import PropertiesCard from "../../components/cards/PropertiesCard";
+import { SectionWrapper } from "../../layouts/SectionWrapper";
+import Title from "../../components/shared/Title";
+import type { PropertyType } from "../../types/Property";
+import { listenToProperties } from "../../utlis/firebaseListeners/propertiesListener";
+import { scrollToTop } from "../../utlis/scrollToTop";
 
 type Props = {
-  showTags?: boolean
-  showDetails?: boolean
-  heading: string
-  paragraph: string
-  buttonLabel?: string
-}
+  showTags?: boolean;
+  showDetails?: boolean;
+  heading: string;
+  paragraph: string;
+  buttonLabel?: string;
+};
 
 function PropertiesSection({
   heading,
@@ -23,37 +24,38 @@ function PropertiesSection({
   showDetails = true,
   showTags = false,
 }: Props) {
-  const dispatch = useAppDispatch()
-  const properties = useAppSelector(selectPropertiesCardsData)
-  const { loading, error } = useAppSelector((state) => state.properties)
+  const dispatch = useAppDispatch();
+  const properties = useAppSelector(selectPropertiesCardsData);
+  const { loading, error } = useAppSelector((state) => state.properties);
 
   useEffect(() => {
     if (properties.length === 0) {
-      dispatch(listenToProperties())
+      dispatch(listenToProperties());
     }
-  }, [dispatch, properties.length])
+  }, [dispatch, properties.length]);
 
-  const skeletonCount = properties.length > 0 ? properties.length : 3
+  const skeletonCount = properties.length > 0 ? properties.length : 3;
 
-    return (
-      <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
-        <div >
-          <Title
-            heading={heading}
-            paragraph={paragraph}
-            buttonLabel={buttonLabel}
-            paragraphStyle="2xl:max-w-[1200px] lg-custom:max-w-[975px] w-full"
-            anamation="fade-up"
-
-          />
-          {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[80px]">
-              {[...Array(skeletonCount)].map((_, index) => (
-                <div
-                  key={index}
-                  className="p-6 lg-custom:p-[30px] 2xl:p-[40px] border dark:border-gray15 border-white90 rounded-xl animate-pulse bg-gray-200 dark:bg-gray-700"
-                >
-                  <div className="w-full h-[210px] lg-custom:h-[255px] 2xl:h-[318px] rounded-[10px] mb-4 lg-custom:mb-5 2xl:mb-[30px] bg-gray-300 dark:bg-gray-600" />
+  return (
+    <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
+      <div>
+        <Title
+          heading={heading}
+          paragraph={paragraph}
+          buttonLabel={buttonLabel}
+          paragraphStyle="2xl:max-w-[1200px] lg-custom:max-w-[975px] w-full"
+          anamation="fade-up"
+          navigateTo="allProperties"
+          onClick={() => scrollToTop()}
+        />
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[80px]">
+            {[...Array(skeletonCount)].map((_, index) => (
+              <div
+                key={index}
+                className="p-6 lg-custom:p-[30px] 2xl:p-[40px] border dark:border-gray15 border-white90 rounded-xl animate-pulse bg-gray-200 dark:bg-gray-700"
+              >
+                <div className="w-full h-[210px] lg-custom:h-[255px] 2xl:h-[318px] rounded-[10px] mb-4 lg-custom:mb-5 2xl:mb-[30px] bg-gray-300 dark:bg-gray-600" />
 
                 <div className="w-32 h-7 2xl:h-9 rounded-[28px] bg-gray-300 dark:bg-gray-600 mb-5" />
 
@@ -88,7 +90,7 @@ function PropertiesSection({
             items={properties}
             navigateTo="allProperties"
             renderSlide={(property, index) => (
-              <div key={index} >
+              <div key={index}>
                 <PropertiesCard
                   key={index}
                   property={property}
@@ -104,7 +106,7 @@ function PropertiesSection({
         )}
       </div>
     </SectionWrapper>
-  )
+  );
 }
 
-export default PropertiesSection
+export default PropertiesSection;

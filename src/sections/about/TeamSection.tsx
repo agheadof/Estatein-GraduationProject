@@ -1,9 +1,9 @@
-import { useEffect } from "react"
-import TeamCardComponent from "../../components/cards/TeamCardComponent"
-import { SectionWrapper } from "../../layouts/SectionWrapper"
-import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import { fetchTeams } from "../../redux/slices/teamSlice"
-import Title from "../../components/shared/Title"
+import { useEffect } from "react";
+import TeamCardComponent from "../../components/cards/TeamCardComponent";
+import { SectionWrapper } from "../../layouts/SectionWrapper";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchTeams } from "../../redux/slices/teamSlice";
+import Title from "../../components/shared/Title";
 import type { Team } from "../../redux/types/team"
 import { teamItemAos } from "../../utlis/Anamation";
 
@@ -47,7 +47,7 @@ const TeamSection = () => {
             {[...Array(skeletonCount)].map((_, i) => (
               <div
                 key={i}
-                className="flex flex-col w-full gap-10 lg-custom:gap-[50px] p-5 lg-custom:p-6 2xl:p-[30px] border border-gray15 rounded-xl bg-gray-200 dark:bg-gray-700 animate-pulse"
+                className="flex flex-col w-full gap-10 lg-custom:gap-[50px] p-5 lg-custom:p-6 2xl:p-[30px] rounded-xl bg-gray-200 dark:bg-gray-700 animate-pulse"
               >
                 <div className="relative">
                   <div className="rounded-[10px] 2xl:rounded-xl w-full h-[268px] lg-custom:h-[220px] 2xl:h-[253px] bg-gray-300 dark:bg-gray-600" />

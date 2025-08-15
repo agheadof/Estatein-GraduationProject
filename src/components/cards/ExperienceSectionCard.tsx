@@ -1,9 +1,14 @@
 export type ExperienceSectionCardProps = {
-  step: string;
+  step: number;
   title: string;
   description: string;
-}
-const ExperienceSectionCard = ({ step, title, description }: ExperienceSectionCardProps) => {
+};
+
+const ExperienceSectionCard = ({
+  step,
+  title,
+  description,
+}: ExperienceSectionCardProps) => {
   return (
     <div className="flex flex-col gap-0 items-start font-urbanist">
       <p className="text-black dark:text-white font-medium leading-[150%] text-base lg-custom:text-xl border-l border-l-[#703BF7] px-5 py-4">
@@ -33,5 +38,5 @@ const ExperienceSectionCard = ({ step, title, description }: ExperienceSectionCa
       </div>
     </div>
   );
-}
-export default ExperienceSectionCard
+};
+export default ExperienceSectionCard;

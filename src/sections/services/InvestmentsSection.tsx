@@ -3,7 +3,12 @@ import UnlockCardComponent from "../../components/cards/UnlockCardComponent";
 import Title from "../../components/shared/Title";
 import { investmentsData } from "../../data/investmentsData";
 import { SectionWrapper } from "../../layouts/SectionWrapper";
-import { invCardAos, invLeftColAos, invSectionAos, invUnlockAos } from "../../utlis/Anamation";
+import {
+  invCardAos,
+  invLeftColAos,
+  invSectionAos,
+  invUnlockAos,
+} from "../../utlis/Anamation";
 
 const InvestmentsSection = () => {
   return (
@@ -12,16 +17,16 @@ const InvestmentsSection = () => {
         id="investments"
         className="flex flex-col items-center xl:flex-row gap-10 md:gap-[50px] 2xl:gap-[60px] "
         {...invSectionAos()}
-
       >
-        <div {...invLeftColAos()}
-          className="grid min-lg-custom:grid-cols-2 xl:grid-cols-1 gap-[30px] lg-custom::gap-10 2xl:gap-[50px]">
+        <div
+          {...invLeftColAos()}
+          className="grid min-lg-custom:grid-cols-2 xl:grid-cols-1 gap-[30px] lg-custom::gap-10 2xl:gap-[50px]"
+        >
           <Title
             heading="Smart Investments, Informed Decisions"
             paragraph="Building a real estate portfolio requires a strategic approach. Estatein's Investment Advisory Service empowers you to make smart investments and informed decisions."
           />
           <div {...invUnlockAos()}>
-
             <UnlockCardComponent
               investments={true}
               cardStyle='p-6 md:p-10 2xl:p-[50px] bg-[url("/assets/images/AbstractDesign3.png")] bg-no-repeat w-full'
@@ -40,11 +45,10 @@ const InvestmentsSection = () => {
                 key={index}
                 cardStyle="p-6 md:p-10 2xl:p-[50px] gap-4 md:gap-5 2xl:gap-[30px] bg-white99 dark:bg-gray08 border-white90 dark:border-gray15 h-full"
                 cardImg={card.cardImg}
-                cardTitle={card.cardTitle}
+                cardTitle_1={card.cardTitle_1}
                 cardDesc={card.cardDesc}
               />
             </div>
-
           ))}
         </div>
       </section>

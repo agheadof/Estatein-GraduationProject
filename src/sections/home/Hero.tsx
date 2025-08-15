@@ -8,11 +8,12 @@ const Hero = () => {
   const isBannerVisible = useAppSelector((state) => state.banner.isVisible);
 
   return (
-
     // === Main Hero Section Container ===
-    <div className={`relative ${isBannerVisible
-      ? "lg-custom:h-[calc(100vh-142px)] lg-custom:mt-[79px] 2xl:mt-[94px] 2xl:h-[calc(100vh-157px)] "
-      : "lg-custom:h-[calc(100vh-79px)] lg-custom:mt-[79px] 2xl:h-[calc(100vh-94px)] ]"
+    <div
+      className={`relative ${
+        isBannerVisible
+          ? "lg-custom:h-[calc(100vh-142px)] lg-custom:mt-[79px] 2xl:mt-[94px] 2xl:h-[calc(100vh-157px)] "
+          : "lg-custom:h-[calc(100vh-79px)] lg-custom:mt-[79px] 2xl:h-[calc(100vh-94px)] ]"
       }  flex flex-col-reverse lg-custom:flex-row lg-custom:items-stretch lg-custom:gap-[60px] 2xl:gap-[80px] text-black dark:text-white`}
     >
       {/* === Left Side: Text, Buttons, and CountUp === */}
@@ -47,7 +48,6 @@ const Hero = () => {
       {/* === Right Side: Hero Image, Background, and RotatingText === */}
 
       <div className="relative  mt-25 lg-custom:mt-0 lg-custom:h-full mx-4 lg-custom:mx-0 lg-custom:px-0 lg-custom:w-[48%]  flex items-end border border-white90 dark:border-gray15 lg-custom:border-none rounded-xl lg-custom:rounded-none bg-white97 dark:bg-gray10 bg-[linear-gradient(to_bottom_left,_#2A213F,_#19191900,_#19191900)]">
-
         {/* === Background Abstract Design Image === */}
         <img
           src="/assets/images/AbstractDesign5.png"
@@ -73,7 +73,6 @@ const Hero = () => {
         className="hidden lg-custom:block  absolute bottom-0 lg-custom:h-[calc(100vh-142px)] w-1/2 right-0"
       />
     </div>
-
   );
 };
 
