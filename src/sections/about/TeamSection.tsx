@@ -17,15 +17,6 @@ const TeamSection = () => {
     }
   }, [dispatch, visibleItems.length])
 
-    useEffect(() => {
-    if (visibleItems && visibleItems.length > 0) {
-      console.log("Team visibleItems:", visibleItems);
-    } else {
-      console.log("Team visibleItems: [] (no items yet)");
-    }
-  }, [visibleItems]);
-
-  
   const skeletonCount = visibleItems.length > 0 ? visibleItems.length : 4
 
   return (
@@ -71,11 +62,14 @@ const TeamSection = () => {
         ) : (
           <div
             className="grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-4 2xl:gap-[30px] gap-[20px]"
+
+
           >
-            {visibleItems.map((team: Team, index:number) => (
+            {visibleItems.map((team: Team, index: number) => (
               <div key={team.id}
                 {...teamItemAos(index)} >
                 <TeamCardComponent
+                  id={team.id}
                   key={team.id}
                   name={team.name}
                   role={team.role}
@@ -83,7 +77,7 @@ const TeamSection = () => {
                   twitterLink={team.twitterLink}
                 />
               </div>
-           
+
             ))}
           </div>
         )}
