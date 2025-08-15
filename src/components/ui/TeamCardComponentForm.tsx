@@ -6,7 +6,7 @@ import {
   resetOutboundMailById,
 } from "../../redux/slices/createEmailSlice";
 import AlertMessage from "../ui/AlertMessage";
-import { composeTeamCardEmail } from "../../lib/teamAndNewsletter";
+import { composeTeamCardEmail } from "../../utlis/teamAndNewsletter";
 
 type Props = {
   cardId: string;

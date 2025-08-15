@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
-import type { testimonials } from "../types/Testimonial"
+import type { Client } from "../types/client"
 
 type TestimonialsState = {
-  items: testimonials[]
+  items: Client[]
   loading: boolean
   error: string | null
 }

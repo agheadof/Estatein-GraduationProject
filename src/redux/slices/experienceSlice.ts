@@ -3,7 +3,7 @@ import { db } from "../../firebaseConfig";
 import { ref, onValue } from "firebase/database";
 
 export type ExperienceItem = {
-    step: number;
+    step: string;
     title: string;
     description: string;
 };
@@ -54,7 +54,7 @@ export const subscribeExperience = () => (dispatch: any) => {
                 const dataObj = snapshot.val();
                 const dataArray: ExperienceItem[] = Object.values(dataObj).map(
                     (value: any) => ({
-                        step: value.step || 0,
+                        step: value.stepNum || 0,
                         title: value.title || "",
                         description: value.description || "",
                     })

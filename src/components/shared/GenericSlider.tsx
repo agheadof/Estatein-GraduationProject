@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react"
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
-import TitleBtn from "../../ui/TitleBtn"
-import { NextArrowIcon, PrevArrowIcon } from "../../icons/SliderArrows"
+import TitleBtn from "../ui/TitleBtn"
+import { NextArrowIcon, PrevArrowIcon } from "../icons/SliderArrows"
 
 type Props<T> = {
   items: T[];

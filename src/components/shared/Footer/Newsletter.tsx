@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { MessageIcon, SendIcon } from "../../icons/FooterIcons";
 import AlertMessage from "../../ui/AlertMessage";
-import {
-  sendOutboundMail,
-  resetOutboundMailById,
-} from "../../../redux/slices/createEmailSlice";
+import { sendOutboundMail, resetOutboundMailById,} from "../../../redux/slices/createEmailSlice";
 import type { RootState } from "../../../redux/store";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { composeNewsletterEmail } from "../../../lib/teamAndNewsletter";
+import { composeNewsletterEmail } from "../../../utlis/teamAndNewsletter";
 
 export function FooterNewsletter() {
   const dispatch = useAppDispatch();
