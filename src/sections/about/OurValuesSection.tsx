@@ -67,7 +67,7 @@ const OurValuesSection = () => {
                       index % 2 === 0 ? "lg:pr-[30px]" : ""
                     } relative not-last:border-b border-white90 dark:border-gray15 not-last:pb-5 lg:not-last:p-0 lg:not-last:border-0 `}
                     cardImg={ourValues[index].icon}
-                    cardTitle_1={values.title}
+                    cardTitle={values.title}
                     cardDesc={values.description}
                   >
                     {index !== 0 && index !== 1 ? (
