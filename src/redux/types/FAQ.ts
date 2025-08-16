@@ -1,4 +1,4 @@
 export type Faqs = {
   question: string;
-  description: string;
+  answer: string;
 };
