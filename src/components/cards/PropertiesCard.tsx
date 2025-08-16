@@ -105,7 +105,9 @@ function PropertiesCard({
           <button
             onClick={() => setIsExpanded((prev) => !prev)}
             className={`dark:text-purple97 text-black font-medium ${
-              isExpanded ? "block m-1.5" : ""
+              isExpanded
+                ? "block m-1.5 font-bold border border-transparent border-b-purple60 hover:border-purple60 hover:p-1.5 rounded-lg p-0.5 transition-all duration-200 ease-in-out"
+                : ""
             }`}
           >
             {isExpanded ? "Show Less" : "Read More"}
@@ -120,26 +122,28 @@ function PropertiesCard({
           </div>
         ) : null}
 
-        <div className="flex items-center justify-between gap-2.5">
-          <div className="flex flex-col">
-            <span className="text-sm 2xl:text-lg text-gray40 dark:text-gray60 font-medium">
-              Price
-            </span>
-            <h2 className="text-lg lg-custom:text-xl 2xl:text-2xl dark:text-white text-black font-semibold">
-              {property.Price ?? "N/A"}
-            </h2>
-          </div>
+        {!isExpanded && (
+          <div className="flex items-center justify-between gap-2.5">
+            <div className="flex flex-col">
+              <span className="text-sm 2xl:text-lg text-gray40 dark:text-gray60 font-medium">
+                Price
+              </span>
+              <h2 className="text-lg lg-custom:text-xl 2xl:text-2xl dark:text-white text-black font-semibold">
+                {property.Price ?? "N/A"}
+              </h2>
+            </div>
 
-          {property.id && (
-            <MainButton
-              variant="normalPurple"
-              onClick={handleViewDetails}
-              className="whitespace-nowrap lg-custom:!text-[10px] xl:!text-xs 2xl:!text-[13px] 2xl:!py-[18px] 2xl:!px-6"
-            >
-              View Property Details
-            </MainButton>
-          )}
-        </div>
+            {property.id && (
+              <MainButton
+                variant="normalPurple"
+                onClick={handleViewDetails}
+                className="whitespace-nowrap lg-custom:!text-[10px] xl:!text-xs 2xl:!text-[13px] 2xl:!py-[18px] 2xl:!px-6"
+              >
+                View Property Details
+              </MainButton>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )
