@@ -9,7 +9,6 @@ import { LocationIcon } from "../../components/icons/FormIcons"
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
 import { fetchPropertyById } from "../../redux/thunks/propertyByIdThunk"
-import { setCurrentProperty } from "../../redux/slices/propertiesSlice"
 
 interface PropertyGalleryProps {
   id: string
@@ -28,10 +27,12 @@ const PropertyGallery = ({ id }: PropertyGalleryProps) => {
     shallowEqual
   )
 
-  useEffect(() => {
-    dispatch(setCurrentProperty(id))
-    if (!current && id) dispatch(fetchPropertyById(id))
-  }, [id, dispatch])
+useEffect(() => {
+  if (id) {
+    console.log("Fetching property with id:", id);
+    dispatch(fetchPropertyById(id));
+  }
+}, [id, dispatch]);
 
   useEffect(() => {
     if (error === "not-found") navigate("/properties")
@@ -39,28 +40,28 @@ const PropertyGallery = ({ id }: PropertyGalleryProps) => {
 
   const galleryDesktop = useMemo(
     () =>
-      current?.gallery && (
+      current?.images && (
         <Gallery
           perView={2}
           thumbNumber={9}
-          images={current.gallery}
+          images={current.images}
           className="hidden lg-custom:flex"
         />
       ),
-    [current?.gallery]
+    [current?.images]
   )
 
   const galleryMobile = useMemo(
     () =>
-      current?.gallery && (
+      current?.images && (
         <Gallery
           perView={1}
           thumbNumber={4}
-          images={current.gallery}
+          images={current.images}
           className="lg-custom:hidden"
         />
       ),
-    [current?.gallery]
+    [current?.images]
   )
 
   // main SkeletonBox style
