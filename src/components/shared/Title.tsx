@@ -1,7 +1,7 @@
 import TitleBtn from "../ui/TitleBtn";
 import { useOneTimeAOS } from "../../hooks/useOneTimeAOS";
 
-type TitleProps = {
+export type TitleProps = {
   starImg?: boolean;
   titleStyle?: string;
   heading: string;

@@ -17,14 +17,11 @@ const SiteFeaturesSection = ({ data }: SiteFeaturesSectionProps) => {
           <CommonCard
             key={index}
             HeadingTag={card.HeadingTag}
-            titleLink_1={card.titleLink_1}
-            titleLink_2={card.titleLink_2}
-            titleLink_3={card.titleLink_3}
+            titleLink={card.titleLink}
+            links={card.links}
             isArrow={true}
             cardImg={card.cardImg}
-            cardTitle_1={card.cardTitle_1}
-            cardTitle_2={card.cardTitle_2}
-            cardTitle_3={card.cardTitle_3}
+            cardTitle={card.cardTitle}
             cardStyle="py-5 px-3.5 md:py-[30px] md:px-4 2xl:py-10 2xl:px-5 bg-white97 dark:bg-gray10 border border-white90 dark:border-gray15 h-full"
             titleStyle="flex-col items-center"
             titleSize="text-sm md:text-base 2xl:text-[20px] text-center"

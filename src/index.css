@@ -125,23 +125,7 @@ select, .close_icon {
     scrollbar-color: var(--color-purple65) var(--color-gray10);
   }
 
-  /* Dark mode scrollbar track & thumb override
-  .dark ::-webkit-scrollbar-track {
-    background: var(--color-gray08);
-  }
 
-  .dark ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg,
-        var(--color-purple65),
-        var(--color-purple75));
-    border: 2px solid var(--color-gray08);
-  }
-
-  .dark ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg,
-        var(--color-purple70),
-        var(--color-purple90));
-  }*/
 }
 
 /* gradient border around icon */

@@ -9,7 +9,7 @@ function AchievementsCard({ title, description }: CardProps) {
             p-[30px] md:p-[10%]
             border-white90 dark:border-gray15 border
             shadow-[0px_0px_0px_10px_rgba(0,0,0,0.02)] dark:shadow-[0px_0px_0px_10px_#191919]
-            rounded-xl cursor-pointer
+            rounded-[10px] 2xl:rounded-xl cursor-pointer
             transition-all duration-300 ease-in-out
             hover:-translate-y-1
             hover:shadow-[0px_10px_20px_rgba(112,59,247,0.3)] dark:hover:shadow-[0px_10px_20px_rgba(148,108,249,0.2)]

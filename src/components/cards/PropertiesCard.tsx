@@ -1,16 +1,20 @@
-import React, { type ReactNode, useCallback, useMemo } from "react";
-import MainButton from "../ui/MainButton";
-import { useNavigate } from "react-router-dom";
-import { Icon1 as BedIcon, Icon2 as BathIcon, Icon3 as VillaIcon } from "../../components/icons/PropertiesIcons";
-import { scrollToTop } from "../../utlis/scrollToTop";
-import type { PropertyType, PropertyDetailType } from "../../types/Property";
+import React, { useCallback, useMemo, useState } from "react"
+import MainButton from "../ui/MainButton"
+import { useNavigate } from "react-router-dom"
+import {
+  Icon1 as BedIcon,
+  Icon2 as BathIcon,
+  Icon3 as VillaIcon,
+} from "../../components/icons/PropertiesIcons"
+import { scrollToTop } from "../../utlis/scrollToTop"
+import type { PropertyType, PropertyDetailType } from "../../types/Property"
 
 const PropertyDetail = React.memo(({ item }: { item: PropertyDetailType }) => {
-  const iconMap: Record<"bed" | "bath" | "villa", ReactNode> = {
+  const iconMap: Record<"bed" | "bath" | "villa", React.ReactNode> = {
     bed: <BedIcon />,
     bath: <BathIcon />,
     villa: <VillaIcon />,
-  };
+  }
 
   return (
     <div className="flex-shrink flex justify-center items-center py-1.5 2xl:py-2 px-3.5  bg-purple97 dark:bg-gray10 border dark:border-gray15 border-white90 rounded-full gap-1 max-w-full">
@@ -21,24 +25,29 @@ const PropertyDetail = React.memo(({ item }: { item: PropertyDetailType }) => {
         {item.label ?? "-"}
       </span>
     </div>
-  );
-});
+  )
+})
 
 type PropertiesCardProps = {
-  property: PropertyType;
-  showDetails?: boolean;
-  showTags?: boolean;
-};
+  property: PropertyType
+  showDetails?: boolean
+  showTags?: boolean
+}
 
-function PropertiesCard({ property, showDetails = true, showTags = false }: PropertiesCardProps) {
-  const navigate = useNavigate();
+function PropertiesCard({
+  property,
+  showDetails = true,
+  showTags = false,
+}: PropertiesCardProps) {
+  const navigate = useNavigate()
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const handleViewDetails = useCallback(() => {
     if (property.id) {
-      navigate(`/properties/${property.id}`);
-      scrollToTop();
+      navigate(`/properties/${property.id}`)
+      scrollToTop()
     }
-  }, [navigate, property.id]);
+  }, [navigate, property.id])
 
   const shortDesc = useMemo(() => {
     if (!property.desc) return "";
@@ -60,13 +69,13 @@ function PropertiesCard({ property, showDetails = true, showTags = false }: Prop
   }, [property.image, property.title]);
 
   const renderTags = useMemo(() => {
-    if (!showTags || !property.tags) return null;
+    if (!showTags || !property.tags) return null
     return (
       <span className="text-nowrap text-[clamp(12px,1.2vw,18px)] font-medium text-black dark:text-white py-1.5 2xl:py-2 px-3 2xl:px-3.5 bg-white97 dark:bg-gray10 dark:border-gray15 border-white90 rounded-[28px]">
         {property.tags}
       </span>
-    );
-  }, [showTags, property.tags]);
+    )
+  }, [showTags, property.tags])
 
   return (
     <div className=" flex flex-col justify-between  w-full gap-4 lg-custom:gap-5 2xl:gap-[30px] h-full 2xl:!min-h-[692px] 2xl:!max-h-[692px] lg-custom:!min-h-[549px] lg-custom:!max-h-[549px] lg-custom:p-[30px] 2xl:p-[40px] p-6  border dark:border-gray15 border-white90 rounded-xl">
@@ -113,4 +122,4 @@ function PropertiesCard({ property, showDetails = true, showTags = false }: Prop
   );
 }
 
-export default React.memo(PropertiesCard);
+export default React.memo(PropertiesCard)
