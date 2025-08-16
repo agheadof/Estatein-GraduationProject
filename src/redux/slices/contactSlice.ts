@@ -60,22 +60,22 @@ export const transformContactData = (contactData: any): CommonCardProps[] => {
 
     return [
         {
-            cardTitle_1: email,
+            cardTitle: email,
             cardImg: "/assets/icons/CardUnderHero/email.svg",
             HeadingTag: Link,
-            titleLink_1: "/",
+            titleLink: "/",
         },
         {
-            cardTitle_1: phone,
+            cardTitle: phone,
             cardImg: "/assets/icons/CardUnderHero/phone.svg",
             HeadingTag: Link,
-            titleLink_1: "/",
+            titleLink: "/",
         },
         {
-            cardTitle_1: branch,
+            cardTitle: branch,
             cardImg: "/assets/icons/CardUnderHero/location.svg",
             HeadingTag: Link,
-            titleLink_1: "/",
+            titleLink: "/",
         },
     ];
 };
@@ -89,19 +89,28 @@ const transformSocialData = (socialData: any): CommonCardProps[] => {
     const instagramUrl = socialData[2].url;
 
     return [
+
         {
-            cardTitle_1: instagram || "No instagram",
-            cardTitle_2: linkedin || "No linkedin",
-            cardTitle_3: facebook || "No facebook",
             cardImg: "assets/icons/CardUnderHero/estatein.svg",
             HeadingTag: Link,
-            titleLink_1: instagramUrl,
-            titleLink_2: linkedinUrl,
-            titleLink_3: facebookUrl,
-        }
+            links: [
+                {
+                    title: instagram || "No instagram",
+                    link: instagramUrl
+                },
+                {
+                    title: linkedin || "No linkedin",
+                    link: linkedinUrl,
+                },
+                {
+                    title: facebook || "No facebook",
+                    link: facebookUrl,
+
+                },
+            ],
+        },
     ];
 };
-
 
 // Slice
 const contactLinksSlice = createSlice({
