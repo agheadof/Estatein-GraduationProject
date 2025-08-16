@@ -20,7 +20,7 @@ function FormSelect({
 
   const handleSelect = (opt: string) => {
     setSelected(opt);
-    onChange({ target: { name, value: opt } } as any);
+    onChange(opt); 
     setIsOpen(false);
   };
 
@@ -61,11 +61,9 @@ function FormSelect({
             {selected || placeholder || "Select"}
           </span>
 
-          <div onClick={() => setIsOpen((prev) => !prev)} >
+          <div onClick={() => setIsOpen((prev) => !prev)}>
             <DropdownIcon
-              className={`absolute right-5 top-1/2 transform -translate-y-1/2 text-black dark:text-white transition-transform duration-200 cursor-pointer ${isOpen ? "rotate-180" : ""
-                } ${classIcon}`}
-                onClick={() => setIsOpen((prev) => !prev)}
+              className={`absolute right-5 top-1/2 transform -translate-y-1/2 text-black dark:text-white transition-transform duration-200 cursor-pointer ${isOpen ? "rotate-180" : ""} ${classIcon}`}
             />
           </div>
         </div>
@@ -75,8 +73,7 @@ function FormSelect({
             {options.map((opt) => (
               <li
                 key={opt}
-                className={`px-5 py-3 hover:bg-purple75 dark:hover:bg-purple90 cursor-pointer text-black dark:text-gray40 text-sm font-medium ${selected === opt ? "bg-purple90 dark:bg-purple90" : ""
-                  }`}
+                className={`px-5 py-3 hover:bg-purple75 dark:hover:bg-purple90 cursor-pointer text-black dark:text-gray40 text-sm font-medium ${selected === opt ? "bg-purple90 dark:bg-purple90" : ""}`}
                 onClick={() => handleSelect(opt)}
               >
                 {opt}

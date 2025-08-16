@@ -59,7 +59,8 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
 
   return (
     <div
-      className={`bg-white97 dark:bg-gray10 border border-white90 dark:border-gray15 rounded-xl p-5 md:p-10 2xl:p-12 flex flex-col items-center gap-5 2xl:gap-8 w-full mx-auto ${className}`}
+      data-aos="fade-up"
+      className={`bg-white97 dark:bg-gray10 border border-white90 dark:border-gray15 rounded-xl p-5 md:p-10 2xl:p-[50px] flex flex-col items-center gap-5 2xl:gap-8 w-full mx-auto ${className}`}
     >
       <div
         ref={thumbsRef}
@@ -94,11 +95,11 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
         ))}
       </div>
 
-      <div className="p-2.5 rounded-[100px] bg-white99 dark:bg-gray08 flex gap-2.5 items-center order-3">
+      <div className="max-lg-custom:justify-between max-lg-custom:w-full p-2.5 rounded-[100px] bg-white99 dark:bg-gray08 flex gap-2.5 items-center order-3">
         <button
           onClick={goPrev}
           disabled={currentSlide === 0}
-          className={`p-2.5 md:p-3.5 border rounded-full size-11 md:size-14 flex items-center justify-center  ${
+          className={`p-2 lg-custom:p-2.5 2xl:p-3.5 border border-gray15 rounded-full size-11 md:size-[58px] flex items-center justify-center  ${
             currentSlide === 0
               ? "text-gray50 bg-transparent "
               : "bg-white97 dark:bg-gray10 cursor-pointer"
@@ -112,7 +113,7 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
             <div
               onClick={() => instanceRef.current?.moveToIdx(idx)}
               key={idx}
-              className={`w-2.5 h-0.5 md:w-5 md:h-1.5 rounded-[60px] transition-all duration-300 ${
+              className={`h-[3px] w-[11px] 2xl:w-5  2xl:h-[5px] rounded-[60px] transition-all duration-300 ${
                 currentSlide === idx
                   ? " bg-purple90 dark:bg-purple60"
                   : "bg-gray30 cursor-pointer"
@@ -124,7 +125,7 @@ const Gallery = ({ images, perView, className, thumbNumber }: GalleryProps) => {
         <button
           onClick={goNext}
           disabled={currentSlide >= images.length - 1}
-          className={`p-2.5 md:p-3.5 border rounded-full size-11 md:size-14 flex items-center justify-center cursor-pointer ${
+          className={`p-2 lg-custom:p-2.5 2xl:p-3.5 border border-gray15 rounded-full size-11 md:size-[58px] flex items-center justify-center cursor-pointer ${
             currentSlide >= images.length - 1
               ? "text-gray50 bg-transparent "
               : "bg-white97 dark:bg-gray10 cursor-pointer"

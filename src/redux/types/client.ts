@@ -1,8 +1,13 @@
-export interface Client {
-  id: string
-  category: string
-  domain: string
+export type Client = {
   name: string
+  subject: string
   review: string
-  since: string
+  clientImage: string
+  location: string
+  show: boolean
+  rate: number
+}
+
+export type TestimonialCardProps = {
+  client: Client
 }

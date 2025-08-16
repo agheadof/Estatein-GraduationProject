@@ -1,5 +1,6 @@
 import { createSlice, type Draft, type SliceCaseReducers } from "@reduxjs/toolkit";
-import { createFetchThunk } from "../thunks/createFetchThunk";
+import { genericListener } from "../../utlis/firebaseListeners/genericListener";
+import type { AppDispatch } from "../store";
 
 export interface GenericState<T> {
   items: T[];
@@ -27,12 +28,10 @@ export const createGenericSlice = <T, R, State = {}>({
   reducers: customReducers,
   extraInitialState = {},
 }: CreateGenericSliceOptions<T, R, State>) => {
-  const fetchEntities = createFetchThunk(name, path, transform);
-
   const initialState: GenericState<R> & State = {
     items: [],
     visibleItems: [],
-    loading: false,
+    loading: true,
     error: null,
     itemsPerPage,
     currentPage: 1,
@@ -43,6 +42,13 @@ export const createGenericSlice = <T, R, State = {}>({
     name,
     initialState,
     reducers: {
+      setItems: (state, action: { payload: R[] }) => {
+        state.loading = false;
+        state.items = action.payload as Draft<R>[];
+        const startIndex = (state.currentPage - 1) * state.itemsPerPage;
+        const endIndex = startIndex + state.itemsPerPage;
+        state.visibleItems = state.items.slice(startIndex, endIndex);
+      },
       paginate: (state, action: { payload: number }) => {
         const page = action.payload;
         const startIndex = (page - 1) * state.itemsPerPage;
@@ -52,25 +58,13 @@ export const createGenericSlice = <T, R, State = {}>({
       },
       ...customReducers,
     },
-    extraReducers: (builder) => {
-      builder
-        .addCase(fetchEntities.pending, (state) => {
-          state.loading = true;
-          state.error = null;
-        })
-        .addCase(fetchEntities.fulfilled, (state, action) => {
-          state.loading = false;
-          state.items = action.payload as unknown as Draft<R>[];
-          const startIndex = (state.currentPage - 1) * state.itemsPerPage;
-          const endIndex = startIndex + state.itemsPerPage;
-          state.visibleItems = state.items.slice(startIndex, endIndex);
-        })
-        .addCase(fetchEntities.rejected, (state, action) => {
-          state.loading = false;
-          state.error = action.error.message || "Failed to load data";
-        });
-    },
   });
 
-  return { slice, fetchEntities, actions: slice.actions };
+  const startListening = (dispatch: AppDispatch) => {
+    return genericListener<T, R>(path, transform, (items) => {
+      dispatch(slice.actions.setItems(items));
+    });
+  };
+
+  return { slice, actions: slice.actions, startListening };
 };

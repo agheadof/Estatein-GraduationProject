@@ -1,243 +1,224 @@
-import { easeIn, easeOut } from "framer-motion";
 
-import { motion } from "framer-motion";
+// ===== Type =====
+export type DataAttrs = Record<string, string>;
 
-export const FadeSlideUpText = ({
-  children,
-  className = "",
-  delay = 0.1,
-  duration = 0.6,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
+// ===== Core (Builder + Shortcuts) =====
+type AosOptions = {
   duration?: number;
-}) => {
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 1, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
-      transition={{ duration, delay, ease: "easeOut" }}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-export const FadeInMotion = ({
-  children,
-  delay = 0.1,
-  duration = 0.6,
-  y = 40,
-  className = "",
-}: {
-  children: React.ReactNode;
   delay?: number;
-  duration?: number;
-  y?: number;
-  className?: string;
-}) => {
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 1, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration, delay, ease: "easeOut" }}
-    >
-      {children}
-    </motion.div>
-  );
+  once?: boolean;
+  anchor?: string;
+  anchorPlacement?: string;
+  offset?: number;
+  easing?: string;
+  mirror?: boolean;
 };
 
-export const ZoomInFade = ({
-  children,
-  delay = 0.1,
-  duration = 0.6,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  duration?: number;
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 1, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ delay, duration, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.4 }}
-    >
-      {children}
-    </motion.div>
-  );
+const S = (v?: string | number | boolean) =>
+  v === undefined ? undefined : String(v);
+
+const buildAos = (name: string, o: AosOptions = {}): DataAttrs => {
+  const attrs: Record<string, string | undefined> = {
+    "data-aos": name,
+    "data-aos-duration": S(o.duration),
+    "data-aos-delay": S(o.delay),
+    "data-aos-once": S(o.once),
+    "data-aos-anchor": o.anchor,
+    "data-aos-anchor-placement": o.anchorPlacement,
+    "data-aos-offset": S(o.offset),
+    "data-aos-easing": o.easing,
+    "data-aos-mirror": S(o.mirror),
+  };
+  Object.keys(attrs).forEach((k) => attrs[k] === undefined && delete attrs[k]);
+  return attrs as DataAttrs;
 };
 
-export const RotateFadeIn = ({
-  children,
-  delay = 0.1,
-  duration = 0.7,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  duration?: number;
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 1, rotate: -10 }}
-      whileInView={{ opacity: 1, rotate: 0 }}
-      transition={{ delay, duration, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
-      {children}
-    </motion.div>
-  );
+const aos = {
+  fade: (o?: AosOptions) => buildAos("fade", o),
+  fadeUp: (o?: AosOptions) => buildAos("fade-up", o),
+  fadeLeft: (o?: AosOptions) => buildAos("fade-left", o),
+  fadeRight: (o?: AosOptions) => buildAos("fade-right", o),
+  zoomIn: (o?: AosOptions) => buildAos("zoom-in", o),
+  zoomOut: (o?: AosOptions) => buildAos("zoom-out", o),
+  zoomInUp: (o?: AosOptions) => buildAos("zoom-in-up", o),
+  flipUp: (o?: AosOptions) => buildAos("flip-up", o),
+  flipLeft: (o?: AosOptions) => buildAos("flip-left", o),
 };
 
-export const SlideRightFade = ({
-  children,
-  delay = 0.2,
-  duration = 0.7,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  duration?: number;
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 1, x: 100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ delay, duration, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.4 }}
-    >
-      {children}
-    </motion.div>
-  );
+// ===== Patterns (Stagger Helpers) =====
+// const centerOutOrder = (n: number) =>
+//   n === 5 ? [2, 1, 3, 0, 4] :
+//   n === 4 ? [1, 2, 0, 3] :
+//   n === 3 ? [1, 0, 2]   :
+//   Array.from({ length: n }, (_, i) => i);
+
+// const centerOutDelay = (i: number, total: number, start = 140, step = 110) => {
+//   const ord = centerOutOrder(total)[i] ?? i;
+//   return start + ord * step;
+// };
+
+const twoColsWaveDelay = (i: number, rowStep = 160, rightBonus = 90) => {
+  const col = i % 2;               
+  const row = Math.floor(i / 2);
+  return row * rowStep + (col ? rightBonus : 0);
 };
 
-export const ScaleIn = ({
-  children,
-  delay = 0.3,
-  duration = 0.8,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  duration?: number;
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 1, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ delay, duration, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.4 }}
-    >
-      {children}
-    </motion.div>
-  );
+const threeColsGridDelay = (i: number) => {
+  const row = Math.floor(i / 3);
+  const col = i % 3;
+  const rowBase = row * 180;
+  const colDelay = col === 1 ? 0 : 140;
+  return rowBase + colDelay;
 };
 
-export const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
-    },
-  },
+// ============================================================================
+// NAVBAR
+// ============================================================================
+
+export const navRootAos = (): DataAttrs =>
+  // nav container
+  buildAos("fade-down", { duration: 600, easing: "ease-out-cubic", once: true });
+
+export const navDesktopItemAos = (index: number): DataAttrs =>
+  aos.fadeUp({ duration: 500, delay: index * 80, once: true });
+
+export const navDesktopContactAos = (): DataAttrs =>
+  aos.zoomIn({ duration: 500, delay: 120, once: true });
+
+export const navMobileContainerAos = (): DataAttrs =>
+  buildAos("fade-down", { duration: 400, easing: "ease-out-cubic", once: true });
+
+export const navMobileItemAos = (index: number): DataAttrs =>
+  aos.fadeUp({ duration: 450, delay: index * 70, once: true });
+
+export const navMobileContactAos = (count: number): DataAttrs =>
+  aos.zoomIn({ duration: 450, delay: count * 70, once: true });
+
+// ============================================================================
+// HERO
+// ============================================================================
+export const heroRootAos = (): DataAttrs =>
+  aos.fade({ duration: 400, easing: "ease-out-cubic", once: false });
+
+export const heroLeftColAos = (): DataAttrs =>
+  aos.fadeRight({ duration: 800, offset: 0, anchor: "#hero-root", anchorPlacement: "top-bottom" });
+
+export const heroH1Aos = (): DataAttrs =>
+  aos.fadeUp({ duration: 700, delay: 0, anchor: "#hero-root", once: false });
+
+export const heroDescAos = (): DataAttrs =>
+  aos.fadeUp({ duration: 700, delay: 120, anchor: "#hero-root", once: false });
+
+export const heroBtnAboutAos = (): DataAttrs =>
+  aos.zoomIn({ duration: 600, delay: 180, anchor: "#hero-root", once: false });
+
+export const heroBtnBrowseAos = (): DataAttrs =>
+  aos.zoomIn({ duration: 600, delay: 260, anchor: "#hero-root", once: false });
+
+export const heroCountUpAos = (): DataAttrs =>
+  aos.flipUp({ duration: 750, delay: 340, anchor: "#hero-root", once: false });
+
+export const heroRightColAos = (): DataAttrs =>
+  aos.fadeLeft({ duration: 900, delay: 120, anchor: "#hero-root", once: false });
+
+export const heroBgAos = (): DataAttrs =>
+  aos.zoomOut({ duration: 1200, delay: 0, anchor: "#hero-right", anchorPlacement: "top-center", once: false });
+
+export const heroMobileImgAos = (): DataAttrs =>
+  aos.fadeLeft({ duration: 800, delay: 160, anchor: "#hero-right", offset: 0, once: false });
+
+export const heroRotatingAos = (): DataAttrs =>
+  aos.zoomInUp({ duration: 900, delay: 280, anchor: "#hero-right", once: false });
+
+export const heroDesktopImgAos = (): DataAttrs =>
+  aos.fadeLeft({ duration: 900, delay: 160, anchor: "#hero-root", offset: 0, once: false });
+
+// ============================================================================
+// EXPERIENCE (ExperienceSection + Team/Achievements helpers)
+// ============================================================================
+const effectForIndex = (i: number) => {
+  const col = i % 3;
+  if (col === 1) return "zoom-in";
+  if (col === 0) return "fade-left";
+  return "fade-right";
 };
 
-export const itemVariants = {
-  hidden: { opacity: 0, y: 40 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: easeOut,
-    },
-  },
+export const getCenterOutAos = (i: number): DataAttrs => {
+  const d = threeColsGridDelay(i);
+  const eff = effectForIndex(i);
+  if (eff === "zoom-in")  return aos.zoomIn({  duration: 650, delay: d });
+  if (eff === "fade-left")return aos.fadeLeft({ duration: 650, delay: d });
+  return aos.fadeRight({   duration: 650, delay: d });
 };
 
-export const flipCardVariants = {
-  hidden: { opacity: 0, rotateY: -90 },
-  show: {
-    opacity: 1,
-    rotateY: 0,
-    transition: {
-      duration: 0.6,
-      ease: easeOut,
-    },
-  },
+export const getFadeUpOnce = (duration = 500): DataAttrs =>
+  aos.fadeUp({ duration });
+
+export const teamItemAos = (index: number): DataAttrs =>
+  aos.fadeUp({ duration: 600, delay: index * 300 });
+
+// ============================================================================
+// PROPERTY VALUE (pv)
+// ============================================================================
+export const pvSectionAos = (): DataAttrs =>
+  aos.fadeUp({ duration: 600, once: false });
+
+export const pvGridAos = (): DataAttrs =>
+  aos.fadeUp({ duration: 500, once: false });
+
+export const pvCardAos = (index: number): DataAttrs =>
+  aos.fadeUp({ duration: 650, delay: index * 120, once: false });
+
+export const pvUnlockAos = (cardsCount: number): DataAttrs =>
+  aos.zoomIn({ duration: 700, delay: cardsCount * 120, once: false });
+
+// ============================================================================
+// INVESTMENTS (inv)
+// ============================================================================
+export const invSectionAos = (): DataAttrs =>
+  aos.fadeUp({ duration: 600, once: false });
+
+export const invLeftColAos = (): DataAttrs =>
+  aos.fadeRight({ duration: 650, once: false });
+
+export const invUnlockAos = (): DataAttrs =>
+  aos.flipUp({ duration: 700, delay: 120, once: false });
+
+export const invGridAos = (): DataAttrs =>
+  aos.fadeUp({ duration: 500, once: false });
+
+export const invCardAos = (index: number): DataAttrs => {
+  const d = twoColsWaveDelay(index);
+  return index % 2
+    ? aos.fadeLeft({ duration: 650, delay: d, once: false })
+    : aos.fadeRight({ duration: 650, delay: d, once: false });
 };
 
-export const defaultMotionConfig = {
-  initial: "hidden",
-  whileInView: "show",
-  viewport: { once: true, amount: 0.20 },
-};
+// ============================================================================
+// OFFICE CARD
+// ============================================================================
+export const officeCardAos = (): DataAttrs =>
+  aos.fadeUp({ duration: 650, once: false });
 
-export const titleMotionConfig = {
-  initial: { opacity: 1, y: 40 },
-  whileInView: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: easeIn },
-  viewport: { once: true, amount: 0.5 },
-};
+export const officeInfoItemAos = (index: number): DataAttrs =>
+  aos.fadeUp({ duration: 500, delay: 100 + index * 100, once: false });
 
-export const commonCardMotionConfig = {
-  initial: { opacity: 1, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.3 },
-  transition: { duration: 0.6, ease: easeIn },
-};
+export const officeButtonAos = (delay = 350): DataAttrs =>
+  aos.zoomIn({ duration: 600, delay, once: false });
 
-export const GenericSliderMotionConfig = {
-  initial: { opacity: 1, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.3 },
-  transition: { duration: 0.6, ease: easeOut },
-};
+// ============================================================================
+// TEAM GALLERY
+// ============================================================================
+export const tgContainerAos = (): DataAttrs =>
+  aos.fadeUp({ duration: 600, once: true });
 
-export const SwiperSlideMotionConfig = {
-  initial: { opacity: 1, scale: 0.95 },
-  whileInView: { opacity: 1, scale: 1 },
-  viewport: { once: true },
-};
+export const tgImgAos = (delay: number): DataAttrs =>
+  aos.zoomIn({ duration: 600, delay, once: true });
 
-export const FilterMotionConfig = {
-  initial: { opacity: 1, y: 50 },
-  whileInView: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: easeOut },
-  viewport: { once: true, amount: 0.2 },
-};
+export const tgTitleAos = (): DataAttrs =>
+  aos.fadeRight({ duration: 650, once: true });
 
-export const fadeUp = {
-  hidden: { opacity: 1, y: 60 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: easeOut },
-  },
-};
+export const tgRightImgAos = (delay = 120): DataAttrs =>
+  aos.fadeLeft({ duration: 650, delay, once: true });
 
-export const fadeLeft = {
-  hidden: { opacity: 1, x: -40 },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.5, ease: easeOut },
-  },
-};
 
-export const fadeRight = {
-  hidden: { opacity: 1, x: 40 },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.6, ease: easeOut },
-  },
-};
-
-export const socialHover = {
-  whileHover: { scale: 1.05, y: -5 },
-  transition: { type: "spring", stiffness: 300 },
-};

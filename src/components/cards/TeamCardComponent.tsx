@@ -1,30 +1,58 @@
-import TeamCardComponentForm from "../ui/TeamCardComponentForm"
+import TeamCardComponentForm from "../ui/TeamCardComponentForm";
 
 interface TeamCardProps {
-  name: string
-  role: string
-  image: string
+  id: string;
+  name: string;
+  role: string;
+  image?: string;
+  twitterLink?: string;
 }
 
-const TeamCardComponent = ({ name, role, image }: TeamCardProps) => {
+const FALLBACK_AVATAR = "/assets/images/team/default-avatar.png";
+
+const TeamCardComponent = ({ id, name, role, image, twitterLink }: TeamCardProps) => {
+  const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    if (!img.src.endsWith(FALLBACK_AVATAR)) img.src = FALLBACK_AVATAR;
+  };
+
+  const src =
+    image?.startsWith("/") || image?.startsWith("http")
+      ? image
+      : image
+      ? "/" + image.replace(/^\/+/, "")
+      : FALLBACK_AVATAR;
+
   return (
-    <div className="flex flex-col w-full gap-10 lg-custom:gap-[50px] p-5 lg-custom:p-6 2xl:p-[30px] border border-gray15 rounded-xl ">
-      <div className="relative  ">
+    <div className="flex flex-col w-full gap-10 lg-custom:gap-[50px] p-5 lg-custom:p-6 2xl:p-[30px] border border-gray15 rounded-xl">
+      <div className="relative">
         <img
-          src={image}
+          src={src}
           alt={name}
-          className="rounded-[10px] 2xl:rounded-xl w-full h-[268px] lg-custom:h-[220px] 2xl:h-[253px] object-top object-cover "
+          onError={handleImgError}
+          loading="lazy"
+          decoding="async"
+          className="rounded-[10px] 2xl:rounded-xl w-full h-[268px] lg-custom:h-[220px] 2xl:h-[253px] object-top object-cover"
         />
-        <div className="bg-purple70 dark:bg-purple60 absolute bottom-0 py-3.5 px-[26px] rounded-[43px] transform translate-y-1/2 left-1/2 -translate-x-1/2 flex items-center justify-center gap-3 cursor-pointer">
-          <img
-            src="/assets/icons/Team/twitter.svg"
-            alt="icon"
-            className="w-5 h-5 2xl:w-6 2xl:h-6 "
-          />
-        </div>
+        {twitterLink && (
+          <a
+            href={twitterLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-purple70 dark:bg-purple60 absolute bottom-0 py-3.5 px-[26px] rounded-[43px] transform translate-y-1/2 left-1/2 -translate-x-1/2 flex items-center justify-center gap-3"
+            aria-label={`Open ${name}'s Twitter`}
+          >
+            <img
+              src="/assets/icons/Team/twitter.svg"
+              alt="X (Twitter)"
+              className="w-5 h-5 2xl:w-6 2xl:h-6"
+            />
+          </a>
+        )}
       </div>
-      <div className="flex flex-col gap-4 lg-custom:gap-5 2xl:gap-6 ">
-        <div className="text-center flex flex-col gap-0.5 lg-custom:gap-1 2xl:gap-1.5 ">
+
+      <div className="flex flex-col gap-4 lg-custom:gap-5 2xl:gap-6">
+        <div className="text-center flex flex-col gap-0.5 lg-custom:gap-1 2xl:gap-1.5">
           <h3 className="text-lg lg-custom:text-[20px] 2xl:text-2xl font-semibold leading-7 text-black dark:text-white">
             {name}
           </h3>
@@ -32,12 +60,13 @@ const TeamCardComponent = ({ name, role, image }: TeamCardProps) => {
             {role}
           </p>
         </div>
-        <div className="relative w-full ">
-          <TeamCardComponentForm/>
+
+        <div className="relative w-full">
+          <TeamCardComponentForm cardId={id} toMemberName={name} />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TeamCardComponent
+export default TeamCardComponent;

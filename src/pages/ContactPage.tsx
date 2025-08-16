@@ -1,24 +1,64 @@
-
+import { useEffect } from "react";
 import SubHero from "../components/shared/SubHero";
 import { subHeroContact } from "../data/subHeroData";
+import { listenToCardData } from "../redux/slices/contactSlice";
 import OurOffices from "../sections/contact/OurOffices";
 import TeamGallery from "../sections/contact/TeamGallery";
-import ContactForm from '../sections/properties/ContactForm';
+import ContactForm from "../sections/properties/ContactForm";
+import SiteFeaturesSection from "../sections/shared/SiteFeaturesSection";
+import type { AppDispatch, RootState } from "../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 
 function ContactPage() {
+  const dispatch = useDispatch<AppDispatch>();
+  const { cards, loading } = useSelector(
+    (state: RootState) => state.contactLinks
+  );
+
+  useEffect(() => {
+    dispatch(listenToCardData());
+  }, [dispatch]);
+
+  //main skeltonBox style
+  const SkeltonBox = () => (
+    <div className="flex flex-col items-center gap-2.5 md:gap-4 2xl:gap-5 bg-gray-200 dark:bg-gray-700 py-5 px-3.5 md:py-[30px] md:px-4 2xl:py-10 2xl:px-5 border border-white90 dark:border-gray15 h-full relative rounded-[10px] 2xl:rounded-xl">
+      <div className="w-[52px] h-[52px] bg-purple70 rounded-full "></div>
+      <div className="w-full h-[52px] bg-gray-300 dark:bg-gray-600 rounded"></div>
+    </div>
+  );
+
   return (
-    <div className="">
-      <SubHero title={subHeroContact.title} desc={subHeroContact.desc} classes="lg-custom:pb-[100px]"/>
+    <div>
+      <SubHero
+        title={subHeroContact.title}
+        desc={subHeroContact.desc}
+        classes="lg-custom:pb-[100px]"
+      />
+
+      {loading ? (
+        // Skeleton Loader
+        <div
+          className="animate-pulse grid grid-cols-2 min-lg-custom:grid-cols-4 gap-2.5 2xl:gap-5
+      p-2.5 2xl:p-5 bg-white99 dark:bg-gray08 border border-white90 dark:border-gray15 dark:shadow-[0px_0px_0px_10px_#191919] rounded-[10px] 2xl:rounded-xl mt-2.5"
+        >
+          {Array.from({ length: 4 }).map((_, index) => (
+            <SkeltonBox key={index} />
+          ))}
+        </div>
+      ) : (
+        <SiteFeaturesSection data={cards} />
+      )}
+
       <ContactForm
-          starImg={true}
-          heading="Let's Make it Happen"
-          paragraph="Ready to take the first step toward your dream property? Fill out the form below, and our real estate wizards will work their magic to find your perfect match. Don't wait; let's embark on this exciting journey together."
-          type='contact'
-        />
-      <TeamGallery/>
-      <OurOffices/>
+        starImg={true}
+        heading="Let's Make it Happen"
+        paragraph="Ready to take the first step toward your dream property? Fill out the form below, and our real estate wizards will work their magic to find your perfect match. Don't wait; let's embark on this exciting journey together."
+        type="contact"
+      />
+      <TeamGallery />
+      <OurOffices />
     </div>
   );
 }
 
-export default ContactPage
+export default ContactPage;

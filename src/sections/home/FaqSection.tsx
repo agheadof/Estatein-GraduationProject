@@ -1,9 +1,10 @@
-import GenericSlider from "../../components/shared/GenericSlider/GenericSlider";
+import GenericSlider from "../../components/shared/GenericSlider";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchFaqs } from "../../redux/slices/faqsSlice";
 import Title from "../../components/shared/Title";
 import FaqCard from "../../components/cards/FaqCard/FaqCard";
+import { scrollToTop } from "../../utlis/scrollToTop";
 
 function FaqSection() {
   const dispatch = useAppDispatch();
@@ -11,7 +12,13 @@ function FaqSection() {
 
   useEffect(() => {
     if (items.length === 0) {
-      dispatch(fetchFaqs());
+            const unsubscribe = dispatch(fetchFaqs());
+
+      return () => {
+        if (typeof unsubscribe === "function") {
+          unsubscribe();
+        }
+      };
     }
   }, [dispatch, items.length]);
 
@@ -24,9 +31,13 @@ function FaqSection() {
         paragraph="Find answers to common questions about Estatein's services, property listings, and the real estate process. We're here to provide clarity and assist you every step of the way."
         buttonLabel="View All FAQ’s"
         paragraphStyle="2xl:max-w-[1236px] lg-custom:max-w-[1003px] w-full"
+        anamation="fade-up"
+        navigateTo="allFaq"
+        onClick={() => scrollToTop()}
       />
+
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
           {[...Array(skeletonCount)].map((_, i) => (
             <div
               key={i}
@@ -48,6 +59,7 @@ function FaqSection() {
           }
           showCounter={true}
           titleBtnLabel="View All FAQ’s"
+          navigateTo="allFaq"
         />
       )}
     </section>

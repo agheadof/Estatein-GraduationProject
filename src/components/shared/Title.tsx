@@ -1,14 +1,17 @@
-import { motion } from "framer-motion";
 import TitleBtn from "../ui/TitleBtn";
-import { titleMotionConfig } from "../../utlis/Anamation";
+import { useOneTimeAOS } from "../../hooks/useOneTimeAOS";
 
-type TitleProps = {
+export type TitleProps = {
   starImg?: boolean;
   titleStyle?: string;
   heading: string;
-  paragraph: string;
+  paragraph?: string;
   paragraphStyle?: string;
   buttonLabel?: string;
+  anamation?: string;
+  animKey?: string;
+  navigateTo?: string;
+  onClick?: () => void;
 };
 
 const Title = ({
@@ -18,24 +21,27 @@ const Title = ({
   paragraph,
   paragraphStyle,
   buttonLabel,
+  anamation,
+  animKey,
+  navigateTo,
+  onClick,
 }: TitleProps) => {
+  const ref = useOneTimeAOS(animKey);
+
   return (
-    <motion.div
-      {...titleMotionConfig}
-      className={`${titleStyle}`}
-    >
+    <div ref={ref} data-aos={anamation} className={`${titleStyle}`}>
       {starImg && (
         <div className="lg-custom:mb-1.5 2xl:mb-2.5">
           <img
             src="/assets/icons/MainTitle/stars.svg"
             alt="icon"
-            className="w-[68px] h-[30px] -ml-2 md:-ml-2.5 2xl:-ml-5"
+            className="2x:w-[68px] 2xl:h-[30px] h-[24px] w-[54.72px] -ml-2 md:-ml-2.5 2xl:-ml-5"
           />
         </div>
       )}
       <div className="flex justify-between items-center 2xl:items-end">
         <div>
-          <h2 className="text-black dark:text-white font-semibold text-[28px] lg-custom:text-[38px] 2xl:text-5xl mb-1.5 lg-custom:mb-2.5 2xl:mb-3.5">
+          <h2 className="text-black dark:text-white font-semibold text-[28px] lg-custom:text-[38px] 2xl:text-5xl mb-2 lg-custom:mb-2.5 2xl:mb-3.5">
             {heading}
           </h2>
           <p
@@ -46,11 +52,15 @@ const Title = ({
         </div>
         {buttonLabel && (
           <div className="hidden lg-custom:block">
-            <TitleBtn label={buttonLabel} />
+            <TitleBtn
+              label={buttonLabel}
+              navigateTo={navigateTo}
+              onClick={onClick}
+            />
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

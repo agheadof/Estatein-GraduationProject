@@ -3,15 +3,18 @@ import Hero from "../sections/home/Hero";
 import OurClientsSection from "../sections/home/OurClientsSection";
 import SiteFeaturesSection from "../sections/shared/SiteFeaturesSection";
 import PropertiesSection from "../sections/home/PropertiesSection";
-import { SiteFeaturesHomeData } from "../data/SiteFeaturesData";
 import { SectionWrapper } from "../layouts/SectionWrapper";
+import { SiteFeaturesHomeData } from "../data/SiteFeaturesData";
 
 function HomePage() {
   return (
     <>
-      <Hero />
+      <Hero
+        title="Discover Your Dream Property with Estatein"
+        description="Your journey to finding the perfect property begins here. Explore our listings to find the home that matches your dreams."
+      />
       <SiteFeaturesSection data={SiteFeaturesHomeData} />
-      <div className="">
+      <div>
         <PropertiesSection
           heading="Featured Properties"
           paragraph={`Explore our handpicked selection of featured properties. Each listing offers a glimpse into exceptional homes and investments available through Estatein. Click "View Details" for more information.`}
