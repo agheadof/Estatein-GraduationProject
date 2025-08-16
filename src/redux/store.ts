@@ -8,6 +8,7 @@ import testimonialsReducer from "./slices/testimonialsSlice"
 import themeReducer from "./slices/themeSlice"
 import bannerReducer from "./slices/bannerSlice"
 import clientsReducer from "./slices/clientsSlice"
+import stepsReducer from "./slices/stepsSlice"
 import valuesReducer from "./slices/valueSlice"
 import pricingReducer from "./slices/pricingSlice";
 import experienceReducer from "./slices/experienceSlice"
@@ -33,6 +34,7 @@ const store: any = configureStore({
     footerLinks: footerLinksReducer,
     contactLinks: contactLinksReducer,
     outboundMailer,
+    steps: stepsReducer
   },
 })
 

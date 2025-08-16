@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { createFetchThunk } from "../thunks/createFetchThunk";
 import { fetchFilteredProperties } from "../thunks/filteredProperties";
+import { fetchPropertyById } from "../thunks/propertyByIdThunk";
 
 export type PropertyType = {
   id: string;
@@ -107,7 +108,20 @@ const propertiesSlice = createSlice({
       .addCase(fetchFilteredProperties.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
-      });
+      })
+      .addCase(fetchPropertyById.fulfilled, (state, action) => {
+      const property = action.payload;
+      state.current = property;
+      state.loading = false;
+    })
+    .addCase(fetchPropertyById.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(fetchPropertyById.rejected, (state, action) => {
+      state.loading = false;
+      state.error = "not-found";
+    });
   },
 });
 

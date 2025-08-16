@@ -9,11 +9,6 @@ const DescriptionComponent = () => {
     return { error, loading, current };
   }, shallowEqual);
 
-  const castingToNumber = (input: string) => {
-    const result = input.replace(/\D/g, "").padStart(2, "0");
-    return result;
-  };
-
   return (
     <div
       data-aos="fade-right"
@@ -49,7 +44,7 @@ const DescriptionComponent = () => {
               </span>
             </div>
             <span className="text-black dark:text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-2xl">
-              {castingToNumber(property.current.details[0].label)}
+              {property.current.bedrooms.padStart(2, "0")}
             </span>
           </div>
 
@@ -68,7 +63,7 @@ const DescriptionComponent = () => {
                 </span>
               </div>
               <span className="text-black dark:text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-2xl">
-                {castingToNumber(property.current.details[1].label)}
+                {property.current.bathrooms.padStart(2, "0")}
               </span>
             </div>
           </div>
@@ -87,9 +82,9 @@ const DescriptionComponent = () => {
                 </span>
               </div>
               <span className="text-black dark:text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-2xl">
-                {`${castingToNumber(
-                  property.current.details[2].label
-                )} Square Feet`}
+                {`${
+                  property.current.area
+                } Square Feet`}
               </span>
             </div>
           </div>
