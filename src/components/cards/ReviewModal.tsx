@@ -6,7 +6,6 @@ import StarRating from "../Forms/StarsInput"
 import FormInput from "../Forms/FormInput"
 import { ImageIcon } from "../icons/ImgIcon"
 import FormTextarea from "../Forms/FormTextarea"
-import { X } from "lucide-react"
 
 type ReviewModalProps = {
   closeModal: () => void
@@ -124,7 +123,7 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
           onClick={closeModal}
           className="absolute top-4 right-4 text-gray-700 dark:text-gray-300 hover:text-red-500 transition"
         >
-          <X size={22} />
+          X
         </button>
 
         <h2 className="text-2xl font-bold text-start text-black dark:text-white">
