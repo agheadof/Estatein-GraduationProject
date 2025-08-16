@@ -68,7 +68,7 @@ const PricingDetailsSection = () => {
               </span>
             </div>
 
-            <div className="flex flex-col gap-5 md:gap-10 2xl:gap-[50px] w-full md:w-[1045px] 2xl:w-[1326px]">
+            <div className="flex flex-col gap-5 lg-custom:gap-10 2xl:gap-[50px] w-full md:w-[1045px] 2xl:w-[1326px]">
               {currentProperty.details.map((cardGroup: any) => (
                 <PricingCard
                   key={cardGroup.cardTitle}

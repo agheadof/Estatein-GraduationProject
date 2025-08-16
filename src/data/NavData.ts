@@ -14,5 +14,10 @@ export const navData = [
   {
     name: "Services",
     path: "services"
-  }
+  },
+  {
+    name: "Contact us",
+    path: "contact"
+  },
 ]
+

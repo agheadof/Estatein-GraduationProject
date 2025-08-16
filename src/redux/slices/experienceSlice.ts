@@ -54,7 +54,7 @@ export const subscribeExperience = () => (dispatch: any) => {
                 const dataObj = snapshot.val();
                 const dataArray: ExperienceItem[] = Object.values(dataObj).map(
                     (value: any) => ({
-                        step: value.stepNum ,
+                        step: value.stepNum || 0,
                         title: value.title || "",
                         description: value.description || "",
                     })

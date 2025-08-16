@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import type { CommonCardProps } from "../../types/CommonCard";
 
-
 const CommonCard = ({
   HeadingTag = "h5",
   titleLink_1,

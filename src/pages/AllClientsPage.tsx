@@ -3,10 +3,10 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { listenToTestimonials } from "../utlis/firebaseListeners/testimonialsListener";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import PaginationComponent from "../components/PaginationComponent";
-import TestimonialCard from "../components/cards/TestimonialCard";
 import { SectionWrapper } from "../layouts/SectionWrapper";
 import Title from "../components/shared/Title";
 import type { Client } from "../redux/types/client";
+import Card from "../components/cards/TestimonialCard/Card";
 
 function AllClientsPage() {
   const dispatch = useAppDispatch();
@@ -76,7 +76,7 @@ function AllClientsPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayedItems.map((client:Client, index:number) => (
-            <TestimonialCard key={index} client={client} />
+            <Card key={index} client={client} />
           ))}
         </div>
       )}

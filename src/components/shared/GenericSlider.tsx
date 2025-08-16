@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react"
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
-import TitleBtn from "../../ui/TitleBtn"
-import { NextArrowIcon, PrevArrowIcon } from "../../icons/SliderArrows"
+import TitleBtn from "../ui/TitleBtn"
+import { NextArrowIcon, PrevArrowIcon } from "../icons/SliderArrows"
 
 type Props<T> = {
   items: T[];
@@ -114,10 +114,10 @@ const GenericSlider = <T,>({
   const totalGroups = Math.ceil(items.length / currentSlidesPerGroup);
 
   return (
-    <div data-aos="fade-up" className="w-full mt-[80px] " >
+    <div data-aos="fade-up" className="w-full  mt-[40px] lg-custom:mt-[60px] 2xl:mt-[80px]" >
       <div ref={sliderRef} className="keen-slider mb-[50px] w-full ">
         {items.map((item, index) => (
-          <div key={index} className="keen-slider__slide">
+          <div key={index} className="keen-slider__slide 2xl:!min-w-[32.08%] lg-custom:!min-w-[32.29%]">
             {renderSlide(item, index)}
           </div>
         ))}
