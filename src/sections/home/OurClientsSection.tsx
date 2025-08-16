@@ -60,6 +60,7 @@ function OurClientsSection() {
           onClick={() => scrollToTop()}
           anamation="fade-up"
         />
+        
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
             {[...Array(skeletonCount)].map((_, i) => (
@@ -92,22 +93,27 @@ function OurClientsSection() {
         ) : error ? (
           <p className="text-red-500">{error}</p>
         ) : (
-          <GenericSlider<Client>
-            items={validClients}
-            renderSlide={(client: Client) => <Card key={client.name} client={client} />}
-            slidesPerView={3}
-            showCounter
-            titleBtnLabel="View All Testimonials"
-            navigateTo="allTestimonials"
-          />
+          <>
 
-        )}
-        <button
-          className="absolute left-[50%] -translate-x-[50%] bottom-[0px] text-sm cursor-pointer text-black dark:text-white hover:underline"
+            <GenericSlider<Client>
+              items={validClients}
+              renderSlide={(client: Client) => <Card key={client.name} client={client} />}
+              slidesPerView={3}
+              showCounter
+              titleBtnLabel="View All Testimonials"
+              navigateTo="allTestimonials"
+            />
+            <button
+          className="text-sm cursor-pointer text-black dark:text-white underline"
           onClick={() => setShowReviewModal(true)}
         >
           Add a review
         </button>
+          </>
+
+
+        )}
+
         {alertMessage && (
           <AlertMessage
             message={alertMessage}

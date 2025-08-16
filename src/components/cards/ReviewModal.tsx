@@ -21,6 +21,7 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const [rating, setRating] = useState<number>(0)
 
+
   const handleImageUpload = async (
     file: File,
     cb: (url: string) => void,
@@ -107,18 +108,30 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
 
   return createPortal(
     <div
-      className="fixed h-screen z-50 inset-0 bg-gray08/50 dark:bg-gray08/10 backdrop-blur-sm flex justify-center overflow-y-auto items-start lg-custom:items-center"
+      className="fixed h-screen z-50 inset-0 bg-gray08/50 dark:bg-gray08/10 backdrop-blur-sm flex justify-center items-start md:items-center overflow-y-auto px-4"
       onClick={closeModal}
     >
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="modal_content rounded-xl border border-purple60 bg-[#dcceff82] dark:bg-gray15/95 backdrop-blur-xl my-8
-        p-6 w-[85%] max-w-[800px] h-max overflow-y-auto flex flex-col gap-8 justify-start"
+        className="relative modal_content rounded-2xl border border-purple60 bg-[#f4edff] dark:bg-gray15/95 backdrop-blur-xl my-8
+        p-6 w-full max-w-[850px] h-max overflow-y-auto flex flex-col gap-8"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="w-full flex flex-col lg-custom:flex-row items-start justify-between">
-          <div className="flex flex-col gap-5 w-full lg-custom:w-[47%]">
+        <button
+          type="button"
+          onClick={closeModal}
+          className="absolute top-4 right-4 text-gray-700 dark:text-gray-300 hover:text-red-500 transition"
+        >
+          X
+        </button>
+
+        <h2 className="text-2xl font-bold text-start text-black dark:text-white">
+          Add Your Review
+        </h2>
+
+        <div className="w-full flex flex-col lg:flex-row gap-6">
+          <div className="flex flex-col gap-5 flex-1">
             <FormInput
               label="Subject"
               name="subject"
@@ -127,14 +140,12 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
               className="border border-purple60"
             />
 
-            <div>
-              <FormTextarea
-                label="Description"
-                name="review"
-                error={errors.review}
-                className="w-full p-2"
-              />
-            </div>
+            <FormTextarea
+              label="Description"
+              name="review"
+              error={errors.review}
+              className="w-full p-2"
+            />
 
             <div>
               <label className="font-semibold text-black dark:text-white mb-1 block">
@@ -142,14 +153,14 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
               </label>
               <StarRating value={rating} onChange={setRating} />
               {errors.rating && (
-                <p className="text-red-600 text-xs">{errors.rating}</p>
+                <p className="text-red-600 text-xs mt-1">{errors.rating}</p>
               )}
             </div>
           </div>
 
-          <div className="flex flex-col gap-5 w-full lg-custom:w-[47%]">
+          <div className="flex flex-col gap-5 flex-1">
             <div>
-              <label className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 2xl:text-xl text-base/[1.5] dark:text-white text-black font-semibold">
+              <label className="mb-2 block text-base font-semibold dark:text-white text-black">
                 Your Image:
               </label>
               <input
@@ -160,22 +171,22 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
                 onChange={handleImageChange}
               />
               <div
-                className="w-1/2 text-white h-[120px] rounded-lg border border-purple60 cursor-pointer flex items-center justify-center"
+                className="w-full max-w-[200px] h-[140px] rounded-lg border border-purple60 cursor-pointer flex items-center justify-center overflow-hidden"
                 onClick={() => imgRef.current?.click()}
               >
                 {uploading ? (
-                  <p>Uploading...</p>
+                  <p className="text-sm">Uploading...</p>
                 ) : imageUrl ? (
                   <img
                     src={imageUrl}
-                    className="w-3/4 h-full object-cover object-top"
+                    className="w-full h-full object-cover object-top"
                   />
                 ) : (
                   <ImageIcon />
                 )}
               </div>
               {errors.image && (
-                <p className="text-red-600 text-xs">{errors.image}</p>
+                <p className="text-red-600 text-xs mt-1">{errors.image}</p>
               )}
             </div>
 
@@ -197,13 +208,15 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
           </div>
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-purple60 rounded-lg px-4 py-2 text-white font-medium cursor-pointer hover:bg-gray08 duration-200 disabled:opacity-60"
-        >
-          {loading ? "Submitting..." : "Submit"}
-        </button>
+        <div className="flex justify-start">
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-purple60 rounded-lg px-6 py-2 text-white font-medium cursor-pointer hover:bg-purple70 transition disabled:opacity-60"
+          >
+            {loading ? "Submitting..." : "Submit"}
+          </button>
+        </div>
       </form>
     </div>,
     document.body

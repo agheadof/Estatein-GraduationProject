@@ -71,7 +71,7 @@ function PropertiesSection({
       {error ? (
         <p className="text-red-500 mt-6">{error}</p>
       ) : loading && properties.length === 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[80px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[40px] lg-custom:mt-[60px] 2xl:mt-[80px]">
           {[...Array(3)].map((_, index) => (
             <SkeletonCard key={index} />
           ))}

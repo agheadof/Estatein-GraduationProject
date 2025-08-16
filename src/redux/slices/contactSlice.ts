@@ -83,11 +83,10 @@ export const transformContactData = (contactData: any): CommonCardProps[] => {
 const transformSocialData = (socialData: any): CommonCardProps[] => {
     const linkedin = socialData[0].platform;
     const facebook = socialData[1].platform;
-    const instagram = socialData[2].platform;
+    const instagram = socialData[4].platform;
     const linkedinUrl = socialData[0].url;
     const facebookUrl = socialData[1].url;
-    const instagramUrl = socialData[2].url;
-
+    const instagramUrl = socialData[4].url;
     return [
 
         {
@@ -110,6 +109,7 @@ const transformSocialData = (socialData: any): CommonCardProps[] => {
             ],
         },
     ];
+    
 };
 
 // Slice
