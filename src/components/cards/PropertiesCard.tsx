@@ -67,8 +67,7 @@ function PropertiesCard({
   }, [showTags, property.tags])
 
   return (
-    <div className="relative h-full p-6 lg-custom:p-[30px] 2xl:p-[40px] border dark:border-gray15 border-white90 rounded-xl overflow-hidden">
-      {/* الصورة ضمن الكارد */}
+    <div className="relative h-full p-6 lg-custom:p-[30px] 2xl:p-[40px] border dark:border-gray15 border-white90 rounded-xl overflow-hidden ">
       {property.image && (
         <img
           src={property.image}
@@ -79,12 +78,10 @@ function PropertiesCard({
         />
       )}
 
-      {/* المحتوى */}
       <div
-        className={`relative transition-all duration-500 ${
-          isExpanded
-            ? "backdrop-blur-md -translate-y-1/2 p-5 rounded-xl bg-white/50 dark:bg-black/50 "
-            : "translate-y-0"
+        className={` transition-all duration-500  ${
+          isExpanded &&
+          "backdrop-blur-md absolute inset-0  p-5 rounded-xl bg-white/50 dark:bg-black/50 "
         }`}
       >
         {renderTags}
@@ -105,16 +102,15 @@ function PropertiesCard({
           <button
             onClick={() => setIsExpanded((prev) => !prev)}
             className={`dark:text-purple97 text-black font-medium ${
-              isExpanded
-                ? "block m-1.5 font-bold border border-transparent border-b-purple60 hover:border-purple60 hover:p-1.5 rounded-lg p-0.5 transition-all duration-200 ease-in-out"
-                : ""
+              isExpanded &&
+              "block m-1.5 font-bold border border-transparent border-b-purple60 hover:border-purple60 hover:p-1.5 rounded-lg p-0.5 transition-all duration-200 ease-in-out"
             }`}
           >
             {isExpanded ? "Show Less" : "Read More"}
           </button>
         </div>
 
-        {showDetails && property.details?.length ? (
+        {!isExpanded && showDetails && property.details?.length ? (
           <div className="flex gap-1 mb-4 lg-custom:mb-5 2xl:mb-[30px]">
             {property.details.map((item: PropertyDetailType, index: number) => (
               <PropertyDetail key={index} item={item} />
