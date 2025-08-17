@@ -1,6 +1,11 @@
 import { shallowEqual } from "react-redux";
 import { useAppSelector } from "../../redux/hooks";
 
+  const castingToNumber = (input: string) => {
+    const result = input.replace(/\D/g, "").padStart(2, "0");
+    return result;
+  };
+
 const DescriptionComponent = () => {
   const property = useAppSelector((state) => {
     let error = state.properties.error;
@@ -12,7 +17,7 @@ const DescriptionComponent = () => {
   return (
     <div
       data-aos="fade-right"
-      className="p-5 lg-custom:p-10 2xl:p-[50px] rounded-[10px] border border-white90 dark:border-gray15 flex flex-col gap-5 lg-custom:gap-10 2xl:gap-[50px] w-full lg-custom:w-1/2 h-fit"
+      className="p-5 lg-custom:p-10 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl border border-white90 dark:border-gray15 flex flex-col gap-5 lg-custom:gap-10 2xl:gap-[50px] w-full lg-custom:w-1/2 h-fit"
     >
       <div className="flex flex-col gap-1.5 lg-custom:gap-2.5 2xl:gap-3.5">
         <h3 className="text-black dark:text-white font-semibold text-lg leading-[150%] lg-custom:text-xl 2xl:text-2xl">
@@ -31,60 +36,122 @@ const DescriptionComponent = () => {
       </div>
 
       {!property.loading && !property.error && property.current && (
-        <div className="flex flex-wrap md:flex-nowrap gap-10 md:gap-5 lg-custom:gap-10 border-t border-t-white90 dark:border-t-gray15 pt-4 justify-between">
-          <div className="flex flex-col gap-1.5 lg-custom:gap-2 2xl:gap-2.5">
-            <div className="flex gap-1 lg-custom:gap-1.5 ">
-              <img
-                src="/assets/icons/FeaturedProperties/bedroom.svg"
-                alt="icon"
-                className="w-5 h-5 2xl:w-6 2xl:h-6"
-              />
-              <span className="text-gray40 dark:text-gray60 font-medium leading-[150%] text-sm 2xl:text-lg">
-                Bedrooms
+        <div
+          className="
+            border-t border-t-white90 dark:border-t-gray15 
+            pt-5 lg-custom:pt-4 2xl:pt-5 
+            flex flex-col gap-5 lg-custom:flex-row lg-custom:gap-10
+          "
+        >
+          <div className="flex justify-between gap-5 lg-custom:hidden">
+            {/* Bedrooms */}
+            <div className="flex flex-col gap-1.5 flex-1">
+              <div className="flex gap-1">
+                <img
+                  src="/assets/icons/FeaturedProperties/bedroom.svg"
+                  alt="icon"
+                  className="w-5 h-5 2xl:w-6 2xl:h-6"
+                />
+                <span className="text-gray40 dark:text-gray60 font-medium text-sm 2xl:text-lg">
+                  Bedrooms
+                </span>
+              </div>
+              <span className="text-black dark:text-white font-semibold text-lg 2xl:text-2xl">
+                {castingToNumber(property.current.details[0].label)}
               </span>
             </div>
-            <span className="text-black dark:text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-2xl">
-              {property.current.bedrooms.padStart(2, "0")}
-            </span>
-          </div>
 
-          <div className="flex gap-4">
-            <span className="h-full w-px bg-white90 dark:bg-gray15 align-middle" />
+            <span className="w-px bg-white90 dark:bg-gray15" />
 
-            <div className="flex flex-col gap-1.5 lg-custom:gap-2 2xl:gap-2.5">
-              <div className="flex gap-1 lg-custom:gap-1.5">
+            <div className="flex flex-col gap-1.5 flex-1">
+              <div className="flex gap-1">
                 <img
                   src="/assets/icons/FeaturedProperties/bathroom.svg"
                   alt="icon"
                   className="w-5 h-5 2xl:w-6 2xl:h-6"
                 />
-                <span className="text-gray40 dark:text-gray60 font-medium  leading-[150%] text-sm 2xl:text-lg">
+                <span className="text-gray40 dark:text-gray60 font-medium text-sm 2xl:text-lg">
                   Bathrooms
                 </span>
               </div>
-              <span className="text-black dark:text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-2xl">
-                {property.current.bathrooms.padStart(2, "0")}
+              <span className="text-black dark:text-white font-semibold text-lg 2xl:text-2xl">
+                {castingToNumber(property.current.details[1].label)}
               </span>
             </div>
           </div>
 
-          <div className="flex gap-4 w-full md:w-auto border-t border-t-white90 dark:border-t-gray15 pt-4 md:border-0 md:pt-0">
-            <span className="hidden md:flex h-full w-px bg-white90 dark:bg-gray15 align-middle" />
-            <div className="flex flex-col gap-1.5 lg-custom:gap-2 2xl:gap-2.5">
-              <div className="flex gap-1 lg-custom:gap-1.5">
+          <span className="flex lg-custom:hidden h-px w-full bg-white90 dark:bg-gray15" />
+
+          <div className="flex flex-col gap-1.5 flex-1 lg-custom:hidden">
+            <div className="flex gap-1">
+              <img
+                src="/assets/icons/FeaturedProperties/area.svg"
+                alt="icon"
+                className="w-5 h-5 2xl:w-6 2xl:h-6"
+              />
+              <span className="text-gray40 dark:text-gray60 font-medium text-sm 2xl:text-lg">
+                Area (m²)
+              </span>
+            </div>
+            <span className="text-black dark:text-white font-semibold text-lg 2xl:text-2xl">
+              {`${castingToNumber(
+                property.current.details[2].label
+              )} Square Feet`}
+            </span>
+          </div>
+
+          <div className="hidden lg-custom:flex gap-10 flex-1">
+            <div className="flex flex-col gap-1.5 flex-1">
+              <div className="flex gap-1">
+                <img
+                  src="/assets/icons/FeaturedProperties/bedroom.svg"
+                  alt="icon"
+                  className="w-5 h-5 2xl:w-6 2xl:h-6"
+                />
+                <span className="text-gray40 dark:text-gray60 font-medium text-sm 2xl:text-lg">
+                  Bedrooms
+                </span>
+              </div>
+              <span className="text-black dark:text-white font-semibold text-lg 2xl:text-2xl">
+                {castingToNumber(property.current.details[0].label)}
+              </span>
+            </div>
+
+            <span className="w-px bg-white90 dark:bg-gray15" />
+
+            <div className="flex flex-col gap-1.5 flex-1">
+              <div className="flex gap-1">
+                <img
+                  src="/assets/icons/FeaturedProperties/bathroom.svg"
+                  alt="icon"
+                  className="w-5 h-5 2xl:w-6 2xl:h-6"
+                />
+                <span className="text-gray40 dark:text-gray60 font-medium text-sm 2xl:text-lg">
+                  Bathrooms
+                </span>
+              </div>
+              <span className="text-black dark:text-white font-semibold text-lg 2xl:text-2xl">
+                {castingToNumber(property.current.details[1].label)}
+              </span>
+            </div>
+
+            <span className="w-px bg-white90 dark:bg-gray15" />
+
+            <div className="flex flex-col gap-1.5 flex-1">
+              <div className="flex gap-1">
                 <img
                   src="/assets/icons/FeaturedProperties/area.svg"
                   alt="icon"
                   className="w-5 h-5 2xl:w-6 2xl:h-6"
                 />
-                <span className="text-gray40 dark:text-gray60 font-medium leading-[150%] text-sm 2xl:text-lg">
+                <span className="text-gray40 dark:text-gray60 font-medium text-sm 2xl:text-lg">
                   Area (m²)
                 </span>
               </div>
-              <span className="text-black dark:text-white font-semibold leading-[150%] text-lg lg-custom:text-xl 2xl:text-2xl">
-                {`${
-                  property.current.area
-                } Square Feet`}
+              <span className="text-black dark:text-white font-semibold text-lg 2xl:text-2xl">
+                {`${castingToNumber(
+                  property.current.details[2].label
+                )} Square Feet`}
               </span>
             </div>
           </div>
