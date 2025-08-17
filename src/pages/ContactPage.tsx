@@ -51,12 +51,12 @@ function ContactPage() {
 
       <ContactForm
         starImg={true}
-        heading="Let's Make it Happen"
-        paragraph="Ready to take the first step toward your dream property? Fill out the form below, and our real estate wizards will work their magic to find your perfect match. Don't wait; let's embark on this exciting journey together."
+        heading="Let's Connect"
+        paragraph="We're excited to connect with you and learn more about your real estate goals. Use the form below to get in touch with Estatein. Whether you're a prospective client, partner, or simply curious about our services, we're here to answer your questions and provide the assistance you need."
         type="contact"
       />
-      <TeamGallery />
       <OurOffices />
+      <TeamGallery />
     </div>
   );
 }
