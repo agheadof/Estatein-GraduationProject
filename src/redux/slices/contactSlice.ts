@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { CommonCardProps } from "../../types/CommonCard";
-import { Link } from "react-router-dom";
 import { onValue, ref } from "firebase/database";
 import { db } from "../../firebaseConfig";
 
@@ -14,19 +13,16 @@ const initialState: ContactState = {
     loading: true,
 };
 
-// Thunk
 export const listenToCardData = createAsyncThunk(
     "contactLinks/listenToCardData",
     async (_, thunkAPI) => {
         const { dispatch } = thunkAPI;
-
         let contactCards: CommonCardProps[] = [];
         let socialLinksCards: CommonCardProps[] = [];
 
         const updateIfReady = () => {
             if (contactCards.length && socialLinksCards.length) {
-                const finalCards = [...contactCards, ...socialLinksCards];
-                dispatch(setCardData(finalCards));
+                dispatch(setCardData([...contactCards, ...socialLinksCards]));
                 dispatch(setLoading(false));
             }
         };
@@ -45,8 +41,7 @@ export const listenToCardData = createAsyncThunk(
         onValue(socialRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                const allItems = Object.values(data);
-                socialLinksCards = transformSocialData(allItems);
+                socialLinksCards = transformSocialData(Object.values(data));
                 updateIfReady();
             }
         });
@@ -54,65 +49,56 @@ export const listenToCardData = createAsyncThunk(
 );
 
 export const transformContactData = (contactData: any): CommonCardProps[] => {
-    const email = contactData?.email || "No Email";
-    const phone = contactData?.phone || "No Phone";
-    const branch = contactData?.branch || "No Phone";
-
     return [
         {
-            cardTitle: email,
+            cardTitle: contactData.email || "No Email",
             cardImg: "/assets/icons/CardUnderHero/email.svg",
-            HeadingTag: Link,
-            titleLink: "/",
+            HeadingTag: "a",
+            titleLink: `mailto:${contactData.email}`,
         },
         {
-            cardTitle: phone,
+            cardTitle: contactData.phone || "No Phone",
             cardImg: "/assets/icons/CardUnderHero/phone.svg",
-            HeadingTag: Link,
-            titleLink: "/",
+            HeadingTag: "a",
+            titleLink: `tel:${contactData.phone}`,
         },
         {
-            cardTitle: branch,
+            cardTitle: contactData.branch || "No Branch",
             cardImg: "/assets/icons/CardUnderHero/location.svg",
-            HeadingTag: Link,
-            titleLink: "/",
+            HeadingTag: "a",
+            titleLink: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactData.branch)}`,
         },
     ];
 };
 
-const transformSocialData = (socialData: any): CommonCardProps[] => {
-    const linkedin = socialData[0].platform;
-    const facebook = socialData[1].platform;
-    const instagram = socialData[4].platform;
-    const linkedinUrl = socialData[0].url;
-    const facebookUrl = socialData[1].url;
-    const instagramUrl = socialData[4].url;
-    return [
+export const transformSocialData = (socialData: any): CommonCardProps[] => {
+    const linkedin = socialData.find((s: any) => s.platform.toLowerCase() === "linkedin");
+    const facebook = socialData.find((s: any) => s.platform.toLowerCase() === "facebook");
+    const instagram = socialData.find((s: any) => s.platform.toLowerCase() === "instagram");
 
+    return [
         {
             cardImg: "assets/icons/CardUnderHero/estatein.svg",
-            HeadingTag: Link,
+            HeadingTag: "a",
             links: [
                 {
-                    title: instagram || "No instagram",
-                    link: instagramUrl
+                    title: instagram?.platform || "No Instagram",
+                    href: instagram?.url || "#",
                 },
                 {
-                    title: linkedin || "No linkedin",
-                    link: linkedinUrl,
+                    title: linkedin?.platform || "No LinkedIn",
+                    href: linkedin?.url || "#",
                 },
                 {
-                    title: facebook || "No facebook",
-                    link: facebookUrl,
-
+                    title: facebook?.platform || "No Facebook",
+                    href: facebook?.url || "#",
                 },
             ],
         },
     ];
-    
 };
 
-// Slice
+
 const contactLinksSlice = createSlice({
     name: "contactLinks",
     initialState,
@@ -122,7 +108,7 @@ const contactLinksSlice = createSlice({
         },
         setLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;
-        }
+        },
     },
 });
 

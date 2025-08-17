@@ -32,7 +32,7 @@ function FaqSection() {
         buttonLabel="View All FAQ’s"
         paragraphStyle="2xl:max-w-[1236px] lg-custom:max-w-[1003px] w-full"
         anamation="fade-up"
-        navigateTo="allFaq"
+        navigateTo="/allFaq"
         onClick={() => scrollToTop()}
       />
 
@@ -57,6 +57,7 @@ function FaqSection() {
           renderSlide={(question, index) =>
             question ? <FaqCard key={index} question={question} /> : null
           }
+          slidesPerView={{ lg: 3, md: 2, sm: 1 }}
           showCounter={true}
           titleBtnLabel="View All FAQ’s"
           navigateTo="allFaq"

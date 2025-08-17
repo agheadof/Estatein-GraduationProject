@@ -1,203 +1,202 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import TitleBtn from "../ui/TitleBtn";
 import { NextArrowIcon, PrevArrowIcon } from "../icons/SliderArrows";
 
+type SlidesPerView = {
+  lg: number; 
+  md?: number; 
+  sm?: number; 
+};
+
 type Props<T> = {
   items: T[];
   renderSlide: (item: T, index: number) => React.ReactNode;
-  slidesPerView?: number;
+  slidesPerView?: SlidesPerView; 
   showCounter?: boolean;
   titleBtnLabel?: string;
   counterClassName?: string;
   navigateTo?: string;
   onClick?: () => void;
+  debug?: boolean;
 };
+
+const clamp = (v: number, a = 0, b = Infinity) => Math.max(a, Math.min(b, v));
 
 const GenericSlider = <T,>({
   items,
   renderSlide,
-  slidesPerView = 3,
+  slidesPerView = { lg: 4, md: 2, sm: 1 },
   showCounter = true,
   titleBtnLabel = "",
   counterClassName = "",
   navigateTo,
   onClick,
+  debug = false,
 }: Props<T>) => {
-  const prevRef = useRef<HTMLButtonElement | null>(null);
-  const nextRef = useRef<HTMLButtonElement | null>(null);
-  const [currentGroup, setCurrentGroup] = useState(1);
-  const [isBeginning, setIsBeginning] = useState(true);
-  const [isEnd, setIsEnd] = useState(false);
-  const [currentSlidesPerGroup, setCurrentSlidesPerGroup] =
-    useState(slidesPerView);
-    
+  const [perViewCurrent, setPerViewCurrent] = useState<number>(slidesPerView.lg);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  const [isBeginning, setIsBeginning] = useState<boolean>(true);
+  const [isEnd, setIsEnd] = useState<boolean>(false);
+  const [currentGroup, setCurrentGroup] = useState<number>(1);
+
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
-    slides: {
-      perView: currentSlidesPerGroup,
-      spacing: 30,
-    },
+    slides: { perView: perViewCurrent, spacing: 30 },
     rubberband: false,
-    breakpoints: {
-      "(max-width: 767px)": {
-        slides: { perView: 1, spacing: 30 },
-      },
-      "(min-width: 768px) and (max-width: 991px)": {
-        slides: { perView: 2, spacing: 30 },
-      },
-      "(min-width: 992px)": {
-        slides: { perView: slidesPerView, spacing: 30 },
-      },
+    created: (s) => {
+      const rel = Math.round(s.track?.details?.rel ?? 0);
+      setCurrentIndex(rel);
+      requestAnimationFrame(() => syncDerivedFromIndex(rel, s));
     },
-    created(slider) {
-      updateNav(slider);
-    },
-    slideChanged(slider) {
-      updateNav(slider);
+    slideChanged: (s) => {
+      const rel = Math.round(s.track?.details?.rel ?? 0);
+      setCurrentIndex(rel);
+      requestAnimationFrame(() => syncDerivedFromIndex(rel, s));
     },
   });
 
-  useEffect(() => {
-    if (!slider || !slider.current) return;
+  const syncDerivedFromIndex = (index: number, s?: any) => {
+    const perView = getPerViewFromSlider(s, perViewCurrent);
+    const maxStart = Math.max(0, items.length - perView);
+    const safeIndex = clamp(Math.round(index), 0, maxStart);
 
-    slider.current.update();
+    const group = Math.ceil(safeIndex / perView) + 1;
+    setCurrentGroup(group);
+    setIsBeginning(safeIndex <= 0);
+    setIsEnd(safeIndex >= maxStart);
 
-    const details = slider.current.track?.details;
-    const rel = details?.rel ?? 0;
-    const perView =
-      typeof slider.current?.options?.slides === "object" &&
-      slider.current.options.slides !== null &&
-      "perView" in slider.current.options.slides
-        ? (slider.current.options.slides.perView as number) ||
-          currentSlidesPerGroup ||
-          1
-        : currentSlidesPerGroup || 1;
-
-    const maxRel = Math.max(0, Math.ceil(Math.max(0, items.length - perView)));
-
-    if (rel > maxRel) {
-      slider.current.moveToIdx(Math.max(0, maxRel));
+    if (debug) {
+      console.log("[syncDerivedFromIndex]", { safeIndex, perView, maxStart, group });
     }
+  };
 
-    requestAnimationFrame(() => updateNav(slider.current));
-  }, [items.length, currentSlidesPerGroup, slider]);
-
-  const updateNav = (slider: any) => {
-    const details = slider?.track?.details;
-    const rel = details?.rel;
-    const perView = slider?.options?.slides?.perView || 1;
-
-    if (details && rel != null) {
-      const group = Math.ceil(rel / perView) + 1;
-      setCurrentGroup(group);
-      setIsBeginning(rel === 0);
-      setIsEnd(rel + perView >= items.length);
-    }
+  const getPerViewFromSlider = (s: any, fallback = perViewCurrent) => {
+    try {
+      const opt = s?.options?.slides;
+      if (opt && typeof opt === "object" && "perView" in opt) {
+        const pv = Number(opt.perView);
+        if (!Number.isNaN(pv) && pv > 0) return pv;
+      }
+    } catch (e) {}
+    return fallback;
   };
 
   useEffect(() => {
     const handleResize = () => {
+      if (!slider.current) return;
       const width = window.innerWidth;
-      if (width >= 992) {
-        setCurrentSlidesPerGroup(slidesPerView);
-      } else if (width >= 768) {
-        setCurrentSlidesPerGroup(2);
-      } else {
-        setCurrentSlidesPerGroup(1);
+      let perView = slidesPerView.sm ?? 1;
+      if (width >= 992) perView = slidesPerView.lg;
+      else if (width >= 768) perView = slidesPerView.md ?? 2;
+
+      setPerViewCurrent(perView);
+      slider.current.update({ slides: { perView, spacing: 30 } });
+
+      const maxStart = Math.max(0, items.length - perView);
+      if (currentIndex > maxStart) {
+        setCurrentIndex(maxStart);
+        slider.current.moveToIdx(maxStart);
       }
+
+      requestAnimationFrame(() => syncDerivedFromIndex(currentIndex, slider.current));
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [slidesPerView]);
+  }, [slidesPerView, items.length]);
 
-  const totalGroups = Math.ceil(items.length / currentSlidesPerGroup);
+  useEffect(() => {
+    if (!slider.current) return;
+    const perView = getPerViewFromSlider(slider.current, perViewCurrent);
+    const maxStart = Math.max(0, items.length - perView);
+    const safeIdx = clamp(Math.round(currentIndex), 0, maxStart);
+
+    const relRaw = slider.current.track?.details?.rel ?? 0;
+    const relRounded = Math.round(relRaw);
+    if (relRounded !== safeIdx) {
+      slider.current.moveToIdx(safeIdx);
+    }
+
+    syncDerivedFromIndex(safeIdx, slider.current);
+  }, [currentIndex, perViewCurrent, items.length]);
+
+  const effectivePerView = (slider && slider.current && (slider.current.options as any)?.slides?.perView) || perViewCurrent;
+  const totalGroups = Math.max(1, Math.ceil(items.length / Number(effectivePerView)));
+
+  const onPrev = () => {
+    const perView = getPerViewFromSlider(slider.current, perViewCurrent);
+    const maxStart = Math.max(0, items.length - perView);
+    const nextIdx = clamp(currentIndex - 1, 0, maxStart);
+
+    setCurrentIndex(nextIdx);
+
+    if (debug) {
+      console.log("[onPrev] currentIndex ->", { from: currentIndex, to: nextIdx, perView, maxStart });
+    }
+    if (slider.current) slider.current.moveToIdx(nextIdx);
+    requestAnimationFrame(() => syncDerivedFromIndex(nextIdx, slider.current));
+  };
+
+  const onNext = () => {
+    const perView = getPerViewFromSlider(slider.current, perViewCurrent);
+    const maxStart = Math.max(0, items.length - perView);
+    const nextIdx = clamp(currentIndex + 1, 0, maxStart);
+
+    setCurrentIndex(nextIdx);
+
+    if (debug) {
+      console.log("[onNext] currentIndex ->", { from: currentIndex, to: nextIdx, perView, maxStart });
+    }
+    if (slider.current) slider.current.moveToIdx(nextIdx);
+    requestAnimationFrame(() => syncDerivedFromIndex(nextIdx, slider.current));
+  };
 
   return (
-    <div
-      data-aos="fade-up"
-      className="w-full  mt-[40px] lg-custom:mt-[60px] 2xl:mt-[80px]"
-    >
-      <div ref={sliderRef} className="keen-slider mb-[50px] w-full ">
+    <div className="w-full mt-[40px] lg-custom:mt-[60px] 2xl:mt-[80px]">
+      <div ref={sliderRef} className="keen-slider mb-[50px] w-full">
         {items.map((item, index) => (
-          <div
-            key={index}
-            className="keen-slider__slide 2xl:!min-w-[32.08%] lg-custom:!min-w-[32.29%]"
-          >
+          <div key={index} className="keen-slider__slide">
             {renderSlide(item, index)}
           </div>
         ))}
       </div>
-      <div
-        className={`${counterClassName} flex justify-between items-center pt-4 2xl:pt-5 border-t border-t-white90 dark:border-t-gray15`}
-      >
+
+      <div className={`${counterClassName} flex justify-between items-center pt-4 border-t border-t-white90 dark:border-t-gray15`}>
         {showCounter && (
-          <p
-            data-aos="fade-right"
-            className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block"
-          >
+          <p className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block">
             {String(currentGroup).padStart(2, "0")}
-            <span className="text-gray40 dark:text-gray60">
-              {" "}
-              of {String(totalGroups).padStart(2, "0")}
-            </span>
+            <span className="text-gray40 dark:text-gray60"> {" "}of {String(totalGroups).padStart(2, "0")}</span>
           </p>
         )}
 
         {titleBtnLabel && (
           <div className="block md:hidden">
-            <TitleBtn
-              label={titleBtnLabel}
-              className="whitespace-pre-wrap"
-              navigateTo={navigateTo}
-              onClick={onClick}
-            />
+            <TitleBtn label={titleBtnLabel} className="whitespace-pre-wrap" navigateTo={navigateTo} onClick={onClick} />
           </div>
         )}
 
-        <div data-aos="fade-left" className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5">
           <button
-            ref={prevRef}
+            data-testid="prev-btn"
             disabled={isBeginning}
-            onClick={() => slider.current?.prev()}
-            className={`
-              p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px]
-              transition-all duration-300 border-white90 dark:border-gray15
-              ${
-                isBeginning
-                  ? "bg-inherit opacity-50 cursor-not-allowed"
-                  : "bg-white97 dark:bg-gray10 border-white90 dark:border-gray15"
-              }
-            `}
+            onClick={onPrev}
+            className={`p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px] transition-all duration-300 border-white90 dark:border-gray15 ${
+              isBeginning ? "bg-inherit opacity-50 cursor-not-allowed" : "bg-white97 dark:bg-gray10"
+            }`}
           >
             <PrevArrowIcon />
           </button>
 
-          {showCounter && (
-            <p className="text-black dark:text-white text-base 2xl:text-xl font-medium block md:hidden">
-              {String(currentGroup).padStart(2, "0")}
-              <span className="text-gray40 dark:text-gray60">
-                {" "}
-                of {String(totalGroups).padStart(2, "0")}
-              </span>
-            </p>
-          )}
-
           <button
-            ref={nextRef}
+            data-testid="next-btn"
             disabled={isEnd}
-            onClick={() => slider.current?.next()}
-            className={`
-              p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px]
-              transition-all duration-300 border-white90 dark:border-gray15
-              ${
-                isEnd
-                  ? "bg-inherit opacity-50 cursor-not-allowed"
-                  : "bg-white97 dark:bg-gray10"
-              }
-            `}
+            onClick={onNext}
+            className={`p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px] transition-all duration-300 border-white90 dark:border-gray15 ${
+              isEnd ? "bg-inherit opacity-50 cursor-not-allowed" : "bg-white97 dark:bg-gray10"
+            }`}
           >
             <NextArrowIcon />
           </button>

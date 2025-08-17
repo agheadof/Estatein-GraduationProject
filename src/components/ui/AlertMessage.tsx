@@ -19,10 +19,10 @@ const cardVariants: Variants = {
     opacity: 1,
     scale: 1,
     transition: {
-      type: "spring", 
-      stiffness: 350,
+      type: "spring",
+      stiffness: 300,
       damping: 20,
-    } as Transition, 
+    } as Transition,
   },
   exit: {
     opacity: 0,
@@ -40,6 +40,7 @@ function AlertMessage({ message, onClose }: FormAlertProps) {
   return (
     <AnimatePresence>
       <motion.div
+        key="backdrop"
         className="fixed inset-0 bg-black z-50"
         variants={backdropVariants}
         initial="hidden"
@@ -49,6 +50,7 @@ function AlertMessage({ message, onClose }: FormAlertProps) {
       />
 
       <motion.div
+        key="card"
         className="fixed inset-0 flex items-center justify-center z-50 p-4"
         initial="hidden"
         animate="visible"
@@ -63,7 +65,7 @@ function AlertMessage({ message, onClose }: FormAlertProps) {
           <p className=" text-gray40 dark:text-gray60 text-sm lg-custom:text-base 2xl:text-lg font-medium leading-[150%]">
             {message}
           </p>
-          
+
         </div>
       </motion.div>
     </AnimatePresence>

@@ -1,50 +1,37 @@
-import { useEffect, useMemo, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import Title from "../../components/shared/Title";
-import { SectionWrapper } from "../../layouts/SectionWrapper";
-import ReviewModal from "../../components/cards/ReviewModal";
-import AlertMessage from "../../components/ui/AlertMessage";
-import { listenToTestimonials } from "../../utlis/firebaseListeners/testimonialsListener";
-import type { Client } from "../../redux/types/client";
-import { scrollToTop } from "../../utlis/scrollToTop";
-import Card from "../../components/cards/TestimonialCard/Card";
-import type { RootState } from "../../redux/store";
-import GenericSlider from "../../components/shared/GenericSlider";
-
-function isValidClient(client: any): client is Client {
-  return (
-    client &&
-    typeof client.name === "string" &&
-    typeof client.subject === "string" &&
-    typeof client.review === "string" &&
-    typeof client.clientImage === "string" &&
-    typeof client.location === "string" &&
-    typeof client.show === "boolean" &&
-    typeof client.rate === "number"
-  );
-}
+import { useEffect, useState } from "react"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import Title from "../../components/shared/Title"
+import { SectionWrapper } from "../../layouts/SectionWrapper"
+import ReviewModal from "../../components/cards/ReviewModal"
+import { listenToTestimonials } from "../../utlis/firebaseListeners/testimonialsListener"
+import type { Client } from "../../redux/types/client"
+import { scrollToTop } from "../../utlis/scrollToTop"
+import Card from "../../components/cards/TestimonialCard/Card"
+import type { RootState } from "../../redux/store"
+import GenericSlider from "../../components/shared/GenericSlider"
 
 function OurClientsSection() {
-  const [showReviewModal, setShowReviewModal] = useState(false);
-  const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  const [showReviewModal, setShowReviewModal] = useState(false)
+  const [hasReviewed, setHasReviewed] = useState(false)
 
-  const dispatch = useAppDispatch();
-
+  const dispatch = useAppDispatch()
   const { items, loading, error } = useAppSelector(
     (state: RootState) => state.testimonials
-  );
+  )
+
+  useEffect(() => {
+    const reviewed = localStorage.getItem("hasReviewed")
+    if (reviewed === "true") setHasReviewed(true)
+  }, [])
 
   useEffect(() => {
     if (!items || items.length === 0) {
-      dispatch(listenToTestimonials());
+      dispatch(listenToTestimonials())
     }
-  }, [dispatch, items]);
+  }, [dispatch, items])
 
-  const handleCloseModal = () => setShowReviewModal(false);
-
-  const validClients = useMemo(() => items.filter(isValidClient), [items]);
-
-  const skeletonCount = items?.length > 0 ? items.length : 3;
+  const handleCloseModal = () => setShowReviewModal(false)
+  const skeletonCount = items?.length > 0 ? items.length : 3
 
   return (
     <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
@@ -66,25 +53,6 @@ function OurClientsSection() {
                 key={i}
                 className="p-[30px] lg-custom:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl border dark:border-gray15 border-white90 bg-gray-200 dark:bg-gray-700 animate-pulse"
               >
-                <div className="flex gap-2 2xl:gap-2.5 mb-6 lg-custom:mb-[30px] 2xl:mb-10">
-                  {[...Array(5)].map((_, starIdx) => (
-                    <div
-                      key={starIdx}
-                      className="w-[30px] h-[30px] lg-custom:w-[38px] lg-custom:h-[36px] 2xl:w-11 2xl:h-11 rounded-full bg-gray-300 dark:bg-gray-600"
-                    />
-                  ))}
-                </div>
-                <div className="mb-6 lg-custom:mb-[30px] 2xl:mb-10">
-                  <div className="h-7 lg-custom:h-8 2xl:h-9 bg-gray-300 dark:bg-gray-600 rounded w-3/4 mb-3" />
-                  <div className="h-5 lg-custom:h-6 2xl:h-7 bg-gray-300 dark:bg-gray-600 rounded w-full" />
-                </div>
-                <div className="flex gap-2.5 2xl:gap-3 items-center">
-                  <div className="w-[50px] h-[50px] 2xl:w-[60px] 2xl:h-[60px] rounded-full bg-gray-300 dark:bg-gray-600" />
-                  <div className="flex flex-col gap-1 w-full">
-                    <div className="h-5 lg-custom:h-6 2xl:h-7 bg-gray-300 dark:bg-gray-600 rounded w-1/2" />
-                    <div className="h-4 lg-custom:h-5 2xl:h-6 bg-gray-300 dark:bg-gray-600 rounded w-1/3" />
-                  </div>
-                </div>
               </div>
             ))}
           </div>
@@ -93,40 +61,38 @@ function OurClientsSection() {
         ) : (
           <>
             <GenericSlider<Client>
-              items={validClients}
-              renderSlide={(client: Client) => (
-                <Card key={client.name} client={client} />
-              )}
-              slidesPerView={3}
+              items={items}
+              renderSlide={(client: Client) => <Card key={client.name} client={client} />}
+              slidesPerView={{ lg: 3, md: 2, sm: 1 }}
               showCounter
               titleBtnLabel="View All Testimonials"
               navigateTo="allTestimonials"
               onClick={() => scrollToTop()}
             />
-            <button
-              className="text-sm cursor-pointer text-black dark:text-white underline"
-              onClick={() => setShowReviewModal(true)}
-            >
-              Add a review
-            </button>
+
+            {!hasReviewed && (
+              <button
+                className="text-sm cursor-pointer text-black dark:text-white underline mt-6"
+                onClick={() => setShowReviewModal(true)}
+              >
+                Add a review
+              </button>
+            )}
           </>
         )}
 
-        {alertMessage && (
-          <AlertMessage
-            message={alertMessage}
-            onClose={() => setAlertMessage(null)}
-          />
-        )}
         {showReviewModal && (
           <ReviewModal
-            setAlertMessage={setAlertMessage}
+            onSuccess={() => {
+              localStorage.setItem("hasReviewed", "true")
+              setHasReviewed(true)
+            }}
             closeModal={handleCloseModal}
           />
         )}
       </section>
     </SectionWrapper>
-  );
+  )
 }
 
-export default OurClientsSection;
+export default OurClientsSection

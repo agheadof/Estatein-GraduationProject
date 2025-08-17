@@ -1,4 +1,3 @@
-import type { ElementType } from "react";
 
 export type CardLink = {
   title: string;
@@ -8,7 +7,7 @@ export type CardLink = {
 export type CommonCardProps = {
   cardImg: string;
   links?: CardLink[];      
-  HeadingTag?: ElementType;
+HeadingTag?: "link" | "h1" | "h2" | "h5" | "span" | "a";
   cardDesc?: string;
   cardStyle?: string;
   titleStyle?: string;
