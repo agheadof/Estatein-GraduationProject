@@ -5,9 +5,10 @@ import PricingCard from "../../components/cards/PricingCards/PricingCard";
 import Title from "../../components/shared/Title";
 import { SectionWrapper } from "../../layouts/SectionWrapper";
 import { subscribePricing } from "../../redux/slices/pricingSlice";
+import type { AppDispatch } from "../../redux/store";
 
 const PricingDetailsSection = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(subscribePricing());
@@ -64,7 +65,7 @@ const PricingDetailsSection = () => {
                 Listing Price
               </h5>
               <span className="text-2xl md:text-[30px] 2xl:text-[40px] text-black dark:text-white font-semibold">
-                {currentProperty.price}
+                {currentProperty.listingPrice}
               </span>
             </div>
 

@@ -46,7 +46,7 @@ function PaginationComponent({
       <button
         onClick={() => onPageChange(1)}
         disabled={currentPage === 1}
-        className="px-3 py-1 border rounded disabled:opacity-50 dark:bg-gray08 bg-white99 dark:border-gray15 border-white90  dark:text-white text-black "
+        className="px-1 md:px-3 py-1 border rounded disabled:opacity-50 dark:bg-gray08 bg-white99 dark:border-gray15 border-white90  dark:text-white text-black "
       >
         First
       </button>
@@ -54,7 +54,7 @@ function PaginationComponent({
       <button
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className="px-3 py-1 border rounded disabled:opacity-50 dark:bg-gray08 bg-white99 dark:border-gray15 border-white90 dark:text-white text-black "
+        className="px-1 md:px-3 py-1 border rounded disabled:opacity-50 dark:bg-gray08 bg-white99 dark:border-gray15 border-white90 dark:text-white text-black "
       >
         Prev
       </button>
@@ -82,7 +82,7 @@ function PaginationComponent({
       <button
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="px-3 py-1 border rounded disabled:opacity-50 dark:bg-gray08 bg-white99 dark:border-gray15 border-white90 dark:text-white text-black"
+        className="px-1 md:px-3 py-1 border rounded disabled:opacity-50 dark:bg-gray08 bg-white99 dark:border-gray15 border-white90 dark:text-white text-black"
       >
         Next
       </button>
@@ -90,7 +90,7 @@ function PaginationComponent({
       <button
         onClick={() => onPageChange(totalPages)}
         disabled={currentPage === totalPages}
-        className="px-3 py-1 border rounded disabled:opacity-50 dark:bg-gray08 bg-white99 dark:border-gray15 border-white90 dark:text-white text-black"
+        className="px-1 md:px-3 py-1 border rounded disabled:opacity-50 dark:bg-gray08 bg-white99 dark:border-gray15 border-white90 dark:text-white text-black"
       >
         Last
       </button>

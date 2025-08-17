@@ -1,4 +1,3 @@
-
 import type { AppDispatch } from "../store";
 import type { Faqs } from "../types/FAQ";
 import { createGenericSlice } from "./createGenericSlice";
