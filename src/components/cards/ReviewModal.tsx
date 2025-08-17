@@ -9,10 +9,10 @@ import FormTextarea from "../Forms/FormTextarea"
 
 type ReviewModalProps = {
   closeModal: () => void
-  setAlertMessage: React.Dispatch<React.SetStateAction<string | null>>
+  onSuccess: () => void
 }
 
-function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
+function ReviewModal({ closeModal, onSuccess }: ReviewModalProps) {
   const formRef = useRef<HTMLFormElement>(null)
   const [imageUrl, setImageUrl] = useState("")
   const [uploading, setUploading] = useState(false)
@@ -32,16 +32,11 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
 
     const res = await fetch(
       `https://api.imgbb.com/1/upload?key=edeee7c6c2851a590946b20e9ce00b5d`,
-      {
-        method: "POST",
-        body: formData,
-      }
+      { method: "POST", body: formData }
     )
 
     const data = await res.json()
-    if (data?.success) {
-      cb(data.data.url)
-    }
+    if (data?.success) cb(data.data.url)
     setUploading(false)
   }
 
@@ -50,10 +45,7 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
     if (file && file.type.startsWith("image/")) {
       handleImageUpload(file, (url) => setImageUrl(url), setUploading)
     } else {
-      setErrors((prev) => ({
-        ...prev,
-        image: "Only valid image formats are allowed",
-      }))
+      setErrors((prev) => ({ ...prev, image: "Only valid image formats are allowed" }))
     }
   }
 
@@ -94,12 +86,12 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
     try {
       const newRef = push(ref(db, "testimonials"))
       await set(newRef, data)
-      setAlertMessage("✅ Review submitted!")
       form.reset()
       setImageUrl("")
       closeModal()
+      onSuccess() // يخفي الزر ويخزن localStorage
     } catch (err) {
-      setAlertMessage("❌ Something went wrong")
+      console.error("Submit error:", err)
     } finally {
       setLoading(false)
     }
@@ -131,44 +123,20 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
 
         <div className="w-full flex flex-col lg:flex-row gap-6">
           <div className="flex flex-col gap-5 flex-1">
-            <FormInput
-              label="Subject"
-              name="subject"
-              placeholder="Enter brief subject"
-              error={errors.subject}
-              className="border border-purple60"
-            />
-
-            <FormTextarea
-              label="Description"
-              name="review"
-              error={errors.review}
-              className="w-full p-2"
-            />
+            <FormInput label="Subject" name="subject" placeholder="Enter brief subject" error={errors.subject} className="border border-purple60" />
+            <FormTextarea label="Description" name="review" error={errors.review} className="w-full p-2" />
 
             <div>
-              <label className="font-semibold text-black dark:text-white mb-1 block">
-                Your Rating
-              </label>
+              <label className="font-semibold text-black dark:text-white mb-1 block">Your Rating</label>
               <StarRating value={rate} onChange={setRating} />
-              {errors.rate && (
-                <p className="text-red-600 text-xs mt-1">{errors.rate}</p>
-              )}
+              {errors.rate && <p className="text-red-600 text-xs mt-1">{errors.rate}</p>}
             </div>
           </div>
 
           <div className="flex flex-col gap-5 flex-1">
             <div>
-              <label className="mb-2 block text-base font-semibold dark:text-white text-black">
-                Your Image:
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                ref={imgRef}
-                onChange={handleImageChange}
-              />
+              <label className="mb-2 block text-base font-semibold dark:text-white text-black">Your Image:</label>
+              <input type="file" accept="image/*" className="hidden" ref={imgRef} onChange={handleImageChange} />
               <div
                 className="w-full max-w-[200px] h-[140px] rounded-lg border border-purple60 cursor-pointer flex items-center justify-center overflow-hidden"
                 onClick={() => imgRef.current?.click()}
@@ -176,34 +144,16 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
                 {uploading ? (
                   <p className="text-sm">Uploading...</p>
                 ) : imageUrl ? (
-                  <img
-                    src={imageUrl}
-                    className="w-full h-full object-cover object-top"
-                  />
+                  <img src={imageUrl} className="w-full h-full object-cover object-top" />
                 ) : (
                   <ImageIcon />
                 )}
               </div>
-              {errors.image && (
-                <p className="text-red-600 text-xs mt-1">{errors.image}</p>
-              )}
+              {errors.image && <p className="text-red-600 text-xs mt-1">{errors.image}</p>}
             </div>
 
-            <FormInput
-              label="Your Name"
-              name="name"
-              placeholder="Enter your name"
-              error={errors.name}
-              className="border border-purple60"
-            />
-
-            <FormInput
-              label="Region"
-              name="location"
-              placeholder="Enter your location"
-              error={errors.location}
-              className="border border-purple60"
-            />
+            <FormInput label="Your Name" name="name" placeholder="Enter your name" error={errors.name} className="border border-purple60" />
+            <FormInput label="Region" name="location" placeholder="Enter your location" error={errors.location} className="border border-purple60" />
           </div>
         </div>
 

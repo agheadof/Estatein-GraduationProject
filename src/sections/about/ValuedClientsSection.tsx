@@ -71,7 +71,7 @@ function ValuedClientsSection() {
               items={items}
               renderSlide={renderClient}
               showCounter
-              slidesPerView={2}
+              slidesPerView={{ lg: 2, md: 2, sm: 1 }}
               counterClassName="justify-center md:justify-between"
             />
           )}

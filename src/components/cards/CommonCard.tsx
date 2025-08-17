@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import type { CommonCardProps } from "../../types/CommonCard";
 
@@ -15,12 +16,12 @@ const CommonCard = ({
 }: CommonCardProps) => {
   const handleAnchorClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    targetId: string
+    href: string
   ) => {
-    e.preventDefault();
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const targetElement = document.getElementById(href.slice(1));
+      if (targetElement) targetElement.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -47,32 +48,33 @@ const CommonCard = ({
 
         {links && links.length > 0 ? (
           <div className="flex flex-wrap justify-center gap-2.5 lg-custom:gap-5 2xl:gap-[30px]">
-            {links
-              .filter((e) => e.title)
-              .map((e, index) => (
-                <Link
-                  key={index}
-                  to={e.link}
-                  className={`text-black dark:text-white font-semibold border-b border-transparent group-hover:border-purple75 transform-border duration-300 ${titleSize}`}
-                >
-                  {e.title}
-                </Link>
-              ))}
+            {links.map((link, idx) => (
+              <a
+                key={idx}
+                href={link.href || link.link}
+                onClick={(e) =>
+                  handleAnchorClick(e, link.href || link.link || "#")
+                }
+                className={`text-black dark:text-white font-semibold border-b border-transparent hover:border-purple-500 transform duration-300 ${titleSize}`}
+                target={link.href?.startsWith("http") ? "_blank" : undefined}
+                rel={link.href?.startsWith("http") ? "noreferrer" : undefined}
+              >
+                {link.title}
+              </a>
+            ))}
           </div>
-        ) : HeadingTag === Link ? (
+        ) : HeadingTag === "link" ? (
           <Link
-            to={titleLink || "#"}
-            className={`text-black dark:text-white font-semibold border-b border-transparent group-hover:border-purple75 transform-border duration-300 ${titleSize}`}
+            to={titleLink!}
+            className={`text-black dark:text-white font-semibold border-b border-transparent hover:border-purple-500 transform duration-300 ${titleSize}`}
           >
             {cardTitle}
           </Link>
         ) : HeadingTag === "a" ? (
           <a
             href={titleLink}
-            onClick={(e) =>
-              handleAnchorClick(e, titleLink?.split("#")[1] || "")
-            }
-            className={`text-black dark:text-white font-semibold border-b border-transparent group-hover:border-purple75 transform-border duration-300 ${titleSize}`}
+            onClick={(e) => handleAnchorClick(e, titleLink || "")}
+            className={`text-black dark:text-white font-semibold border-b border-transparent hover:border-purple-500 transform duration-300 ${titleSize}`}
           >
             {cardTitle}
           </a>
