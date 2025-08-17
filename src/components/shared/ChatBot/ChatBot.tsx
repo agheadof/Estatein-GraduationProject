@@ -78,7 +78,7 @@ const ChatBot = () => {
           data-aos-duration="400"
           data-aos-easing="ease-out-cubic"
           data-aos-once="true"
-          className="fixed bottom-[90px] left-15 bg-gray20 text-white px-4 py-3 rounded-lg rounded-bl-none shadow-lg z-50 max-w-[280px] text-sm"
+          className="fixed bottom-[90px] left-15 dark:bg-gray20 dark:text-white bg-purple75 px-4 py-3 rounded-lg rounded-bl-none shadow-lg z-50 max-w-[280px] text-sm"
         >
           <p className="font-semibold mb-1">{chatbotTexts.welcomeTitle}</p>
           <p>{chatbotTexts.welcomeMessage}</p>
@@ -113,18 +113,18 @@ const ChatBot = () => {
           data-aos="fade-up"
           data-aos-duration="300"
           data-aos-once="true"
-          className="fixed bottom-[100px] left-6 z-40 bg-gray10 border border-gray15 shadow-xl h-[70vh] w-[80vw] max-w-[400px] rounded-xl flex flex-col overflow-hidden"
+          className="fixed bottom-[100px] left-6 z-40 dark:bg-gray10 bg-white border border-gray15 shadow-xl h-[60vh] w-[40vw] max-w-[350px] rounded-xl flex flex-col overflow-hidden"
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-4 bg-gray15">
+          <div className="flex items-center justify-between p-4  dark:bg-gray15 dark:text-white bg-purple75 text-white">
             <div className="flex items-center gap-3">
               <img src="/assets/icons/bot.svg" alt="Logo" className="w-10 h-10" />
               <div>
-                <h2 className="text-lg font-semibold text-white">{chatbotTexts.headerTitle}</h2>
-                <p className="text-sm text-gray60">{chatbotTexts.headerSubtitle}</p>
+                <h2 className="text-lg font-semibold ">{chatbotTexts.headerTitle}</h2>
+                <p className="text-sm ">{chatbotTexts.headerSubtitle}</p>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="cursor-pointer p-2 hover:bg-gray20 rounded-full transition">
+            <button onClick={() => setIsOpen(false)} className="cursor-pointer p-2 dark:hover:bg-gray20 hover:bg-gray-300 rounded-full transition">
               <img src="/assets/icons/close.svg" alt="Close" />
             </button>
           </div>
@@ -139,8 +139,8 @@ const ChatBot = () => {
                   </span>
                 )}
                 <div className={`px-4 py-2 text-sm rounded-lg max-w-[100%] ${msg.role === "user"
-                  ? "bg-gray30 text-white rounded-br-none"
-                  : "bg-gray20 text-white rounded-bl-none"
+                  ? "dark:bg-gray15 dark:text-white bg-purple75 text-white rounded-br-none"
+                  : "dark:bg-gray15 dark:text-white bg-purple75 text-white rounded-bl-none"
                   }`}>
                   {msg.content}
                 </div>
@@ -168,7 +168,7 @@ const ChatBot = () => {
                   <button
                     key={question}
                     onClick={() => sendMessage(question)}
-                    className="bg-gray15 text-white text-xs px-3 py-1 rounded-full hover:bg-gray20 transition"
+                    className="dark:bg-gray15 dark:text-white bg-purple75 text-white text-xs px-3 py-1 rounded-full hover:bg-purple70 dark:hover:bg-gray20 transition"
                   >
                     {question}
                   </button>
@@ -178,9 +178,9 @@ const ChatBot = () => {
           )}
 
           {/* Input */}
-          <div className="flex p-3 gap-2 bg-gray08">
+          <div className="flex p-3 gap-2 dark:bg-gray08  dark:text-white bg-purple75  ">
             <input
-              className="flex-1 bg-gray15 text-white px-4 py-2 text-sm focus:outline-none rounded-3xl placeholder-gray50"
+              className="flex-1 bg-gray-200 dark:bg-gray15 text-white px-4 py-2 text-sm focus:outline-none rounded-3xl placeholder-gray50"
               value={input}
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
@@ -189,7 +189,7 @@ const ChatBot = () => {
             <button
               onClick={() => sendMessage(input)}
               disabled={loading}
-              className="bg-gray30 text-white px-4 py-2 rounded-full text-sm"
+              className="bg-gray-300 dark:bg-gray30 text-white px-4 py-2 rounded-full text-sm"
             >
               {loading ? (
                 <img src="/assets/icons/stop.svg" alt="Stop" className="w-5 h-5" />

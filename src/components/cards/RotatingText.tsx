@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useMemo } from "react";
 
 export default function RotatingText() {
-  const text = "Discover Your Dream Property✨ ";
+  const text = "✨ Discover Your Dream Property ";
   const circleRef = useRef<HTMLDivElement>(null);
   const [radius, setRadius] = useState(88);
   const [isFast, setIsFast] = useState(false);
@@ -27,7 +27,7 @@ export default function RotatingText() {
   const letters = useMemo(() => text.split(""), [text]);
 
   return (
-    <div className="absolute bottom-[-55px] lg-custom:bottom-0 2xl:top-[240px] 2xl:left-[-80px] lg-custom:top-[120px] lg-custom:left-[-70px] inline-block z-40">
+    <div  className="absolute bottom-[-55px] lg-custom:bottom-0 2xl:top-[144px] 2xl:left-[-80px] lg-custom:top-[100px] lg-custom:left-[-70px] inline-block z-40">
       <style>{`
         @keyframes rotateSlow {
           0% { transform: rotate(0deg); }
@@ -64,7 +64,7 @@ export default function RotatingText() {
             ))}
           </div>
 
-          <div className="bg-white90 dark:bg-gray15 p-3 md:p-5 2xl:p-7 rounded-full border border-white90 dark:border-gray15 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer">
+          <div className="bg-white90 dark:bg-gray10 p-3 md:p-5 2xl:p-7 rounded-full border border-white90 dark:border-gray15 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer">
             <img src="/assets/icons/arrowUpRight.svg" alt="Arrow" />
           </div>
         </div>
