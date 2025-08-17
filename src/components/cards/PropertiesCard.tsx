@@ -57,25 +57,25 @@ function PropertiesCard({
       : words.slice(0, 10).join(" ") + "…"
   }, [property.desc])
 
-  const renderImage = useMemo(() => {
-    return property.image ? (
-      <img
-        loading="lazy"
-        className="object-cover w-full h-[210px] lg-custom:h-[255px] 2xl:h-[318px] rounded-[10px]  "
-        src={property.image}
-        alt={property.title ?? "Property Image"}
-      />
-    ) : (
-      <div className="bg-gray20 dark:bg-gray15 w-full h-[210px] lg-custom:h-[255px] 2xl:h-[318px] rounded-[10px] mb-4 lg-custom:mb-5 2xl:mb-[30px]" />
-    )
-  }, [property.image, property.title])
+  // const renderImage = useMemo(() => {
+  //   return property.image ? (
+  //     <img
+  //       loading="lazy"
+  //       className="object-cover w-full h-[210px] lg-custom:h-[255px] 2xl:h-[318px] rounded-[10px]  "
+  //       src={property.image}
+  //       alt={property.title ?? "Property Image"}
+  //     />
+  //   ) : (
+  //     <div className="bg-gray20 dark:bg-gray15 w-full h-[210px] lg-custom:h-[255px] 2xl:h-[318px] rounded-[10px] mb-4 lg-custom:mb-5 2xl:mb-[30px]" />
+  //   )
+  // }, [property.image, property.title])
 
   const renderTags = useMemo(() => {
     if (!showTags || !property.tags) return null
     return (
-      <span className="text-nowrap text-[clamp(12px,1.2vw,18px)] font-medium text-black dark:text-white py-1.5 2xl:py-2 px-3 2xl:px-3.5 bg-white97 dark:bg-gray10 dark:border-gray15 border-white90 rounded-[28px]">
-        {property.tags}
-      </span>
+      <span className="text-nowrap text-[12px] font-medium text-black dark:text-white py-1.5 2xl:py-2 px-3 2xl:px-3.5 bg-white97 dark:bg-gray10 dark:border-gray15 border-white90 rounded-[28px]">
+          {property.tags}
+        </span>
     )
   }, [showTags, property.tags])
 

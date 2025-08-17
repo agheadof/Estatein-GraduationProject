@@ -13,6 +13,7 @@ const Hero = ({ title, description }: HeroProps) => {
 
   return (
     <div
+      id="#hero"
       className={`relative ${
         isBannerVisible
           ? "lg-custom:h-[calc(100vh-142px)] lg-custom:mt-[79px] 2xl:mt-[94px] 2xl:h-[calc(100vh-157px)]"
