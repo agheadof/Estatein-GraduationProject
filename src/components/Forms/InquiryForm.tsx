@@ -69,6 +69,14 @@ function InquiryForm({
     const payload = { ...data, type, createdAt: serverTimestamp(), agreed };
     try {
       await push(ref(db, `forms/${type}`), payload);
+      await push(ref(db, "notifications"), {
+        name: `${data.firstName || ""} ${data.lastName || ""}`.trim() || undefined,
+        email: data.email || undefined,
+        message: (data.message || data.inquiryType || "").toString().trim(),
+        formType: type,
+        createdAt: Date.now(),
+      });
+
       setShowAlert(true);
       resetForm();
     } catch (error) {
@@ -217,6 +225,7 @@ function InquiryForm({
             variant="normalPurple"
             className="normalPurple 2xl:py-4.5 2xl:px-11.5 py-3.5 px-8.5 rounded-md 2xl:rounded-lg 2xl:text-lg text-sm"
             type="submit"
+            onClick={() => handleSubmit(onSubmit)()}
           >
             Send Your Message
           </MainButton>

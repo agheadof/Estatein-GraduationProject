@@ -12,7 +12,7 @@ function FaqSection() {
 
   useEffect(() => {
     if (items.length === 0) {
-            const unsubscribe = dispatch(fetchFaqs());
+      const unsubscribe = dispatch(fetchFaqs());
 
       return () => {
         if (typeof unsubscribe === "function") {
@@ -60,6 +60,7 @@ function FaqSection() {
           showCounter={true}
           titleBtnLabel="View All FAQ’s"
           navigateTo="allFaq"
+          onClick={() => scrollToTop()}
         />
       )}
     </section>

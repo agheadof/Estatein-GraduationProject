@@ -34,6 +34,13 @@ useEffect(() => {
   }
 }, [id, dispatch]);
 
+useEffect(() => {
+  if (current) {
+    console.log("Current property data:", current);
+  }
+}, [current]);
+
+
   useEffect(() => {
     if (error === "not-found") navigate("/properties")
   }, [error, navigate])
@@ -148,7 +155,7 @@ useEffect(() => {
           <p className="text-gray40 dark:text-gray60 text-sm 2xl:text-[16px] font-medium">
             Price
           </p>
-          <p className="font-semibold text-xl 2xl:text-2xl">{current?.Price}</p>
+          <p className="font-semibold text-xl 2xl:text-2xl">{current?.price}</p>
         </div>
       </div>
 
