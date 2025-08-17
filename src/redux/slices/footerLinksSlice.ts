@@ -3,7 +3,7 @@ import { db } from "../../firebaseConfig";
 import { ref, onValue } from "firebase/database";
 
 export type SocialLink = {
-    platform: string; // facebook, twitter, ...
+    platform: string; 
     url: string;
 };
 
