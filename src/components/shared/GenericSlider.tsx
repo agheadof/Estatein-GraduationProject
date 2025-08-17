@@ -32,7 +32,7 @@ const GenericSlider = <T,>({
   const [isEnd, setIsEnd] = useState(false);
   const [currentSlidesPerGroup, setCurrentSlidesPerGroup] =
     useState(slidesPerView);
-
+    
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     slides: {
       perView: currentSlidesPerGroup,

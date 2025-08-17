@@ -25,7 +25,7 @@ const UnlockCardComponent = ({
           {title}{" "}
         </h2>
         {!investments && (
-          <button className="bg-white99 dark:bg-gray08 text-sm 2xl:text-lg font-medium text-black dark:text-white rounded-lg 2xl:rounded-xl border border-white90 dark:border-gray15 max-md:w-full py-3.5 px-5 2xl:py-[18px] 2xl:px-6 ">
+          <button className="bg-purple90 dark:bg-gray08 text-sm 2xl:text-lg font-medium text-black dark:text-white rounded-lg 2xl:rounded-xl border border-white90 dark:border-gray15 max-md:w-full py-3.5 px-5 2xl:py-[18px] 2xl:px-6 ">
             Learn More
           </button>
         )}
@@ -38,7 +38,7 @@ const UnlockCardComponent = ({
       </p>
 
       {investments && (
-        <button className="bg-white99 dark:bg-gray08 text-sm 2xl:text-lg font-medium text-black dark:text-white rounded-lg 2xl:rounded-xl border border-white90 dark:border-gray15 py-[18px] px-6 w-full mt-[30px]">
+        <button className="bg-purple90 dark:bg-gray08 text-sm 2xl:text-lg font-medium text-black dark:text-white rounded-lg 2xl:rounded-xl border border-white90 dark:border-gray15 py-[18px] px-6 w-full mt-[30px]">
           Learn More
         </button>
       )}
