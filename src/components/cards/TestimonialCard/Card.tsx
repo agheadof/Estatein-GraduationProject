@@ -14,15 +14,15 @@ type Props = {
 
 const Card = ({ client }: Props) => {
   const cardContainerClass =
-    "p-[30px] lg-custom:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl dark:bg-gray08 bg-white99 border dark:border-gray15 border-white90";
+    " flex flex-col justify-between gap-6 xl:gap-[30px] 2xl:gap-[40px] h-full 2xl:!min-h-[442px] 2xl:!max-h-[442px] xl:!min-h-[363px] xl:!max-h-[363px]  p-[30px] xl:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl dark:bg-gray08 bg-white99 border dark:border-gray15 border-white90";
   const clientNameClass =
     "dark:text-white text-black font-medium text-lg lg-custom:text-xl 2xl:text-xl whitespace-nowrap";
   const clientLocationClass =
     "text-gray40 dark:text-gray60 font-medium text-sm lg-custom:text-base 2xl:text-lg";
   const subjectClass =
-    "dark:text-white text-black whitespace-nowrap font-semibold lg-custom:text-xl 2xl:text-2xl mb-2.5";
+    "dark:text-white text-black whitespace-nowrap font-semibold text-lg lg-custom:text-xl 2xl:text-2xl";
   const reviewClass =
-    "line-clamp-2 dark:text-white text-black font-medium lg-custom:text-base 2xl:text-lg";
+    " dark:text-white text-black font-medium text-sm lg-custom:text-base 2xl:text-lg";
 
   return (
     <div className={cardContainerClass}>
@@ -30,13 +30,13 @@ const Card = ({ client }: Props) => {
       {client.rate && <StarRating rate={client.rate} />}
 
       {/* Subject & Review */}
-      <div className="mb-6 lg-custom:mb-[30px] 2xl:mb-10">
+      <div className=" flex flex-col gap-1.5 xl:gap-2.5 2xl:gap-3.5  ">
         <h3 className={subjectClass}>{client.subject}</h3>
         <p className={reviewClass}>{client.review}</p>
       </div>
 
       {/* Client Info */}
-      <div className="flex gap-2.5 2xl:gap-3 items-center">
+      <div className="flex gap-2.5 2xl:gap-3 items-center ">
         <img
           src={client.clientImage}
           alt={`${client.name} image`}

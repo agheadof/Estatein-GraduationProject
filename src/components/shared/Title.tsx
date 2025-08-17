@@ -1,7 +1,7 @@
 import TitleBtn from "../ui/TitleBtn";
 import { useOneTimeAOS } from "../../hooks/useOneTimeAOS";
 
-type TitleProps = {
+export type TitleProps = {
   starImg?: boolean;
   titleStyle?: string;
   heading: string;
@@ -35,13 +35,13 @@ const Title = ({
           <img
             src="/assets/icons/MainTitle/stars.svg"
             alt="icon"
-            className="2x:w-[68px] 2xl:h-[30px] h-[24px] w-[54.72px] -ml-2 md:-ml-2.5 2xl:-ml-5"
+            className="2xl:w-[68px] 2xl:h-[30px] h-[24px] w-[45px] lg-custom:w-[54.72px] -ml-2 md:-ml-2.5 2xl:-ml-5"
           />
         </div>
       )}
       <div className="flex justify-between items-center 2xl:items-end">
         <div>
-          <h2 className="text-black dark:text-white font-semibold text-[28px] lg-custom:text-[38px] 2xl:text-5xl mb-2 lg-custom:mb-2.5 2xl:mb-3.5">
+          <h2 className="text-black dark:text-white font-semibold text-[28px] lg-custom:text-[38px] 2xl:text-5xl mb-2 lg-custom:mb-2.5 2xl:mb-3.5 leading-[150%] ">
             {heading}
           </h2>
           <p

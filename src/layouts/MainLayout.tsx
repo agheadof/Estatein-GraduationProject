@@ -57,7 +57,7 @@ const MainLayout = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen font-urbanist flex-grow bg-white99 dark:bg-gray08 overflow-hidden">
+    <div className="flex flex-col min-h-screen font-urbanist flex-grow  overflow-hidden ">
       <CustomCursor />
       <ChatBot />
       {isLoading && <Loader />}
@@ -78,7 +78,7 @@ const MainLayout = () => {
             navData={navData} 
             />
 
-          <main>
+          <main className="bg-white99 dark:bg-gray08">
             <Outlet />
             <CTA
               title="Start Your Real Estate Journey Today"
@@ -90,7 +90,7 @@ const MainLayout = () => {
           <Scroll2Top />
           <Footer
             links={defaultLinks}
-            footerNote="©2023 Estatein. All Rights Reserved."
+            footerNote="@2023 Estatein. All Rights Reserved."
             logo="/assets/icons/Footer/logo.svg"
           />
         </>

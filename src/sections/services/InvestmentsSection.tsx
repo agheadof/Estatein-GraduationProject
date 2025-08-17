@@ -12,7 +12,10 @@ import {
 
 const InvestmentsSection = () => {
   return (
-    <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
+    <SectionWrapper
+      className="pt-[61px] lg-custom:pt-[90px] 2xl:pt-[110px]
+    pb-[80px] lg-custom:pb-[120px] 2xl:pb-[150px]"
+    >
       <section
         id="investments"
         className="flex flex-col items-center xl:flex-row gap-10 md:gap-[50px] 2xl:gap-[60px] "
@@ -45,7 +48,7 @@ const InvestmentsSection = () => {
                 key={index}
                 cardStyle="p-6 md:p-10 2xl:p-[50px] gap-4 md:gap-5 2xl:gap-[30px] bg-white99 dark:bg-gray08 border-white90 dark:border-gray15 h-full"
                 cardImg={card.cardImg}
-                cardTitle_1={card.cardTitle_1}
+                cardTitle={card.cardTitle}
                 cardDesc={card.cardDesc}
               />
             </div>

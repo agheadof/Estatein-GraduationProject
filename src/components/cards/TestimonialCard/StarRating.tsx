@@ -6,7 +6,7 @@ const StarRating = ({ rate }: StarRatingProps) => {
   if (!rate || rate <= 0) return null;
 
   return (
-    <div className="flex gap-2 2xl:gap-2.5 mb-6 lg-custom:mb-[30px] 2xl:mb-10">
+    <div className="flex gap-2 2xl:gap-2.5 ">
       {Array.from({ length: rate }).map((_, i) => (
         <div
           key={i}
