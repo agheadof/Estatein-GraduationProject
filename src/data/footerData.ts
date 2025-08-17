@@ -14,11 +14,11 @@ export const defaultLinks: LinkGroup[] = [
     title: "Home",
     to: "/",
     items: [
-      { label: "Hero Section", to: "/" },
-      { label: "Features", to: "/" },
-      { label: "Properties", to: "/properties" },
-      { label: "Testimonials", to: "/" },
-      { label: "FAQ's", to: "/" },
+      { label: "Hero Section", to: "/#hero" },
+      { label: "Features", to: "/#features" },
+      { label: "Properties", to: "/#properties" },
+      { label: "Testimonials", to: "/#testimonials" },
+      { label: "FAQ's", to: "/#faqs" },
     ],
   },
   {
@@ -26,18 +26,18 @@ export const defaultLinks: LinkGroup[] = [
     to: "/about",
     items: [
       { label: "Our Story", to: "/about" },
-      { label: "Our Works", to: "/about" },
-      { label: "How It Works", to: "/about" },
-      { label: "Our Team", to: "/about" },
-      { label: "Our Clients", to: "/about" },
+      { label: "Our Works", to: "/about#works" },
+      { label: "How It Works", to: "/about#steps" },
+      { label: "Our Team", to: "/about#team" },
+      { label: "Our Clients", to: "/about#clients" },
     ],
   },
   {
     title: "Properties",
     to: "/properties",
     items: [
-      { label: "Portfolio", to: "/properties" },
-      { label: "Categories", to: "/properties" },
+      { label: "Portfolio", to: "/properties#properties" },
+      { label: "Categories", to: "/properties#find" },
     ],
   },
   {

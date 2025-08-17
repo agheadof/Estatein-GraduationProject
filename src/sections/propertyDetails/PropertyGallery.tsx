@@ -1,23 +1,22 @@
-import { useEffect, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import { shallowEqual } from "react-redux";
+import { useEffect, useMemo } from "react"
+import { useNavigate } from "react-router-dom"
+import { shallowEqual } from "react-redux"
 
-import Gallery from "../../components/Sliders/Gallery";
-import DescriptionComponent from "../../components/cards/DescriptionComponent";
-import KeyFeaturesComponent from "../../components/cards/KeyFeaturesComponent";
-import { LocationIcon } from "../../components/icons/FormIcons";
+import Gallery from "../../components/Sliders/Gallery"
+import DescriptionComponent from "../../components/cards/DescriptionComponent"
+import KeyFeaturesComponent from "../../components/cards/KeyFeaturesComponent"
+import { LocationIcon } from "../../components/icons/FormIcons"
 
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchPropertyById } from "../../redux/thunks/propertyByIdThunk";
-import { setCurrentProperty } from "../../redux/slices/propertiesSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import { fetchPropertyById } from "../../redux/thunks/propertyByIdThunk"
 
 interface PropertyGalleryProps {
-  id: string;
+  id: string
 }
 
 const PropertyGallery = ({ id }: PropertyGalleryProps) => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const { current, error, loading } = useAppSelector(
     (state) => ({
@@ -26,49 +25,51 @@ const PropertyGallery = ({ id }: PropertyGalleryProps) => {
       loading: state.properties.loading,
     }),
     shallowEqual
-  );
+  )
+
+useEffect(() => {
+  if (id) {
+    console.log("Fetching property with id:", id);
+    dispatch(fetchPropertyById(id));
+  }
+}, [id, dispatch]);
 
   useEffect(() => {
-    dispatch(setCurrentProperty(id));
-    if (!current && id) dispatch(fetchPropertyById(id));
-  }, [id, dispatch]);
-
-  useEffect(() => {
-    if (error === "not-found") navigate("/properties");
-  }, [error, navigate]);
+    if (error === "not-found") navigate("/properties")
+  }, [error, navigate])
 
   const galleryDesktop = useMemo(
     () =>
-      current?.gallery && (
+      current?.images && (
         <Gallery
           perView={2}
           thumbNumber={9}
-          images={current.gallery}
+          images={current.images}
           className="hidden lg-custom:flex"
         />
       ),
-    [current?.gallery]
-  );
+    [current?.images]
+  )
 
   const galleryMobile = useMemo(
     () =>
-      current?.gallery && (
+      current?.images && (
         <Gallery
           perView={1}
           thumbNumber={4}
-          images={current.gallery}
+          images={current.images}
           className="lg-custom:hidden"
         />
       ),
-    [current?.gallery]
-  );
+    [current?.images]
+  )
 
   // main SkeletonBox style
   const SkeletonBox = ({ className = "" }) => (
     <div
       className={`rounded-[10px] 2xl:rounded-lg bg-gray-300 dark:bg-gray-600 animate-pulse ${className}`}
     ></div>
-  );
+  )
 
   if (loading)
     return (
@@ -127,35 +128,39 @@ const PropertyGallery = ({ id }: PropertyGalleryProps) => {
           </div>
         </div>
       </div>
-    );
+    )
 
   return (
-    <div className="flex flex-col gap-12 text-black dark:text-white">
+    <div className="flex flex-col gap-5 lg-custom:gap-6 text-black dark:text-white">
       <div className="flex justify-between items-center">
         <div className="flex flex-col lg-custom:flex-row items-center gap-5">
-          <h1 className="font-semibold text-xl 2xl:text-3xl">
+          <h1 className="font-semibold text-xl lg-custom:text-2xl 2xl:text-3xl">
             {current?.title}
           </h1>
-          <div className="border border-white90 dark:border-gray15 rounded-lg p-2.5 flex gap-1.5">
+          <div className="border border-white90 dark:border-gray15 lg-custom:rounded-md rounded-lg p-2  flex gap-1.5">
             <LocationIcon />
-            <h2 className="font-medium">{current?.location}</h2>
+            <h2 className="font-medium text-sm 2xl:text-lg">
+              {current?.location}
+            </h2>
           </div>
         </div>
-        <div className="flex flex-col gap-0.5">
-          <p className="text-gray40 dark:text-gray60 font-medium">Price</p>
-          <p className="font-semibold text-lg 2xl:text-2xl">{current?.Price}</p>
+        <div className="flex lg-custom:flex-col items-center lg-custom:items-start gap-1 lg-custom:gap-0.5">
+          <p className="text-gray40 dark:text-gray60 text-sm 2xl:text-[16px] font-medium">
+            Price
+          </p>
+          <p className="font-semibold text-xl 2xl:text-2xl">{current?.Price}</p>
         </div>
       </div>
 
       {galleryDesktop}
       {galleryMobile}
 
-      <div className="flex flex-col lg-custom:flex-row gap-5">
+      <div className="flex flex-col lg-custom:flex-row gap-5 2xl:gap-6">
         <DescriptionComponent />
         <KeyFeaturesComponent />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PropertyGallery;
+export default PropertyGallery

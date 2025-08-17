@@ -26,7 +26,10 @@ const SkeletonCard = () => (
     <div className="h-5 lg-custom:h-6 2xl:h-7 bg-gray-300 dark:bg-gray-600 rounded mb-6 w-full" />
     <div className="flex flex-wrap gap-1.5 2xl:gap-2.5 mb-5 lg-custom:mb-6 2xl:mb-[30px]">
       {[...Array(3)].map((_, i) => (
-        <div key={i} className="w-[100px] 2xl:w-[120px] h-8 2xl:h-10 rounded-[28px] bg-gray-300 dark:bg-gray-600" />
+        <div
+          key={i}
+          className="w-[100px] 2xl:w-[120px] h-8 2xl:h-10 rounded-[28px] bg-gray-300 dark:bg-gray-600"
+        />
       ))}
     </div>
     <div className="flex items-center justify-between gap-[30px] lg-custom:gap-[40px] 2xl:gap-[50px]">
@@ -71,7 +74,7 @@ function PropertiesSection({
       {error ? (
         <p className="text-red-500 mt-6">{error}</p>
       ) : loading && properties.length === 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[80px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[40px] lg-custom:mt-[60px] 2xl:mt-[80px]">
           {[...Array(3)].map((_, index) => (
             <SkeletonCard key={index} />
           ))}
@@ -91,6 +94,7 @@ function PropertiesSection({
           slidesPerView={3}
           showCounter
           titleBtnLabel="View All Properties"
+          onClick={() => scrollToTop()}
         />
       )}
     </SectionWrapper>

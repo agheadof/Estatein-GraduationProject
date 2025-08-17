@@ -20,11 +20,11 @@ const TeamCardComponent = ({ id, name, role, image, twitterLink }: TeamCardProps
     image?.startsWith("/") || image?.startsWith("http")
       ? image
       : image
-      ? "/" + image.replace(/^\/+/, "")
-      : FALLBACK_AVATAR;
+        ? "/" + image.replace(/^\/+/, "")
+        : FALLBACK_AVATAR;
 
   return (
-    <div className="flex flex-col w-full gap-10 lg-custom:gap-[50px] p-5 lg-custom:p-6 2xl:p-[30px] border border-gray15 rounded-xl">
+    <div className="group flex flex-col w-full gap-10 lg-custom:gap-[50px] p-5 lg-custom:p-6 2xl:p-[30px] border border-gray15 rounded-xl transition-all duration-500 hover:shadow-2xl hover:shadow-purple70/30">
       <div className="relative">
         <img
           src={src}
@@ -39,7 +39,7 @@ const TeamCardComponent = ({ id, name, role, image, twitterLink }: TeamCardProps
             href={twitterLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-purple70 dark:bg-purple60 absolute bottom-0 py-3.5 px-[26px] rounded-[43px] transform translate-y-1/2 left-1/2 -translate-x-1/2 flex items-center justify-center gap-3"
+            className="bg-purple70 dark:bg-purple60 absolute bottom-0 py-3.5 px-[26px] rounded-[43px] transform translate-y-1/2 left-1/2 -translate-x-1/2 flex items-center justify-center gap-3 transition-transform duration-700 group-hover:rotate-y-[360deg]"
             aria-label={`Open ${name}'s Twitter`}
           >
             <img
@@ -48,6 +48,7 @@ const TeamCardComponent = ({ id, name, role, image, twitterLink }: TeamCardProps
               className="w-5 h-5 2xl:w-6 2xl:h-6"
             />
           </a>
+
         )}
       </div>
 

@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react"
-import { useKeenSlider } from "keen-slider/react"
-import "keen-slider/keen-slider.min.css"
-import TitleBtn from "../ui/TitleBtn"
-import { NextArrowIcon, PrevArrowIcon } from "../icons/SliderArrows"
+import React, { useEffect, useRef, useState } from "react";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
+import TitleBtn from "../ui/TitleBtn";
+import { NextArrowIcon, PrevArrowIcon } from "../icons/SliderArrows";
 
 type Props<T> = {
   items: T[];
@@ -12,6 +12,7 @@ type Props<T> = {
   titleBtnLabel?: string;
   counterClassName?: string;
   navigateTo?: string;
+  onClick?: () => void;
 };
 
 const GenericSlider = <T,>({
@@ -22,6 +23,7 @@ const GenericSlider = <T,>({
   titleBtnLabel = "",
   counterClassName = "",
   navigateTo,
+  onClick,
 }: Props<T>) => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
@@ -114,19 +116,28 @@ const GenericSlider = <T,>({
   const totalGroups = Math.ceil(items.length / currentSlidesPerGroup);
 
   return (
-    <div data-aos="fade-up" className="w-full mt-[80px] " >
+    <div
+      data-aos="fade-up"
+      className="w-full  mt-[40px] lg-custom:mt-[60px] 2xl:mt-[80px]"
+    >
       <div ref={sliderRef} className="keen-slider mb-[50px] w-full ">
         {items.map((item, index) => (
-          <div key={index} className="keen-slider__slide">
+          <div
+            key={index}
+            className="keen-slider__slide 2xl:!min-w-[32.08%] lg-custom:!min-w-[32.29%]"
+          >
             {renderSlide(item, index)}
           </div>
         ))}
       </div>
-      <div 
+      <div
         className={`${counterClassName} flex justify-between items-center pt-4 2xl:pt-5 border-t border-t-white90 dark:border-t-gray15`}
       >
         {showCounter && (
-          <p data-aos="fade-right" className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block">
+          <p
+            data-aos="fade-right"
+            className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block"
+          >
             {String(currentGroup).padStart(2, "0")}
             <span className="text-gray40 dark:text-gray60">
               {" "}
@@ -141,12 +152,12 @@ const GenericSlider = <T,>({
               label={titleBtnLabel}
               className="whitespace-pre-wrap"
               navigateTo={navigateTo}
+              onClick={onClick}
             />
           </div>
         )}
 
-        <div           data-aos="fade-left"
-  className="flex items-center gap-2.5">
+        <div data-aos="fade-left" className="flex items-center gap-2.5">
           <button
             ref={prevRef}
             disabled={isBeginning}
@@ -175,7 +186,6 @@ const GenericSlider = <T,>({
           )}
 
           <button
-          
             ref={nextRef}
             disabled={isEnd}
             onClick={() => slider.current?.next()}
@@ -194,7 +204,7 @@ const GenericSlider = <T,>({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default GenericSlider;
