@@ -1,53 +1,55 @@
-import { useEffect, useMemo, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import Title from "../../components/shared/Title";
-import { SectionWrapper } from "../../layouts/SectionWrapper";
-import ReviewModal from "../../components/cards/ReviewModal";
-import AlertMessage from "../../components/ui/AlertMessage";
-import { listenToTestimonials } from "../../utlis/firebaseListeners/testimonialsListener";
-import type { Client } from "../../redux/types/client";
-import { scrollToTop } from "../../utlis/scrollToTop";
-import Card from "../../components/cards/TestimonialCard/Card";
-import type { RootState } from "../../redux/store";
-import GenericSlider from "../../components/shared/GenericSlider";
+import { useEffect, useState } from "react"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import Title from "../../components/shared/Title"
+import { SectionWrapper } from "../../layouts/SectionWrapper"
+import ReviewModal from "../../components/cards/ReviewModal"
+import AlertMessage from "../../components/ui/AlertMessage"
+import { listenToTestimonials } from "../../utlis/firebaseListeners/testimonialsListener"
+import type { Client } from "../../redux/types/client"
+import { scrollToTop } from "../../utlis/scrollToTop"
+import Card from "../../components/cards/TestimonialCard/Card"
+import type { RootState } from "../../redux/store"
+import GenericSlider from "../../components/shared/GenericSlider"
 
-function isValidClient(client: any): client is Client {
-  return (
-    client &&
-    typeof client.name === "string" &&
-    typeof client.subject === "string" &&
-    typeof client.review === "string" &&
-    typeof client.clientImage === "string" &&
-    typeof client.location === "string" &&
-    typeof client.show === "boolean" &&
-    typeof client.rate === "number"
-  );
-}
+// function isValidClient(client: any): client is Client {
+//   return (
+//     client &&
+//     typeof client.name === "string" &&
+//     typeof client.subject === "string" &&
+//     typeof client.review === "string" &&
+//     typeof client.clientImage === "string" &&
+//     typeof client.location === "string" &&
+//     typeof client.show === "boolean" &&
+//     typeof client.rate === "number"
+//   );
+// }
 
 function OurClientsSection() {
-  const [showReviewModal, setShowReviewModal] = useState(false);
-  const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  const [showReviewModal, setShowReviewModal] = useState(false)
+  const [alertMessage, setAlertMessage] = useState<string | null>(null)
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const { items, loading, error } = useAppSelector(
     (state: RootState) => state.testimonials
-  );
+  )
 
   useEffect(() => {
     if (!items || items.length === 0) {
-      dispatch(listenToTestimonials());
+      dispatch(listenToTestimonials())
     }
-  }, [dispatch, items]);
+  }, [dispatch, items])
 
-  const handleCloseModal = () => setShowReviewModal(false);
+  console.log("items", items)
 
-  const validClients = useMemo(
-    () => items.filter(isValidClient),
-    [items]
-  );
+  const handleCloseModal = () => setShowReviewModal(false)
 
-  const skeletonCount = items?.length > 0 ? items.length : 3;
+  // const validClients = useMemo(
+  //   () => items.filter(isValidClient),
+  //   [items]
+  // );
+
+  const skeletonCount = items?.length > 0 ? items.length : 3
 
   return (
     <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
@@ -60,7 +62,7 @@ function OurClientsSection() {
           onClick={() => scrollToTop()}
           anamation="fade-up"
         />
-        
+
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
             {[...Array(skeletonCount)].map((_, i) => (
@@ -94,24 +96,23 @@ function OurClientsSection() {
           <p className="text-red-500">{error}</p>
         ) : (
           <>
-
             <GenericSlider<Client>
-              items={validClients}
-              renderSlide={(client: Client) => <Card key={client.name} client={client} />}
+              items={items}
+              renderSlide={(client: Client) => (
+                <Card key={client.name} client={client} />
+              )}
               slidesPerView={3}
               showCounter
               titleBtnLabel="View All Testimonials"
               navigateTo="allTestimonials"
             />
             <button
-          className="text-sm cursor-pointer text-black dark:text-white underline"
-          onClick={() => setShowReviewModal(true)}
-        >
-          Add a review
-        </button>
+              className="text-sm cursor-pointer text-black dark:text-white underline"
+              onClick={() => setShowReviewModal(true)}
+            >
+              Add a review
+            </button>
           </>
-
-
         )}
 
         {alertMessage && (
@@ -128,7 +129,7 @@ function OurClientsSection() {
         )}
       </section>
     </SectionWrapper>
-  );
+  )
 }
 
-export default OurClientsSection;
+export default OurClientsSection
