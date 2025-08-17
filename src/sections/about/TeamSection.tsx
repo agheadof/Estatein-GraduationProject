@@ -6,6 +6,7 @@ import { fetchTeams } from "../../redux/slices/teamSlice";
 import Title from "../../components/shared/Title";
 import type { Team } from "../../redux/types/team";
 import { teamItemAos } from "../../utlis/Anamation";
+import GenericSlider from "../../components/shared/GenericSlider";
 
 const SkeletonCard = () => (
   <div className="flex flex-col w-full gap-10 lg-custom:gap-[50px] p-5 lg-custom:p-6 2xl:p-[30px] rounded-xl bg-gray-200 dark:bg-gray-700 animate-pulse">
@@ -43,12 +44,10 @@ const TeamSection = () => {
 
   return (
     <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
-      <section className="flex flex-col gap-4 lg-custom:gap-[60px] 2xl:gap-20">
         <Title
           heading="Meet the Estatein Team"
           paragraph="At Estatein, our success is driven by the dedication and expertise of our team. Get to know the people behind our mission to make your real estate dreams a reality."
           starImg
-          titleStyle="mb-2 md:mb-[10px] lg-custom:mb-[14px]"
           paragraphStyle="w-full"
           anamation="fade-up"
         />
@@ -59,16 +58,27 @@ const TeamSection = () => {
           </div>
         ) : error ? (
           <p className="text-red-500">{error}</p>
+        ) : visibleItems.length === 0 ? (
+          <p className="text-center text-gray-600 dark:text-gray-300">No team members found.</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-4 2xl:gap-[30px] gap-[20px]">
-            {visibleItems.map((team: Team, index: number) => (
-              <div key={team.id} {...teamItemAos(index)}>
-                <TeamCardComponent {...team} image={team.clientImage} />
+          <GenericSlider<Team>
+            items={visibleItems}
+            slidesPerView={3}
+            showCounter
+            counterClassName="mt-0"
+            renderSlide={(team, index) => (
+              <div {...teamItemAos(index)} className="h-full" key={team.id ?? index}>
+                <TeamCardComponent
+                  id={team.id}
+                  name={team.name}
+                  role={team.role}
+                  image={(team as any).image ?? (team as any).clientImage}
+                  twitterLink={(team as any).twitterLink}
+                />
               </div>
-            ))}
-          </div>
+            )}
+          />
         )}
-      </section>
     </SectionWrapper>
   );
 };

@@ -41,14 +41,14 @@ const Navbar = ({ isBannerVisible, logo: Logo, navData }: NavbarProps) => {
   }, [isMenuOpen]);
 
   return (
-    <nav className={`bg-purple70/60 backdrop-blur-xl dark:backdrop-blur-none dark:bg-gray10 dark:text-white py-5 lg-custom:py-3.5 2xl:py-5 fixed w-full z-50 border-b-2 border-purple75 dark:border-b-2 dark:border-b-gray15 transition-all duration-700 ease-in-out ${
+    <nav className={`bg-purple70/60 backdrop-blur-xl dark:backdrop-blur-none dark:bg-gray10 dark:text-white py-5 lg-custom:py-3.5 2xl:py-5 fixed w-full z-50 border-b-2 border-purple75 dark:border-b-2 dark:border-b-gray15 transition-all duration-700 ease-in-out h-[95px]${
         isBannerVisible ? "top-[78px] md:top-[49px] 2xl:top-[63px]" : "top-0"}`} role="navigation">
       <SectionWrapper>
         <div className="flex justify-between items-center">
           <NavLink to="/" onClick={handleCloseMenu}>
             <Logo className="w-24 md:w-28 2xl:w-40 text-white" />
           </NavLink>
-          <ul className="hidden lg-custom:flex lg-custom:gap-6 2xl:gap-[30px] 2xl:font-medium" role="menubar">
+          <ul className="hidden lg-custom:flex lg-custom:gap-6 2xl:gap-[30px] 2xl:font-medium leading-[150%] lg-custom:text-sm 2xl:text-lg" role="menubar">
             {mainNavLinks.map((link, index) => (
               <li key={link.name} {...navDesktopItemAos(index)}
                 onClick={scrollToTop}
@@ -61,7 +61,7 @@ const Navbar = ({ isBannerVisible, logo: Logo, navData }: NavbarProps) => {
           <div className="flex items-center gap-4 lg-custom:gap-6">
             <NavLink to={contactLink.path} onClick={handleCloseMenu}
               className={({ isActive }) =>
-                `hidden lg-custom:block text-white font-medium lg-custom:py-3 lg-custom:px-5 2xl:py-3.5 2xl:px-6 lg-custom:rounded-lg 2xl:rounded-[10px] dark:border dark:border-gray15 ${
+                `hidden lg-custom:block text-white font-medium lg-custom:py-3 lg-custom:px-5 2xl:py-3.5 2xl:px-6 lg-custom:rounded-lg 2xl:rounded-[10px] dark:border dark:border-gray15 leading-[150%] lg-custom:text-sm 2xl:text-lg ${
                   isActive ? "dark:bg-gray08 bg-gray08/60" : "dark:bg-gray08 bg-gray08/60"
                 } transition-all duration-300 ease-in-out`
               } {...navDesktopContactAos()}>
