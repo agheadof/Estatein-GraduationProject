@@ -13,7 +13,6 @@ const CommonCard = ({
   cardStyle,
   isArrow,
   links,
-  
 }: CommonCardProps) => {
   const handleAnchorClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -27,7 +26,9 @@ const CommonCard = ({
   };
 
   return (
-    <div className={`group relative rounded-[10px] 2xl:rounded-xl border flex flex-col ${cardStyle}`}>
+    <div
+      className={`group relative rounded-[10px] 2xl:rounded-xl border flex flex-col ${cardStyle}`}
+    >
       {isArrow && (
         <img
           src="/assets/icons/CardUnderHero/arrowRight.svg"
@@ -36,7 +37,9 @@ const CommonCard = ({
         />
       )}
 
-      <div className={`flex items-center gap-2.5 md:gap-4 2xl:gap-5 ${titleStyle}`}>
+      <div
+        className={`flex items-center gap-2.5 md:gap-4 2xl:gap-5 ${titleStyle}`}
+      >
         <div className="relative border-gradient-base border-gradient-2">
           <div className="relative m-1.5 border-gradient-base border-gradient-1">
             <img src={cardImg} alt="card image" className="p-2" />
@@ -49,7 +52,9 @@ const CommonCard = ({
               <a
                 key={idx}
                 href={link.href || link.link}
-                onClick={(e) => handleAnchorClick(e, link.href || link.link || "#")}
+                onClick={(e) =>
+                  handleAnchorClick(e, link.href || link.link || "#")
+                }
                 className={`text-black dark:text-white font-semibold border-b border-transparent hover:border-purple-500 transform duration-300 ${titleSize}`}
                 target={link.href?.startsWith("http") ? "_blank" : undefined}
                 rel={link.href?.startsWith("http") ? "noreferrer" : undefined}
@@ -60,7 +65,7 @@ const CommonCard = ({
           </div>
         ) : HeadingTag === "link" ? (
           <Link
-            to={titleLink || "#"}
+            to={titleLink!}
             className={`text-black dark:text-white font-semibold border-b border-transparent hover:border-purple-500 transform duration-300 ${titleSize}`}
           >
             {cardTitle}
@@ -74,7 +79,9 @@ const CommonCard = ({
             {cardTitle}
           </a>
         ) : (
-          <HeadingTag className={`text-black dark:text-white font-semibold ${titleSize}`}>
+          <HeadingTag
+            className={`text-black dark:text-white font-semibold ${titleSize}`}
+          >
             {cardTitle}
           </HeadingTag>
         )}
