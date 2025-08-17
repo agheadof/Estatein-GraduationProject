@@ -1,4 +1,4 @@
-import { onValue, ref } from "firebase/database"
+import { onValue, ref, query, limitToFirst } from "firebase/database";
 import type { AppDispatch } from "../../redux/store"
 import { db } from "../../firebaseConfig"
 import type { OfficeLocation } from "../../redux/types/OfficeLocation"
@@ -9,29 +9,28 @@ import {
 } from "../../redux/slices/ourOfficesSlice"
 
 export const listenToOffices = () => (dispatch: AppDispatch) => {
-  dispatch(setLoading(true))
-
-  const officesRef = ref(db, "locations")
+  dispatch(setLoading(true));
+  const officesRef = query(ref(db, "locations"), limitToFirst(2)); 
 
   onValue(
     officesRef,
     (snapshot) => {
       if (snapshot.exists()) {
-        const data = snapshot.val()
+        const data = snapshot.val();
 
         const formatted = Object.entries(data).map(([id, value]) => ({
           id,
           ...(value as Omit<OfficeLocation, "id">),
-        })) as OfficeLocation[]
+        })) as OfficeLocation[];
 
-        dispatch(setOffices(formatted))
+        dispatch(setOffices(formatted));
       } else {
-        dispatch(setOffices([]))
+        dispatch(setOffices([]));
       }
     },
     (error) => {
-      dispatch(setError(error.message))
-      dispatch(setLoading(false))
+      dispatch(setError(error.message));
+      dispatch(setLoading(false));
     }
-  )
+  );
 }

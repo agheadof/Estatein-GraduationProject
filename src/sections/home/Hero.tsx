@@ -37,10 +37,10 @@ const Hero = ({ title, description }: HeroProps) => {
 
         {/* === Call-to-Action Buttons === */}
         <div data-aos="fade-right" className="flex flex-col lg-custom:flex-row gap-4 px-4 lg-custom:px-0">
-          <Link to="/about" className="text-center py-3.5 px-5 2xl:py-[18px] text-sm 2xl:text-lg 2xl:px-6 border  border-white90 dark:border-gray15 rounded-lg">
+          <Link to="/about" className="text-center py-3.5 px-5 2xl:py-[18px] text-sm 2xl:text-lg 2xl:px-6 border  border-white90 dark:border-gray15 rounded-lg hover:bg-gray10">
             Learn More
           </Link>
-          <Link to="/properties" className="text-center py-3.5 px-5 2xl:py-[18px] 2xl:px-6 text-sm 2xl:text-lg bg-purple90 dark:bg-purple60 rounded-lg hover:bg-purple75">
+          <Link to="/properties" className="text-center py-3.5 px-5 2xl:py-[18px] 2xl:px-6 text-sm 2xl:text-lg bg-purple90 dark:bg-purple60 rounded-lg hover:bg-purple60/60">
             Browse Properties
           </Link>
         </div>

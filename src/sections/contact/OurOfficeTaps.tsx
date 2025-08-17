@@ -70,7 +70,7 @@ function OurOfficeTaps() {
           ? [...Array(skeletonCount)].map((_, i) => (
               <div
                 key={i}
-                className="flex flex-col min-h-[409px] lg-custom:min-w-[372px] 2xl:min-w-[472px] border border-white90 dark:border-gray15 rounded-lg 2xl:rounded-xl p-6 lg-custom:p-10 2xl:p-[50px] gap-6 lg-custom:gap-[30px] 2xl:gap-10 bg-gray-300 dark:bg-gray-700 animate-pulse"
+                className="flex flex-col min-h-[409px] lg-custom:min-h-[372px] 2xl:min-h-[472px] border border-white90 dark:border-gray15 rounded-lg 2xl:rounded-xl p-6 lg-custom:p-10 2xl:p-[50px] gap-6 lg-custom:gap-[30px] 2xl:gap-10 bg-gray-300 dark:bg-gray-700 animate-pulse"
               >
                 <div className="rounded-[10px] 2xl:rounded-xl w-full h-[268px] lg-custom:h-[220px] 2xl:h-[253px] bg-gray-400 dark:bg-gray-600" />
                 <div className="space-y-4 flex-1 flex flex-col justify-between">
@@ -93,6 +93,7 @@ function OurOfficeTaps() {
             ))}
       </div>
     </div>
+    
   )
 }
 
