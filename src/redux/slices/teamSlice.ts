@@ -4,7 +4,6 @@ import type { Team } from "../types/team"
 const { slice, startListening } = createGenericSlice<Team, Team>({
   name: "team",
   path: "team",
-  itemsPerPage: 4,
 })
 
 export const fetchTeams = startListening

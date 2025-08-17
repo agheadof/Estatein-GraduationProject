@@ -1,20 +1,19 @@
-import type { ElementType, ReactNode } from "react";
+export type CardLink = {
+    title: string;
+    href: string;
+    link?: string;
+};
 
 export type CommonCardProps = {
-    HeadingTag?: ElementType;
-    titleLink?: string;
-    cardStyle?: string;
     cardImg: string;
     cardTitle?: string;
+    HeadingTag?: "link" | "h1" | "h2" | "h5" | "span" | "a";
+    titleLink?: string;
+    links?: CardLink[];
+    cardStyle?: string;
     titleStyle?: string;
     titleSize?: string;
     cardDesc?: string;
-    isArrow?: boolean,
-    children?: ReactNode;
-    links?: LinkItem[]
-}
-
-type LinkItem = {
-    title: string;
-    link: string;
-}
+    isArrow?: boolean;
+    children?: React.ReactNode;
+};

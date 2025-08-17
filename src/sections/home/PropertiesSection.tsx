@@ -91,7 +91,7 @@ function PropertiesSection({
               showTags={showTags}
             />
           )}
-          slidesPerView={3}
+          slidesPerView={{ lg: 3, md: 2, sm: 1 }}
           showCounter
           titleBtnLabel="View All Properties"
           onClick={() => scrollToTop()}

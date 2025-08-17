@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import type { CommonCardProps } from "../../types/CommonCard";
 
@@ -12,22 +13,21 @@ const CommonCard = ({
   cardStyle,
   isArrow,
   links,
+  
 }: CommonCardProps) => {
   const handleAnchorClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    targetId: string
+    href: string
   ) => {
-    e.preventDefault();
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const targetElement = document.getElementById(href.slice(1));
+      if (targetElement) targetElement.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <div
-      className={`group relative rounded-[10px] 2xl:rounded-xl border flex flex-col ${cardStyle}`}
-    >
+    <div className={`group relative rounded-[10px] 2xl:rounded-xl border flex flex-col ${cardStyle}`}>
       {isArrow && (
         <img
           src="/assets/icons/CardUnderHero/arrowRight.svg"
@@ -36,9 +36,7 @@ const CommonCard = ({
         />
       )}
 
-      <div
-        className={`flex items-center gap-2.5 md:gap-4 2xl:gap-5 ${titleStyle}`}
-      >
+      <div className={`flex items-center gap-2.5 md:gap-4 2xl:gap-5 ${titleStyle}`}>
         <div className="relative border-gradient-base border-gradient-2">
           <div className="relative m-1.5 border-gradient-base border-gradient-1">
             <img src={cardImg} alt="card image" className="p-2" />
@@ -47,39 +45,36 @@ const CommonCard = ({
 
         {links && links.length > 0 ? (
           <div className="flex flex-wrap justify-center gap-2.5 lg-custom:gap-5 2xl:gap-[30px]">
-            {links
-              .filter((e) => e.title)
-              .map((e, index) => (
-                <Link
-                  key={index}
-                  to={e.link}
-                  className={`text-black dark:text-white font-semibold border-b border-transparent group-hover:border-purple75 transform-border duration-300 ${titleSize}`}
-                >
-                  {e.title}
-                </Link>
-              ))}
+            {links.map((link, idx) => (
+              <a
+                key={idx}
+                href={link.href || link.link}
+                onClick={(e) => handleAnchorClick(e, link.href || link.link || "#")}
+                className={`text-black dark:text-white font-semibold border-b border-transparent hover:border-purple-500 transform duration-300 ${titleSize}`}
+                target={link.href?.startsWith("http") ? "_blank" : undefined}
+                rel={link.href?.startsWith("http") ? "noreferrer" : undefined}
+              >
+                {link.title}
+              </a>
+            ))}
           </div>
-        ) : HeadingTag === Link ? (
+        ) : HeadingTag === "link" ? (
           <Link
             to={titleLink || "#"}
-            className={`text-black dark:text-white font-semibold border-b border-transparent group-hover:border-purple75 transform-border duration-300 ${titleSize}`}
+            className={`text-black dark:text-white font-semibold border-b border-transparent hover:border-purple-500 transform duration-300 ${titleSize}`}
           >
             {cardTitle}
           </Link>
         ) : HeadingTag === "a" ? (
           <a
             href={titleLink}
-            onClick={(e) =>
-              handleAnchorClick(e, titleLink?.split("#")[1] || "")
-            }
-            className={`text-black dark:text-white font-semibold border-b border-transparent group-hover:border-purple75 transform-border duration-300 ${titleSize}`}
+            onClick={(e) => handleAnchorClick(e, titleLink || "")}
+            className={`text-black dark:text-white font-semibold border-b border-transparent hover:border-purple-500 transform duration-300 ${titleSize}`}
           >
             {cardTitle}
           </a>
         ) : (
-          <HeadingTag
-            className={`text-black dark:text-white font-semibold ${titleSize}`}
-          >
+          <HeadingTag className={`text-black dark:text-white font-semibold ${titleSize}`}>
             {cardTitle}
           </HeadingTag>
         )}

@@ -16,10 +16,6 @@ const OurValuesSection = () => {
     dispatch(fetchValues);
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log("visibleItems", visibleItems);
-  }, [visibleItems]);
-
   // main SkeletonBox style
   const SkeletonBox = () => (
     <div className="flex justify-between">
