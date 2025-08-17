@@ -11,19 +11,6 @@ import Card from "../../components/cards/TestimonialCard/Card"
 import type { RootState } from "../../redux/store"
 import GenericSlider from "../../components/shared/GenericSlider"
 
-// function isValidClient(client: any): client is Client {
-//   return (
-//     client &&
-//     typeof client.name === "string" &&
-//     typeof client.subject === "string" &&
-//     typeof client.review === "string" &&
-//     typeof client.clientImage === "string" &&
-//     typeof client.location === "string" &&
-//     typeof client.show === "boolean" &&
-//     typeof client.rate === "number"
-//   );
-// }
-
 function OurClientsSection() {
   const [showReviewModal, setShowReviewModal] = useState(false)
   const [alertMessage, setAlertMessage] = useState<string | null>(null)
@@ -44,11 +31,6 @@ function OurClientsSection() {
 
   const handleCloseModal = () => setShowReviewModal(false)
 
-  // const validClients = useMemo(
-  //   () => items.filter(isValidClient),
-  //   [items]
-  // );
-
   const skeletonCount = items?.length > 0 ? items.length : 3
 
   return (
@@ -63,7 +45,6 @@ function OurClientsSection() {
           anamation="fade-up"
           navigateTo="allTestimonials"
         />
-
 
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
@@ -110,11 +91,6 @@ function OurClientsSection() {
               onClick={() => scrollToTop()}
             />
             <button
-              className="text-sm cursor-pointer text-black dark:text-white underline"
-              onClick={() => setShowReviewModal(true)}
-            >
-              Add a review
-            </button>
               className="text-sm cursor-pointer text-black dark:text-white underline"
               onClick={() => setShowReviewModal(true)}
             >
