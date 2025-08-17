@@ -12,14 +12,15 @@ const ExperienceSectionCard = ({ step, title, description}: ExperienceSectionCar
       </p>
       <div
         className=" bg-[linear-gradient(117deg,rgba(112,59,247,1)_0%,rgba(228,228,231,1)_24%)] dark:bg-[linear-gradient(117deg,rgba(112,59,247,1)_0%,rgba(38,38,38,1)_24%)]
-          relative rounded-xl !rounded-tl-none w-full flex items-center justify-center p-[1px]">
-        <div className="card flex flex-col items-start gap-[14px] lg-custom:gap-5 p-[30px] lg-custom:p-10  huge:p-[50px] rounded-xl !rounded-tl-none 
+          relative rounded-xl !rounded-tl-none w-full flex items-center justify-center p-[1px] ">
+
+        <div className="card flex flex-col items-start gap-[14px] lg-custom:gap-4 2xl:gap-5 p-[30px] lg-custom:p-[38px]  2xl:p-[50px] rounded-xl !rounded-tl-none 
                         !bg-[linear-gradient(120deg,#DBCEFD_0%,rgba(228,228,231,0.8)_12%)]
-                        dark:!bg-[linear-gradient(120deg,#271c44_0%,#141414_10%)]">
-          <h2 className="text-black dark:text-white font-semibold text-lg md:text-xl huge:text-[26px] leading-[150%]">
+                        dark:!bg-[linear-gradient(120deg,#271c44_0%,#141414_10%)] min-h-[185px] lg-custom:min-h-[222px] 2xl:min-h-[267px] justify-start">
+          <h2 className="text-black dark:text-white font-semibold text-lg md:text-xl 2xl:text-[26px] leading-[150%] line-clamp-1">
             {title}
           </h2>
-          <p className="font-medium text-sm md:text-base huge:text-lg leading-[150%] text-gray40 dark:text-gray60">
+          <p className="font-medium text-sm md:text-base 2xl:text-lg leading-[150%] text-gray40 dark:text-gray60 line-clamp-4">
             {description}
           </p>
         </div>

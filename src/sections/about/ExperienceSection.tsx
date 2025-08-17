@@ -45,11 +45,11 @@ function ExperienceSection() {
           <p className="text-red-500">{error}</p>
         ) : (
           <div
-            className="cards_container grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-3 gap-y-[30px] gap-x-[0px] md:gap-x-[20px] md:gap-y-[40px] huge:gap-x-[30px] huge:gap-y-[50px] mt-10 lg-custom:mt-[60px] 2xl:mt-[80px]"
+            className="cards_container grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-3 gap-y-[30px] gap-x-[0px] md:gap-x-[20px] lg-custom:gap-y-[40px] 2xl:gap-x-[30px] 2xl:gap-y-[50px] mt-10 lg-custom:mt-[60px] 2xl:mt-[80px]"
             {...getFadeUpOnce(500)}
           >
             {items.map((item: ExperienceItem, idx: number) => (
-              <div key={idx} {...getCenterOutAos(idx)}>
+              <div key={idx} {...getCenterOutAos(idx)} className={`${idx > 2 ? 'hidden md:flex' : ''}`}>
                 <ExperienceSectionCard {...item} />
               </div>
             ))}
