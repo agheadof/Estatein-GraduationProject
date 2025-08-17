@@ -17,11 +17,11 @@ const PropertyDetail = React.memo(({ item }: { item: PropertyDetailType }) => {
   }
 
   return (
-    <div className="flex-shrink flex justify-center items-center py-1.5 2xl:py-2 px-3.5  bg-purple97 dark:bg-gray10 border dark:border-gray15 border-white90 rounded-full gap-1 max-w-full">
-      <span className="text-black dark:text-white w-5 2xl:w-6 h-5 2xl:h-6 flex items-center justify-center">
+    <div className="flex-shrink flex justify-center items-center py-1.5 2xl:py-2 px-3 2xl:px-3.5  bg-purple97 dark:bg-gray10 border dark:border-gray15 border-white90 rounded-full gap-1 max-w-full">
+      <span className="text-black dark:text-white w-3 flex items-center justify-center">
         {item.icon ? iconMap[item.icon] : null}
       </span>
-      <span className="text-black dark:text-white text-sm xl:text-xs 2xl:text-lg whitespace-nowrap">
+      <span className="text-black dark:text-white text-[12px] md:text-sm  whitespace-nowrap">
         {item.label ?? "-"}
       </span>
     </div>
@@ -124,7 +124,7 @@ function PropertiesCard({
         </div>
 
         {!isExpanded && showDetails && property.details?.length ? (
-          <div className="flex gap-1 mb-4 lg-custom:mb-5 2xl:mb-[30px]">
+          <div className="flex max-[1300px]:flex-wrap gap-1 mb-4 lg-custom:mb-5 2xl:mb-[30px]">
             {property.details.map((item: PropertyDetailType, index: number) => (
               <PropertyDetail key={index} item={item} />
             ))}
@@ -146,7 +146,7 @@ function PropertiesCard({
               <MainButton
                 variant="normalPurple"
                 onClick={handleViewDetails}
-                className="whitespace-nowrap lg-custom:!text-[10px] xl:!text-xs 2xl:!text-[13px] 2xl:!py-[18px] 2xl:!px-6"
+                className="whitespace-nowrap lg-custom:!text-[10px] xl:!text-xs 2xl:!text-[13px] 2xl:!py-[18px] max-[380px]:!px-3 2xl:!px-6"
               >
                 View Property Details
               </MainButton>
