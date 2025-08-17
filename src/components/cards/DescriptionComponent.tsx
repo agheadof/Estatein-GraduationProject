@@ -1,10 +1,10 @@
 import { shallowEqual } from "react-redux";
 import { useAppSelector } from "../../redux/hooks";
 
-  const castingToNumber = (input: string) => {
-    const result = input.replace(/\D/g, "").padStart(2, "0");
-    return result;
-  };
+const castingToNumber = (input?: string) => {
+  if (!input) return "00";
+  return input.replace(/\D/g, "").padStart(2, "0");
+};
 
 const DescriptionComponent = () => {
   const property = useAppSelector((state) => {
@@ -13,6 +13,26 @@ const DescriptionComponent = () => {
     let current = state.properties.current;
     return { error, loading, current };
   }, shallowEqual);
+
+  const details = property.current?.details ?? [];
+
+  const fields = [
+    {
+      icon: "/assets/icons/FeaturedProperties/bedroom.svg",
+      label: "Bedrooms",
+      value: castingToNumber(details[0]?.label),
+    },
+    {
+      icon: "/assets/icons/FeaturedProperties/bathroom.svg",
+      label: "Bathrooms",
+      value: castingToNumber(details[1]?.label),
+    },
+    {
+      icon: "/assets/icons/FeaturedProperties/area.svg",
+      label: "Area (m²)",
+      value: `${castingToNumber(details[2]?.label)} Square Feet`,
+    },
+  ];
 
   return (
     <div
@@ -36,125 +56,32 @@ const DescriptionComponent = () => {
       </div>
 
       {!property.loading && !property.error && property.current && (
-        <div
-          className="
-            border-t border-t-white90 dark:border-t-gray15 
-            pt-5 lg-custom:pt-4 2xl:pt-5 
-            flex flex-col gap-5 lg-custom:flex-row lg-custom:gap-10
-          "
-        >
-          <div className="flex justify-between gap-5 lg-custom:hidden">
-            {/* Bedrooms */}
-            <div className="flex flex-col gap-1.5 flex-1">
-              <div className="flex gap-1">
+        <div className="border-t border-t-white90 dark:border-t-gray15 pt-5 lg-custom:pt-4 2xl:pt-5 flex flex-col lg-custom:flex-row gap-5 lg-custom:gap-10">
+          {fields.map((field, i) => (
+            <div key={i} className="flex flex-col gap-1.5 flex-1">
+              <div className="flex gap-1 items-center">
                 <img
-                  src="/assets/icons/FeaturedProperties/bedroom.svg"
-                  alt="icon"
+                  src={field.icon}
+                  alt={field.label}
                   className="w-5 h-5 2xl:w-6 2xl:h-6"
                 />
                 <span className="text-gray40 dark:text-gray60 font-medium text-sm 2xl:text-lg">
-                  Bedrooms
+                  {field.label}
                 </span>
               </div>
               <span className="text-black dark:text-white font-semibold text-lg 2xl:text-2xl">
-                {castingToNumber(property.current.details[0].label)}
+                {field.value}
               </span>
             </div>
+          ))}
 
-            <span className="w-px bg-white90 dark:bg-gray15" />
-
-            <div className="flex flex-col gap-1.5 flex-1">
-              <div className="flex gap-1">
-                <img
-                  src="/assets/icons/FeaturedProperties/bathroom.svg"
-                  alt="icon"
-                  className="w-5 h-5 2xl:w-6 2xl:h-6"
-                />
-                <span className="text-gray40 dark:text-gray60 font-medium text-sm 2xl:text-lg">
-                  Bathrooms
-                </span>
-              </div>
-              <span className="text-black dark:text-white font-semibold text-lg 2xl:text-2xl">
-                {castingToNumber(property.current.details[1].label)}
-              </span>
-            </div>
-          </div>
-
-          <span className="flex lg-custom:hidden h-px w-full bg-white90 dark:bg-gray15" />
-
-          <div className="flex flex-col gap-1.5 flex-1 lg-custom:hidden">
-            <div className="flex gap-1">
-              <img
-                src="/assets/icons/FeaturedProperties/area.svg"
-                alt="icon"
-                className="w-5 h-5 2xl:w-6 2xl:h-6"
+          {fields.length > 1 &&
+            fields.slice(0, -1).map((_, i) => (
+              <span
+                key={`sep-${i}`}
+                className="hidden lg-custom:block w-px bg-white90 dark:bg-gray15"
               />
-              <span className="text-gray40 dark:text-gray60 font-medium text-sm 2xl:text-lg">
-                Area (m²)
-              </span>
-            </div>
-            <span className="text-black dark:text-white font-semibold text-lg 2xl:text-2xl">
-              {`${castingToNumber(
-                property.current.details[2].label
-              )} Square Feet`}
-            </span>
-          </div>
-
-          <div className="hidden lg-custom:flex gap-10 flex-1">
-            <div className="flex flex-col gap-1.5 flex-1">
-              <div className="flex gap-1">
-                <img
-                  src="/assets/icons/FeaturedProperties/bedroom.svg"
-                  alt="icon"
-                  className="w-5 h-5 2xl:w-6 2xl:h-6"
-                />
-                <span className="text-gray40 dark:text-gray60 font-medium text-sm 2xl:text-lg">
-                  Bedrooms
-                </span>
-              </div>
-              <span className="text-black dark:text-white font-semibold text-lg 2xl:text-2xl">
-                {castingToNumber(property.current.details[0].label)}
-              </span>
-            </div>
-
-            <span className="w-px bg-white90 dark:bg-gray15" />
-
-            <div className="flex flex-col gap-1.5 flex-1">
-              <div className="flex gap-1">
-                <img
-                  src="/assets/icons/FeaturedProperties/bathroom.svg"
-                  alt="icon"
-                  className="w-5 h-5 2xl:w-6 2xl:h-6"
-                />
-                <span className="text-gray40 dark:text-gray60 font-medium text-sm 2xl:text-lg">
-                  Bathrooms
-                </span>
-              </div>
-              <span className="text-black dark:text-white font-semibold text-lg 2xl:text-2xl">
-                {castingToNumber(property.current.details[1].label)}
-              </span>
-            </div>
-
-            <span className="w-px bg-white90 dark:bg-gray15" />
-
-            <div className="flex flex-col gap-1.5 flex-1">
-              <div className="flex gap-1">
-                <img
-                  src="/assets/icons/FeaturedProperties/area.svg"
-                  alt="icon"
-                  className="w-5 h-5 2xl:w-6 2xl:h-6"
-                />
-                <span className="text-gray40 dark:text-gray60 font-medium text-sm 2xl:text-lg">
-                  Area (m²)
-                </span>
-              </div>
-              <span className="text-black dark:text-white font-semibold text-lg 2xl:text-2xl">
-                {`${castingToNumber(
-                  property.current.details[2].label
-                )} Square Feet`}
-              </span>
-            </div>
-          </div>
+            ))}
         </div>
       )}
     </div>
