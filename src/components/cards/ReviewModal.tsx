@@ -19,8 +19,7 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
   const [loading, setLoading] = useState(false)
   const imgRef = useRef<HTMLInputElement>(null)
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
-  const [rating, setRating] = useState<number>(0)
-
+  const [rate, setRating] = useState<number>(0)
 
   const handleImageUpload = async (
     file: File,
@@ -72,7 +71,7 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
       subject: get("subject"),
       review: get("review"),
       clientImage: imageUrl,
-      rating: rating,
+      rate: rate,
       show: false,
     }
 
@@ -82,7 +81,7 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
     if (!data.subject) newErrors.subject = "Subject is required"
     if (!data.review) newErrors.review = "Review is required"
     if (!data.clientImage) newErrors.image = "Image is required"
-    if (rating === 0) newErrors.rating = "Rating is required"
+    if (rate === 0) newErrors.rate = "Rating is required"
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
@@ -151,9 +150,9 @@ function ReviewModal({ closeModal, setAlertMessage }: ReviewModalProps) {
               <label className="font-semibold text-black dark:text-white mb-1 block">
                 Your Rating
               </label>
-              <StarRating value={rating} onChange={setRating} />
-              {errors.rating && (
-                <p className="text-red-600 text-xs mt-1">{errors.rating}</p>
+              <StarRating value={rate} onChange={setRating} />
+              {errors.rate && (
+                <p className="text-red-600 text-xs mt-1">{errors.rate}</p>
               )}
             </div>
           </div>
