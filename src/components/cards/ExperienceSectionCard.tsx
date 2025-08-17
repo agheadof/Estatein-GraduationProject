@@ -1,5 +1,5 @@
 export type ExperienceSectionCardProps = {
-  stepNum: string;
+  step: string;
   title: string;
   description: string;
 };

@@ -131,7 +131,7 @@ useEffect(() => {
     )
 
   return (
-    <div className="flex flex-col gap-[30px] lg-custom:gap-[40px] 2xl:gap-[50px] text-black dark:text-white">
+    <div className="flex flex-col gap-5 lg-custom:gap-6 text-black dark:text-white">
       <div className="flex justify-between items-center">
         <div className="flex flex-col lg-custom:flex-row items-center gap-5">
           <h1 className="font-semibold text-xl lg-custom:text-2xl 2xl:text-3xl">
@@ -155,7 +155,7 @@ useEffect(() => {
       {galleryDesktop}
       {galleryMobile}
 
-      <div className="flex flex-col lg-custom:flex-row gap-5">
+      <div className="flex flex-col lg-custom:flex-row gap-5 2xl:gap-6">
         <DescriptionComponent />
         <KeyFeaturesComponent />
       </div>
