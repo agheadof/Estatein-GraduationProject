@@ -10,7 +10,8 @@ import FormTextarea from "../Forms/FormTextarea"
 type ReviewModalProps = {
   closeModal: () => void
   onSuccess: () => void
-}
+}  
+
 
 function ReviewModal({ closeModal, onSuccess }: ReviewModalProps) {
   const formRef = useRef<HTMLFormElement>(null)
