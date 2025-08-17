@@ -1,4 +1,3 @@
-
 // ===== Type =====
 export type DataAttrs = Record<string, string>;
 
@@ -58,7 +57,7 @@ const aos = {
 // };
 
 const twoColsWaveDelay = (i: number, rowStep = 160, rightBonus = 90) => {
-  const col = i % 2;               
+  const col = i % 2;
   const row = Math.floor(i / 2);
   return row * rowStep + (col ? rightBonus : 0);
 };
@@ -77,7 +76,11 @@ const threeColsGridDelay = (i: number) => {
 
 export const navRootAos = (): DataAttrs =>
   // nav container
-  buildAos("fade-down", { duration: 600, easing: "ease-out-cubic", once: true });
+  buildAos("fade-down", {
+    duration: 600,
+    easing: "ease-out-cubic",
+    once: true,
+  });
 
 export const navDesktopItemAos = (index: number): DataAttrs =>
   aos.fadeUp({ duration: 500, delay: index * 80, once: true });
@@ -86,7 +89,11 @@ export const navDesktopContactAos = (): DataAttrs =>
   aos.zoomIn({ duration: 500, delay: 120, once: true });
 
 export const navMobileContainerAos = (): DataAttrs =>
-  buildAos("fade-down", { duration: 400, easing: "ease-out-cubic", once: true });
+  buildAos("fade-down", {
+    duration: 400,
+    easing: "ease-out-cubic",
+    once: true,
+  });
 
 export const navMobileItemAos = (index: number): DataAttrs =>
   aos.fadeUp({ duration: 450, delay: index * 70, once: true });
@@ -101,7 +108,12 @@ export const heroRootAos = (): DataAttrs =>
   aos.fade({ duration: 400, easing: "ease-out-cubic", once: false });
 
 export const heroLeftColAos = (): DataAttrs =>
-  aos.fadeRight({ duration: 800, offset: 0, anchor: "#hero-root", anchorPlacement: "top-bottom" });
+  aos.fadeRight({
+    duration: 800,
+    offset: 0,
+    anchor: "#hero-root",
+    anchorPlacement: "top-bottom",
+  });
 
 export const heroH1Aos = (): DataAttrs =>
   aos.fadeUp({ duration: 700, delay: 0, anchor: "#hero-root", once: false });
@@ -119,19 +131,47 @@ export const heroCountUpAos = (): DataAttrs =>
   aos.flipUp({ duration: 750, delay: 340, anchor: "#hero-root", once: false });
 
 export const heroRightColAos = (): DataAttrs =>
-  aos.fadeLeft({ duration: 900, delay: 120, anchor: "#hero-root", once: false });
+  aos.fadeLeft({
+    duration: 900,
+    delay: 120,
+    anchor: "#hero-root",
+    once: false,
+  });
 
 export const heroBgAos = (): DataAttrs =>
-  aos.zoomOut({ duration: 1200, delay: 0, anchor: "#hero-right", anchorPlacement: "top-center", once: false });
+  aos.zoomOut({
+    duration: 1200,
+    delay: 0,
+    anchor: "#hero-right",
+    anchorPlacement: "top-center",
+    once: false,
+  });
 
 export const heroMobileImgAos = (): DataAttrs =>
-  aos.fadeLeft({ duration: 800, delay: 160, anchor: "#hero-right", offset: 0, once: false });
+  aos.fadeLeft({
+    duration: 800,
+    delay: 160,
+    anchor: "#hero-right",
+    offset: 0,
+    once: false,
+  });
 
 export const heroRotatingAos = (): DataAttrs =>
-  aos.zoomInUp({ duration: 900, delay: 280, anchor: "#hero-right", once: false });
+  aos.zoomInUp({
+    duration: 900,
+    delay: 280,
+    anchor: "#hero-right",
+    once: false,
+  });
 
 export const heroDesktopImgAos = (): DataAttrs =>
-  aos.fadeLeft({ duration: 900, delay: 160, anchor: "#hero-root", offset: 0, once: false });
+  aos.fadeLeft({
+    duration: 900,
+    delay: 160,
+    anchor: "#hero-root",
+    offset: 0,
+    once: false,
+  });
 
 // ============================================================================
 // EXPERIENCE (ExperienceSection + Team/Achievements helpers)
@@ -146,9 +186,9 @@ const effectForIndex = (i: number) => {
 export const getCenterOutAos = (i: number): DataAttrs => {
   const d = threeColsGridDelay(i);
   const eff = effectForIndex(i);
-  if (eff === "zoom-in")  return aos.zoomIn({  duration: 650, delay: d });
-  if (eff === "fade-left")return aos.fadeLeft({ duration: 650, delay: d });
-  return aos.fadeRight({   duration: 650, delay: d });
+  if (eff === "zoom-in") return aos.zoomIn({ duration: 650, delay: d });
+  if (eff === "fade-left") return aos.fadeLeft({ duration: 650, delay: d });
+  return aos.fadeRight({ duration: 650, delay: d });
 };
 
 export const getFadeUpOnce = (duration = 500): DataAttrs =>
@@ -220,5 +260,3 @@ export const tgTitleAos = (): DataAttrs =>
 
 export const tgRightImgAos = (delay = 120): DataAttrs =>
   aos.fadeLeft({ duration: 650, delay, once: true });
-
-

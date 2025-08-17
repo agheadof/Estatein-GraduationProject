@@ -9,7 +9,7 @@ type SiteFeaturesSectionProps = {
 const SiteFeaturesSection = ({ data }: SiteFeaturesSectionProps) => {
   return (
     <section
-      className="grid grid-cols-2 min-lg-custom:grid-cols-4 gap-2.5 2xl:gap-5
+      className="huge:max-w-[1920px] huge:mx-auto grid grid-cols-2 min-lg-custom:grid-cols-4 gap-2.5 2xl:gap-5
       p-2.5 2xl:p-5 bg-white99 dark:bg-gray08 border border-white90 dark:border-gray15 dark:shadow-[0px_0px_0px_10px_#191919] rounded-[10px] 2xl:rounded-xl mt-2.5"
     >
       {data?.map((card, index) => (

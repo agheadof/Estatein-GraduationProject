@@ -42,10 +42,7 @@ function OurClientsSection() {
 
   const handleCloseModal = () => setShowReviewModal(false);
 
-  const validClients = useMemo(
-    () => items.filter(isValidClient),
-    [items]
-  );
+  const validClients = useMemo(() => items.filter(isValidClient), [items]);
 
   const skeletonCount = items?.length > 0 ? items.length : 3;
 
@@ -59,8 +56,9 @@ function OurClientsSection() {
           paragraphStyle="2xl:max-w-[1181px] lg-custom:max-w-[960px] w-full"
           onClick={() => scrollToTop()}
           anamation="fade-up"
+          navigateTo="allTestimonials"
         />
-        
+
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
             {[...Array(skeletonCount)].map((_, i) => (
@@ -94,24 +92,24 @@ function OurClientsSection() {
           <p className="text-red-500">{error}</p>
         ) : (
           <>
-
             <GenericSlider<Client>
               items={validClients}
-              renderSlide={(client: Client) => <Card key={client.name} client={client} />}
+              renderSlide={(client: Client) => (
+                <Card key={client.name} client={client} />
+              )}
               slidesPerView={3}
               showCounter
               titleBtnLabel="View All Testimonials"
               navigateTo="allTestimonials"
+              onClick={() => scrollToTop()}
             />
             <button
-          className="text-sm cursor-pointer text-black dark:text-white underline"
-          onClick={() => setShowReviewModal(true)}
-        >
-          Add a review
-        </button>
+              className="text-sm cursor-pointer text-black dark:text-white underline"
+              onClick={() => setShowReviewModal(true)}
+            >
+              Add a review
+            </button>
           </>
-
-
         )}
 
         {alertMessage && (
