@@ -61,7 +61,9 @@ function OurClientsSection() {
           paragraphStyle="2xl:max-w-[1181px] lg-custom:max-w-[960px] w-full"
           onClick={() => scrollToTop()}
           anamation="fade-up"
+          navigateTo="allTestimonials"
         />
+
 
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
@@ -105,8 +107,14 @@ function OurClientsSection() {
               showCounter
               titleBtnLabel="View All Testimonials"
               navigateTo="allTestimonials"
+              onClick={() => scrollToTop()}
             />
             <button
+              className="text-sm cursor-pointer text-black dark:text-white underline"
+              onClick={() => setShowReviewModal(true)}
+            >
+              Add a review
+            </button>
               className="text-sm cursor-pointer text-black dark:text-white underline"
               onClick={() => setShowReviewModal(true)}
             >

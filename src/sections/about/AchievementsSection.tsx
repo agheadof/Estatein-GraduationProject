@@ -10,7 +10,8 @@ import type { Achievement } from "../../redux/types/achievement";
 const AchievementSkeleton = () => (
   <div
     className=" p-[30px] md:p-[10%] border-white90 dark:border-gray15 border rounded-xl bg-gray-200 dark:bg-gray-700 animate-pulse
-      shadow-[0px_0px_0px_10px_rgba(0,0,0,0.02)] dark:shadow-[0px_0px_0px_10px_#191919] cursor-pointer">
+      shadow-[0px_0px_0px_10px_rgba(0,0,0,0.02)] dark:shadow-[0px_0px_0px_10px_#191919] cursor-pointer"
+  >
     <div className="h-[30px] lg-custom:h-[36px] 2xl:h-[44px] bg-gray-300 dark:bg-gray-600 rounded mb-6 md:mb-8 2xl:mb-[30px]" />
     <div className="h-[18px] lg-custom:h-[21px] 2xl:h-[24px] bg-gray-300 dark:bg-gray-600 rounded w-full" />
   </div>

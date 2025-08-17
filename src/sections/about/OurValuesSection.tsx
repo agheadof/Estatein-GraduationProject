@@ -35,7 +35,7 @@ const OurValuesSection = () => {
   return (
     <>
       <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
-        <section className="flex flex-col lg:flex-row items-center justify-center lg:justify-between xl:space-x-[80px] gap-10 lg:gap-0">
+        <section className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-10 lg-custom:gap-[60px] 2xl:gap-20">
           <Title
             titleStyle="leading-[1.5] lg:w-1/3 w-full"
             starImg={true}

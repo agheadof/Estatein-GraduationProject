@@ -39,7 +39,7 @@ const Title = ({
           />
         </div>
       )}
-      <div className="flex justify-between items-center 2xl:items-end">
+      <div className="flex justify-between items-center 2xl:items-end gap-10">
         <div>
           <h2 className="text-black dark:text-white font-semibold text-[28px] lg-custom:text-[38px] 2xl:text-5xl mb-2 lg-custom:mb-2.5 2xl:mb-3.5 leading-[150%] ">
             {heading}
@@ -51,7 +51,7 @@ const Title = ({
           </p>
         </div>
         {buttonLabel && (
-          <div className="hidden lg-custom:block">
+          <div className="hidden md:block">
             <TitleBtn
               label={buttonLabel}
               navigateTo={navigateTo}
