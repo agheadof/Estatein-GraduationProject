@@ -157,24 +157,48 @@ const GenericSlider = <T,>({
   return (
     <div className="w-full mt-[40px] lg-custom:mt-[60px] 2xl:mt-[80px]">
       <div ref={sliderRef} className="keen-slider mb-[50px] w-full">
-        {items.map((item, index) => (
-          <div key={index} className="keen-slider__slide">
-            {renderSlide(item, index)}
-          </div>
-        ))}
+        {items.map((item, index) => {
+          const isVisible =
+            index >= currentIndex && index < currentIndex + perViewCurrent;
+
+          return (
+            <div
+              key={index}
+              className="keen-slider__slide"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateY(0)" : "translateY(10px)",
+                transition: "opacity 0.2s linear, transform 0.2s linear",
+                pointerEvents: isVisible ? "auto" : "none",
+              }}
+            >
+              {renderSlide(item, index)}
+            </div>
+          );
+        })}
       </div>
 
-      <div className={`${counterClassName} flex justify-between items-center pt-4 border-t border-t-white90 dark:border-t-gray15`}>
+      <div
+        className={`${counterClassName} flex justify-between items-center pt-4 border-t border-t-white90 dark:border-t-gray15`}
+      >
         {showCounter && (
           <p className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block">
             {String(currentGroup).padStart(2, "0")}
-            <span className="text-gray40 dark:text-gray60"> {" "}of {String(totalGroups).padStart(2, "0")}</span>
+            <span className="text-gray40 dark:text-gray60">
+              {" "}
+              of {String(totalGroups).padStart(2, "0")}
+            </span>
           </p>
         )}
 
         {titleBtnLabel && (
           <div className="block md:hidden">
-            <TitleBtn label={titleBtnLabel} className="whitespace-pre-wrap" navigateTo={navigateTo} onClick={onClick} />
+            <TitleBtn
+              label={titleBtnLabel}
+              className="whitespace-pre-wrap"
+              navigateTo={navigateTo}
+              onClick={onClick}
+            />
           </div>
         )}
 
@@ -184,7 +208,9 @@ const GenericSlider = <T,>({
             disabled={isBeginning}
             onClick={onPrev}
             className={`p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px] transition-all duration-300 border-white90 dark:border-gray15 ${
-              isBeginning ? "bg-inherit opacity-50 cursor-not-allowed" : "bg-white97 dark:bg-gray10"
+              isBeginning
+                ? "bg-inherit opacity-50 cursor-not-allowed"
+                : "bg-white97 dark:bg-gray10"
             }`}
           >
             <PrevArrowIcon />
@@ -195,7 +221,9 @@ const GenericSlider = <T,>({
             disabled={isEnd}
             onClick={onNext}
             className={`p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px] transition-all duration-300 border-white90 dark:border-gray15 ${
-              isEnd ? "bg-inherit opacity-50 cursor-not-allowed" : "bg-white97 dark:bg-gray10"
+              isEnd
+                ? "bg-inherit opacity-50 cursor-not-allowed"
+                : "bg-white97 dark:bg-gray10"
             }`}
           >
             <NextArrowIcon />
