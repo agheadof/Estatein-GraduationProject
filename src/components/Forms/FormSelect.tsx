@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import type { SelectProps } from "../../types/Form";
 import { DropdownIcon } from "../icons/FormIcons";
 
-function FormSelect({ label, name, value, placeholder, onChange, options, error,  classNameCustom, classExtra = "bg-white97 dark:bg-gray10", classIcon, children }: SelectProps) {
+function FormSelect({ label, name, value, placeholder, onChange, options, error, classExtra = "bg-white97 dark:bg-gray10", classIcon, children }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<string>(value || "");
   const selectRef = useRef<HTMLDivElement>(null);
