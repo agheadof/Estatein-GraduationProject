@@ -6,7 +6,7 @@ import { setError, setLoading, setProperties } from "../../redux/slices/properti
 const transformProperty = (property: any, id: string) => ({
   id, 
   image: property.images?.[0] || "",
-  title: property.type || "Property",
+  title: property.title || "Property",
   desc: property.description?.slice(0, 100) + "...",
   Price: `$${property.price?.toLocaleString() || "N/A"}`,
   details: [
