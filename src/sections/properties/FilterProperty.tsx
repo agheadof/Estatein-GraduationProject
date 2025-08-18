@@ -1,7 +1,14 @@
 import { SectionWrapper } from "../../layouts/SectionWrapper";
 import FormSelect from "../../components/Forms/FormSelect";
 import MainButton from "../../components/ui/MainButton";
-import { SearchIcon, LocationIcon, PropertyIcon, PricingIcon, PropertySizeIcon, BuildIcon,} from "../../components/icons/FilterPropertyIcons";
+import {
+  SearchIcon,
+  LocationIcon,
+  PropertyIcon,
+  PricingIcon,
+  PropertySizeIcon,
+  BuildIcon,
+} from "../../components/icons/FilterPropertyIcons";
 import { useState, useMemo, useCallback, type JSX } from "react";
 import { fetchFilteredProperties } from "../../redux/thunks/filteredProperties";
 import { useAppDispatch } from "../../redux/types/typed-hooks";
@@ -28,8 +35,7 @@ type SelectField = {
 const FilterProperty = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-    const [showAlert, setShowAlert] = useState(false);
-
+  const [showAlert, setShowAlert] = useState(false);
 
   const [filters, setFilters] = useState<Filters>({
     searchTerm: "",
@@ -69,7 +75,8 @@ const FilterProperty = () => {
     }
   }, [filters, dispatch, navigate]);
 
-  const selectFields: SelectField[] = useMemo(() => [
+  const selectFields: SelectField[] = useMemo(
+    () => [
       {
         name: "location",
         placeholder: "Location",

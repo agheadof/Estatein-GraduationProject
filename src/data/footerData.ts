@@ -25,7 +25,7 @@ export const defaultLinks: LinkGroup[] = [
     title: "About Us",
     to: "/about",
     items: [
-      { label: "Our Story", to: "/about" },
+      { label: "Our Story", to: "/about#story" },
       { label: "Our Works", to: "/about#works" },
       { label: "How It Works", to: "/about#steps" },
       { label: "Our Team", to: "/about#team" },
@@ -44,19 +44,19 @@ export const defaultLinks: LinkGroup[] = [
     title: "Services",
     to: "/services",
     items: [
-      { label: "Valuation Mastery", to: "/services" },
-      { label: "Strategic Marketing", to: "/services" },
-      { label: "Negotiation Wizardry", to: "/services" },
-      { label: "Closing Success", to: "/services" },
-      { label: "Property Management", to: "/services" },
+      { label: "Valuation Mastery", to: "/services#property" },
+      { label: "Strategic Marketing", to: "/services#property" },
+      { label: "Negotiation Wizardry", to: "/services#property" },
+      { label: "Closing Success", to: "/services#property" },
+      { label: "Property Management", to: "/services#management" },
     ],
   },
   {
     title: "Contact Us",
     to: "/contact",
     items: [
-      { label: "Contact Form", to: "/contact" },
-      { label: "Our Offices", to: "/contact" },
+      { label: "Contact Form", to: "/contact#form" },
+      { label: "Our Offices", to: "/contact#office" },
     ],
   },
 ]

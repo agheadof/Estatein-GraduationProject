@@ -18,14 +18,14 @@ const FaqPopup = ({ question, answer, onClick }: FaqPopupProps) => {
 
   const handleClose = () => {
     setIsVisible(false);
-    setTimeout(onClick, 300); 
+    setTimeout(onClick, 300);
   };
 
   return createPortal(
     <div
-      className={`fixed inset-0 z-50 flex justify-center items-center backdrop-blur-xs transition-opacity duration-300 ${
+      className={`fixed inset-0 z-50 flex justify-center items-center transition-opacity duration-300 ${
         isVisible ? "opacity-100" : "opacity-0"
-      } bg-[#00000033] dark:bg-[#e3e3e380]`}
+      } backdrop-blur-xs bg-[#00000033] dark:bg-[#e3e3e380]`}
       onClick={handleClose}
     >
       <div

@@ -1,11 +1,19 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { FacebookIcon, LinkedinIcon, TwitterIcon, YoutubeIcon, } from "../../icons/FooterIcons";
-import { Link } from "react-router-dom";
+import {
+  FacebookIcon,
+  LinkedinIcon,
+  TwitterIcon,
+  YoutubeIcon,
+} from "../../icons/FooterIcons";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FooterNewsletter } from "./Newsletter";
 import LogoIcon from "../../icons/LogoIcon";
 import { scrollToTop } from "../../../utlis/scrollToTop";
-import { fetchSocialLinks, type SocialLink } from "../../../redux/slices/footerLinksSlice";
+import {
+  fetchSocialLinks,
+  type SocialLink,
+} from "../../../redux/slices/footerLinksSlice";
 import type { AppDispatch, RootState } from "../../../redux/store";
 
 type FooterLinkItem = {
@@ -27,6 +35,8 @@ type FooterProps = {
 
 export default function Footer({ links, footerNote }: FooterProps) {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const { links: socialLinks, loading } = useSelector(
     (state: RootState) => state.footerLinks
@@ -35,6 +45,40 @@ export default function Footer({ links, footerNote }: FooterProps) {
   useEffect(() => {
     dispatch(fetchSocialLinks());
   }, [dispatch]);
+
+  const scrollToSection = (to: string) => {
+    const [path, hash] = to.split("#");
+
+    if (window.location.pathname === path) {
+      // same page
+      if (hash) {
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    } else {
+      // different page
+      navigate(path, { state: { scrollToHash: hash } });
+    }
+  };
+
+  useEffect(() => {
+    const stateHash = location.state?.scrollToHash;
+    if (stateHash) {
+      const scrollToEl = () => {
+        const el = document.getElementById(stateHash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        } else {
+          requestAnimationFrame(scrollToEl);
+        }
+      };
+      requestAnimationFrame(scrollToEl);
+    }
+  }, [location]);
 
   const renderSocialIcon = (link: SocialLink) => {
     let IconComponent;
@@ -86,24 +130,22 @@ export default function Footer({ links, footerNote }: FooterProps) {
                 ({ title, to, items }: FooterLinkColumn, i: number) => (
                   <div
                     key={i}
-                    className="flex flex-col space-y-2 pb-5 border-b  border-b-white90 dark:border-b-gray15 odd:border-r border-r-white90 dark:border-r-gray15 lg-custom:pb-0 lg-custom:border-none"
+                    className="flex flex-col space-y-2 pb-5 border-b border-b-white90 dark:border-b-gray15 odd:border-r border-r-white90 dark:border-r-gray15 lg-custom:pb-0 lg-custom:border-none"
                   >
-                    <Link
-                      to={to}
-                      onClick={scrollToTop}
-                      className="font-medium text-base 2xl:whitespace-nowrap md:text-[18px] 2xl:text-xl text-purple70 dark:text-gray40 hover:text-purple70 transition-colors mb-4 md:mb-6 2xl:mb-[30px]"
+                    <button
+                      onClick={() => scrollToSection(to)}
+                      className="text-start font-medium text-base 2xl:whitespace-nowrap md:text-[18px] 2xl:text-xl text-purple70 dark:text-gray40 hover:text-purple70 transition-colors mb-4 md:mb-6 2xl:mb-[30px]"
                     >
                       {title}
-                    </Link>
+                    </button>
                     {items.map(({ label, to }: FooterLinkItem, j: number) => (
-                      <Link
+                      <button
                         key={j}
-                        to={to}
-                        onClick={scrollToTop}
-                        className="font-medium text-black dark:text-white 2xl:whitespace-nowrap hover:text-gray60 text-sm md:text-base lg-custom:!text-sm lg:!text-[18px] 2xl:!text-lg transition-colors leading-6"
+                        onClick={() => scrollToSection(to)}
+                        className="text-start font-medium text-black dark:text-white 2xl:whitespace-nowrap hover:text-gray60 text-sm md:text-base lg-custom:!text-sm lg:!text-[18px] 2xl:!text-lg transition-colors leading-6"
                       >
                         {label}
-                      </Link>
+                      </button>
                     ))}
                   </div>
                 )
@@ -117,10 +159,7 @@ export default function Footer({ links, footerNote }: FooterProps) {
           <div className="flex flex-col-reverse gap-[20px] lg-custom:flex-row justify-between items-center">
             <div className="flex flex-col lg-custom:flex-row justify-center items-center flex-wrap gap-[10px] lg-custom:gap-[38px] text-black dark:text-white font-medium text-sm 2xl:text-[18px] leading-6">
               <p>{footerNote}</p>
-              <Link
-                to={"/under-process"}
-                onClick={scrollToTop}
-              >
+              <Link to={"/under-process"} onClick={scrollToTop}>
                 Terms & Conditions
               </Link>
             </div>
@@ -129,14 +168,12 @@ export default function Footer({ links, footerNote }: FooterProps) {
             <div className="flex space-x-[10px] mt-4 lg:mt-0">
               {loading
                 ? Array.from({ length: 4 }).map((_, index) => (
-                  <div
-                    key={index}
-                    className="w-[52px] h-[52px] bg-purple70 rounded-full animate-pulse"
-                  ></div>
-                ))
-                : socialLinks.map((link: SocialLink) =>
-                  renderSocialIcon(link)
-                )}
+                    <div
+                      key={index}
+                      className="w-[52px] h-[52px] bg-purple70 rounded-full animate-pulse"
+                    ></div>
+                  ))
+                : socialLinks.map((link: SocialLink) => renderSocialIcon(link))}
             </div>
           </div>
         </div>

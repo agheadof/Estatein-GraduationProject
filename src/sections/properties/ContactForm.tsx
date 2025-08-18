@@ -9,14 +9,12 @@ type ContactFormProps = {
   type: "inquiry" | "contact" | "property";
 };
 
-function ContactForm({
-  starImg,
-  heading,
-  paragraph,
-  type,
-}: ContactFormProps) {
+function ContactForm({ starImg, heading, paragraph, type }: ContactFormProps) {
   return (
-    <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
+    <SectionWrapper
+      id="form"
+      className="py-20 lg-custom:py-[120px] 2xl:py-[150px]"
+    >
       <Title
         anamation="fade-up"
         starImg={starImg}

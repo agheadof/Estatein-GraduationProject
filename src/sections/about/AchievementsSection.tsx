@@ -38,36 +38,37 @@ function AchievementsSection() {
   }, [visibleItems.length]);
 
   return (
-    <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
-      <section>
-        <Title
-          starImg
-          heading="Our Achievements"
-          paragraph="Our story is one of continuous growth and evolution. We started as a small team with big dreams, determined to create a real estate platform that transcended the ordinary."
-          paragraphStyle="w-[95%]"
-          anamation="fade-up"
-        />
+    <SectionWrapper
+      id="works"
+      className="py-20 lg-custom:py-[120px] 2xl:py-[150px]"
+    >
+      <Title
+        starImg
+        heading="Our Achievements"
+        paragraph="Our story is one of continuous growth and evolution. We started as a small team with big dreams, determined to create a real estate platform that transcended the ordinary."
+        paragraphStyle="w-[95%]"
+        anamation="fade-up"
+      />
 
-        {loading ? (
-          <div className="grid gap-5 md:grid-cols-3 md:gap-[30px] 2xl:gap-10 pt-10 md:pt-[60px] 2xl:pt-20">
-            {skeletons}
-          </div>
-        ) : error ? (
-          <p className="text-red-500">{error}</p>
-        ) : (
-          <div
-            className="grid gap-5 md:grid-cols-3 md:gap-[30px] 2xl:gap-10 pt-10 md:pt-[60px] 2xl:pt-20"
-            data-aos="fade-up"
-            data-aos-duration="500"
-          >
-            {visibleItems.map((achievement: Achievement, index: number) => (
-              <div key={achievement.id} {...teamItemAos(index)}>
-                <AchievementsCard {...achievement} />
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
+      {loading ? (
+        <div className="grid gap-5 md:grid-cols-3 md:gap-[30px] 2xl:gap-10 pt-10 md:pt-[60px] 2xl:pt-20">
+          {skeletons}
+        </div>
+      ) : error ? (
+        <p className="text-red-500">{error}</p>
+      ) : (
+        <div
+          className="grid gap-5 md:grid-cols-3 md:gap-[30px] 2xl:gap-10 pt-10 md:pt-[60px] 2xl:pt-20"
+          data-aos="fade-up"
+          data-aos-duration="500"
+        >
+          {visibleItems.map((achievement: Achievement, index: number) => (
+            <div key={achievement.id} {...teamItemAos(index)}>
+              <AchievementsCard {...achievement} />
+            </div>
+          ))}
+        </div>
+      )}
     </SectionWrapper>
   );
 }

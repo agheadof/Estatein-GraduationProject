@@ -38,12 +38,18 @@ const TeamSection = () => {
   }, [dispatch, items.length]);
 
   const skeletons = useMemo(
-    () => Array.from({ length: items.length || 4 }, (_, i) => <SkeletonCard key={i} />),
+    () =>
+      Array.from({ length: items.length || 4 }, (_, i) => (
+        <SkeletonCard key={i} />
+      )),
     [items.length]
   );
 
   return (
-    <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
+    <SectionWrapper
+      id="team"
+      className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]"
+    >
       <Title
         heading="Meet the Estatein Team"
         paragraph="At Estatein, our success is driven by the dedication and expertise of our team. Get to know the people behind our mission to make your real estate dreams a reality."
@@ -59,7 +65,9 @@ const TeamSection = () => {
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : items.length === 0 ? (
-        <p className="text-center text-gray-600 dark:text-gray-300">No team members found.</p>
+        <p className="text-center text-gray-600 dark:text-gray-300">
+          No team members found.
+        </p>
       ) : (
         <GenericSlider<Team>
           items={items}
@@ -67,7 +75,11 @@ const TeamSection = () => {
           showCounter
           counterClassName="mt-0"
           renderSlide={(team, index) => (
-            <div {...teamItemAos(index)} className="h-full" key={team.id ?? index}>
+            <div
+              {...teamItemAos(index)}
+              className="h-full"
+              key={team.id ?? index}
+            >
               <TeamCardComponent
                 id={team.id}
                 name={team.name}
@@ -75,7 +87,6 @@ const TeamSection = () => {
                 image={(team as any).image ?? (team as any).clientImage}
                 twitterLink={(team as any).twitterLink}
                 email={(team as any).email}
-
               />
             </div>
           )}

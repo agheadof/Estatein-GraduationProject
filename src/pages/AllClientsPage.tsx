@@ -75,7 +75,7 @@ function AllClientsPage() {
         <p className="text-red-500">{error}</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedItems.map((client:Client, index:number) => (
+          {displayedItems.map((client: Client, index: number) => (
             <Card key={index} client={client} />
           ))}
         </div>
