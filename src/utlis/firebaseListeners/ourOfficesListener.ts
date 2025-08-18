@@ -1,4 +1,4 @@
-import { onValue, ref, query, limitToFirst } from "firebase/database";
+import { onValue, ref, query} from "firebase/database";
 import type { AppDispatch } from "../../redux/store"
 import { db } from "../../firebaseConfig"
 import type { OfficeLocation } from "../../redux/types/OfficeLocation"
@@ -10,7 +10,7 @@ import {
 
 export const listenToOffices = () => (dispatch: AppDispatch) => {
   dispatch(setLoading(true));
-  const officesRef = query(ref(db, "locations"), limitToFirst(2)); 
+  const officesRef = query(ref(db, "locations"), ); 
 
   onValue(
     officesRef,
