@@ -34,10 +34,7 @@ module.exports = {
       fontFamily: {
         urbanist: ["Urbanist", "sans-serif"],
       },
-      screens: {
-        "lg-custom": "992px",
-        "huge": "1921px",
-      },
+      
     },
   },
   plugins: [],
