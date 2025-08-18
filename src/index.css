@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
-@source "../src/"
+
 @theme {
   --color-white90: #e4e4e7;
   --color-white95: #f1f1f3;
