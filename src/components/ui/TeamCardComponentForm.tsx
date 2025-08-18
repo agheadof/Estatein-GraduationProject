@@ -6,14 +6,15 @@ import {
   resetOutboundMailById,
 } from "../../redux/slices/createEmailSlice";
 import AlertMessage from "../ui/AlertMessage";
-import { composeTeamCardEmail } from "../../utlis/teamAndNewsletter";
+
 
 type Props = {
   cardId: string;
   toMemberName?: string;
+  toEmail?: string;
 };
 
-export default function TeamCardComponentForm({ cardId, toMemberName }: Props) {
+export default function TeamCardComponentForm({ cardId, toMemberName, toEmail }: Props) {
   const dispatch = useAppDispatch();
   const channel = useAppSelector((s: RootState) => s.outboundMailer.byId[cardId]);
   const sending = channel?.sending ?? false;
@@ -46,15 +47,14 @@ export default function TeamCardComponentForm({ cardId, toMemberName }: Props) {
     }
     setLocalError("");
 
-    const { subject, message } = composeTeamCardEmail(toMemberName || "Team Member");
-    
+
     dispatch(
       sendOutboundMail({
+        to_email: toEmail,
         cardId,
-        subject,
+        subject: `Message to ${toMemberName ?? "Team Member"}`,
         from_name: "TeamCardComponent",
-        message,
-        extra: { to_member: toMemberName ?? "Team Member" },
+        message: input.trim(),
       })
     );
   };

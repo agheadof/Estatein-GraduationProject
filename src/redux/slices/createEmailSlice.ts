@@ -5,6 +5,7 @@ type ChannelState = { sending: boolean; success: boolean; error: string | null }
 type SliceState = { byId: Record<string, ChannelState> };
 
 const initialChannel: ChannelState = { sending: false, success: false, error: null };
+
 const ensure = (state: SliceState, id: string) => {
   if (!state.byId[id]) state.byId[id] = { ...initialChannel };
   return state.byId[id];
@@ -15,6 +16,8 @@ export type SendOutboundMailArgs = {
   message: string;
   subject?: string;
   from_name?: string;
+  to_email?: string;
+  reply_to?: string;
   extra?: Record<string, any>;
   serviceId?: string;
   templateId?: string;
@@ -39,8 +42,12 @@ export const sendOutboundMail = createAsyncThunk(
         message: args.message,
         subject: args.subject ?? "New Message",
         from_name: args.from_name ?? "Website",
+        to_email: args.to_email,
+        reply_to: args.reply_to,
+
         ...(args.extra ?? {}),
       });
+
       if (res.status < 200 || res.status >= 300) {
         throw new Error(`${res.status} ${res.text || "Unknown error"}`);
       }
