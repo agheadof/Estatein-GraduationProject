@@ -15,6 +15,7 @@ const Hero = ({ title, description }: HeroProps) => {
     // === Main Hero Section Container ===
 
     <div
+      id="hero"
       className={`relative max-w-[1920px] huge:mx-auto lg-custom:pl-[80px] 2xl:pl-[162px] huge:pr-[162px]  ${
         isBannerVisible
           ? "lg-custom:h-[calc(100vh-142px)] lg-custom:mt-[77px] 2xl:mt-[94px] 2xl:h-[calc(100vh-157px)] "

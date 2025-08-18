@@ -4,7 +4,10 @@ import OurOfficeTaps from "./OurOfficeTaps";
 
 function OurOffices() {
   return (
-    <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
+    <SectionWrapper
+      id="office"
+      className="py-20 lg-custom:py-[120px] 2xl:py-[150px]"
+    >
       <Title
         starImg={true}
         heading="Discover Our Office Locations"
@@ -18,5 +21,3 @@ function OurOffices() {
 }
 
 export default OurOffices;
-
-

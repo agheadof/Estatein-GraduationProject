@@ -11,19 +11,19 @@ export const SiteFeaturesServicesData: CommonCardProps[] = [
         cardTitle: "Unlock Property Value",
         cardImg: "/assets/icons/CardUnderHero/unlock.svg",
         HeadingTag: "a",
-        titleLink: "/services/#property"
+        titleLink: "/services#property"
     },
     {
         cardTitle: "Effortless Property Management",
         cardImg: "/assets/icons/CardUnderHero/effortless.svg",
         HeadingTag: "a",
-        titleLink: "/services/#management"
+        titleLink: "/services#management"
     },
     {
         cardTitle: "Smart Investments, Informed Decisions",
         cardImg: "/assets/icons/CardUnderHero/smart.svg",
         HeadingTag: "a",
-        titleLink: "/services/#investments"
+        titleLink: "/services#investments"
     },
 ]
 

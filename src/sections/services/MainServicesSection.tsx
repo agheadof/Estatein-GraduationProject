@@ -27,8 +27,11 @@ const MainServicesSection = ({
   unlockCardData,
 }: MainServicesSectionProps) => {
   return (
-    <SectionWrapper className="pt-[61px] lg-custom:pt-[90px] 2xl:pt-[110px]">
-      <section id={id} {...pvSectionAos()}>
+    <SectionWrapper
+      id={id}
+      className="pt-[61px] lg-custom:pt-[90px] 2xl:pt-[110px]"
+    >
+      <section {...pvSectionAos()}>
         <Title
           titleStyle={titleData.titleStyle}
           heading={titleData.heading}

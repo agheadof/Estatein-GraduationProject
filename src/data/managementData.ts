@@ -32,8 +32,8 @@ export const managementTitleData: TitleProps = {
     paragraphStyle: "w-[81.203%]",
 }
 
-export const unlockCardComponentData: unlockCardComponentProps =
+export const unlockCardManagementData: unlockCardComponentProps =
 {
-    title: "Unlock the Value of Your Property Today",
-    desc: "Ready to unlock the true value of your property? Explore our Property Selling Service categories and let us help you achieve the best deal possible for your valuable asset.",
+    title: "Experience Effortless Property Management",
+    desc: "Ready to experience hassle-free property management? Explore our Property Management Service categories and let us handle the complexities while you enjoy the benefits of property ownership.",
 }

@@ -6,7 +6,7 @@ import SubHero from "../components/shared/SubHero";
 
 function PropertiesPage() {
   return (
-    <div className="">
+    <div>
       <SubHero
         title={subHeroProperties.title}
         desc={subHeroProperties.desc}
