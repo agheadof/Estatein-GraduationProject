@@ -91,10 +91,8 @@ const Navbar = ({ isBannerVisible, logo: Logo, navData }: NavbarProps) => {
               to={contactLink.path}
               onClick={handleCloseMenu}
               className={({ isActive }) =>
-                `hidden lg-custom:block text-white font-medium lg-custom:py-3 lg-custom:px-5 2xl:py-3.5 2xl:px-6 lg-custom:rounded-lg 2xl:rounded-[10px] dark:border dark:border-gray15 leading-[150%] lg-custom:text-sm 2xl:text-lg ${
-                  isActive
-                    ? "dark:bg-gray08 bg-gray08/60"
-                    : "dark:bg-gray08 bg-gray08/60"
+                `hidden lg-custom:block text-white font-medium lg-custom:py-3 lg-custom:px-5 2xl:py-3.5 2xl:px-6 lg-custom:rounded-lg 2xl:rounded-[10px] dark:border dark:border-gray15 ${
+                  isActive ? "dark:bg-gray08 bg-gray08/60 hover:bg-gray08/50 dark:hover:bg-gray10/60" : "dark:bg-gray08 bg-gray08/60 hover:bg-gray08/80 dark:hover:bg-gray10"
                 } transition-all duration-300 ease-in-out`
               }
               {...navDesktopContactAos()}

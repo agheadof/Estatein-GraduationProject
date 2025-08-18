@@ -46,51 +46,52 @@ const TeamSection = () => {
   );
 
   return (
-    <SectionWrapper className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]">
-      <section id="team">
-        <Title
-          heading="Meet the Estatein Team"
-          paragraph="At Estatein, our success is driven by the dedication and expertise of our team. Get to know the people behind our mission to make your real estate dreams a reality."
-          starImg
-          paragraphStyle="w-full"
-          anamation="fade-up"
-        />
+    <SectionWrapper
+      id="team"
+      className="pb-20 lg-custom:pb-[120px] 2xl:pb-[150px]"
+    >
+      <Title
+        heading="Meet the Estatein Team"
+        paragraph="At Estatein, our success is driven by the dedication and expertise of our team. Get to know the people behind our mission to make your real estate dreams a reality."
+        starImg
+        paragraphStyle="w-full"
+        anamation="fade-up"
+      />
 
-        {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-4 2xl:gap-[30px] gap-[20px]">
-            {skeletons}
-          </div>
-        ) : error ? (
-          <p className="text-red-500">{error}</p>
-        ) : items.length === 0 ? (
-          <p className="text-center text-gray-600 dark:text-gray-300">
-            No team members found.
-          </p>
-        ) : (
-          <GenericSlider<Team>
-            items={items}
-            slidesPerView={{ lg: 4, md: 2, sm: 1 }} // 4 كروت للكبير، 2 للوسط، 1 للصغير
-            showCounter
-            counterClassName="mt-0"
-            renderSlide={(team, index) => (
-              <div
-                {...teamItemAos(index)}
-                className="h-full"
-                key={team.id ?? index}
-              >
-                <TeamCardComponent
-                  id={team.id}
-                  name={team.name}
-                  role={team.role}
-                  image={(team as any).image ?? (team as any).clientImage}
-                  twitterLink={(team as any).twitterLink}
-                  email={(team as any).email}
-                />
-              </div>
-            )}
-          />
-        )}
-      </section>
+      {loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg-custom:!grid-cols-4 2xl:gap-[30px] gap-[20px]">
+          {skeletons}
+        </div>
+      ) : error ? (
+        <p className="text-red-500">{error}</p>
+      ) : items.length === 0 ? (
+        <p className="text-center text-gray-600 dark:text-gray-300">
+          No team members found.
+        </p>
+      ) : (
+        <GenericSlider<Team>
+          items={items}
+          slidesPerView={{ lg: 4, md: 2, sm: 1 }} // 4 كروت للكبير، 2 للوسط، 1 للصغير
+          showCounter
+          counterClassName="mt-0"
+          renderSlide={(team, index) => (
+            <div
+              {...teamItemAos(index)}
+              className="h-full"
+              key={team.id ?? index}
+            >
+              <TeamCardComponent
+                id={team.id}
+                name={team.name}
+                role={team.role}
+                image={(team as any).image ?? (team as any).clientImage}
+                twitterLink={(team as any).twitterLink}
+                email={(team as any).email}
+              />
+            </div>
+          )}
+        />
+      )}
     </SectionWrapper>
   );
 };

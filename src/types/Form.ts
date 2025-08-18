@@ -20,6 +20,7 @@ export type SelectProps = {
   onChange: (value: string) => void 
   options: string[]
   classExtra?: string
+  classNameCustom?: string
   classIcon?: string
   children?: React.ReactNode
 }
@@ -58,4 +59,21 @@ export type CustomFormData = {
   preferredContact?: string
 }
 
-export type FormType = "inquiry" | "property" | "detailed"
+export type ContactMethod = {
+   type: "email" | "tel";
+   name: keyof CustomFormData;
+   placeholder: string;
+   icon: React.ComponentType<any>;
+ };
+ 
+export type SelectField = {
+  label: string;
+  name: keyof CustomFormData; 
+  placeholder: string;
+  options: string[];
+  classNameWrapper?: string;
+};
+
+export type FormType = "inquiry" | "property" | "contact";
+
+

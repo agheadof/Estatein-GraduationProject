@@ -20,8 +20,9 @@ function ClientCard({ since, title, domain, category, review, website }: Client)
         shadow-[0px_0px_0px_6px_#f1f1f3] dark:shadow-[0px_0px_0px_6px_#191919] 
         lg-custom:shadow-[0px_0px_0px_8px_#f1f1f3] dark:lg-custom:shadow-[0px_0px_0px_8px_#191919] 
         flex flex-col gap-[30px] 2xl:gap-[40px] h-full
-        duration-300 hover:shadow-[0px_10px_20px_rgba(112,59,247,0.1)] 
-        dark:hover:shadow-[0px_10px_20px_rgba(148,108,249,0.2)]">
+        hover:border-purple75 dark:hover:border-purple60/60 hover:bg-gradient-to-br hover:from-purple75/20 hover:to-transparent 
+       dark:hover:from-purple60/10 dark:hover:to-transparent transition-all duration-300 ease-in-out"
+    >
       <div className="flex xl:items-center justify-between gap-5 lg-custom:gap-[30px] flex-col items-start xl:flex-row">
         <div className="flex flex-col w-full sm:w-max">
           <span className="text-sm lg-custom:text-base 2xl:text-lg font-medium leading-[150%] text-gray40 dark:text-gray60">

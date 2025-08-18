@@ -26,7 +26,10 @@ const TeamCardComponent = ({ id, name, role, image, twitterLink, email }: TeamCa
         : FALLBACK_AVATAR;
 
   return (
-    <div className="group flex flex-col w-full gap-10 lg-custom:gap-[50px] p-5 lg-custom:p-6 2xl:p-[30px] border border-gray15 rounded-xl transition-all duration-500 hover:shadow-2xl hover:shadow-purple70/30">
+    <div
+      className="group flex flex-col w-full gap-10 lg-custom:gap-[50px] p-5 lg-custom:p-6 2xl:p-[30px] border border-gray15 rounded-xl hover:border-purple75 dark:hover:border-purple60/60 hover:bg-gradient-to-br hover:from-purple75/20 hover:to-transparent 
+       dark:hover:from-purple60/10 dark:hover:to-transparent transition-all duration-300 ease-in-out"
+    >
       <div className="relative">
         <img
           src={src}
@@ -50,7 +53,6 @@ const TeamCardComponent = ({ id, name, role, image, twitterLink, email }: TeamCa
               className="w-5 h-5 2xl:w-6 2xl:h-6"
             />
           </a>
-
         )}
       </div>
 

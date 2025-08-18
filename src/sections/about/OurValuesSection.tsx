@@ -41,7 +41,7 @@ const OurValuesSection = () => {
           />
           <div
             data-aos="fade-left"
-            className="lg:w-2/3 w-full bg-purple90 dark:bg-gray10 p-2.5  rounded-xl hover:bg-purple75 transition duration-300"
+            className="lg:w-2/3 w-full bg-purple90 dark:bg-gray10 p-2.5 rounded-xl transition-all duration-300 ease-out hover:bg-purple70/50 hover:-translate-y-1 hover:shadow-[0px_10px_20px_rgba(112,59,247,0.3)] dark:hover:shadow-[0px_10px_20px_rgba(148,108,249,0.2)]"
           >
             <div className="bg-white99 dark:bg-gray08 p-6 lg:p-[55px] grid grid-cols-1 min-lg-custom:grid-cols-2  rounded-xl justify-center gap-[30px]">
               {loading ? (

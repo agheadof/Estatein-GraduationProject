@@ -10,6 +10,7 @@ function FormSelect({
   onChange,
   options,
   error,
+  classNameCustom,
   classExtra = "bg-white97 dark:bg-gray10",
   classIcon,
   children,
@@ -20,7 +21,7 @@ function FormSelect({
 
   const handleSelect = (opt: string) => {
     setSelected(opt);
-    onChange(opt); 
+    onChange(opt);
     setIsOpen(false);
   };
 
@@ -42,7 +43,7 @@ function FormSelect({
       {label && (
         <label
           htmlFor={name}
-          className="mb-4 text-xl lg-custom:text-base/[1.5] text-black dark:text-white font-semibold"
+          className="2xl:mb-4 lg-custom:mb-3.5 mb-2.5 2xl:text-xl text-base/[1.5] text-black dark:text-white font-semibold"
           onClick={() => setIsOpen((prev) => !prev)}
         >
           {label}
@@ -50,20 +51,27 @@ function FormSelect({
       )}
 
       <div
-        className={`relative bg-purple90 flex flex-col border-1 rounded-lg border-white90 dark:border-gray15 hover:text-purple75 transition-colors duration-300 ${classExtra}`}
+        className={`relative flex flex-col border-1  border-white90 dark:border-gray15 hover:text-purple75 font-medium ${classExtra}`}
       >
         <div
-          className={`flex gap-2.5 px-5 py-6 pr-12 items-center cursor-pointer`}
+          className={`flex gap-2.5 items-center cursor-pointer ${classNameCustom}`}
           onClick={() => setIsOpen((prev) => !prev)}
         >
           {children}
-          <span className={`text-black dark:text-gray40 text-lg/[20px] lg-custom:text-sm font-medium`}>
+          <span
+            className={`${
+              selected ? "text-black dark:text-white" : ""
+            }`}
+          >
             {selected || placeholder || "Select"}
           </span>
-
-          <div onClick={() => setIsOpen((prev) => !prev)}>
+          <div
+            className={`absolute top-1/2 transform -translate-y-1/2 ${classIcon}`}
+          >
             <DropdownIcon
-              className={`absolute right-5 top-1/2 transform -translate-y-1/2 text-black dark:text-white transition-transform duration-200 cursor-pointer ${isOpen ? "rotate-180" : ""} ${classIcon}`}
+              className={`text-black dark:text-white transition-transform duration-200 cursor-pointer ${
+                isOpen ? "rotate-180" : ""
+              } `}
             />
           </div>
         </div>
@@ -73,7 +81,9 @@ function FormSelect({
             {options.map((opt) => (
               <li
                 key={opt}
-                className={`px-5 py-3 hover:bg-purple75 dark:hover:bg-purple90 cursor-pointer text-black dark:text-gray40 text-sm font-medium ${selected === opt ? "bg-purple90 dark:bg-purple90" : ""}`}
+                className={`px-5 py-3 hover:bg-purple75 dark:hover:bg-purple90 cursor-pointer text-black dark:text-gray40 text-sm font-medium ${
+                  selected === opt ? "bg-purple90 dark:bg-purple90" : ""
+                }`}
                 onClick={() => handleSelect(opt)}
               >
                 {opt}

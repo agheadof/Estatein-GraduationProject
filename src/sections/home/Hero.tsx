@@ -46,13 +46,13 @@ const Hero = ({ title, description }: HeroProps) => {
         >
           <Link
             to="/about"
-            className="text-center py-3.5 px-5 2xl:py-[18px] text-sm 2xl:text-lg 2xl:px-6 border  border-white90 dark:border-gray15 rounded-lg"
+            className="text-center py-3.5 px-5 2xl:py-[18px] text-sm 2xl:text-lg 2xl:px-6 border  border-white90 dark:border-gray15 rounded-lg hover:bg-purple97 dark:hover:bg-gray10"
           >
             Learn More
           </Link>
           <Link
             to="/properties"
-            className="text-center py-3.5 px-5 2xl:py-[18px] 2xl:px-6 text-sm 2xl:text-lg bg-purple90 dark:bg-purple60 rounded-lg hover:bg-purple75"
+            className="text-center py-3.5 px-5 2xl:py-[18px] 2xl:px-6 text-sm 2xl:text-lg bg-purple90 dark:bg-purple60 rounded-lg hover:bg-purple90/60"
           >
             Browse Properties
           </Link>

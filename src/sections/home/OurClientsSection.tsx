@@ -34,8 +34,11 @@ function OurClientsSection() {
   const skeletonCount = items?.length > 0 ? items.length : 3;
 
   return (
-    <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
-      <section className="relative" id="testimonials">
+    <SectionWrapper
+      id="testimonials"
+      className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]"
+    >
+      <section className="relative">
         <Title
           heading="What Our Clients Say"
           paragraph="Read the success stories and heartfelt testimonials from our valued clients. Discover why they chose Estatein for their real estate needs."
@@ -73,7 +76,7 @@ function OurClientsSection() {
 
             {!hasReviewed && (
               <button
-                className=" cursor-pointer text-black dark:text-white underline mt-6 hover:text-purple60 duration-300"
+                className="text-base cursor-pointer text-black dark:text-white underline mt-6 hover:text-purple60 hover:scale-105 duration-300"
                 onClick={() => setShowReviewModal(true)}
               >
                 Add a review
