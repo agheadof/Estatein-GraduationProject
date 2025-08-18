@@ -51,8 +51,32 @@ function OurClientsSection() {
             {[...Array(skeletonCount)].map((_, i) => (
               <div
                 key={i}
-                className="p-[30px] lg-custom:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl border dark:border-gray15 border-white90 bg-gray-200 dark:bg-gray-700 animate-pulse"
+                className="flex flex-col justify-between gap-6 xl:gap-[30px] 2xl:gap-[40px] h-full 2xl:!min-h-[442px] 2xl:!max-h-[442px] xl:!min-h-[363px] xl:!max-h-[363px] p-[30px] xl:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl border dark:border-gray15 border-white90 bg-gray-200 dark:bg-gray-700 animate-pulse"
               >
+                {/* Star Rating Skeleton */}
+                <div className="flex gap-2">
+                  {[...Array(5)].map((_, starIdx) => (
+                    <div
+                      key={starIdx}
+                      className="w-[30px] h-[30px] lg-custom:w-[38px] lg-custom:h-[36px] 2xl:w-11 2xl:h-11 rounded-full bg-gray-300 dark:bg-gray-600"
+                    />
+                  ))}
+                </div>
+
+                {/* Subject & Review Skeleton */}
+                <div className="flex flex-col gap-1.5 xl:gap-2.5 2xl:gap-3.5">
+                  <div className="h-6 xl:h-7 2xl:h-8 rounded bg-gray-300 dark:bg-gray-600 w-3/4"></div>
+                  <div className="h-4 xl:h-5 2xl:h-6 rounded bg-gray-300 dark:bg-gray-600 w-full"></div>
+                </div>
+
+                {/* Client Info Skeleton */}
+                <div className="flex gap-2.5 2xl:gap-3 items-center">
+                  <div className="w-[50px] h-[50px] 2xl:w-[60px] 2xl:h-[60px] rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                  <div className="flex flex-col gap-1">
+                    <div className="h-4 xl:h-5 2xl:h-6 rounded bg-gray-300 dark:bg-gray-600 w-1/2"></div>
+                    <div className="h-3 xl:h-4 2xl:h-5 rounded bg-gray-300 dark:bg-gray-600 w-1/3"></div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
