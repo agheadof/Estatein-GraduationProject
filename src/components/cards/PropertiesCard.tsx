@@ -15,17 +15,16 @@ const PropertyDetail = React.memo(({ item }: { item: PropertyDetailType }) => {
     bath: <BathIcon />,
     villa: <VillaIcon />,
   }
-
   return (
     <div className="flex-shrink flex justify-center items-center py-1.5 2xl:py-2 px-3 2xl:px-3.5  bg-purple97 dark:bg-gray10 border dark:border-gray15 border-white90 rounded-full gap-1 max-w-full">
-      <span className="text-black dark:text-white w-3 flex items-center justify-center">
+      <span className="text-black dark:text-white w-5 h-5 min-[992px]:w-[9px] min-[992px]:h-[9px] min-[1300px]:w-5 min-[1300px]:h-5 2xl:w-6 2xl:h-6 flex items-center justify-center">
         {item.icon ? iconMap[item.icon] : null}
       </span>
-      <span className="text-black dark:text-white text-[12px] md:text-sm  whitespace-nowrap">
+      <span className="text-black dark:text-white text-sm min-[992px]:text-[9px] min-[1400px]:text-sm min-[1500px]:text-[12px] min-[1850px]:text-lg whitespace-nowrap">
         {item.label ?? "-"}
       </span>
     </div>
-  )
+  );
 })
 
 type PropertiesCardProps = {
@@ -97,7 +96,7 @@ function PropertiesCard({
       <div
         className={` transition-all duration-500  ${
           isExpanded &&
-          "backdrop-blur-md absolute inset-0  p-5 rounded-xl bg-white/50 dark:bg-black/50 "
+          "backdrop-blur-md absolute inset-0  rounded-xl bg-white/50 dark:bg-black/50 "
         }`}
       >
         {renderTags}
@@ -117,7 +116,7 @@ function PropertiesCard({
           </p>
           <button
             onClick={() => setIsExpanded((prev) => !prev)}
-            className={`dark:text-purple97 text-black font-medium ${
+            className={`dark:text-purple97 text-black font-medium text-sm lg-custom:text-base 2xl:text-lg underline  ${
               isExpanded &&
               "block m-1.5 font-bold border border-transparent border-b-purple60 hover:border-purple60 hover:p-1.5 rounded-lg p-0.5 transition-all duration-200 ease-in-out"
             }`}
@@ -127,7 +126,7 @@ function PropertiesCard({
         </div>
 
         {!isExpanded && showDetails && property.details?.length ? (
-          <div className="flex max-[1300px]:flex-wrap gap-1 mb-4 lg-custom:mb-5 2xl:mb-[30px]">
+          <div className="flex max-[1300px]:flex-wrap gap-[6px] mb-4 lg-custom:mb-6 2xl:mb-[30px]">
             {property.details.map((item: PropertyDetailType, index: number) => (
               <PropertyDetail key={index} item={item} />
             ))}
@@ -144,12 +143,11 @@ function PropertiesCard({
                 {property.Price ?? "N/A"}
               </h2>
             </div>
-
             {property.id && (
               <MainButton
                 variant="normalPurple"
                 onClick={handleViewDetails}
-                className="whitespace-nowrap lg-custom:!text-[10px] xl:!text-xs 2xl:!text-[13px] 2xl:!py-[18px] max-[380px]:!px-3 2xl:!px-6"
+                className="whitespace-nowrap  min-[767px]:text-[10px] min-[1400px]:text-sm min-[1500px]:text-[12px] min-[1850px]:text-lg 2xl:!py-[18px] max-[380px]:!px-3 2xl:!px-6"
               >
                 View Property Details
               </MainButton>

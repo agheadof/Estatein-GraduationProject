@@ -12,7 +12,7 @@ type Props = {
   showTags?: boolean;
   showDetails?: boolean;
   heading: string;
-  paragraph: string;
+  paragraph: string | React.ReactNode;
   buttonLabel?: string;
 };
 

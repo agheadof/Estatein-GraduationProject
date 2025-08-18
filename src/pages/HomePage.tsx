@@ -17,7 +17,17 @@ function HomePage() {
       <div>
         <PropertiesSection
           heading="Featured Properties"
-          paragraph={`Explore our handpicked selection of featured properties. Each listing offers a glimpse into exceptional homes and investments available through Estatein. Click "View Details" for more information.`}
+          paragraph={
+            <>
+              Explore our handpicked selection of featured properties. Each
+              listing offers a glimpse into exceptional homes and investments
+              available through Estatein.
+              <span className="hidden sm:inline">
+                {" "}
+                Click "View Details" for more information.
+              </span>
+            </>
+          }
           buttonLabel="View All Properties"
         />
         <OurClientsSection />

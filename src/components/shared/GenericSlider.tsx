@@ -41,9 +41,11 @@ const GenericSlider = <T,>({
   const [isBeginning, setIsBeginning] = useState<boolean>(true);
   const [isEnd, setIsEnd] = useState<boolean>(false);
   const [currentGroup, setCurrentGroup] = useState<number>(1);
+  
+  const [spacing, setSpacing] = useState<number>();
 
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
-    slides: { perView: perViewCurrent, spacing: 30 },
+    slides: { perView: perViewCurrent, spacing: spacing },
     rubberband: false,
     created: (s) => {
       const rel = Math.round(s.track?.details?.rel ?? 0);
@@ -91,8 +93,19 @@ const GenericSlider = <T,>({
       if (width >= 992) perView = slidesPerView.lg;
       else if (width >= 768) perView = slidesPerView.md ?? 2;
 
+      let newSpacing; 
+      if (width >= 1920) {
+        newSpacing = perView === 2 ? 50 : 30;
+      } else if (width >= 1440) {
+        newSpacing = perView === 2 ? 40 : 20;
+      } else {
+        newSpacing = perView === 2 ? 30 : 20;
+      }
+
       setPerViewCurrent(perView);
-      slider.current.update({ slides: { perView, spacing: 30 } });
+      setSpacing(newSpacing);
+
+      slider.current.update({ slides: { perView, spacing: newSpacing }});
 
       const maxStart = Math.max(0, items.length - perView);
       if (currentIndex > maxStart) {
@@ -156,7 +169,7 @@ const GenericSlider = <T,>({
 
   return (
     <div className="w-full mt-[40px] lg-custom:mt-[60px] 2xl:mt-[80px]">
-      <div ref={sliderRef} className="keen-slider mb-[50px] w-full">
+      <div ref={sliderRef} className="keen-slider mb-[30px] lg-custom:mb-10 2xl:mb-[50px] w-full">
         {items.map((item, index) => {
           const isVisible =
             index >= currentIndex && index < currentIndex + perViewCurrent;
