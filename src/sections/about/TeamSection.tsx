@@ -74,6 +74,7 @@ const TeamSection = () => {
                   role={team.role}
                   image={(team as any).image ?? (team as any).clientImage}
                   twitterLink={(team as any).twitterLink}
+                  email={(team as any).email}
                 />
               </div>
             )}

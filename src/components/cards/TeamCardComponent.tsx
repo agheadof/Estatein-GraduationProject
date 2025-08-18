@@ -6,11 +6,13 @@ interface TeamCardProps {
   role: string;
   image?: string;
   twitterLink?: string;
+  email?: string;
+
 }
 
 const FALLBACK_AVATAR = "/assets/images/team/default-avatar.png";
 
-const TeamCardComponent = ({ id, name, role, image, twitterLink }: TeamCardProps) => {
+const TeamCardComponent = ({ id, name, role, image, twitterLink, email }: TeamCardProps) => {
   const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const img = e.currentTarget;
     if (!img.src.endsWith(FALLBACK_AVATAR)) img.src = FALLBACK_AVATAR;
@@ -63,7 +65,7 @@ const TeamCardComponent = ({ id, name, role, image, twitterLink }: TeamCardProps
         </div>
 
         <div className="relative w-full">
-          <TeamCardComponentForm cardId={id} toMemberName={name} />
+          <TeamCardComponentForm cardId={id}  toEmail={email} />
         </div>
       </div>
     </div>
