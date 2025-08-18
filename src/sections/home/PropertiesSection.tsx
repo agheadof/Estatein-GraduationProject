@@ -61,42 +61,44 @@ function PropertiesSection({
 
   return (
     <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
-      <Title
-        heading={heading}
-        paragraph={paragraph}
-        buttonLabel={buttonLabel}
-        paragraphStyle="2xl:max-w-[1200px] lg-custom:max-w-[975px] w-full"
-        anamation="fade-up"
-        navigateTo="allProperties"
-        onClick={scrollToTop}
-      />
-
-      {error ? (
-        <p className="text-red-500 mt-6">{error}</p>
-      ) : loading && properties.length === 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[40px] lg-custom:mt-[60px] 2xl:mt-[80px]">
-          {[...Array(3)].map((_, index) => (
-            <SkeletonCard key={index} />
-          ))}
-        </div>
-      ) : (
-        <GenericSlider<PropertyType>
-          items={properties}
+      <section id="properties">
+        <Title
+          heading={heading}
+          paragraph={paragraph}
+          buttonLabel={buttonLabel}
+          paragraphStyle="2xl:max-w-[1200px] lg-custom:max-w-[975px] w-full"
+          anamation="fade-up"
           navigateTo="allProperties"
-          renderSlide={(property) => (
-            <PropertiesCard
-              key={property.id}
-              property={property}
-              showDetails={showDetails}
-              showTags={showTags}
-            />
-          )}
-          slidesPerView={{ lg: 3, md: 2, sm: 1 }}
-          showCounter
-          titleBtnLabel="View All Properties"
-          onClick={() => scrollToTop()}
+          onClick={scrollToTop}
         />
-      )}
+
+        {error ? (
+          <p className="text-red-500 mt-6">{error}</p>
+        ) : loading && properties.length === 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-[40px] lg-custom:mt-[60px] 2xl:mt-[80px]">
+            {[...Array(3)].map((_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+          </div>
+        ) : (
+          <GenericSlider<PropertyType>
+            items={properties}
+            navigateTo="allProperties"
+            renderSlide={(property) => (
+              <PropertiesCard
+                key={property.id}
+                property={property}
+                showDetails={showDetails}
+                showTags={showTags}
+              />
+            )}
+            slidesPerView={{ lg: 3, md: 2, sm: 1 }}
+            showCounter
+            titleBtnLabel="View All Properties"
+            onClick={() => scrollToTop()}
+          />
+        )}
+      </section>
     </SectionWrapper>
   );
 }

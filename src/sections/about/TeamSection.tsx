@@ -38,7 +38,10 @@ const TeamSection = () => {
   }, [dispatch, items.length]);
 
   const skeletons = useMemo(
-    () => Array.from({ length: items.length || 4 }, (_, i) => <SkeletonCard key={i} />),
+    () =>
+      Array.from({ length: items.length || 4 }, (_, i) => (
+        <SkeletonCard key={i} />
+      )),
     [items.length]
   );
 
@@ -59,7 +62,9 @@ const TeamSection = () => {
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : items.length === 0 ? (
-        <p className="text-center text-gray-600 dark:text-gray-300">No team members found.</p>
+        <p className="text-center text-gray-600 dark:text-gray-300">
+          No team members found.
+        </p>
       ) : (
         <GenericSlider<Team>
           items={items}
@@ -67,7 +72,11 @@ const TeamSection = () => {
           showCounter
           counterClassName="mt-0"
           renderSlide={(team, index) => (
-            <div {...teamItemAos(index)} className="h-full" key={team.id ?? index}>
+            <div
+              {...teamItemAos(index)}
+              className="h-full"
+              key={team.id ?? index}
+            >
               <TeamCardComponent
                 id={team.id}
                 name={team.name}

@@ -1,11 +1,19 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { FacebookIcon, LinkedinIcon, TwitterIcon, YoutubeIcon, } from "../../icons/FooterIcons";
+import {
+  FacebookIcon,
+  LinkedinIcon,
+  TwitterIcon,
+  YoutubeIcon,
+} from "../../icons/FooterIcons";
 import { Link } from "react-router-dom";
 import { FooterNewsletter } from "./Newsletter";
 import LogoIcon from "../../icons/LogoIcon";
 import { scrollToTop } from "../../../utlis/scrollToTop";
-import { fetchSocialLinks, type SocialLink } from "../../../redux/slices/footerLinksSlice";
+import {
+  fetchSocialLinks,
+  type SocialLink,
+} from "../../../redux/slices/footerLinksSlice";
 import type { AppDispatch, RootState } from "../../../redux/store";
 
 type FooterLinkItem = {
@@ -117,10 +125,7 @@ export default function Footer({ links, footerNote }: FooterProps) {
           <div className="flex flex-col-reverse gap-[20px] lg-custom:flex-row justify-between items-center">
             <div className="flex flex-col lg-custom:flex-row justify-center items-center flex-wrap gap-[10px] lg-custom:gap-[38px] text-black dark:text-white font-medium text-sm 2xl:text-[18px] leading-6">
               <p>{footerNote}</p>
-              <Link
-                to={"/under-process"}
-                onClick={scrollToTop}
-              >
+              <Link to={"/under-process"} onClick={scrollToTop}>
                 Terms & Conditions
               </Link>
             </div>
@@ -129,14 +134,12 @@ export default function Footer({ links, footerNote }: FooterProps) {
             <div className="flex space-x-[10px] mt-4 lg:mt-0">
               {loading
                 ? Array.from({ length: 4 }).map((_, index) => (
-                  <div
-                    key={index}
-                    className="w-[52px] h-[52px] bg-purple70 rounded-full animate-pulse"
-                  ></div>
-                ))
-                : socialLinks.map((link: SocialLink) =>
-                  renderSocialIcon(link)
-                )}
+                    <div
+                      key={index}
+                      className="w-[52px] h-[52px] bg-purple70 rounded-full animate-pulse"
+                    ></div>
+                  ))
+                : socialLinks.map((link: SocialLink) => renderSocialIcon(link))}
             </div>
           </div>
         </div>

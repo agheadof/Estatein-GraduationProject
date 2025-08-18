@@ -14,18 +14,22 @@ const Hero = ({ title, description }: HeroProps) => {
   return (
     // === Main Hero Section Container ===
 
-
     <div
-      className={`relative max-w-[1920px] huge:mx-auto lg-custom:pl-[80px] 2xl:pl-[162px] huge:pr-[162px]  ${isBannerVisible
-        ? "lg-custom:h-[calc(100vh-142px)] lg-custom:mt-[77px] 2xl:mt-[94px] 2xl:h-[calc(100vh-157px)] "
-        : "lg-custom:h-[calc(100vh-77px)] lg-custom:mt-[77px] 2xl:h-[calc(100vh-94px)] ]"
-        }  flex flex-col-reverse lg-custom:flex-row lg-custom:items-stretch lg-custom:gap-[60px] 2xl:gap-[80px] text-black dark:text-white`}
+      id="hero"
+      className={`relative max-w-[1920px] huge:mx-auto lg-custom:pl-[80px] 2xl:pl-[162px] huge:pr-[162px]  ${
+        isBannerVisible
+          ? "lg-custom:h-[calc(100vh-142px)] lg-custom:mt-[77px] 2xl:mt-[94px] 2xl:h-[calc(100vh-157px)] "
+          : "lg-custom:h-[calc(100vh-77px)] lg-custom:mt-[77px] 2xl:h-[calc(100vh-94px)] ]"
+      }  flex flex-col-reverse lg-custom:flex-row lg-custom:items-stretch lg-custom:gap-[60px] 2xl:gap-[80px] text-black dark:text-white`}
     >
       {/* === Left Side: Text, Buttons, and CountUp === */}
       <div className="flex justify-center lg-custom:w-[50%] flex-col gap-10 lg-custom:gap-[4vh] 2xl:gap-[5vh]  ">
-
         {/* === Title and Description === */}
-        <div data-aos="fade-right" data-aos-delay="300" className="px-4 lg-custom:px-0 flex flex-col gap-4 lg-custom:gap-5 2xl:gap-6 mt-20 lg-custom:mt-0">
+        <div
+          data-aos="fade-right"
+          data-aos-delay="300"
+          className="px-4 lg-custom:px-0 flex flex-col gap-4 lg-custom:gap-5 2xl:gap-6 mt-20 lg-custom:mt-0"
+        >
           <h1 className="text-[28px] lg-custom:text-[47px] 2xl:text-[60px] font-semibold leading-[120%]">
             {title}
           </h1>
@@ -36,11 +40,20 @@ const Hero = ({ title, description }: HeroProps) => {
         </div>
 
         {/* === Call-to-Action Buttons === */}
-        <div data-aos="fade-right" className="flex flex-col lg-custom:flex-row gap-4 px-4 lg-custom:px-0">
-          <Link to="/about" className="text-center py-3.5 px-5 2xl:py-[18px] text-sm 2xl:text-lg 2xl:px-6 border  border-white90 dark:border-gray15 rounded-lg">
+        <div
+          data-aos="fade-right"
+          className="flex flex-col lg-custom:flex-row gap-4 px-4 lg-custom:px-0"
+        >
+          <Link
+            to="/about"
+            className="text-center py-3.5 px-5 2xl:py-[18px] text-sm 2xl:text-lg 2xl:px-6 border  border-white90 dark:border-gray15 rounded-lg"
+          >
             Learn More
           </Link>
-          <Link to="/properties" className="text-center py-3.5 px-5 2xl:py-[18px] 2xl:px-6 text-sm 2xl:text-lg bg-purple90 dark:bg-purple60 rounded-lg hover:bg-purple75">
+          <Link
+            to="/properties"
+            className="text-center py-3.5 px-5 2xl:py-[18px] 2xl:px-6 text-sm 2xl:text-lg bg-purple90 dark:bg-purple60 rounded-lg hover:bg-purple75"
+          >
             Browse Properties
           </Link>
         </div>
@@ -70,15 +83,15 @@ const Hero = ({ title, description }: HeroProps) => {
         <RotatingText />
         {/* === Foreground Hero Image === */}
 
-        <img data-aos="fade-up" data-aos-delay="300"
+        <img
+          data-aos="fade-up"
+          data-aos-delay="300"
           src="/assets/images/MainHero/main.png"
           alt="Hero"
           className="hidden lg-custom:block  absolute bottom-0 lg-custom:h-[calc(100vh-142px)]  right-10"
         />
       </div>
-
     </div>
-
   );
 };
 

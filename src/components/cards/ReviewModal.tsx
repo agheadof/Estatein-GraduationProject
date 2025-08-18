@@ -1,59 +1,71 @@
-import { createPortal } from "react-dom"
-import { useRef, useState } from "react"
-import { db } from "../../firebaseConfig"
-import { push, ref, set } from "firebase/database"
-import StarRating from "../Forms/StarsInput"
-import FormInput from "../Forms/FormInput"
-import { ImageIcon } from "../icons/ImgIcon"
-import FormTextarea from "../Forms/FormTextarea"
+import { createPortal } from "react-dom";
+import { useRef, useState, useEffect } from "react";
+import { db } from "../../firebaseConfig";
+import { push, ref, set } from "firebase/database";
+import StarRating from "../Forms/StarsInput";
+import FormInput from "../Forms/FormInput";
+import { ImageIcon } from "../icons/ImgIcon";
+import FormTextarea from "../Forms/FormTextarea";
 
 type ReviewModalProps = {
-  closeModal: () => void
-  onSuccess: () => void
-}  
-
+  closeModal: () => void;
+  onSuccess: () => void;
+};
 
 function ReviewModal({ closeModal, onSuccess }: ReviewModalProps) {
-  const formRef = useRef<HTMLFormElement>(null)
-  const [imageUrl, setImageUrl] = useState("")
-  const [uploading, setUploading] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const imgRef = useRef<HTMLInputElement>(null)
-  const [errors, setErrors] = useState<{ [key: string]: string }>({})
-  const [rate, setRating] = useState<number>(0)
+  const formRef = useRef<HTMLFormElement>(null);
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [uploading, setUploading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const imgRef = useRef<HTMLInputElement>(null);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [rate, setRating] = useState<number>(0);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
+  useEffect(() => {
+    const t = setTimeout(() => setIsVisible(true), 10);
+    return () => clearTimeout(t);
+  }, []);
+
+  const handleClose = () => {
+    setIsVisible(false);
+    setTimeout(() => closeModal(), 300);
+  };
 
   const handleImageUpload = async (file: File, cb: (url: string) => void) => {
-    setUploading(true)
-    const formData = new FormData()
-    formData.append("image", file)
+    setUploading(true);
+    const formData = new FormData();
+    formData.append("image", file);
 
     const res = await fetch(
       `https://api.imgbb.com/1/upload?key=edeee7c6c2851a590946b20e9ce00b5d`,
       { method: "POST", body: formData }
-    )
+    );
 
-    const data = await res.json()
-    if (data?.success) cb(data.data.url)
-    setUploading(false)
-  }
+    const data = await res.json();
+    if (data?.success) cb(data.data.url);
+    setUploading(false);
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
+    const file = e.target.files?.[0];
     if (file && file.type.startsWith("image/")) {
-      handleImageUpload(file, (url) => setImageUrl(url))
+      handleImageUpload(file, (url) => setImageUrl(url));
     } else {
-      setErrors((prev) => ({ ...prev, image: "Only valid image formats are allowed" }))
+      setErrors((prev) => ({
+        ...prev,
+        image: "Only valid image formats are allowed",
+      }));
     }
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    const form = formRef.current
-    if (!form) return
+    e.preventDefault();
+    const form = formRef.current;
+    if (!form) return;
 
     const get = (name: string) =>
-      (form.elements.namedItem(name) as HTMLInputElement)?.value.trim() || ""
+      (form.elements.namedItem(name) as HTMLInputElement)?.value.trim() || "";
 
     const data = {
       name: get("name"),
@@ -63,53 +75,61 @@ function ReviewModal({ closeModal, onSuccess }: ReviewModalProps) {
       clientImage: imageUrl,
       rate: rate,
       show: false,
-    }
+    };
 
-    const newErrors: { [key: string]: string } = {}
-    if (!data.name) newErrors.name = "Name is required"
-    if (!data.location) newErrors.location = "Location is required"
-    if (!data.subject) newErrors.subject = "Subject is required"
-    if (!data.review) newErrors.review = "Review is required"
-    if (!data.clientImage) newErrors.image = "Image is required"
-    if (rate === 0) newErrors.rate = "Rating is required"
+    const newErrors: { [key: string]: string } = {};
+    if (!data.name) newErrors.name = "Name is required";
+    if (!data.location) newErrors.location = "Location is required";
+    if (!data.subject) newErrors.subject = "Subject is required";
+    if (!data.review) newErrors.review = "Review is required";
+    if (!data.clientImage) newErrors.image = "Image is required";
+    if (rate === 0) newErrors.rate = "Rating is required";
 
     if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors)
-      return
+      setErrors(newErrors);
+      return;
     }
 
-    setErrors({})
-    setLoading(true)
+    setErrors({});
+    setLoading(true);
 
     try {
-      const newRef = push(ref(db, "testimonials"))
-      await set(newRef, data)
-      form.reset()
-      setImageUrl("")
-      closeModal()
-      onSuccess()
-
+      const newRef = push(ref(db, "testimonials"));
+      await set(newRef, data);
+      form.reset();
+      setImageUrl("");
+      handleClose();
+      onSuccess();
     } catch (err) {
-      console.error("Submit error:", err)
+      console.error("Submit error:", err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md px-4"
-      onClick={closeModal}
+      className={`fixed inset-0 z-50 flex items-center justify-center px-4 transition-opacity duration-300
+      ${
+        isVisible ? "opacity-100" : "opacity-0"
+      } backdrop-blur-xs bg-[#00000033] dark:bg-[#e3e3e380]`}
+      onClick={handleClose}
     >
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="relative w-full max-w-3xl bg-white dark:bg-black/70 rounded-2xl shadow-2xl overflow-hidden p-8 flex flex-col gap-8"
+        className={`relative w-full max-w-3xl bg-white dark:bg-black/70 rounded-2xl shadow-2xl overflow-hidden p-8 flex flex-col gap-8
+        transform transition-all duration-300
+        ${
+          isVisible
+            ? "scale-100 translate-y-0 opacity-100"
+            : "scale-95 translate-y-5 opacity-0"
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
-          onClick={closeModal}
+          onClick={handleClose}
           className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-red-500 hover:text-white text-gray-600 dark:text-gray-300 transition"
         >
           ✕
@@ -209,11 +229,10 @@ function ReviewModal({ closeModal, onSuccess }: ReviewModalProps) {
             {loading ? "Submitting..." : "Submit Review"}
           </button>
         </div>
-
       </form>
     </div>,
     document.body
-  )
+  );
 }
 
-export default ReviewModal
+export default ReviewModal;
