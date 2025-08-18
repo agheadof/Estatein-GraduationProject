@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { scrollToTop } from "../utlis/scrollToTop";
 
 const UnderProcessPage: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ const UnderProcessPage: React.FC = () => {
 
       <Link
         to="/"
+        onClick={scrollToTop}
         className="px-6 py-3 rounded-full font-medium text-white bg-[var(--color-purple65)] hover:bg-[var(--color-purple70)] dark:bg-[var(--color-purple70)] dark:hover:bg-[var(--color-purple60)] transition-colors duration-200 shadow-lg"
       >
         Go to Home

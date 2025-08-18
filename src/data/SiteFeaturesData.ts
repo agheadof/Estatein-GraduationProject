@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
 import type { CommonCardProps } from "../types/CommonCard";
 
 export const SiteFeaturesServicesData: CommonCardProps[] = [
     {
         cardTitle: "Find Your Dream Home",
         cardImg: "/assets/icons/CardUnderHero/home.svg",
-        HeadingTag: Link,
+        HeadingTag: "link",
         titleLink: "/properties"
     },
     {
@@ -32,24 +31,24 @@ export const SiteFeaturesHomeData: CommonCardProps[] = [
     {
         cardTitle: "Find Your Dream Home",
         cardImg: "/assets/icons/CardUnderHero/home.svg",
-        HeadingTag: Link,
+        HeadingTag: "link",
         titleLink: "/properties"
     },
     {
         cardTitle: "Unlock Property Value",
         cardImg: "/assets/icons/CardUnderHero/unlock.svg",
-        HeadingTag: Link,
+        HeadingTag: "link",
         titleLink: "/services"
     },
     {
         cardTitle: "Effortless Property Management",
         cardImg: "/assets/icons/CardUnderHero/effortless.svg",
-        HeadingTag: Link,
+        HeadingTag: "link",
         titleLink: "/services"
     },
     {
         cardTitle: "Smart Investments, Informed Decisions",
-        HeadingTag: Link,
+        HeadingTag: "link",
         cardImg: "/assets/icons/CardUnderHero/smart.svg",
         titleLink: "/services"
     },

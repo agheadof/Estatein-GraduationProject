@@ -59,7 +59,6 @@ export const subscribeExperience = () => (dispatch: any) => {
                         description: value.description || "",
                     })
                 );
-                console.log(dataArray);
                 
                 dispatch(setExperience(dataArray));
             } else {

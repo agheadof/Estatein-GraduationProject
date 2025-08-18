@@ -1,22 +1,22 @@
-import { useEffect, useMemo } from "react"
-import { useNavigate } from "react-router-dom"
-import { shallowEqual } from "react-redux"
+import { useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import { shallowEqual } from "react-redux";
 
-import Gallery from "../../components/Sliders/Gallery"
-import DescriptionComponent from "../../components/cards/DescriptionComponent"
-import KeyFeaturesComponent from "../../components/cards/KeyFeaturesComponent"
-import { LocationIcon } from "../../components/icons/FormIcons"
+import Gallery from "../../components/Sliders/Gallery";
+import DescriptionComponent from "../../components/cards/DescriptionComponent";
+import KeyFeaturesComponent from "../../components/cards/KeyFeaturesComponent";
+import { LocationIcon } from "../../components/icons/FormIcons";
 
-import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import { fetchPropertyById } from "../../redux/thunks/propertyByIdThunk"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchPropertyById } from "../../redux/thunks/propertyByIdThunk";
 
 interface PropertyGalleryProps {
-  id: string
+  id: string;
 }
 
 const PropertyGallery = ({ id }: PropertyGalleryProps) => {
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const { current, error, loading } = useAppSelector(
     (state) => ({
@@ -25,25 +25,24 @@ const PropertyGallery = ({ id }: PropertyGalleryProps) => {
       loading: state.properties.loading,
     }),
     shallowEqual
-  )
-
-useEffect(() => {
-  if (id) {
-    console.log("Fetching property with id:", id);
-    dispatch(fetchPropertyById(id));
-  }
-}, [id, dispatch]);
-
-useEffect(() => {
-  if (current) {
-    console.log("Current property data:", current);
-  }
-}, [current]);
-
+  );
 
   useEffect(() => {
-    if (error === "not-found") navigate("/properties")
-  }, [error, navigate])
+    if (id) {
+      console.log("Fetching property with id:", id);
+      dispatch(fetchPropertyById(id));
+    }
+  }, [id, dispatch]);
+
+  useEffect(() => {
+    if (current) {
+      console.log("Current property data:", current);
+    }
+  }, [current]);
+
+  useEffect(() => {
+    if (error === "not-found") navigate("/properties");
+  }, [error, navigate]);
 
   const galleryDesktop = useMemo(
     () =>
@@ -56,7 +55,7 @@ useEffect(() => {
         />
       ),
     [current?.images]
-  )
+  );
 
   const galleryMobile = useMemo(
     () =>
@@ -69,14 +68,14 @@ useEffect(() => {
         />
       ),
     [current?.images]
-  )
+  );
 
   // main SkeletonBox style
   const SkeletonBox = ({ className = "" }) => (
     <div
       className={`rounded-[10px] 2xl:rounded-lg bg-gray-300 dark:bg-gray-600 animate-pulse ${className}`}
     ></div>
-  )
+  );
 
   if (loading)
     return (
@@ -135,7 +134,7 @@ useEffect(() => {
           </div>
         </div>
       </div>
-    )
+    );
 
   return (
     <div className="flex flex-col gap-5 lg-custom:gap-6 text-black dark:text-white">
@@ -167,7 +166,7 @@ useEffect(() => {
         <KeyFeaturesComponent />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PropertyGallery
+export default PropertyGallery;

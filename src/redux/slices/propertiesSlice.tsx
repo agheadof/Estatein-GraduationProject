@@ -118,7 +118,7 @@ const propertiesSlice = createSlice({
       state.loading = true;
       state.error = null;
     })
-    .addCase(fetchPropertyById.rejected, (state, action) => {
+    .addCase(fetchPropertyById.rejected, (state) => {
       state.loading = false;
       state.error = "not-found";
     });

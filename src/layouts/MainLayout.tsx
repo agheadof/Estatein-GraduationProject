@@ -11,8 +11,8 @@ import ChatBot from "../components/shared/ChatBot/ChatBot";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { hideBanner, showBanner } from "../redux/slices/bannerSlice";
 import CustomCursor from "../components/shared/CustomCursor";
-import 'aos/dist/aos.css';
-import AOS from 'aos';
+import "aos/dist/aos.css";
+import AOS from "aos";
 import LogoIcon from "../components/icons/LogoIcon";
 import { navData } from "../data/NavData";
 
@@ -68,15 +68,15 @@ const MainLayout = () => {
               isVisible={isBannerVisible}
               onClose={handleBannerClose}
               message="✨ Discover Your Dream Property with Estatein"
-              linkText = "Learn More"
-              link = "/properties"
+              linkText="Learn More"
+              link="/properties"
             />
           )}
           <Navbar
             isBannerVisible={isBannerVisible && !hasClosedBanner}
-            logo={LogoIcon} 
-            navData={navData} 
-            />
+            logo={LogoIcon}
+            navData={navData}
+          />
 
           <main className="bg-white99 dark:bg-gray08">
             <Outlet />

@@ -35,7 +35,6 @@ const initialState: PricingState = {
   loading: true,
 };
 
-
 export const transformPropertyData = (propertyData: any) => {
   const additionalFees = propertyData.additionalFees || {};
   const monthlyCosts = propertyData.monthlyCosts || {};
@@ -44,7 +43,7 @@ export const transformPropertyData = (propertyData: any) => {
 
   return {
     title: propertyData.title,
-    price: propertyData.Price,
+    price: propertyData.price,
     details: [
       {
         cardTitle: "Additional Fees",
@@ -193,7 +192,7 @@ export const subscribePricing = () => (dispatch: any) => {
       dispatch(
         setPricing({
           properties: transformed,
-          selectedPropertyId: null,
+          selectedPropertyId: Object.keys(transformed) || null,
         })
       );
     } else {

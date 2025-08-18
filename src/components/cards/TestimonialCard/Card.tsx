@@ -1,28 +1,28 @@
-import StarRating from "./StarRating";
+import StarRating from "./StarRating"
 
 type Props = {
   client: {
-    name: string;
-    subject: string;
-    review: string;
-    clientImage: string;
-    location: string;
-    show?: boolean;
-    rate?: number;
-  };
-};
+    name: string
+    subject: string
+    review: string
+    clientImage: string
+    location: string
+    show?: boolean
+    rate?: number
+  }
+}
 
 const Card = ({ client }: Props) => {
   const cardContainerClass =
-    " flex flex-col justify-between gap-6 xl:gap-[30px] 2xl:gap-[40px] h-full 2xl:!min-h-[442px] 2xl:!max-h-[442px] xl:!min-h-[363px] xl:!max-h-[363px]  p-[30px] xl:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl dark:bg-gray08 bg-white99 border dark:border-gray15 border-white90";
+    " flex flex-col justify-between gap-6 xl:gap-[30px] 2xl:gap-[40px] h-full 2xl:!min-h-[442px] 2xl:!max-h-[442px] xl:!min-h-[363px] xl:!max-h-[363px]  p-[30px] xl:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl dark:bg-gray08 bg-white99 border dark:border-gray15 border-white90"
   const clientNameClass =
-    "dark:text-white text-black font-medium text-lg lg-custom:text-xl 2xl:text-xl whitespace-nowrap";
+    "dark:text-white text-black font-medium text-lg lg-custom:text-xl 2xl:text-xl whitespace-nowrap"
   const clientLocationClass =
-    "text-gray40 dark:text-gray60 font-medium text-sm lg-custom:text-base 2xl:text-lg";
+    "text-gray40 dark:text-gray60 font-medium text-sm lg-custom:text-base 2xl:text-lg"
   const subjectClass =
-    "dark:text-white text-black whitespace-nowrap font-semibold text-lg lg-custom:text-xl 2xl:text-2xl";
+    "dark:text-white text-black whitespace-nowrap font-semibold text-lg lg-custom:text-xl 2xl:text-2xl"
   const reviewClass =
-    " dark:text-white text-black font-medium text-sm lg-custom:text-base 2xl:text-lg";
+    " dark:text-white text-black font-medium text-sm lg-custom:text-base 2xl:text-lg"
 
   return (
     <div className={cardContainerClass}>
@@ -45,11 +45,13 @@ const Card = ({ client }: Props) => {
         />
         <div>
           <h4 className={clientNameClass}>{client.name}</h4>
-          {client.location && <span className={clientLocationClass}>{client.location}</span>}
+          {client.location && (
+            <span className={clientLocationClass}>{client.location}</span>
+          )}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card
