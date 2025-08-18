@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { MessageIcon, SendIcon } from "../../icons/FooterIcons";
 import AlertMessage from "../../ui/AlertMessage";
-import { sendOutboundMail, resetOutboundMailById,} from "../../../redux/slices/createEmailSlice";
+import { sendOutboundMail, resetOutboundMailById } from "../../../redux/slices/createEmailSlice";
 import type { RootState } from "../../../redux/store";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { composeNewsletterEmail } from "../../../utlis/teamAndNewsletter";
@@ -61,6 +61,8 @@ export function FooterNewsletter() {
         subject,
         from_name: "FooterNewsletter",
         message,
+        to_email: email,     
+        reply_to: email,     
         extra: { subscriber_email: email },
       })
     );

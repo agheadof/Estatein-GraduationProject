@@ -275,7 +275,8 @@ function InquiryForm({
             variant="normalPurple"
             className="normalPurple 2xl:py-4.5 2xl:px-14 px-10 py-3 rounded-lg 2xl:text-xl"
             type="submit"
-            onClick={() => handleSubmit(onSubmit)()}
+                        onClick={() => handleSubmit(onSubmit)()}
+
           >
             Send Message
           </MainButton>
