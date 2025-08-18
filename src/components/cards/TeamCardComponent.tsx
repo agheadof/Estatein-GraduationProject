@@ -6,11 +6,13 @@ interface TeamCardProps {
   role: string;
   image?: string;
   twitterLink?: string;
+  email?: string;
+
 }
 
 const FALLBACK_AVATAR = "/assets/images/team/default-avatar.png";
 
-const TeamCardComponent = ({ id, name, role, image, twitterLink }: TeamCardProps) => {
+const TeamCardComponent = ({ id, name, role, image, twitterLink, email }: TeamCardProps) => {
   const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const img = e.currentTarget;
     if (!img.src.endsWith(FALLBACK_AVATAR)) img.src = FALLBACK_AVATAR;
@@ -24,7 +26,10 @@ const TeamCardComponent = ({ id, name, role, image, twitterLink }: TeamCardProps
         : FALLBACK_AVATAR;
 
   return (
-    <div className="group flex flex-col w-full gap-10 lg-custom:gap-[50px] p-5 lg-custom:p-6 2xl:p-[30px] border border-gray15 rounded-xl transition-all duration-500 hover:shadow-2xl hover:shadow-purple70/30">
+    <div
+      className="group flex flex-col w-full gap-10 lg-custom:gap-[50px] p-5 lg-custom:p-6 2xl:p-[30px] border border-gray15 rounded-xl hover:border-purple75 dark:hover:border-purple60/60 hover:bg-gradient-to-br hover:from-purple75/20 hover:to-transparent 
+       dark:hover:from-purple60/10 dark:hover:to-transparent transition-all duration-300 ease-in-out"
+    >
       <div className="relative">
         <img
           src={src}
@@ -48,7 +53,6 @@ const TeamCardComponent = ({ id, name, role, image, twitterLink }: TeamCardProps
               className="w-5 h-5 2xl:w-6 2xl:h-6"
             />
           </a>
-
         )}
       </div>
 
@@ -63,7 +67,7 @@ const TeamCardComponent = ({ id, name, role, image, twitterLink }: TeamCardProps
         </div>
 
         <div className="relative w-full">
-          <TeamCardComponentForm cardId={id} toMemberName={name} />
+          <TeamCardComponentForm cardId={id}  toEmail={email} />
         </div>
       </div>
     </div>

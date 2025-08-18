@@ -23,7 +23,7 @@ const MainButton = ({
     normalPurple:
       "bg-purple90 dark:bg-purple60 text-black dark:text-white dark:hover:bg-purple60/80 hover:bg-purple70/60",
     darkBg:
-      "bg-white97 dark:bg-gray10 text-black dark:text-white border border-white90 dark:border-gray15 hover:bg-gray15",
+      "bg-white97 dark:bg-gray10 text-black dark:text-white border border-white90 dark:border-gray15 hover:bg-gray10/60",
     lightMode: "",
   };
 

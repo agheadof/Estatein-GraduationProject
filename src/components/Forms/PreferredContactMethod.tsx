@@ -30,12 +30,12 @@ function PreferredContactMethod({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="w-full rounded-lg border-1 border-white90 bg-white97 px-5 py-4 2xl:pr-12 2xl:pl-15 pl-11.5 font-medium 2xl:text-lg text-sm/[20px] dark:border-gray15 dark:bg-gray10 dark:text-gray40"
+        className="w-full rounded-md 2xl:rounded-lg border-1 border-white90 bg-white97 px-5 py-4 2xl:py-6 2xl:pr-12 pl-11.5 2xl:pl-15 font-medium [@media(min-width:1690px)]:text-lg [@media(min-width:1530px)]:text-[15px] text-sm/[20px] dark:border-gray15 dark:bg-gray10 text-black dark:text-gray30"
         disabled={!checked}
       />
       <input
         type="radio"
-        name="preferredContact" 
+        name="preferredContact"
         value={name}
         checked={checked}
         onChange={() => onRadioChange(name)}

@@ -80,7 +80,10 @@ function PropertiesCard({
   }, [showTags, property.tags])
 
   return (
-    <div className="relative h-full p-6 lg-custom:p-[30px] 2xl:p-[40px] border dark:border-gray15 border-white90 rounded-xl overflow-hidden ">
+    <div
+      className="relative h-full p-6 lg-custom:p-[30px] 2xl:p-[40px] border dark:border-gray15 border-white90 rounded-xl overflow-hidden hover:border-purple75 dark:hover:border-purple60/60 hover:bg-gradient-to-br hover:from-purple75/20 hover:to-transparent 
+       dark:hover:from-purple60/10 dark:hover:to-transparent transition-all duration-300 ease-in-out "
+    >
       {property.image && (
         <img
           src={property.image}
@@ -155,7 +158,7 @@ function PropertiesCard({
         )}
       </div>
     </div>
-  )
+  );
 }
 
 export default React.memo(PropertiesCard)

@@ -40,8 +40,12 @@ const CommonCard = ({
       <div
         className={`flex items-center gap-2.5 md:gap-4 2xl:gap-5 ${titleStyle}`}
       >
-        <div className="relative border-gradient-base border-gradient-2">
-          <div className="relative m-1.5 border-gradient-base border-gradient-1">
+        <div
+          className="relative border-gradient-base border-gradient-2 transition-transform duration-500 ease-in-out group-hover:rotate-[360deg]"
+        >
+          <div
+            className="relative m-1.5 border-gradient-base border-gradient-1 transition-transform duration-500 ease-in-out group-hover:rotate-[-360deg]"
+          >
             <img src={cardImg} alt="card image" className="p-2" />
           </div>
         </div>

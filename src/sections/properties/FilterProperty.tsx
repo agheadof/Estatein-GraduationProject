@@ -7,6 +7,7 @@ import { fetchFilteredProperties } from "../../redux/thunks/filteredProperties";
 import { useAppDispatch } from "../../redux/types/typed-hooks";
 import { useNavigate } from "react-router-dom";
 import { scrollToTop } from "../../utlis/scrollToTop";
+import AlertMessage from "../../components/ui/AlertMessage";
 
 type Filters = {
   searchTerm: string;
@@ -27,6 +28,8 @@ type SelectField = {
 const FilterProperty = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+    const [showAlert, setShowAlert] = useState(false);
+
 
   const [filters, setFilters] = useState<Filters>({
     searchTerm: "",
@@ -47,7 +50,7 @@ const FilterProperty = () => {
   const handleSearch = useCallback(async () => {
     const hasAnyValue = Object.values(filters).some((val) => val.trim() !== "");
     if (!hasAnyValue) {
-      alert("Please enter at least one input value ...");
+      setShowAlert(true);
       return;
     }
 
@@ -103,12 +106,24 @@ const FilterProperty = () => {
 
   return (
     <SectionWrapper className="mt-0 lg-custom:-mt-12 2xl:-mt-16 py-5 lg:py-0 w-full">
+      {showAlert && (
+        <AlertMessage
+          message="Oops! Looks like you forgot to choose a filter"
+          onClose={() => setShowAlert(false)}
+        />
+      )}
       <div className="mb-5 lg:mb-0 rounded-xl bg-purple70/60 dark:bg-gray10 border-r border-l border-1 border-gray08/60 dark:border-gray15 w-full lg:w-[81.4536%] lg:mx-auto pt-2.5 px-2.5">
-        <div data-aos="fade-up"
-          className="px-4 py-2 flex justify-between items-center mb-2.5 rounded-lg bg-white99 dark:bg-gray08 text-black dark:text-white focus:outline-none focus:border-purple-500">
-          <input type="text" placeholder="Search For A Property"
+        <div
+          data-aos="fade-up"
+          className="px-4 py-2 flex justify-between items-center mb-2.5 rounded-lg bg-white99 dark:bg-gray08 text-black dark:text-white focus:outline-none focus:border-purple-500"
+        >
+          <input
+            type="text"
+            placeholder="Search For A Property"
             className="w-full md:w-8/12 outline-none bg-transparent placeholder:text-black dark:placeholder:text-gray40"
-            value={filters.searchTerm} onChange={(e) => handleChange("searchTerm", e.target.value)} />
+            value={filters.searchTerm}
+            onChange={(e) => handleChange("searchTerm", e.target.value)}
+          />
           <MainButton
             variant="normalPurple"
             onClick={handleSearch}
@@ -137,8 +152,9 @@ const FilterProperty = () => {
               onChange={(val) => handleChange(field.name, val)}
               options={field.options}
               error=""
-              classExtra="bg-white99 dark:bg-gray08"
-              classIcon="bg-purple90 dark:bg-gray10 rounded-full p-1"
+              classExtra="bg-white99 dark:bg-gray08 rounded-lg 2xl:rounded-xl"
+              classNameCustom="py-[12px] pr-10.5 pl-3.5 2xl:p-5 2xl:pr-[52px] text-black dark:text-gray60 text-sm/[1.5] 2xl:text-lg"
+              classIcon="bg-purple90 dark:bg-gray10 rounded-full right-[14px] md:right-1 lg:right-[14px] 2xl:right-5 p-1"
             >
               <div className="flex items-center border-r border-white90 dark:border-gray15 pr-2.5">
                 {field.icon}
