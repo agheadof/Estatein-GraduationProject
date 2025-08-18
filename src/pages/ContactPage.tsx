@@ -57,7 +57,6 @@ function ContactPage() {
       />
       <OurOffices />
       <TeamGallery />
-      
     </div>
   );
 }

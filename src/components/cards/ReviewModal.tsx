@@ -10,7 +10,8 @@ import FormTextarea from "../Forms/FormTextarea"
 type ReviewModalProps = {
   closeModal: () => void
   onSuccess: () => void
-}
+}  
+
 
 function ReviewModal({ closeModal, onSuccess }: ReviewModalProps) {
   const formRef = useRef<HTMLFormElement>(null)
@@ -21,11 +22,8 @@ function ReviewModal({ closeModal, onSuccess }: ReviewModalProps) {
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const [rate, setRating] = useState<number>(0)
 
-  const handleImageUpload = async (
-    file: File,
-    cb: (url: string) => void,
-    setUploading: (v: boolean) => void
-  ) => {
+
+  const handleImageUpload = async (file: File, cb: (url: string) => void) => {
     setUploading(true)
     const formData = new FormData()
     formData.append("image", file)
@@ -43,7 +41,7 @@ function ReviewModal({ closeModal, onSuccess }: ReviewModalProps) {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file && file.type.startsWith("image/")) {
-      handleImageUpload(file, (url) => setImageUrl(url), setUploading)
+      handleImageUpload(file, (url) => setImageUrl(url))
     } else {
       setErrors((prev) => ({ ...prev, image: "Only valid image formats are allowed" }))
     }
@@ -89,7 +87,8 @@ function ReviewModal({ closeModal, onSuccess }: ReviewModalProps) {
       form.reset()
       setImageUrl("")
       closeModal()
-      onSuccess() // يخفي الزر ويخزن localStorage
+      onSuccess()
+
     } catch (err) {
       console.error("Submit error:", err)
     } finally {
@@ -99,73 +98,118 @@ function ReviewModal({ closeModal, onSuccess }: ReviewModalProps) {
 
   return createPortal(
     <div
-      className="fixed h-screen z-50 inset-0 bg-gray08/50 dark:bg-gray08/10 backdrop-blur-sm flex justify-center items-start md:items-center overflow-y-auto px-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md px-4"
       onClick={closeModal}
     >
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="relative modal_content rounded-2xl border border-purple60 bg-[#f4edff] dark:bg-gray15/95 backdrop-blur-xl my-8
-        p-6 w-full max-w-[850px] h-max overflow-y-auto flex flex-col gap-8"
+        className="relative w-full max-w-3xl bg-white dark:bg-black/70 rounded-2xl shadow-2xl overflow-hidden p-8 flex flex-col gap-8"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
           onClick={closeModal}
-          className="absolute top-4 right-4 text-gray-700 dark:text-gray-300 hover:text-red-500 transition"
+          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-red-500 hover:text-white text-gray-600 dark:text-gray-300 transition"
         >
-          X
+          ✕
         </button>
 
-        <h2 className="text-2xl font-bold text-start text-black dark:text-white">
-          Add Your Review
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3">
+          Share Your Review
         </h2>
 
-        <div className="w-full flex flex-col lg:flex-row gap-6">
-          <div className="flex flex-col gap-5 flex-1">
-            <FormInput label="Subject" name="subject" placeholder="Enter brief subject" error={errors.subject} className="border border-purple60" />
-            <FormTextarea label="Description" name="review" error={errors.review} className="w-full p-2" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left side */}
+          <div className="flex flex-col gap-5">
+            <FormInput
+              label="Subject"
+              name="subject"
+              placeholder="Enter brief subject"
+              error={errors.subject}
+              className="rounded-lg border-gray-300 dark:border-gray-700"
+            />
+            <FormTextarea
+              label="Description"
+              name="review"
+              error={errors.review}
+              className="rounded-lg border-gray-300 dark:border-gray-700"
+            />
 
             <div>
-              <label className="font-semibold text-black dark:text-white mb-1 block">Your Rating</label>
+              <label className="font-semibold text-gray-900 dark:text-gray-200 mb-2 block">
+                Your Rating
+              </label>
               <StarRating value={rate} onChange={setRating} />
-              {errors.rate && <p className="text-red-600 text-xs mt-1">{errors.rate}</p>}
+              {errors.rate && (
+                <p className="text-red-600 text-xs mt-1">{errors.rate}</p>
+              )}
             </div>
           </div>
 
-          <div className="flex flex-col gap-5 flex-1">
+          {/* Right side */}
+          <div className="flex flex-col gap-5">
             <div>
-              <label className="mb-2 block text-base font-semibold dark:text-white text-black">Your Image:</label>
-              <input type="file" accept="image/*" className="hidden" ref={imgRef} onChange={handleImageChange} />
+              <label className="mb-2 block text-base font-semibold dark:text-gray-200 text-gray-900">
+                Your Image
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                ref={imgRef}
+                onChange={handleImageChange}
+              />
               <div
-                className="w-full max-w-[200px] h-[140px] rounded-lg border border-purple60 cursor-pointer flex items-center justify-center overflow-hidden"
+                className="w-[200px] h-[140px] rounded-xl border-2 border-dashed border-purple-400 cursor-pointer flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                 onClick={() => imgRef.current?.click()}
               >
                 {uploading ? (
-                  <p className="text-sm">Uploading...</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    Uploading...
+                  </p>
                 ) : imageUrl ? (
-                  <img src={imageUrl} className="w-full h-full object-cover object-top" />
+                  <img
+                    src={imageUrl}
+                    className="w-full h-full object-cover object-top"
+                  />
                 ) : (
                   <ImageIcon />
                 )}
               </div>
-              {errors.image && <p className="text-red-600 text-xs mt-1">{errors.image}</p>}
+              {errors.image && (
+                <p className="text-red-600 text-xs mt-1">{errors.image}</p>
+              )}
             </div>
 
-            <FormInput label="Your Name" name="name" placeholder="Enter your name" error={errors.name} className="border border-purple60" />
-            <FormInput label="Region" name="location" placeholder="Enter your location" error={errors.location} className="border border-purple60" />
+            <FormInput
+              label="Your Name"
+              name="name"
+              placeholder="Enter your name"
+              error={errors.name}
+              className="rounded-lg border-gray-300 dark:border-gray-700"
+            />
+            <FormInput
+              label="Region"
+              name="location"
+              placeholder="Enter your location"
+              error={errors.location}
+              className="rounded-lg border-gray-300 dark:border-gray-700"
+            />
           </div>
         </div>
 
-        <div className="flex justify-start">
+        {/* Submit */}
+        <div className="flex justify-end">
           <button
             type="submit"
             disabled={loading}
-            className="bg-purple60 rounded-lg px-6 py-2 text-white font-medium cursor-pointer hover:bg-purple70 transition disabled:opacity-60"
+            className="bg-purple-600 hover:bg-purple-700 disabled:opacity-60 px-8 py-3 rounded-xl text-white font-semibold shadow-lg transition"
           >
-            {loading ? "Submitting..." : "Submit"}
+            {loading ? "Submitting..." : "Submit Review"}
           </button>
         </div>
+
       </form>
     </div>,
     document.body
