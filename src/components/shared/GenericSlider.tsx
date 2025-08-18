@@ -167,8 +167,7 @@ const GenericSlider = <T,>({
               className="keen-slider__slide"
               style={{
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(0)" : "translateY(10px)",
-                transition: "opacity 0.2s linear, transform 0.2s linear",
+                transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
                 pointerEvents: isVisible ? "auto" : "none",
               }}
             >
