@@ -66,7 +66,7 @@ const Navbar = ({ isBannerVisible, logo: Logo, navData }: NavbarProps) => {
       role="navigation"
     >
       <SectionWrapper>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mt-2.5 2xl:mt-0 ">
           <NavLink to="/" onClick={handleCloseMenu}>
             <Logo className="w-24 md:w-28 2xl:w-40 text-white" />
           </NavLink>
