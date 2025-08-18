@@ -36,7 +36,8 @@ module.exports = {
       },
       screens: {
         "lg-custom": "992px",
-        huge: "1921px",
+        "huge": "1921px",
+
       },
     },
   },
