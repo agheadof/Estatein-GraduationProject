@@ -2,6 +2,8 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+@tailwind utilities;
+
 @theme {
   --color-white90: #e4e4e7;
   --color-white95: #f1f1f3;
