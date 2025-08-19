@@ -52,7 +52,10 @@ function ValuedClientsSection() {
   );
 
   return (
-    <SectionWrapper className="pb-20 lg-custom:mb-[120px] 2xl:mb-[150px]">
+    <SectionWrapper
+      id="clients"
+      className="pb-20 lg-custom:mb-[120px] 2xl:mb-[150px]"
+    >
       <Title
         heading="Our Valued Clients"
         paragraph="At Estatein, we have had the privilege of working with a diverse range of clients across various industries. Here are some of the clients we've had the pleasure of serving"
@@ -62,19 +65,19 @@ function ValuedClientsSection() {
       />
 
       <div className="cards_container flex flex-col lg-custom:flex-row items-center gap-10 2xl:gap-[50px]">
-        {loading
-          ? skeletonLayout
-          : error
-          ? <p className="text-red-500">{error}</p>
-          : (
-            <GenericSlider
-              items={items}
-              renderSlide={renderClient}
-              showCounter
-              slidesPerView={{ lg: 2, md: 2, sm: 1 }}
-              counterClassName="justify-center md:justify-between"
-            />
-          )}
+        {loading ? (
+          skeletonLayout
+        ) : error ? (
+          <p className="text-red-500">{error}</p>
+        ) : (
+          <GenericSlider
+            items={items}
+            renderSlide={renderClient}
+            showCounter
+            slidesPerView={{ lg: 2, md: 2, sm: 1 }}
+            counterClassName="!justify-end "
+          />
+        )}
       </div>
     </SectionWrapper>
   );

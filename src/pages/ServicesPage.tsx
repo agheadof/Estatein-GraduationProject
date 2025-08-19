@@ -6,11 +6,12 @@ import MainServicesSection from "../sections/services/MainServicesSection";
 import {
   propertyValueData,
   propertyValueTitleData,
+  UnlockCardPropertyData,
 } from "../data/propertyValueData";
 import {
   managementData,
   managementTitleData,
-  unlockCardComponentData,
+  unlockCardManagementData,
 } from "../data/managementData";
 import InvestmentsSection from "../sections/services/InvestmentsSection";
 
@@ -28,14 +29,14 @@ function ServicesPage() {
         id="property"
         mainData={propertyValueData}
         titleData={propertyValueTitleData}
-        unlockCardData={unlockCardComponentData}
+        unlockCardData={UnlockCardPropertyData}
       />
-      
+
       <MainServicesSection
         id="management"
         mainData={managementData}
         titleData={managementTitleData}
-        unlockCardData={unlockCardComponentData}
+        unlockCardData={unlockCardManagementData}
       />
 
       <InvestmentsSection />

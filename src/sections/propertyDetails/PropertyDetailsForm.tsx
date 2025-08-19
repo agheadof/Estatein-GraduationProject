@@ -83,17 +83,22 @@ function PropertyDetailsForm() {
 
   return (
     <SectionWrapper className="py-20 lg-custom:py-[120px] 2xl:py-[150px]">
-      <div className="grid grid-cols-1 xl:grid-cols-[32.21%_61.53%] 2xl:grid-cols-[33.38%_61.38%] gap-y-10 md:gap-x-10 xl:gap-x-[80px] 2xl:gap-x-[100px]">
+      <div className="grid grid-cols-1 xl:grid-cols-[38.51%_61.49%] 2xl:grid-cols-[38%_61.7%] gap-y-10 ">
         <Title
           titleStyle="w-full"
           starImg
           heading={`Inquire About ${property.title}`}
           paragraph="Interested in this property? Fill out the form below, and our real estate experts will get back to you with more details, including scheduling a viewing and answering any questions you may have."
+          paragraphStyle="lg-custom:w-[85%] 2xl:w-[86%] w-full"
           data-aos="fade-left"
         />
 
         <div className="w-full">
-          <Suspense fallback={<div className="animate-pulse h-[400px] rounded-xl bg-gray-200 dark:bg-gray-700" />}>
+          <Suspense
+            fallback={
+              <div className="animate-pulse h-[400px] rounded-xl bg-gray-200 dark:bg-gray-700" />
+            }
+          >
             <InquiryForm
               type="property"
               propertyTitle={property.title}

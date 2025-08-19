@@ -1,69 +1,42 @@
-# React + TypeScript + Vite
+<!-- Overview:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Estatein is a modern, responsive real estate website that allows users to browse properties, view detailed information, add reviews, and easily contact the company. The platform features an elegant design, advanced search filters, rich property details, and an admin dashboard for efficient data management.
 
-Currently, two official plugins are available:
+📄 Pages :
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Home Page – Quick overview of properties, statistics, customer testimonials, and a call-to-action.
+2. About Us – Introduction to the company, its values, team, and achievements.
+3. Properties – Property listings with advanced search filters.
+4. Property Details – Detailed information for each property with images, inquiry form, and an Add Review button for user reviews.
+5. Services – Overview of company services: sales, ownership, and investment consulting.
+6. Contact – Contact information, office locations, and an inquiry form.
 
-## Expanding the ESLint configuration
+⚙️ Technologies used:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. React – Frontend framework
+2. TypeScript – Strongly typed language for scalable development
+3. Tailwind CSS – Modern and responsive styling
+4. Redux Toolkit – State management
+5. Firebase Firestore – Data storage and real-time updates
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+✨ Features :
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+1. Responsive Design: Seamlessly works across mobile, tablet, and desktop.
+2. Light & Dark Mode: Personalized user experience.
+3. Advanced Search: Filter by location, property type, price, size, and build year.
+4. Detailed Property Pages: Includes images, specifications, fees, and monthly costs.
+5. Add Reviews: Users can submit property reviews via the Add Review button.
+6. Interactive UI: Smooth animations for enhanced user experience.
+7. Reusable Components: Clean, scalable, and maintainable code.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+🚀 Installation
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. Clone the repository :
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+git clone https://github.com/Elin23/Estatein-GraduationProject 2. Navigate to the project folder:
+cd estatein 3. Install dependencies:
+npm install 4. Start the development server:
+npm run dev
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+🌐 Demo :
+https://estatein-team-x1.netlify.app/ -->

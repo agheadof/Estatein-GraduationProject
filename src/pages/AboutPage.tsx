@@ -7,7 +7,7 @@ import ValuedClientsSection from "../sections/about/ValuedClientsSection";
 
 function AboutPage() {
   return (
-    <div className="">
+    <div>
       <Hero2 />
       <OurValuesSection />
       <AchievementsSection />

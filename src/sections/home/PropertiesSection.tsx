@@ -12,7 +12,7 @@ type Props = {
   showTags?: boolean;
   showDetails?: boolean;
   heading: string;
-  paragraph: string;
+  paragraph: string | React.ReactNode;
   buttonLabel?: string;
 };
 
@@ -60,7 +60,10 @@ function PropertiesSection({
   }, [dispatch, properties.length]);
 
   return (
-    <SectionWrapper className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]">
+    <SectionWrapper
+      id="properties"
+      className="pt-20 lg-custom:pt-[120px] 2xl:pt-[150px]"
+    >
       <Title
         heading={heading}
         paragraph={paragraph}
@@ -93,8 +96,8 @@ function PropertiesSection({
           )}
           slidesPerView={{ lg: 3, md: 2, sm: 1 }}
           showCounter
-          titleBtnLabel="View All Properties"
-          onClick={() => scrollToTop()}
+          titleBtnLabel={buttonLabel ? "View All Properties" : undefined}
+          onClick={scrollToTop}
         />
       )}
     </SectionWrapper>

@@ -25,7 +25,7 @@ function FaqSection() {
   const skeletonCount = items.length > 0 ? items.length : 3;
 
   return (
-    <section>
+    <section id="faqs">
       <Title
         heading="Frequently Asked Questions"
         paragraph="Find answers to common questions about Estatein's services, property listings, and the real estate process. We're here to provide clarity and assist you every step of the way."
@@ -33,7 +33,7 @@ function FaqSection() {
         paragraphStyle="2xl:max-w-[1236px] lg-custom:max-w-[1003px] w-full"
         anamation="fade-up"
         navigateTo="/allFaq"
-        onClick={() => scrollToTop()}
+        onClick={() => scrollToTop}
       />
 
       {loading ? (

@@ -5,7 +5,7 @@ export type TitleProps = {
   starImg?: boolean;
   titleStyle?: string;
   heading: string;
-  paragraph?: string;
+  paragraph?: string | React.ReactNode;
   paragraphStyle?: string;
   buttonLabel?: string;
   anamation?: string;

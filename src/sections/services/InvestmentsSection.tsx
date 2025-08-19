@@ -13,11 +13,11 @@ import {
 const InvestmentsSection = () => {
   return (
     <SectionWrapper
+      id="investments"
       className="pt-[61px] lg-custom:pt-[90px] 2xl:pt-[110px]
     pb-[80px] lg-custom:pb-[120px] 2xl:pb-[150px]"
     >
       <section
-        id="investments"
         className="flex flex-col items-center xl:flex-row gap-10 md:gap-[50px] 2xl:gap-[60px] "
         {...invSectionAos()}
       >

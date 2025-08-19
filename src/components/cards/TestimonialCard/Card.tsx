@@ -14,7 +14,7 @@ type Props = {
 
 const Card = ({ client }: Props) => {
   const cardContainerClass =
-    " flex flex-col justify-between gap-6 xl:gap-[30px] 2xl:gap-[40px] h-full 2xl:!min-h-[442px] 2xl:!max-h-[442px] xl:!min-h-[363px] xl:!max-h-[363px]  p-[30px] xl:p-[40px] 2xl:p-[50px] rounded-[10px] 2xl:rounded-xl dark:bg-gray08 bg-white99 border dark:border-gray15 border-white90"
+    " flex flex-col justify-between gap-6 xl:gap-[30px] 2xl:gap-[40px] h-full 2xl:!min-h-[442px] 2xl:!max-h-[442px] xl:!min-h-[363px] xl:!max-h-[363px]  p-[30px] xl:!p-[40px] 2xl:!p-[50px] rounded-[10px] 2xl:rounded-xl dark:bg-gray08 bg-white99 border dark:border-gray15 border-white90 hover:border-purple75 dark:hover:border-purple60/60 hover:bg-gradient-to-br hover:from-purple75/20 hover:to-transparent dark:hover:from-purple60/10 dark:hover:to-transparent transition-all duration-300 ease-in-out"
   const clientNameClass =
     "dark:text-white text-black font-medium text-lg lg-custom:text-xl 2xl:text-xl whitespace-nowrap"
   const clientLocationClass =

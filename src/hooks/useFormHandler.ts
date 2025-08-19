@@ -43,12 +43,13 @@ export function useFormHandler(initialValues?: Partial<CustomFormData>) {
     const newErrors: FormErrors = {};
 
     const requiredFields: (keyof CustomFormData)[] = ["firstName", "lastName"];
-
     requiredFields.forEach((key) => {
       if (!formData[key]) {
-        newErrors[key] = `${
-          key.charAt(0).toUpperCase() + key.slice(1)
-        } is required`;
+        const label = key
+          .replace(/([a-z])([A-Z])/g, "$1 $2") 
+          .replace(/^./, (str) => str.toUpperCase()); 
+
+        newErrors[key] = `${label} is required`;
       }
     });
 
