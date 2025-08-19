@@ -57,19 +57,6 @@ function PropertiesCard({
       : words.slice(0, 10).join(" ") + "…";
   }, [property.desc]);
 
-  // const renderImage = useMemo(() => {
-  //   return property.image ? (
-  //     <img
-  //       loading="lazy"
-  //       className="object-cover w-full h-[210px] lg-custom:h-[255px] 2xl:h-[318px] rounded-[10px]  "
-  //       src={property.image}
-  //       alt={property.title ?? "Property Image"}
-  //     />
-  //   ) : (
-  //     <div className="bg-gray20 dark:bg-gray15 w-full h-[210px] lg-custom:h-[255px] 2xl:h-[318px] rounded-[10px] mb-4 lg-custom:mb-5 2xl:mb-[30px]" />
-  //   )
-  // }, [property.image, property.title])
-
   const renderTags = useMemo(() => {
     if (!showTags || !property.tags) return null;
     return (
@@ -97,7 +84,7 @@ function PropertiesCard({
       <div
         className={` transition-all duration-500  ${
           isExpanded &&
-          "backdrop-blur-md absolute inset-0  rounded-xl bg-white/50 dark:bg-black/50 "
+          "backdrop-blur-md absolute inset-0 p-5 rounded-xl bg-white/50 dark:bg-black/50 "
         }`}
       >
         {renderTags}
