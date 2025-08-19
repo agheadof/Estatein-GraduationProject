@@ -135,7 +135,7 @@ function PropertiesCard({
               <MainButton
                 variant="normalPurple"
                 onClick={handleViewDetails}
-                className="whitespace-nowrap min-[767px]:text-[10px] min-[1400px]:text-sm min-[1500px]:text-[12px] min-[1850px]:text-lg 2xl:!py-[18px] max-[380px]:!px-3 2xl:!px-6"
+                className="whitespace-nowrap min-[767px]:text-[10px] min-[1400px]:text-sm min-[1500px]:text-[12px] min-[1850px]:text-lg 2xl:!py-[18px] max-[380px]:!px-1 2xl:!px-6"
               >
                 View Property Details
               </MainButton>
