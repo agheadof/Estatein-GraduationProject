@@ -84,7 +84,7 @@ const ChatBot = () => {
           <p>{chatbotTexts.welcomeMessage}</p>
         </div>
       )}
-40vw
+
       {/* Toggle Button */}
       <div
         className={`fixed bottom-6 left-6 z-50 group
@@ -108,95 +108,107 @@ const ChatBot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div
-          ref={chatRef}
-          data-aos="fade-up"
-          data-aos-duration="300"
-          data-aos-once="true"
-          className="fixed bottom-[100px] left-6 z-40 dark:bg-gray10 bg-white border border-gray15 shadow-xl h-[60vh] w-[100vw] md:w-[40vw] max-w-[350px] rounded-xl flex flex-col overflow-hidden"
-        >
-          {/* Header */}
-          <div className="flex items-center justify-between p-4  dark:bg-gray15 dark:text-white bg-purple75 text-white">
-            <div className="flex items-center gap-3">
-              <img src="/assets/icons/bot.svg" alt="Logo" className="w-10 h-10" />
-              <div>
-                <h2 className="text-lg font-semibold ">{chatbotTexts.headerTitle}</h2>
-                <p className="text-sm ">{chatbotTexts.headerSubtitle}</p>
+        <div className="fixed inset-0 z-40 flex items-end md:items-center md:justify-start">
+          {/* Overlay background */}
+          <div
+            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+            onClick={() => setIsOpen(false)}
+          />
+
+          {/* Chat Box */}
+          <div
+            ref={chatRef}
+            data-aos="fade-up"
+            data-aos-duration="300"
+            data-aos-once="true"
+            className="relative z-50 mb-[100px] md:mb-0 md:ml-6
+                       dark:bg-gray10 bg-white border border-gray15 shadow-xl 
+                       h-[60vh] w-[90vw] md:w-[40vw] max-w-[350px] 
+                       mx-auto rounded-xl flex flex-col overflow-hidden"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between p-4  dark:bg-gray15 dark:text-white bg-purple75 text-white">
+              <div className="flex items-center gap-3">
+                <img src="/assets/icons/bot.svg" alt="Logo" className="w-10 h-10" />
+                <div>
+                  <h2 className="text-lg font-semibold ">{chatbotTexts.headerTitle}</h2>
+                  <p className="text-sm ">{chatbotTexts.headerSubtitle}</p>
+                </div>
               </div>
+              <button onClick={() => setIsOpen(false)} className="cursor-pointer p-2 dark:hover:bg-gray20 hover:bg-gray-300 rounded-full transition">
+                <img src="/assets/icons/close.svg" alt="Close" />
+              </button>
             </div>
-            <button onClick={() => setIsOpen(false)} className="cursor-pointer p-2 dark:hover:bg-gray20 hover:bg-gray-300 rounded-full transition">
-              <img src="/assets/icons/close.svg" alt="Close" />
-            </button>
-          </div>
 
-          {/* Chat Body */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-4">
-            {messages.map((msg, i) => (
-              <div key={i} className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}>
-                {msg.role === "bot" && (
-                  <span className="text-xs text-gray50 mb-1">
-                    {chatbotTexts.botLabel(msg.timestamp)}
-                  </span>
-                )}
-                <div className={`px-4 py-2 text-sm rounded-lg max-w-[100%] ${msg.role === "user"
-                  ? "dark:bg-gray15 dark:text-white bg-purple75 text-white rounded-br-none"
-                  : "dark:bg-gray15 dark:text-white bg-purple75 text-white rounded-bl-none"
-                  }`}>
-                  {msg.content}
+            {/* Chat Body */}
+            <div className="flex-1 p-4 overflow-y-auto space-y-4">
+              {messages.map((msg, i) => (
+                <div key={i} className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}>
+                  {msg.role === "bot" && (
+                    <span className="text-xs text-gray50 mb-1">
+                      {chatbotTexts.botLabel(msg.timestamp)}
+                    </span>
+                  )}
+                  <div className={`px-4 py-2 text-sm rounded-lg max-w-[100%] ${msg.role === "user"
+                    ? "dark:bg-gray15 dark:text-white bg-purple75 text-white rounded-br-none"
+                    : "dark:bg-gray15 dark:text-white bg-purple75 text-white rounded-bl-none"
+                    }`}>
+                    {msg.content}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
 
-            {typingMessage && (
-              <div className="flex flex-col items-start">
-                <div className="text-xs text-gray50 mb-1">
-                  {chatbotTexts.typingLabel}
+              {typingMessage && (
+                <div className="flex flex-col items-start">
+                  <div className="text-xs text-gray50 mb-1">
+                    {chatbotTexts.typingLabel}
+                  </div>
+                  <div className="px-4 py-2 text-sm rounded-lg max-w-[100%] bg-gray20 text-white rounded-bl-none">
+                    {typingMessage}
+                  </div>
                 </div>
-                <div className="px-4 py-2 text-sm rounded-lg max-w-[100%] bg-gray20 text-white rounded-bl-none">
-                  {typingMessage}
+              )}
+            </div>
+
+            {/* Suggested Questions */}
+            {messages.length === 1 && messages[0].role === "bot" && (
+              <div className="px-4 pb-2 space-y-2">
+                <p className="text-xs text-gray60">{chatbotTexts.suggestedIntro}</p>
+                <div className="flex flex-wrap gap-2">
+                  {chatbotTexts.suggestedQuestions.map((question) => (
+                    <button
+                      key={question}
+                      onClick={() => sendMessage(question)}
+                      className="dark:bg-gray15 dark:text-white bg-purple75 text-white text-xs px-3 py-1 rounded-full hover:bg-purple70 dark:hover:bg-gray20 transition"
+                    >
+                      {question}
+                    </button>
+                  ))}
                 </div>
               </div>
             )}
-          </div>
 
-          {/* Suggested Questions */}
-          {messages.length === 1 && messages[0].role === "bot" && (
-            <div className="px-4 pb-2 space-y-2">
-              <p className="text-xs text-gray60">{chatbotTexts.suggestedIntro}</p>
-              <div className="flex flex-wrap gap-2">
-                {chatbotTexts.suggestedQuestions.map((question) => (
-                  <button
-                    key={question}
-                    onClick={() => sendMessage(question)}
-                    className="dark:bg-gray15 dark:text-white bg-purple75 text-white text-xs px-3 py-1 rounded-full hover:bg-purple70 dark:hover:bg-gray20 transition"
-                  >
-                    {question}
-                  </button>
-                ))}
-              </div>
+            {/* Input */}
+            <div className="flex p-3 gap-2 dark:bg-gray08  dark:text-white bg-purple75  ">
+              <input
+                className="flex-1 bg-gray-200 dark:bg-gray15 text-white px-4 py-2 text-sm focus:outline-none rounded-3xl placeholder-gray50"
+                value={input}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
+                placeholder={chatbotTexts.placeholder}
+              />
+              <button
+                onClick={() => sendMessage(input)}
+                disabled={loading}
+                className="bg-gray-300 dark:bg-gray30 text-white px-4 py-2 rounded-full text-sm"
+              >
+                {loading ? (
+                  <img src="/assets/icons/stop.svg" alt="Stop" className="w-5 h-5" />
+                ) : (
+                  <img src="/assets/icons/send.svg" alt="Send" className="w-5 h-5" />
+                )}
+              </button>
             </div>
-          )}
-
-          {/* Input */}
-          <div className="flex p-3 gap-2 dark:bg-gray08  dark:text-white bg-purple75  ">
-            <input
-              className="flex-1 bg-gray-200 dark:bg-gray15 text-white px-4 py-2 text-sm focus:outline-none rounded-3xl placeholder-gray50"
-              value={input}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              placeholder={chatbotTexts.placeholder}
-            />
-            <button
-              onClick={() => sendMessage(input)}
-              disabled={loading}
-              className="bg-gray-300 dark:bg-gray30 text-white px-4 py-2 rounded-full text-sm"
-            >
-              {loading ? (
-                <img src="/assets/icons/stop.svg" alt="Stop" className="w-5 h-5" />
-              ) : (
-                <img src="/assets/icons/send.svg" alt="Send" className="w-5 h-5" />
-              )}
-            </button>
           </div>
         </div>
       )}
@@ -205,4 +217,3 @@ const ChatBot = () => {
 };
 
 export default ChatBot;
-
