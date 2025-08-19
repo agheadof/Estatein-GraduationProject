@@ -47,7 +47,7 @@ function OurOfficeTaps() {
 
   return (
     <div className="flex flex-col mt-10 lg-custom:mt-[60px] 2xl:mt-20 gap-7.5 lg-custom:gap-10 2xl:gap-[50px]">
-      <div className="flex w-full sm:w-fit bg-white97 dark:bg-gray10 gap-2.5 p-2.5 rounded-lg 2xl:rounded-xl overflow-x-auto whitespace-nowrap">
+      <div className="flex w-full sm:w-fit bg-white97 dark:bg-gray10 gap-2.5 p-2.5 rounded-lg 2xl:rounded-xl overflow-x-auto whitespace-nowrap scrollbar-hide">
         {tabs.map((tab) => (
           <button
             key={tab}

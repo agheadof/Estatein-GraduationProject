@@ -10,7 +10,6 @@ export type PropertyType = {
   desc: string;
   details: { label: string; icon: string }[];
   Price: string;
-
   descriptionLong?: string;
   gallery?: string[];
   location?: string;
@@ -37,13 +36,11 @@ const transformProperty = (property: any, id: string): PropertyType => ({
     { label: `${property.bathrooms || 0}-Bathroom`, icon: "bath" },
     { label: `Villa`, icon: "villa" },
   ],
-
   descriptionLong: property.description,
   gallery: property.images,
   location: property.location,
   tags: "Coastal Escapes - Where Waves Beckon",
   features: property.features || [],
-
   additionalFees: property.additionalFees || {},
   monthlyCosts: property.monthlyCosts || {},
   monthlyExpenses: property.monthlyExpenses || {},
@@ -57,7 +54,8 @@ export const fetchProperties = createFetchThunk<PropertyType>(
 );
 
 type PropertiesState = {
-  all: PropertyType[];
+  all: PropertyType[];        // All properties
+  result: PropertyType[];     // Search/filter results
   current?: PropertyType | null;
   loading: boolean;
   error: string | null;
@@ -65,6 +63,7 @@ type PropertiesState = {
 
 const initialState: PropertiesState = {
   all: [],
+  result: [],
   current: null,
   loading: true,
   error: null,
@@ -79,6 +78,12 @@ const propertiesSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    // New reducer to set search results
+    setSearchResults: (state, action: PayloadAction<PropertyType[]>) => {
+      state.result = action.payload ?? [];
+      state.loading = false;
+      state.error = null;
+    },
     setCurrentProperty: (state, action: PayloadAction<string>) => {
       const id = action.payload;
       state.current = state.all.find((prop) => prop.id === id) || null;
@@ -90,42 +95,64 @@ const propertiesSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    // Clear search results
+    clearSearchResults: (state) => {
+      state.result = [];
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchFilteredProperties.pending, (state) => {
+      // Handle all properties fetch
+      .addCase(fetchProperties.pending, (state) => {
         state.loading = true;
         state.error = null;
-        state.all = [];
       })
-      .addCase(
-        fetchFilteredProperties.fulfilled,
-        (state, action: PayloadAction<PropertyType[]>) => {
-          state.loading = false;
-          state.all = action.payload;
-        }
-      )
-      .addCase(fetchFilteredProperties.rejected, (state, action) => {
+      .addCase(fetchProperties.fulfilled, (state, action: PayloadAction<PropertyType[]>) => {
+        state.loading = false;
+        state.all = action.payload;
+      })
+      .addCase(fetchProperties.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       })
+      // Handle filtered/search results
+      .addCase(fetchFilteredProperties.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchFilteredProperties.fulfilled, (state, action: PayloadAction<PropertyType[]>) => {
+        state.loading = false;
+        state.result = action.payload; // Store in result, not all
+      })
+      .addCase(fetchFilteredProperties.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+        state.result = []; // Clear results on error
+      })
+      // Handle single property fetch
       .addCase(fetchPropertyById.fulfilled, (state, action) => {
-      const property = action.payload;
-      state.current = property;
-      state.loading = false;
-    })
-    .addCase(fetchPropertyById.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    })
-    .addCase(fetchPropertyById.rejected, (state) => {
-      state.loading = false;
-      state.error = "not-found";
-    });
+        const property = action.payload;
+        state.current = property;
+        state.loading = false;
+      })
+      .addCase(fetchPropertyById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchPropertyById.rejected, (state) => {
+        state.loading = false;
+        state.error = "not-found";
+      });
   },
 });
 
-export const { setProperties, setCurrentProperty, setLoading, setError } =
-  propertiesSlice.actions;
+export const { 
+  setProperties, 
+  setSearchResults, 
+  setCurrentProperty, 
+  setLoading, 
+  setError,
+  clearSearchResults
+} = propertiesSlice.actions;
 
 export default propertiesSlice.reducer;

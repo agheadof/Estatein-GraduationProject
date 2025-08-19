@@ -127,8 +127,15 @@ select, .close_icon {
 
 
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 
-/* gradient border around icon */
+.scrollbar-hide {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
 .border-gradient-base::before {
   content: "";
   position: absolute;

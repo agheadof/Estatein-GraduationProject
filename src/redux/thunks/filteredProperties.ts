@@ -5,7 +5,14 @@ import { db } from "../../firebaseConfig";
 
 export const fetchFilteredProperties = createAsyncThunk<
   PropertyType[],
-  Partial<{ searchTerm: string; location: string; propertyType: string; buildYear: string; pricingRange: string; propertySize: string }>,
+  Partial<{ 
+    searchTerm: string; 
+    location: string; 
+    propertyType: string; 
+    buildYear: string; 
+    pricingRange: string; 
+    propertySize: string 
+  }>,
   { rejectValue: string }
 >(
   "properties/fetchFiltered",
@@ -16,7 +23,12 @@ export const fetchFilteredProperties = createAsyncThunk<
 
       if (!snapshot.exists()) return [];
 
-      let results: PropertyType[] = Object.values(snapshot.val()) as PropertyType[];
+      // Get all properties
+      const allProperties: any = snapshot.val();
+      let results: PropertyType[] = Object.entries(allProperties).map(
+        ([id, property]: [string, any]) => transformProperty(property, id)
+      );
+
       let minPrice: number | null = null;
       let maxPrice: number | null = null;
 
@@ -72,3 +84,25 @@ export const fetchFilteredProperties = createAsyncThunk<
     }
   }
 );
+
+// Helper function to transform raw property data
+const transformProperty = (property: any, id: string): PropertyType => ({
+  id,
+  image: property.images?.[0] || "",
+  title: property.type || "Property",
+  desc: property.description?.slice(0, 100) + "...",
+  Price: `$${property.price?.toLocaleString() || "N/A"}`,
+  details: [
+    { label: `${property.bedrooms || 0}-Bedroom`, icon: "bed" },
+    { label: `${property.bathrooms || 0}-Bathroom`, icon: "bath" },
+    { label: `Villa`, icon: "villa" },
+  ],
+  descriptionLong: property.description,
+  gallery: property.images,
+  location: property.location,
+  tags: "Coastal Escapes - Where Waves Beckon",
+  features: property.features || [],
+  additionalFees: property.additionalFees || {},
+  // Add other properties as needed
+  ...property
+});
