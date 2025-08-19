@@ -1,0 +1,5 @@
+tailwind.config.js merge=ours
+postcss.config.js merge=ours
+package.json merge=ours
+package-lock.json merge=ours
+vite.config.ts merge=ours
