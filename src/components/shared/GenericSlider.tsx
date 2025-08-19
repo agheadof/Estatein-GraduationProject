@@ -5,15 +5,15 @@ import TitleBtn from "../ui/TitleBtn";
 import { NextArrowIcon, PrevArrowIcon } from "../icons/SliderArrows";
 
 type SlidesPerView = {
-  lg: number; 
-  md?: number; 
-  sm?: number; 
+  lg: number;
+  md?: number;
+  sm?: number;
 };
 
 type Props<T> = {
   items: T[];
   renderSlide: (item: T, index: number) => React.ReactNode;
-  slidesPerView?: SlidesPerView; 
+  slidesPerView?: SlidesPerView;
   showCounter?: boolean;
   titleBtnLabel?: string;
   counterClassName?: string;
@@ -81,7 +81,7 @@ const GenericSlider = <T,>({
         const pv = Number(opt.perView);
         if (!Number.isNaN(pv) && pv > 0) return pv;
       }
-    } catch (e) {}
+    } catch (e) { }
     return fallback;
   };
 
@@ -93,7 +93,7 @@ const GenericSlider = <T,>({
       if (width >= 992) perView = slidesPerView.lg;
       else if (width >= 768) perView = slidesPerView.md ?? 2;
 
-      let newSpacing; 
+      let newSpacing;
       if (width >= 1920) {
         newSpacing = perView === 2 ? 50 : 30;
       } else if (width >= 1440) {
@@ -105,7 +105,7 @@ const GenericSlider = <T,>({
       setPerViewCurrent(perView);
       setSpacing(newSpacing);
 
-      slider.current.update({ slides: { perView, spacing: newSpacing }});
+      slider.current.update({ slides: { perView, spacing: newSpacing } });
 
       const maxStart = Math.max(0, items.length - perView);
       if (currentIndex > maxStart) {
@@ -217,24 +217,30 @@ const GenericSlider = <T,>({
             data-testid="prev-btn"
             disabled={isBeginning}
             onClick={onPrev}
-            className={`p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px] transition-all duration-300 border-white90 dark:border-gray15 ${
-              isBeginning
+            className={`p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px] transition-all duration-300 border-white90 dark:border-gray15 ${isBeginning
                 ? "bg-inherit opacity-50 cursor-not-allowed"
                 : "bg-white97 dark:bg-gray10"
-            }`}
+              }`}
           >
             <PrevArrowIcon />
           </button>
-
+          {showCounter && (
+            <p className="text-black dark:text-white text-base 2xl:text-xl font-medium block md:hidden ">
+              {String(currentGroup).padStart(2, "0")}
+              <span className="text-gray40 dark:text-gray60">
+                {" "}
+                of {String(totalGroups).padStart(2, "0")}
+              </span>
+            </p>
+          )}
           <button
             data-testid="next-btn"
             disabled={isEnd}
             onClick={onNext}
-            className={`p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px] transition-all duration-300 border-white90 dark:border-gray15 ${
-              isEnd
+            className={`p-2.5 2xl:p-3.5 border rounded-full w-[44px] 2xl:w-[58px] transition-all duration-300 border-white90 dark:border-gray15 ${isEnd
                 ? "bg-inherit opacity-50 cursor-not-allowed"
                 : "bg-white97 dark:bg-gray10"
-            }`}
+              }`}
           >
             <NextArrowIcon />
           </button>

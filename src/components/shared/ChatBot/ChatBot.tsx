@@ -84,7 +84,7 @@ const ChatBot = () => {
           <p>{chatbotTexts.welcomeMessage}</p>
         </div>
       )}
-
+40vw
       {/* Toggle Button */}
       <div
         className={`fixed bottom-6 left-6 z-50 group
@@ -113,7 +113,7 @@ const ChatBot = () => {
           data-aos="fade-up"
           data-aos-duration="300"
           data-aos-once="true"
-          className="fixed bottom-[100px] left-6 z-40 dark:bg-gray10 bg-white border border-gray15 shadow-xl h-[60vh] w-[40vw] max-w-[350px] rounded-xl flex flex-col overflow-hidden"
+          className="fixed bottom-[100px] left-6 z-40 dark:bg-gray10 bg-white border border-gray15 shadow-xl h-[60vh] w-[100vw] md:w-[40vw] max-w-[350px] rounded-xl flex flex-col overflow-hidden"
         >
           {/* Header */}
           <div className="flex items-center justify-between p-4  dark:bg-gray15 dark:text-white bg-purple75 text-white">

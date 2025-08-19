@@ -65,15 +65,15 @@ const TeamSection = () => {
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : items.length === 0 ? (
-        <p className="text-center text-gray-600 dark:text-gray-300">
+        <p className="text-center text-gray-600 dark:text-gray-300 !justify-end">
           No team members found.
         </p>
       ) : (
         <GenericSlider<Team>
           items={items}
-          slidesPerView={{ lg: 4, md: 2, sm: 1 }} // 4 كروت للكبير، 2 للوسط، 1 للصغير
+          slidesPerView={{ lg: 4, md: 2, sm: 1 }} 
           showCounter
-          counterClassName="mt-0"
+          counterClassName="mt-0 !justify-end"
           renderSlide={(team, index) => (
             <div
               {...teamItemAos(index)}
