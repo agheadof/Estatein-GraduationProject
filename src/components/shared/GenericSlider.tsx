@@ -190,7 +190,7 @@ const GenericSlider = <T,>({
         })}
       </div>
 
-      <div className={`${counterClassName} flex md:justify-end justify-between items-center pt-4 border-t border-t-white90 dark:border-t-gray15`}>
+      <div className={`${counterClassName} flex justify-between items-center pt-4 border-t border-t-white90 dark:border-t-gray15`}>
         {showCounter && (
           <p className="text-black dark:text-white text-base 2xl:text-xl font-medium hidden md:block">
             {String(currentGroup).padStart(2, "0")}
